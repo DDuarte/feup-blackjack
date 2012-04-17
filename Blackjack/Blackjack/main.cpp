@@ -27,7 +27,9 @@ void CardTests()
 
 void LocalizationTests()
 {
-    std::vector<std::string> a = Localization::ReadLangFile("pt");
+    Localization loc;
+    loc.SetLang(loc.GetAvailableLanguages()[0]);
+    std::cout << loc.GetString(STR_ACE) << std::endl;
 }
 
 void Tests()
