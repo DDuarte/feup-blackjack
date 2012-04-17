@@ -18,12 +18,12 @@ int main()
     char ans;
     std::cin >> ans;
 
-    struct Langs
+    struct Language
     {
-        std::string l[3];
+        std::string Phrases[3];
     };
 
-    Langs strings[] =
+    Language strings[] =
     {   //  en           pt
         { "Suits"   , "Naipes" },
         { "Clubs"   , "Paus" },
@@ -65,7 +65,7 @@ int main()
 
             for (size_t i = 0; i < count; ++i)
             {
-                std::cout << strings[i].l[0] << ": ";
+                std::cout << strings[i].Phrases[0] << ": ";
 
                 std::string newLocal;
                 std::cin >> newLocal;
@@ -73,7 +73,7 @@ int main()
                 if (newLocal == "x")
                     continue;
 
-                strings[i].l[2] = newLocal;
+                strings[i].Phrases[2] = newLocal;
             }
 
             langIndex = 2;
@@ -90,7 +90,7 @@ int main()
         exit(EXIT_FAILURE);
 
     for (size_t i = 0; i < count; ++i)
-        file << strings[i].l[langIndex] << '\0';
+        file << strings[i].Phrases[langIndex] << '\0';
 
     std::cout << "Success";
     std::getchar();

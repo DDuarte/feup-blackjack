@@ -43,10 +43,14 @@ public:
     CardName GetName() const { return _name; };
     unsigned int GetScore() const { return _score; };
     std::string GetFormattedName() const;
+
     bool IsValid() const { return _suit != CsNone && _name != CnNone && _score != 0; };
+
 	static std::string GetOutputFormat() { return _outputFormat; };
+
 	void SetScore(unsigned int score);
-	static std::string SetOutputFormat(std::string outputFormat) { _outputFormat =  outputFormat; };
+
+	static void SetOutputFormat(std::string outputFormat) { _outputFormat =  outputFormat; };
 
 private:
 	CardSuit _suit;

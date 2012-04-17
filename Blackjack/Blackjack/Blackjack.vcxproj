@@ -78,10 +78,12 @@
     <ClInclude Include="dealer.h" />
     <ClInclude Include="deck.h" />
     <ClInclude Include="game.h" />
-    <ClInclude Include="player.h" />
+    <ClInclude Include="player.h" /
+    <ClInclude Include="localization.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="card.cpp" />
+    <ClCompile Include="localization.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
