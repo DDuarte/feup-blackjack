@@ -28,10 +28,12 @@ std::string Card::GetFormattedName() const
 	std::string temp(_outputFormat);
 
 	std::size_t pos = temp.find('N');
-	temp.replace(temp[pos], temp[pos+1], GetStr((Strings)(_name + 6)));
+    temp.erase(temp.begin()+pos);
+	temp.insert(pos, GetStr((Strings)(_name + 6)));
 	
 	pos = temp.find('S');
-    temp.replace(temp[pos], temp[pos+1], GetStr((Strings)(_name + 1)));
+    temp.erase(temp.begin()+pos);
+    temp.insert(pos, GetStr((Strings)(_name + 1)));
 
 	return temp;
 }

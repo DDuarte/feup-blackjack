@@ -1,0 +1,142 @@
+#include "card.h"
+#include "localization.h"
+
+#include <string>
+#include <stdexcept>
+#include <sstream>
+
+std::string Card::_outputFormat = DEFAULT_OUTPUT_FORMAT;
+
+Card::Card()
+{
+<<<<<<< HEAD
+	_name = CnNone;
+	_suit = CsNone;
+	_score = 0;
+	_outputFormat = DEFAULT_OUTPUT_FORMAT;
+=======
+    _name = CardName::CnNone;
+    _suit = CardSuit::CsNone;
+    _score = 0;
+    _outputFormat = DEFAULT_OUTPUT_FORMAT;
+>>>>>>> Fixed errors in card.cpp.
+}
+
+Card::Card(CardSuit suit, CardName name, unsigned int score)
+{
+    _name = name;
+    _suit = suit;
+    SetScore(score);
+    _outputFormat = DEFAULT_OUTPUT_FORMAT;
+}
+
+std::string Card::GetFormattedName() const
+{
+<<<<<<< HEAD
+	if (!IsValid()) return "";
+	std::string temp(_outputFormat);
+
+	std::size_t pos = temp.find('N');
+	temp.replace(temp[pos], temp[pos+1], GetStr((Strings)(_name + 6)));
+	
+	pos = temp.find('S');
+    temp.replace(temp[pos], temp[pos+1], GetStr((Strings)(_name + 1)));
+
+	return temp;
+=======
+    if (!IsValid()) return "";
+    std::string temp(_outputFormat);
+    std::size_t pos = temp.find('N');
+    temp.replace(temp[pos], temp[pos+1], GetStr((Strings)(_name + 6)));
+    pos = temp.find('S');
+    temp.replace(temp[pos], temp[pos+1], GetStr((Strings)(_name + 1)));
+    /*switch (_name)
+    {
+    case CardName::Two:
+        temp.erase(temp.begin()+pos);
+        temp.insert(pos, GetStr(STR_TWO));
+        break;
+    case CardName::Three:
+        temp.erase(temp.begin()+pos);
+        temp.insert(pos, GetStr(STR_THREE));
+        break;
+    case CardName::Four:
+        temp.erase(temp.begin()+pos);
+        temp.insert(pos, GetStr(STR_FOUR));
+        break;
+    case CardName::Five:
+        temp.erase(temp.begin()+pos);
+        temp.insert(pos, GetStr(STR_FIVE));
+        break;
+    case CardName::Six:
+        temp.erase(temp.begin()+pos);
+        temp.insert(pos, GetStr(STR_SIX));
+        break;
+    case CardName::Seven:
+        temp.erase(temp.begin()+pos);
+        temp.insert(pos, GetStr(STR_SEVEN));
+        break;
+    case CardName::Eight:
+        temp.erase(temp.begin()+pos);
+        temp.insert(pos, GetStr(STR_EIGHT));
+        break;
+    case CardName::Nine:
+        temp.erase(temp.begin()+pos);
+        temp.insert(pos, GetStr(STR_NINE));
+        break;
+    case CardName::Ten:
+        temp.erase(temp.begin()+pos);
+        temp.insert(pos, GetStr(STR_TEN));
+        break;
+    case CardName::Jack:
+        temp.erase(temp.begin()+pos);
+        temp.insert(pos, GetStr(STR_JACK));
+        break;
+    case CardName::Queen:
+        temp.erase(temp.begin()+pos);
+        temp.insert(pos, GetStr(STR_QUEEN));
+        break;
+    case CardName::King:
+        temp.erase(temp.begin()+pos);
+        temp.insert(pos, GetStr(STR_KING));
+        break;
+    case CardName::Ace:
+        temp.erase(temp.begin()+pos);
+        temp.insert(pos, GetStr(STR_ACE));
+        break;
+    }
+
+    pos = temp.find('S');
+    switch (_suit)
+    {
+    case CardSuit::Clubs:
+        temp.erase(temp.begin()+pos);
+        temp.insert(pos, GetStr(STR_CLUBS));
+        break;
+    case CardSuit::Spades:
+        temp.erase(temp.begin()+pos);
+        temp.insert(pos, GetStr(STR_SPADES));
+        break;
+    case CardSuit::Hearts:
+        temp.erase(temp.begin()+pos);
+        temp.insert(pos, GetStr(STR_HEARTS));
+        break;
+    case CardSuit::Diamonds:
+        temp.erase(temp.begin()+pos);
+        temp.insert(pos, GetStr(STR_DIAMONDS));
+        break;
+    }*/
+    return temp;
+>>>>>>> Fixed errors in card.cpp.
+}
+
+void Card::SetScore(unsigned int score)
+{
+    if (score >= MIN_SCORE && score <= MAX_SCORE) 
+        _score = score;
+    else
+    {
+        throw std::logic_error( "Invalid Score!" );
+
+    }
+}
