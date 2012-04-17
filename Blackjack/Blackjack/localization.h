@@ -4,6 +4,8 @@
 #include <vector>
 #include <string>
 
+#define GetStr(name) Localization::Instance()->GetString((name))
+
 enum Strings
 {
     STR_SUITS,

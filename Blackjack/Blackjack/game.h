@@ -1,20 +1,14 @@
 #ifndef GAME_H
 #define GAME_H
 
-abstract class Game
+class Game abstract
 {
 public:
-    Game();
-
-    ~Game();
-   
-protected:
-    Initialize();
-    LoadContents();
-    Update();
-    Draw();
-    UnloadContents();
-private:
+    virtual void Initialize();
+    virtual void LoadContents();
+    virtual void Update();
+    virtual void Draw();
+    virtual void UnloadContents();
 
 };
 

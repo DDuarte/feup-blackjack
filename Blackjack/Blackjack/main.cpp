@@ -7,8 +7,6 @@
 
 #include "localization.h"
 
-#define GetStr(name) Localization::Instance()->GetString(name)
-
 void CardTests()
 {
     std::ofstream logFile("log.txt");
@@ -27,7 +25,6 @@ void CardTests()
     }
 }
 
-    loc.SetLang(loc.GetAvailableLanguages()[1]);
 void Tests()
 {
     CardTests();
