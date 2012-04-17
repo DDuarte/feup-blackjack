@@ -78,6 +78,7 @@
     <ClInclude Include="deck.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="card.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
