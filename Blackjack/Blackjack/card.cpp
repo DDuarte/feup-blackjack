@@ -1,4 +1,5 @@
 #include "card.h"
+#include "localization.h"
 #include <string>
 #include <stdexcept>
 #include <sstream>
@@ -29,13 +30,13 @@ std::string Card::GetFormattedName() const
 	switch (_name)
 	{
 	case CardName::Two:
-		temp.replace(temp[pos], temp[pos+1], "Two");
+		temp.replace(temp[pos], temp[pos+1], (*Localization::Instance())[STR_TWO]);
 		break;
 	case CardName::Three:
-		temp.replace(temp[pos], temp[pos+1], "Three");
+		temp.replace(temp[pos], temp[pos+1], (*Localization::Instance())[STR_THREE]));
 		break;
 	case CardName::Four:
-		temp.replace(temp[pos], temp[pos+1], "Four");
+		temp.replace(temp[pos], temp[pos+1], (*Localization::Instance())[STR_FOUR]));
 		break;
 	case CardName::Five:
 		temp.replace(temp[pos], temp[pos+1], "Five");

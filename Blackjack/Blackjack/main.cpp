@@ -27,6 +27,7 @@ void CardTests()
     }
 }
 
+    loc.SetLang(loc.GetAvailableLanguages()[1]);
 void Tests()
 {
     CardTests();
