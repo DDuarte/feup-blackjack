@@ -46,17 +46,17 @@ public:
 
     bool IsValid() const { return _suit != CsNone && _name != CnNone && _score != 0; };
 
-	static std::string GetOutputFormat() { return _outputFormat; };
+    static std::string GetOutputFormat() { return _outputFormat; };
 
-	void SetScore(unsigned int score);
+    void SetScore(unsigned int score);
 
-	static void SetOutputFormat(std::string outputFormat) { _outputFormat =  outputFormat; };
+    static void SetOutputFormat(std::string outputFormat) { _outputFormat =  outputFormat; };
 
 private:
-	CardSuit _suit;
-	CardName _name;
-	unsigned int _score;
-	static std::string _outputFormat; // [ N - T ]; { N - T }
+    CardSuit _suit;
+    CardName _name;
+    unsigned int _score;
+    static std::string _outputFormat; // [ N - T ]; { N - T }
 };
 
 
