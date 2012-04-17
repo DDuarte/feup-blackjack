@@ -33,7 +33,7 @@ std::string Card::GetFormattedName() const
 	
 	pos = temp.find('S');
     temp.erase(temp.begin()+pos);
-    temp.insert(pos, GetStr((Strings)(_name + 1)));
+    temp.insert(pos, GetStr((Strings)(_suit + 1)));
 
 	return temp;
 }
