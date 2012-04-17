@@ -83,8 +83,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="card.cpp" />
+    <ClCompile Include="dealer.cpp" />
+    <ClCompile Include="deck.cpp" />
+    <ClCompile Include="game.cpp" />
     <ClCompile Include="localization.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="player.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
