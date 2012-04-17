@@ -25,21 +25,15 @@ void CardTests()
     }
 }
 
-void LocalizationTests()
-{
-    Localization loc;
-    loc.SetLang(loc.GetAvailableLanguages()[0]);
-    std::cout << loc.GetString(STR_ACE) << std::endl;
-}
-
 void Tests()
 {
     CardTests();
-    LocalizationTests();
 }
 
 int main()
 {
+    Localization::Inst()->SetLang(English); // will be set by the UI
+
     Tests();
 
     system("PAUSE");

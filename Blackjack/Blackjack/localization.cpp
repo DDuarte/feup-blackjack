@@ -4,6 +4,9 @@
 #include <cstring>
 #include <stdio.h>
 #include <iostream>
+#include <algorithm>
+#include <sstream>
+#include <exception>
 
 #ifndef _WIN32
 #include <dirent.h>
@@ -15,9 +18,19 @@
 #define GetCurrentDir _getcwd
 #endif
 
+Localization* Localization::_instance = NULL;
+
+Localization* Localization::Inst()
+{
+    if (!_instance)
+        _instance = new Localization;
+
+    return _instance;
+}
+
 Localization::Localization()
 {
-    _languages = std::vector<std::string>();
+    _languages = std::vector<Language>();
     _strings = std::vector<std::string>();
 
     FindLangs();
@@ -63,7 +76,7 @@ bool Localization::FindLangs()
     {
         while ((ent = readdir(dir)) != NULL)
             if (strstr(ent->d_name, ext))
-                _languages.push_back(std::string(ent->d_name).substr(0, 2));
+                _languages.push_back(GetLanguageByShortLang(std::string(ent->d_name).substr(0, 2)));
         closedir(dir);
     }
     else
@@ -80,30 +93,32 @@ std::string Localization::GetString(Strings index) const
         return std::string();
 }
 
-std::vector<Language> Localization::GetAvailableLanguages() const
-{
-    std::vector<Language> result;
-
-    // TODO: Use LanguageShort[]
-    for (size_t i = 0; i < _languages.size(); ++i)
-    {
-        if (_languages[i] == "en")
-            result.push_back(English);
-        else if (_languages[i] == "pt")
-            result.push_back(Portuguese);
-        else if (_languages[i] == "es")
-            result.push_back(Spanish);
-        else if (_languages[i] == "fr")
-            result.push_back(French);
-        else
-            result.push_back(None);
-    }
-
-    return result;
-}
-
 void Localization::SetLang(Language lang)
 {
-    _currLang = lang;
-    ReadLangFile(LanguageShort[_currLang]);
+    if (std::find(_languages.begin(), _languages.end(), lang) != _languages.end())
+    {
+        _currLang = lang;
+        ReadLangFile(LanguageShort[_currLang]);
+    }
+    else
+    {
+        std::ostringstream ss;
+        ss << "Language " << lang << " was not found.";
+        throw std::exception(ss.str().c_str());
+    }
+        
+}
+
+std::string Localization::operator[]( const Strings index )
+{
+    return GetString(index);
+}
+
+Language Localization::GetLanguageByShortLang(std::string lang)
+{
+         if (lang == "en") return English;
+    else if (lang == "pt") return Portuguese;
+    else if (lang == "es") return Spanish;
+    else if (lang == "fr") return French;
+    else                   return None;
 }

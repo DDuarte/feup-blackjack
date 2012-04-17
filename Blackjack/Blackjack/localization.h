@@ -39,22 +39,31 @@ enum Language
 
 static char* LanguageShort[] = { "uk", "en", "pt", "fr", "es" };
 
+// Singleton since we need to use it all around the code
 class Localization
 {
 public:
-    Localization();
+    static Localization* Inst();
     
-    std::vector<Language> GetAvailableLanguages() const;
+    std::vector<Language> GetAvailableLanguages() const { return _languages; }
+
     std::string GetString(Strings index) const;
+    std::string operator[] (const Strings index);
+
     void SetLang(Language lang);
 
 private:
-    std::vector<std::string> _languages;
+    Localization();
+
+    static Localization* _instance;
+
+    std::vector<Language> _languages;
     std::vector<std::string> _strings;
     Language _currLang;
 
     bool ReadLangFile(char* lang);
     bool FindLangs();
+    static Language GetLanguageByShortLang(std::string lang);
 };
 
 #endif // LOCALIZATION_H
