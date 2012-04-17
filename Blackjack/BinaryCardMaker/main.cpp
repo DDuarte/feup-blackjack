@@ -92,6 +92,8 @@ int main()
     for (size_t i = 0; i < count; ++i)
         file << strings[i].Phrases[langIndex] << '\0';
 
+    file.close();
+
     std::cout << "Success";
     std::getchar();
 
