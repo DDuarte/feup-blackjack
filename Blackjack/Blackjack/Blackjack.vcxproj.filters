@@ -32,7 +32,7 @@
     </ClInclude>
     <ClInclude Include="localization.h">
       <Filter>Header Files</Filter>
-    </ClInclude
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
