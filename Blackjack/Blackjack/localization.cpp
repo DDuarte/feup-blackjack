@@ -20,7 +20,7 @@
 
 Localization* Localization::_instance = NULL;
 
-Localization* Localization::Inst()
+Localization* Localization::Instance()
 {
     if (!_instance)
         _instance = new Localization;
@@ -107,11 +107,6 @@ void Localization::SetLang(Language lang)
         throw std::exception(ss.str().c_str());
     }
         
-}
-
-std::string Localization::operator[]( const Strings index )
-{
-    return GetString(index);
 }
 
 Language Localization::GetLanguageByShortLang(std::string lang)

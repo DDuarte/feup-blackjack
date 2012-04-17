@@ -43,12 +43,11 @@ static char* LanguageShort[] = { "uk", "en", "pt", "fr", "es" };
 class Localization
 {
 public:
-    static Localization* Inst();
+    static Localization* Instance();
     
     std::vector<Language> GetAvailableLanguages() const { return _languages; }
 
     std::string GetString(Strings index) const;
-    std::string operator[] (const Strings index);
 
     void SetLang(Language lang);
 

@@ -7,6 +7,8 @@
 
 #include "localization.h"
 
+#define GetStr(name) Localization::Instance()->GetString(name)
+
 void CardTests()
 {
     std::ofstream logFile("log.txt");
@@ -32,7 +34,7 @@ void Tests()
 
 int main()
 {
-    Localization::Inst()->SetLang(English); // will be set by the UI
+    Localization::Instance()->SetLang(English); // default lang
 
     Tests();
 
