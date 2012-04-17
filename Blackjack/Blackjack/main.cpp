@@ -11,7 +11,8 @@ int main()
 
 	try
 	{
-		Card myCard(CardSuit::Clubs, CardName::Ace, -10);
+		Card myCard(CardSuit::Clubs, CardName::Ace, 10);
+		std::cout << myCard.GetFormattedName() << std::endl;
 	}
 	catch (std::logic_error &e)
 	{
@@ -19,6 +20,8 @@ int main()
 	}
 
 	
+
+	system("PAUSE");
 
 	return 0;
 }

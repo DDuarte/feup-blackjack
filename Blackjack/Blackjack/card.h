@@ -30,7 +30,7 @@ enum CardName
     Ace
 };
 
-const std::string DEFAULT_OUTPUT_FORMAT = "[ N - T ]";
+const std::string DEFAULT_OUTPUT_FORMAT = "[ N - S ]";
 const unsigned int MAX_SCORE = 11;
 const unsigned int MIN_SCORE = 0;
 
