@@ -27,3 +27,5 @@ obj/
 _ReSharper*/
 ipch/
 [Tt]est[Rr]esult*
+*.opensdf
+*.sdf
