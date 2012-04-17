@@ -1,9 +1,19 @@
 #ifndef GAME_H
 #define GAME_H
 
-class Game
+abstract class Game
 {
 public:
+    Game();
+
+    ~Game();
+   
+protected:
+    Initialize();
+    LoadContents();
+    Update();
+    Draw();
+    UnloadContents();
 private:
 
 };
