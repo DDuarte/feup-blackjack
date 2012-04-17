@@ -77,6 +77,7 @@
     <ClInclude Include="card.h" />
     <ClInclude Include="dealer.h" />
     <ClInclude Include="deck.h" />
+    <ClInclude Include="game.h" />
     <ClInclude Include="player.h" />
   </ItemGroup>
   <ItemGroup>
