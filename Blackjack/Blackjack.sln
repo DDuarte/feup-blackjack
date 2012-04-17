@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Blackjack", "Blackjack\Blackjack.vcxproj", "{71475748-ED48-4EC5-BC24-BE8A7DD22465}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BinaryCardMaker", "BinaryCardMaker\BinaryCardMaker.vcxproj", "{DC46BF33-060D-41AB-B0D7-039532F76FDD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -13,6 +15,10 @@ Global
 		{71475748-ED48-4EC5-BC24-BE8A7DD22465}.Debug|Win32.Build.0 = Debug|Win32
 		{71475748-ED48-4EC5-BC24-BE8A7DD22465}.Release|Win32.ActiveCfg = Release|Win32
 		{71475748-ED48-4EC5-BC24-BE8A7DD22465}.Release|Win32.Build.0 = Release|Win32
+		{DC46BF33-060D-41AB-B0D7-039532F76FDD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DC46BF33-060D-41AB-B0D7-039532F76FDD}.Debug|Win32.Build.0 = Debug|Win32
+		{DC46BF33-060D-41AB-B0D7-039532F76FDD}.Release|Win32.ActiveCfg = Release|Win32
+		{DC46BF33-060D-41AB-B0D7-039532F76FDD}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
