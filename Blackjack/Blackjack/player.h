@@ -29,18 +29,7 @@ public:
     void SetBalance(double balance) { _balance = balance; };
     void SetBet(double bet) { (bet > 0 ? _bet = bet : throw InvalidBetException("Invalid bet exception at Player::IncreaseBet(double bet)!")); };
     void IncreaseBet(double bet) { (bet > 0 ? _bet += bet : throw InvalidBetException("Invalid bet exception at Player::IncreaseBet(double bet)!")); };
-    static void SetPlayersFileName(std::string playersFileName)
-    {
-        if (!Utilities::FileExists(playersFileName.c_str()))
-        {
-            std::fstream out (playersFileName.c_str(), std::ios::out | std::ios::binary);
-            if (!out.is_open())
-                ;//throw exception
-            out.close();
-        }
-
-        _playersFileName = playersFileName;
-    }
+    static void SetPlayersFileName(std::string playersFileName);
 
     bool IsBusted() { return GetHand().IsBusted(); }         
     bool IsBlackjack() { return GetHand().IsBlackjack(); } 

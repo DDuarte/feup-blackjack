@@ -78,7 +78,14 @@ std::vector<Player*> BlackJack::CheckWinners() const
 
 void BlackJack::Initialize()
 {
-    ReadPlayersFromFile();
+    try
+    {
+        ReadPlayersFromFile();
+    }
+    catch (FileNotFoundException &e)
+    {
+    	return;
+    }
 }
 
 void BlackJack::LoadContents()
@@ -106,7 +113,7 @@ void BlackJack::ReadPlayersFromFile()
     std::ifstream file (Player::GetPlayersFileName(), std::ios::binary | std::ios::in);
 
     if (!file.is_open())
-        ; //throw file not found exception
+        throw FileNotFoundException(Player::GetPlayersFileName(), Player::GetPlayersFileName() + " not found!");
 
     while (!file.fail())
     {

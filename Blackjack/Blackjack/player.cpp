@@ -51,3 +51,16 @@ bool Player::ReadBinary( std::ifstream& file )
     
     return true;
 }
+
+void Player::SetPlayersFileName(std::string playersFileName)
+{
+    if (!Utilities::FileExists(playersFileName.c_str()))
+    {
+        std::fstream out (playersFileName.c_str(), std::ios::out | std::ios::binary);
+        if (!out.is_open())
+            ;//throw exception
+        out.close();
+    }
+
+    _playersFileName = playersFileName;
+}
