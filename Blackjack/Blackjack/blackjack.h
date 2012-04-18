@@ -10,7 +10,6 @@
 
 const unsigned int NUM_ACTIVE_PLAYERS = 4;
 
-class Dealer;
 class Deck;
 class Player;
 
@@ -37,8 +36,7 @@ private:
 
     void SelectPlayers();
 
-    // Should these two be pointers? Ya.
-    Dealer* _dealer;
+    // Should these two be pointers?
     Deck* _deck;
 };
 

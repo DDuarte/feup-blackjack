@@ -1,7 +1,6 @@
 #include "card.h"
 #include "localization.h"
-#include "invalidCardException.h"
-#include "invalidScoreException.h"
+#include "gameExceptions.h"
 
 #include <string>
 #include <stdexcept>
@@ -47,7 +46,7 @@ void Card::SetScore(unsigned int score)
         _score = score;
     else
     {
-        throw InvalidCardScoreException( "Invalid card score at Card::SetScore(unsigned int score)!" );
+        throw InvalidScoreException( "Invalid card score at Card::SetScore(unsigned int score)!" );
 
     }
 }

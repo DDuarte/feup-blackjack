@@ -1,7 +1,7 @@
 #include "blackjack.h"
 #include "player.h"
 #include "deck.h"
-#include "dealer.h"
+#include "gameExceptions.h"
 
 #include <exception>
 
@@ -12,7 +12,6 @@ BlackJack::BlackJack()
 
     _activePlayers = new Player*[NUM_ACTIVE_PLAYERS];
 
-    _dealer = new Dealer;
     _deck = new Deck;
 }
 
@@ -24,7 +23,6 @@ BlackJack::~BlackJack()
 
     delete[] _activePlayers;
 
-    delete _dealer;
     delete _deck;
 
     _players.clear();
@@ -37,9 +35,9 @@ BlackJack::~BlackJack()
 void BlackJack::SelectPlayers()
 {
     if (_waitingPlayers.empty() || _waitingPlayers.size() < NUM_ACTIVE_PLAYERS)
-        throw std::exception("Not enough players to start a game."); // TODO: Change this to a custom exception
-                                                                     // We need to catch it later and print error
-                                                                     // to player
+        throw InvalidPlayerException("Not enough players to start a game."); // TODO: Change this to a custom exception
+                                                                            // We need to catch it later and print error
+                                                                           // to player
 
     for (unsigned int i = 0; i < NUM_ACTIVE_PLAYERS; ++i)
     {
@@ -51,7 +49,7 @@ void BlackJack::SelectPlayers()
 void BlackJack::RegisterPlayer(std::string name, double balance)
 {
     if (balance <= 0 || name.empty())
-        throw std::exception("Invalid parameters when registering player."); // TODO: (Read above exception comment)
+        throw InvalidPlayerException("Invalid parameters when registering player."); // TODO: (Read above exception comment)
 
     _players.push_back(Player(name, balance));
     _waitingPlayers.push(&_players.back());
@@ -64,17 +62,11 @@ std::vector<Player*> BlackJack::CheckWinners() const
     std::vector<Player*> winners;
     for (int i = 0; i < NUM_ACTIVE_PLAYERS; ++i)
     {
-        if (winners.empty())
-            winners.push_back(_activePlayers[i]);
-        else if (winners.at(0)->GetHand().GetScore() < _activePlayers[i]->GetHand().GetScore())
-        {
+        if (winners.at(0)->GetHand().GetScore() < _activePlayers[i]->GetHand().GetScore())
             winners.clear();
-            winners.push_back(_activePlayers[i]);
-        }
-        else if (winners.at(0)->GetHand().GetScore() == _activePlayers[i]->GetHand().GetScore())
-        {
-            winners.push_back(_activePlayers[i]);
-        }
+        else if (winners.at(0)->GetHand().GetScore() > _activePlayers[i]->GetHand().GetScore())
+            continue;
+        winners.push_back(_activePlayers[i]);
     }
     return winners;
 }

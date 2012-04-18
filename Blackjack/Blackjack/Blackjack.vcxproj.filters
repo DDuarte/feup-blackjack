@@ -33,9 +33,6 @@
     <ClInclude Include="player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dealer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -51,10 +48,7 @@
     <ClInclude Include="hand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="invalidCardException.h">
-      <Filter>Game Exceptions\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="invalidScoreException.h">
+    <ClInclude Include="gameExceptions.h">
       <Filter>Game Exceptions\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -66,9 +60,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="localization.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="dealer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="deck.cpp">

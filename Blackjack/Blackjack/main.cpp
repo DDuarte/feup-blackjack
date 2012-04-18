@@ -8,8 +8,7 @@
 
 #include "localization.h"
 #include "deck.h"
-#include "invalidCardException.h"
-#include "invalidScoreException.h"
+#include "gameExceptions.h"
 
 void CardTests()
 {
@@ -29,7 +28,7 @@ void CardTests()
     {
         std::clog << e.what() << std::endl;
     }
-    catch (InvalidCardScoreException &e)
+    catch (InvalidScoreException &e)
     {
         std::clog << e.what() << std::endl;
     }

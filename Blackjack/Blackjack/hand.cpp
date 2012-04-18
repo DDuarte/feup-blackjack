@@ -1,12 +1,12 @@
 #include "hand.h"
 #include "card.h"
+#include "gameExceptions.h"
 
 #include <vector>
 
 Hand::Hand()
 {
-
-
+    _cards.clear();
 }
 
 unsigned int Hand::GetScore()
@@ -22,7 +22,7 @@ unsigned int Hand::GetScore()
 }
 
 
-void Hand::AddCard( Card card )
+void Hand::AddCard(Card card)
 {
     if (card.IsValid())
     {
@@ -30,7 +30,7 @@ void Hand::AddCard( Card card )
     }
     else
     {
-
+        throw InvalidCardException("Invalid card at Hand::AddCard(Card card)!");
     }
 }
 

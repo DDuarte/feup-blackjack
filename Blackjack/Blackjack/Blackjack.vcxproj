@@ -76,12 +76,10 @@
   <ItemGroup>
     <ClInclude Include="blackjack.h" />
     <ClInclude Include="card.h" />
-    <ClInclude Include="dealer.h" />
     <ClInclude Include="deck.h" />
     <ClInclude Include="game.h" />
-    <ClInclude Include="invalidCardException.h" />
+    <ClInclude Include="gameExceptions.h" />
     <ClInclude Include="hand.h" />
-    <ClInclude Include="invalidScoreException.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="localization.h" />
     <ClInclude Include="utilities.h" />
@@ -89,7 +87,6 @@
   <ItemGroup>
     <ClCompile Include="blackjack.cpp" />
     <ClCompile Include="card.cpp" />
-    <ClCompile Include="dealer.cpp" />
     <ClCompile Include="deck.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="hand.cpp" />
