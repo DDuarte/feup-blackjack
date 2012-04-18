@@ -23,20 +23,27 @@ public:
     std::vector<Player*> CheckWinners() const;
 
     virtual void Initialize();
-    virtual void LoadContents();
-    virtual void Update();
-    virtual void Draw();
-    virtual void UnloadContents();
+    virtual void LoadContents() { }
+    virtual void Update() { }
+    virtual void Draw() { }
+    virtual void UnloadContents() { }
 
     void ReadPlayersFromFile();
 
+    void RemovePlayer(Player* player);
+    void VerifyPlayersBalance();
+
+    bool ShouldEnd();
+    bool CanStart();
+
 private:
     std::vector<Player> _players;
-    std::queue<Player*> _waitingPlayers;
 
+    std::queue<Player*> _waitingPlayers;
     Player** _activePlayers;
 
-    void SelectPlayers();
+    void SelectPlayers(); // For the first 4 players
+    Player* SelectNextPlayer(); // For each "replacement"
 
     Deck* _deck;
 };

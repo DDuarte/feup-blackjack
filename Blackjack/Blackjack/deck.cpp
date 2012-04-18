@@ -21,19 +21,20 @@ void Deck::InitializeDeck(unsigned int numberOfDecks)
 
     for (unsigned int i = 0; i < NUMBER_OF_SUITS*numberOfDecks; ++i)
     {
-        _cards.push_back(Card(types[i%NUMBER_OF_SUITS], Two, 2));
-        _cards.push_back(Card(types[i%NUMBER_OF_SUITS], Three, 3));
-        _cards.push_back(Card(types[i%NUMBER_OF_SUITS], Four, 4));
-        _cards.push_back(Card(types[i%NUMBER_OF_SUITS], Five, 5));
-        _cards.push_back(Card(types[i%NUMBER_OF_SUITS], Six, 6));
-        _cards.push_back(Card(types[i%NUMBER_OF_SUITS], Seven, 7));
-        _cards.push_back(Card(types[i%NUMBER_OF_SUITS], Eight, 8));
-        _cards.push_back(Card(types[i%NUMBER_OF_SUITS], Nine, 9));
-        _cards.push_back(Card(types[i%NUMBER_OF_SUITS], Ten, 10));
-        _cards.push_back(Card(types[i%NUMBER_OF_SUITS], Jack, 10));
-        _cards.push_back(Card(types[i%NUMBER_OF_SUITS], Queen, 10));
-        _cards.push_back(Card(types[i%NUMBER_OF_SUITS], King, 10));
-        _cards.push_back(Card(types[i%NUMBER_OF_SUITS], Ace, 11)); // or 1
+        int suit = i % NUMBER_OF_SUITS;
+        _cards.push_back(Card(types[suit], Two, 2));
+        _cards.push_back(Card(types[suit], Three, 3));
+        _cards.push_back(Card(types[suit], Four, 4));
+        _cards.push_back(Card(types[suit], Five, 5));
+        _cards.push_back(Card(types[suit], Six, 6));
+        _cards.push_back(Card(types[suit], Seven, 7));
+        _cards.push_back(Card(types[suit], Eight, 8));
+        _cards.push_back(Card(types[suit], Nine, 9));
+        _cards.push_back(Card(types[suit], Ten, 10));
+        _cards.push_back(Card(types[suit], Jack, 10));
+        _cards.push_back(Card(types[suit], Queen, 10));
+        _cards.push_back(Card(types[suit], King, 10));
+        _cards.push_back(Card(types[suit], Ace, 0)); // 11 or 1
     }
 
     Shuffle();

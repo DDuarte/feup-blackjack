@@ -82,30 +82,10 @@ void BlackJack::Initialize()
     {
         ReadPlayersFromFile();
     }
-    catch (FileNotFoundException &e)
+    catch (FileNotFoundException)
     {
     	return;
     }
-}
-
-void BlackJack::LoadContents()
-{
-
-}
-
-void BlackJack::Update()
-{
-
-}
-
-void BlackJack::Draw()
-{
-
-}
-
-void BlackJack::UnloadContents()
-{
-
 }
 
 void BlackJack::ReadPlayersFromFile()
@@ -123,4 +103,63 @@ void BlackJack::ReadPlayersFromFile()
     }
 
     file.close();
+}
+
+void BlackJack::RemovePlayer(Player* player)
+{
+    for (int i = 0; i < NUM_ACTIVE_PLAYERS; ++i)
+    {
+        if (_activePlayers[i] == player)
+        {
+            if (Player* nextPlayer = SelectNextPlayer())
+                _activePlayers[i] = nextPlayer; // TODO call some other function signaling that a new player was added
+            else
+                _activePlayers[i] = NULL; // TODO call a function that will handle the fact that there are no new players
+
+            return;
+        }
+    }
+}
+
+Player* BlackJack::SelectNextPlayer()
+{
+    if (_waitingPlayers.size() == 0)
+        return NULL;
+
+    Player* plr = _waitingPlayers.front();
+    _waitingPlayers.pop();
+
+    return plr;
+}
+
+bool BlackJack::ShouldEnd()
+{
+    int activePlayerCount = 0;
+    for (int i = 0; i < NUM_ACTIVE_PLAYERS; ++i)
+        if (_activePlayers[i] != NULL)
+            activePlayerCount++;
+
+    return _waitingPlayers.size() == 0 && activePlayerCount > 1;
+}
+
+void BlackJack::VerifyPlayersBalance()
+{
+    for (int i = 0; i < NUM_ACTIVE_PLAYERS; ++i)
+    {
+        if (_activePlayers[i] != NULL)
+            if (_activePlayers[i]->GetBalance() <= 0.0)
+                RemovePlayer(_activePlayers[i]); // this will also select next player
+    }
+}
+
+bool BlackJack::CanStart()
+{
+    int activePlayerCount = 0;
+    for (int i = 0; i < NUM_ACTIVE_PLAYERS; ++i)
+    {
+        if (_activePlayers[i] != NULL)
+            activePlayerCount++;
+    }
+
+    return activePlayerCount > 1;
 }

@@ -9,7 +9,7 @@
 const unsigned int DEFAULT_NUMBER_OF_DECKS = 1;
 const unsigned int NUMBER_OF_CARDS = 52;
 const unsigned int NUMBER_OF_SUITS = 4;
-const unsigned int NUMBER_OF_CARDS_PER_SUIT = 52/4;
+const unsigned int NUMBER_OF_CARDS_PER_SUIT = NUMBER_OF_CARDS/NUMBER_OF_SUITS;
 
 class Deck
 {

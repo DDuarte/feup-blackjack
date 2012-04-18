@@ -31,6 +31,10 @@ void Hand::UpdateScore()
 {
     // TODO: Test
 
+    if (_cards.size() == 0)
+        // This should only be called by AddCard so hand must have at least 1 element
+        throw InvalidCardException("Empty hand at Hand::UpdateScore()!");
+
     int aces = 0;
 
     for (std::vector<Card>::const_iterator card = _cards.begin(); card != _cards.end(); ++card)
