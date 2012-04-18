@@ -27,7 +27,7 @@ public:
 
     void SetName(std::string name) { if (name.size() > 0) _name = name; };
     void SetBalance(double balance) { _balance = balance; };
-    void SetBet(double bet) { (bet > 0 ? _bet = bet : throw InvalidBetException("Invalid bet exception at Player::IncreaseBet(double bet)!")); };
+    void SetBet(double bet) { (bet > 0 ? _bet = bet : throw InvalidBetException("Invalid bet exception at Player::Set(double bet)!")); };
     void IncreaseBet(double bet) { (bet > 0 ? _bet += bet : throw InvalidBetException("Invalid bet exception at Player::IncreaseBet(double bet)!")); };
     static void SetPlayersFileName(std::string playersFileName);
 

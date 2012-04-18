@@ -30,13 +30,12 @@ Player::Player(std::ifstream& file)
         ; //throw invalid file exception
 }
 
-
-void Player::WriteBinary( std::ofstream& out )
+void Player::WriteBinary(std::ofstream& out)
 {
     out << _name << '\0' << _balance; // << _bet; It isn't needed because we don't want to save Player bet;
 }
 
-bool Player::ReadBinary( std::ifstream& file )
+bool Player::ReadBinary(std::ifstream& file)
 {
 
         char phrase[200];
