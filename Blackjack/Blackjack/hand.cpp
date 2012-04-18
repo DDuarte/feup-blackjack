@@ -20,11 +20,30 @@ Hand::Hand( std::vector<Card> cards )
 unsigned int Hand::GetScore()
 {
     unsigned int score = 0;
-
+    bool hasAce = false;
     for (std::vector<Card>::const_iterator card = _cards.begin(); card != _cards.end(); ++card)
     {
-        score += card->GetScore();
+        if (card->GetName() !=  Ace)
+            score += card->GetScore();
+        else
+            hasAce = true;
     }
+
+    if (hasAce)
+        for (std::vector<Card>::iterator card = _cards.begin(); card != _cards.end(); ++card)
+        {
+            if (card->GetName() ==  Ace)
+                if (score + 11 > 21)
+                { 
+                    card->SetScore(11);
+                    score += 11;
+                }
+                else
+                {
+                    card->SetScore(1);
+                    score += 1;
+                }
+        }
 
     return score;
 }
