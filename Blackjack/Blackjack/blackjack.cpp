@@ -1,9 +1,11 @@
 #include "blackjack.h"
 #include "player.h"
 #include "deck.h"
+#include "localization.h"
 #include "gameExceptions.h"
 
 #include <exception>
+#include <fstream>
 
 BlackJack::BlackJack()
 {
@@ -13,6 +15,8 @@ BlackJack::BlackJack()
     _activePlayers = new Player*[NUM_ACTIVE_PLAYERS];
 
     _deck = new Deck;
+
+    Initialize();
 }
 
 BlackJack::~BlackJack()
@@ -95,4 +99,21 @@ void BlackJack::Draw()
 void BlackJack::UnloadContents()
 {
 
+}
+
+void BlackJack::ReadPlayersFromFile()
+{
+    std::ifstream file (Player::GetPlayersFileName(), std::ios::binary | std::ios::in);
+
+    if (!file.is_open())
+        ; //throw file not found exception
+
+    while (!file.fail())
+    {
+        Player tempPlayer(file);
+        _players.push_back(tempPlayer);
+        _waitingPlayers.push(&_players.back());
+    }
+
+    file.close();
 }

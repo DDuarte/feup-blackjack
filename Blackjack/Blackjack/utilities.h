@@ -1,6 +1,8 @@
 #ifndef UTILITIES_H_
 #define UTILITIES_H_
 
+#include <string>
+
 namespace Utilities
 {
     // Swaps two values
@@ -11,6 +13,8 @@ namespace Utilities
         val1 = val2;
         val2 = temp;
     }
+
+    bool FileExists(std::string fileName);
 }
 
 #endif // UTILITIES_H_

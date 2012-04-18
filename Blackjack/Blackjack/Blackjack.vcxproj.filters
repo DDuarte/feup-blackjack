@@ -15,9 +15,6 @@
     <Filter Include="Classes">
       <UniqueIdentifier>{f01ec21f-5161-4c21-bd44-c0228e2ea5df}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\Players">
-      <UniqueIdentifier>{616ddd5c-4b76-4a94-b9bf-8ec7aa14ed9f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes\Card">
       <UniqueIdentifier>{00721920-bc93-4438-8ef5-493cc0529ccf}</UniqueIdentifier>
     </Filter>
@@ -36,13 +33,16 @@
     <Filter Include="Classes\Hand">
       <UniqueIdentifier>{03b03a38-fd27-4f7c-ae80-2fa1147021db}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Player">
+      <UniqueIdentifier>{616ddd5c-4b76-4a94-b9bf-8ec7aa14ed9f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="utilities.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="player.h">
-      <Filter>Classes\Players</Filter>
+      <Filter>Classes\Player</Filter>
     </ClInclude>
     <ClInclude Include="card.h">
       <Filter>Classes\Card</Filter>
@@ -71,7 +71,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="player.cpp">
-      <Filter>Classes\Players</Filter>
+      <Filter>Classes\Player</Filter>
     </ClCompile>
     <ClCompile Include="card.cpp">
       <Filter>Classes\Card</Filter>
@@ -90,6 +90,9 @@
     </ClCompile>
     <ClCompile Include="hand.cpp">
       <Filter>Classes\Hand</Filter>
+    </ClCompile>
+    <ClCompile Include="utilities.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

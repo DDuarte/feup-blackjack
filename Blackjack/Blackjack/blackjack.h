@@ -28,6 +28,8 @@ public:
     virtual void Draw();
     virtual void UnloadContents();
 
+    void ReadPlayersFromFile();
+
 private:
     std::vector<Player> _players;
     std::queue<Player*> _waitingPlayers;
