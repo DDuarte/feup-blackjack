@@ -9,73 +9,87 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Game Exceptions">
       <UniqueIdentifier>{35c01a25-95f5-4fae-b94b-5ed7d6c0c76a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game Exceptions\Header Files">
-      <UniqueIdentifier>{882e855a-d48f-449d-907a-d2e0e3a4733c}</UniqueIdentifier>
+    <Filter Include="Classes">
+      <UniqueIdentifier>{f01ec21f-5161-4c21-bd44-c0228e2ea5df}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game Exceptions\Source Files">
-      <UniqueIdentifier>{ad5966c4-de25-4553-b0fa-10a14b30da24}</UniqueIdentifier>
+    <Filter Include="Classes\Players">
+      <UniqueIdentifier>{616ddd5c-4b76-4a94-b9bf-8ec7aa14ed9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Card">
+      <UniqueIdentifier>{00721920-bc93-4438-8ef5-493cc0529ccf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Deck">
+      <UniqueIdentifier>{d6a74592-d13d-4dea-b9c0-2d30709b9bbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Localization">
+      <UniqueIdentifier>{086f2f8c-56a2-4a37-9a81-f57334ce0851}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Game">
+      <UniqueIdentifier>{f6801f0d-7a99-48b6-870a-74df9bb2c5fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Blackjack">
+      <UniqueIdentifier>{a1977ace-97ae-4af4-955f-7de678ad455a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Hand">
+      <UniqueIdentifier>{03b03a38-fd27-4f7c-ae80-2fa1147021db}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="card.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="deck.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="localization.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="blackjack.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="utilities.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>Classes\Players</Filter>
+    </ClInclude>
+    <ClInclude Include="card.h">
+      <Filter>Classes\Card</Filter>
+    </ClInclude>
+    <ClInclude Include="deck.h">
+      <Filter>Classes\Deck</Filter>
+    </ClInclude>
+    <ClInclude Include="localization.h">
+      <Filter>Classes\Localization</Filter>
+    </ClInclude>
+    <ClInclude Include="game.h">
+      <Filter>Classes\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="blackjack.h">
+      <Filter>Classes\Blackjack</Filter>
+    </ClInclude>
     <ClInclude Include="hand.h">
-      <Filter>Header Files</Filter>
+      <Filter>Classes\Hand</Filter>
     </ClInclude>
     <ClInclude Include="gameExceptions.h">
-      <Filter>Game Exceptions\Header Files</Filter>
+      <Filter>Game Exceptions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="card.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="player.cpp">
+      <Filter>Classes\Players</Filter>
     </ClCompile>
-    <ClCompile Include="localization.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="card.cpp">
+      <Filter>Classes\Card</Filter>
     </ClCompile>
     <ClCompile Include="deck.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Classes\Deck</Filter>
+    </ClCompile>
+    <ClCompile Include="localization.cpp">
+      <Filter>Classes\Localization</Filter>
     </ClCompile>
     <ClCompile Include="game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="player.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Classes\Game</Filter>
     </ClCompile>
     <ClCompile Include="blackjack.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Classes\Blackjack</Filter>
     </ClCompile>
     <ClCompile Include="hand.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Classes\Hand</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
