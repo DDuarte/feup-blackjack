@@ -46,7 +46,6 @@ public:
     std::string GetFormattedName() const;
     static std::string GetOutputFormat() { return _outputFormat; };
 
-    void SetScore(unsigned int score);
     static void SetOutputFormat(std::string outputFormat) { _outputFormat =  outputFormat; };
 
     bool IsValid() const { return _suit != CsNone && _name != CnNone && _score != 0; };

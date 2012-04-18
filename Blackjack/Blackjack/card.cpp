@@ -39,14 +39,3 @@ std::string Card::GetFormattedName() const
 
     return temp;
 }
-
-void Card::SetScore(unsigned int score)
-{
-    if (score >= MIN_SCORE && score <= MAX_SCORE) 
-        _score = score;
-    else
-    {
-        throw InvalidScoreException( "Invalid card score at Card::SetScore(unsigned int score)!" );
-
-    }
-}
