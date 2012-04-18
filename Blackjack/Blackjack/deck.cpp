@@ -2,37 +2,49 @@
 #include "deck.h"
 #include "card.h"
 
-
 #include <ctime>
+#include <stack>
+#include <vector>
 
 Deck::Deck()
 {
+    InitializeDeck(DEFAULT_NUMBER_OF_DECKS);
+}
+
+Deck::Deck(unsigned int numberOfDecks)
+{
+    InitializeDeck(numberOfDecks);
+}
+
+void Deck::InitializeDeck( unsigned int numberOfDecks )
+{
     _cards = std::vector<Card>();
-    _cards.reserve(52);
+
+    _cards.reserve(52*numberOfDecks);
 
     CardSuit types[] = { Clubs, Spades, Hearts, Diamonds };
 
     for (int i = 0; i < 4; ++i)
     {
-        _cards.push_back(Card(types[i], Two, 2));
-        _cards.push_back(Card(types[i], Three, 3));
-        _cards.push_back(Card(types[i], Four, 4));
-        _cards.push_back(Card(types[i], Five, 5));
-        _cards.push_back(Card(types[i], Six, 6));
-        _cards.push_back(Card(types[i], Seven, 7));
-        _cards.push_back(Card(types[i], Eight, 8));
-        _cards.push_back(Card(types[i], Nine, 9));
-        _cards.push_back(Card(types[i], Ten, 10));
-        _cards.push_back(Card(types[i], Jack, 10));
-        _cards.push_back(Card(types[i], Queen, 10));
-        _cards.push_back(Card(types[i], King, 10));
-        _cards.push_back(Card(types[i], Ace, 11)); // or 1
+        _cards.push_back(Card(types[i%numberOfDecks], Two, 2));
+        _cards.push_back(Card(types[i%numberOfDecks], Three, 3));
+        _cards.push_back(Card(types[i%numberOfDecks], Four, 4));
+        _cards.push_back(Card(types[i%numberOfDecks], Five, 5));
+        _cards.push_back(Card(types[i%numberOfDecks], Six, 6));
+        _cards.push_back(Card(types[i%numberOfDecks], Seven, 7));
+        _cards.push_back(Card(types[i%numberOfDecks], Eight, 8));
+        _cards.push_back(Card(types[i%numberOfDecks], Nine, 9));
+        _cards.push_back(Card(types[i%numberOfDecks], Ten, 10));
+        _cards.push_back(Card(types[i%numberOfDecks], Jack, 10));
+        _cards.push_back(Card(types[i%numberOfDecks], Queen, 10));
+        _cards.push_back(Card(types[i%numberOfDecks], King, 10));
+        _cards.push_back(Card(types[i%numberOfDecks], Ace, 11)); // or 1
     }
-    
+
     Shuffle();
 }
 
-void Deck::DrawCard()
+void Deck::WithdrawCard()
 {
 
 }
@@ -49,6 +61,7 @@ void Deck::Shuffle()
             r1 = rand() % size;
         } while (r1 == i);
         
+
         Utilities::Swap(_cards[r1], _cards[i]);
     }
 }

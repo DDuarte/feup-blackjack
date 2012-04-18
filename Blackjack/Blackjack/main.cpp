@@ -19,9 +19,8 @@ void CardTests()
 
     try
     {
-        Card myCard(Clubs, Ace, 0);
+        Card myCard(Clubs, Ace, 10);
         myCard.SetOutputFormat("{ N - S }");
-        myCard.SetScore(15);
         std::cout << myCard.GetFormattedName() << std::endl;
     }
     catch (InvalidCardException &e)

@@ -6,8 +6,16 @@
 
 Hand::Hand()
 {
-    _cards.clear();
+    _cards = std::vector<Card>();
 }
+
+Hand::Hand( std::vector<Card> cards )
+{
+    _cards = std::vector<Card>();
+    _cards.reserve(cards.size());
+    _cards = cards;
+}
+
 
 unsigned int Hand::GetScore()
 {

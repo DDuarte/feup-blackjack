@@ -62,10 +62,13 @@ std::vector<Player*> BlackJack::CheckWinners() const
     std::vector<Player*> winners;
     for (int i = 0; i < NUM_ACTIVE_PLAYERS; ++i)
     {
-        if (winners.at(0)->GetHand().GetScore() < _activePlayers[i]->GetHand().GetScore())
-            winners.clear();
-        else if (winners.at(0)->GetHand().GetScore() > _activePlayers[i]->GetHand().GetScore())
-            continue;
+        if (!winners.empty())
+        {
+            if (winners.at(0)->GetHand().GetScore() < _activePlayers[i]->GetHand().GetScore())
+                winners.clear();
+            else if (winners.at(0)->GetHand().GetScore() > _activePlayers[i]->GetHand().GetScore())
+                continue;
+        }
         winners.push_back(_activePlayers[i]);
     }
     return winners;
