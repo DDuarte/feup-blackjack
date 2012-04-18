@@ -17,6 +17,10 @@ BlackJack::BlackJack()
 
 BlackJack::~BlackJack()
 {
+    UnloadContents();
+
+    // ...
+
     delete[] _activePlayers;
 
     delete _dealer;
@@ -26,6 +30,7 @@ BlackJack::~BlackJack()
 
     while (!_waitingPlayers.empty())
         _waitingPlayers.pop();
+
 }
 
 void BlackJack::SelectPlayers()
@@ -50,4 +55,29 @@ void BlackJack::RegisterPlayer(std::string name, double balance)
     _players.push_back(Player(name, balance));
     _waitingPlayers.push(&_players.back());
     
+}
+
+void BlackJack::Initialize()
+{
+
+}
+
+void BlackJack::LoadContents()
+{
+
+}
+
+void BlackJack::Update()
+{
+
+}
+
+void BlackJack::Draw()
+{
+
+}
+
+void BlackJack::UnloadContents()
+{
+
 }

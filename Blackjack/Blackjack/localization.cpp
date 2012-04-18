@@ -39,7 +39,7 @@ Localization::Localization()
 bool Localization::ReadLangFile(char* lang)
 {
     std::string filename = std::string(lang) + ".lang";
-    std::ifstream file(filename, std::ios::binary | std::ios::out);
+    std::ifstream file(filename, std::ios::binary);
 
     _strings.clear();
 

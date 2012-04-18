@@ -1,5 +1,9 @@
+#include "utilities.h"
 #include "deck.h"
 #include "card.h"
+
+
+#include <ctime>
 
 Deck::Deck()
 {
@@ -24,9 +28,27 @@ Deck::Deck()
         _cards.push_back(Card(types[i], King, 10));
         _cards.push_back(Card(types[i], Ace, 11)); // or 1
     }
+    
+    Shuffle();
 }
 
 void Deck::DrawCard()
 {
 
+}
+
+void Deck::Shuffle()
+{
+    size_t size = _cards.size();
+
+    for (size_t i = 0; i < _cards.size(); ++i)
+    {
+        int r1;
+        do 
+        {
+            r1 = rand() % size;
+        } while (r1 == i);
+        
+        Utilities::Swap(_cards[r1], _cards[i]);
+    }
 }

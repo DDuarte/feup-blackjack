@@ -23,6 +23,8 @@ public:
 
     void PlaceBet(double bet) { _bet = bet; /* ... */ };
 
+    void WriteBinary(std::ofstream& out);
+
 private:
     std::string _name;
     double _balance;

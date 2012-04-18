@@ -81,6 +81,7 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="localization.h" />
+    <ClInclude Include="utilities.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="blackjack.cpp" />

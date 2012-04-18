@@ -4,8 +4,10 @@
 #include <stdexcept>
 #include <fstream>
 #include <string>
+#include <ctime>
 
 #include "localization.h"
+#include "deck.h"
 
 void CardTests()
 {
@@ -25,14 +27,21 @@ void CardTests()
     }
 }
 
+void DeckTests()
+{
+    Deck d;
+}
+
 void Tests()
 {
+    DeckTests();
     CardTests();
 }
 
 int main()
 {
     Localization::Instance()->SetLang(English); // default lang
+    srand((unsigned int)time(NULL)); // initialize seed
 
     Tests();
 

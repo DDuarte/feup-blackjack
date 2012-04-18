@@ -59,6 +59,4 @@ private:
     static std::string _outputFormat; // [ N - T ]; { N - T }
 };
 
-
-
 #endif // CARD_H

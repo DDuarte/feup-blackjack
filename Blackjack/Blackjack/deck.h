@@ -2,6 +2,7 @@
 #define DECK_H
 
 #include "card.h"
+
 #include <vector>
 
 class Deck
@@ -13,6 +14,8 @@ public:
 
 private:
     std::vector<Card> _cards;
+
+    void Shuffle();
 };
 
 #endif // DECK_H
