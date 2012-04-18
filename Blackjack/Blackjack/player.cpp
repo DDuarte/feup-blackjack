@@ -38,8 +38,7 @@ void Player::WriteBinary( std::ofstream& out )
 
 bool Player::ReadBinary( std::ifstream& file )
 {
-    while (!file.fail())
-    {
+
         char phrase[200];
         file.getline(phrase, 200, '\0');
 
@@ -47,7 +46,6 @@ bool Player::ReadBinary( std::ifstream& file )
 
         if(*phrase == '\0')
             return false;
-    } 
 
     file >> _balance;
     

@@ -78,7 +78,7 @@ std::vector<Player*> BlackJack::CheckWinners() const
 
 void BlackJack::Initialize()
 {
-
+    ReadPlayersFromFile();
 }
 
 void BlackJack::LoadContents()
