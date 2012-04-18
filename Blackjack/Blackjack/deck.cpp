@@ -6,39 +6,34 @@
 #include <stack>
 #include <vector>
 
-Deck::Deck()
-{
-    InitializeDeck(DEFAULT_NUMBER_OF_DECKS);
-}
-
-Deck::Deck(unsigned int numberOfDecks)
+Deck::Deck(unsigned int numberOfDecks /*= DEFAULT_NUMBER_OF_DECKS*/)
 {
     InitializeDeck(numberOfDecks);
 }
 
-void Deck::InitializeDeck( unsigned int numberOfDecks )
+void Deck::InitializeDeck(unsigned int numberOfDecks)
 {
     _cards = std::vector<Card>();
 
-    _cards.reserve(52*numberOfDecks);
+    _cards.reserve(NUMBER_OF_CARDS*numberOfDecks);
 
     CardSuit types[] = { Clubs, Spades, Hearts, Diamonds };
 
-    for (int i = 0; i < 4; ++i)
+    for (unsigned int i = 0; i < NUMBER_OF_SUITS*numberOfDecks; ++i)
     {
-        _cards.push_back(Card(types[i%numberOfDecks], Two, 2));
-        _cards.push_back(Card(types[i%numberOfDecks], Three, 3));
-        _cards.push_back(Card(types[i%numberOfDecks], Four, 4));
-        _cards.push_back(Card(types[i%numberOfDecks], Five, 5));
-        _cards.push_back(Card(types[i%numberOfDecks], Six, 6));
-        _cards.push_back(Card(types[i%numberOfDecks], Seven, 7));
-        _cards.push_back(Card(types[i%numberOfDecks], Eight, 8));
-        _cards.push_back(Card(types[i%numberOfDecks], Nine, 9));
-        _cards.push_back(Card(types[i%numberOfDecks], Ten, 10));
-        _cards.push_back(Card(types[i%numberOfDecks], Jack, 10));
-        _cards.push_back(Card(types[i%numberOfDecks], Queen, 10));
-        _cards.push_back(Card(types[i%numberOfDecks], King, 10));
-        _cards.push_back(Card(types[i%numberOfDecks], Ace, 11)); // or 1
+        _cards.push_back(Card(types[i%NUMBER_OF_SUITS], Two, 2));
+        _cards.push_back(Card(types[i%NUMBER_OF_SUITS], Three, 3));
+        _cards.push_back(Card(types[i%NUMBER_OF_SUITS], Four, 4));
+        _cards.push_back(Card(types[i%NUMBER_OF_SUITS], Five, 5));
+        _cards.push_back(Card(types[i%NUMBER_OF_SUITS], Six, 6));
+        _cards.push_back(Card(types[i%NUMBER_OF_SUITS], Seven, 7));
+        _cards.push_back(Card(types[i%NUMBER_OF_SUITS], Eight, 8));
+        _cards.push_back(Card(types[i%NUMBER_OF_SUITS], Nine, 9));
+        _cards.push_back(Card(types[i%NUMBER_OF_SUITS], Ten, 10));
+        _cards.push_back(Card(types[i%NUMBER_OF_SUITS], Jack, 10));
+        _cards.push_back(Card(types[i%NUMBER_OF_SUITS], Queen, 10));
+        _cards.push_back(Card(types[i%NUMBER_OF_SUITS], King, 10));
+        _cards.push_back(Card(types[i%NUMBER_OF_SUITS], Ace, 11)); // or 1
     }
 
     Shuffle();

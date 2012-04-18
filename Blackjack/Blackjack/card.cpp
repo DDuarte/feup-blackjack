@@ -3,26 +3,11 @@
 #include "gameExceptions.h"
 
 #include <string>
-#include <stdexcept>
 #include <sstream>
 
 std::string Card::_outputFormat = DEFAULT_OUTPUT_FORMAT;
 
-Card::Card()
-{
-    _name = CnNone;
-    _suit = CsNone;
-    _score = 0;
-    _outputFormat = DEFAULT_OUTPUT_FORMAT;
-}
-
-Card::Card(CardSuit suit, CardName name, unsigned int score)
-{
-    _name = name;
-    _suit = suit;
-    SetScore(score);
-    _outputFormat = DEFAULT_OUTPUT_FORMAT;
-}
+Card::Card(CardSuit suit, CardName name, unsigned int score) : _name(name), _suit(suit), _score(score) { }
 
 std::string Card::GetFormattedName() const
 {

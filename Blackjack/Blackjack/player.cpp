@@ -8,14 +8,6 @@
 
 std::string Player::_playersFileName = std::string("players.data");
 
-Player::Player()
-{
-    _name = "";
-    _balance = 0.0;
-    _bet = 0.0;
-    _hand = std::vector<Card>();
-}
-
 Player::Player(std::string name, double balance)
 {
     _name = name;
@@ -62,4 +54,13 @@ void Player::SetPlayersFileName(std::string playersFileName)
     }
 
     _playersFileName = playersFileName;
+}
+
+void Player::PlaceBet(double bet)
+{
+    if (bet <= 0 || bet > _balance)
+        throw InvalidBetException("Invalid bet exception at Player::Set(double bet)!");
+
+    _bet = bet;
+    _balance -= bet;
 }

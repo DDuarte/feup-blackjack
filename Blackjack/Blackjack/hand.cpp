@@ -46,9 +46,9 @@ void Hand::UpdateScore()
 
     for (int i = 0; i < aces; ++i)
     {
-        if (_score + AceMaxVal <= BlackjackHand)
-            _score += AceMaxVal;
+        if (_score + ACE_MAX_VAL <= BLACKJACK_HAND)
+            _score += ACE_MAX_VAL;
         else
-            _score += AceMinVal;
+            _score += ACE_MIN_VAL;
     }
 }

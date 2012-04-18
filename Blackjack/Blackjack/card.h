@@ -31,24 +31,21 @@ enum CardName
 };
 
 const std::string DEFAULT_OUTPUT_FORMAT = "[ N - S ]";
-const unsigned int MAX_SCORE = 11;
-const unsigned int MIN_SCORE = 0;
 
 class Card
 {
 public:
-    Card();
     Card(CardSuit suit, CardName name, unsigned int score);
 
-    CardSuit GetSuit() const { return _suit; };
-    CardName GetName() const { return _name; };
-    unsigned int GetScore() const { return _score; };
+    CardSuit GetSuit() const { return _suit; }
+    CardName GetName() const { return _name; }
+    unsigned int GetScore() const { return _score; }
     std::string GetFormattedName() const;
-    static std::string GetOutputFormat() { return _outputFormat; };
+    static std::string GetOutputFormat() { return _outputFormat; }
 
-    static void SetOutputFormat(std::string outputFormat) { _outputFormat =  outputFormat; };
+    static void SetOutputFormat(std::string outputFormat) { _outputFormat = outputFormat; }
 
-    bool IsValid() const { return _suit != CsNone && _name != CnNone && _score != 0; };
+    bool IsValid() const { return _suit != CsNone && _name != CnNone && _score != 0; }
 
 private:
     CardSuit _suit;

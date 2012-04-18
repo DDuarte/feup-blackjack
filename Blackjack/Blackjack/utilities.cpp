@@ -8,7 +8,14 @@ namespace Utilities
     bool FileExists(std::string fileName)
     {
         std::ifstream in(fileName.c_str());
-        return in.is_open();
+
+        if (in.is_open())
+        {
+            in.close();
+            return true;
+        }
+
+        return false;
     }
 }
 
