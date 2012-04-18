@@ -2,6 +2,8 @@
 #define PLAYER_H
 
 #include "card.h"
+#include "hand.h"
+
 #include <string>
 #include <vector>
 
@@ -16,7 +18,7 @@ public:
     std::string GetName() const { return _name; };
     double GetBalance() const { return _balance; };
     double GetBet() const { return _bet; };
-    std::vector<Card> GetHand() const { return _hand; };
+    Hand GetHand() const { return _hand; };
 
     void SetName(std::string name) { if (name.size() > 0) _name = name; };
     void SetBalance(double balance) { _balance = balance; };
@@ -29,7 +31,7 @@ private:
     std::string _name;
     double _balance;
     double _bet;
-    std::vector<Card> _hand;
+    Hand _hand;
 };
 
 #endif // PLAYER_H

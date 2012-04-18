@@ -81,6 +81,7 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="invalidCardException.h" />
     <ClInclude Include="hand.h" />
+    <ClInclude Include="invalidScoreException.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="localization.h" />
     <ClInclude Include="utilities.h" />

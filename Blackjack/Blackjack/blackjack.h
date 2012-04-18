@@ -2,6 +2,8 @@
 #define BLACKJACK_H
 
 #include "game.h"
+#include "player.h"
+#include "deck.h"
 
 #include <vector>
 #include <queue>
@@ -19,6 +21,7 @@ public:
     ~BlackJack();
 
     void RegisterPlayer(std::string name, double balance);
+    std::vector<Player*> CheckWinners() const;
 
     virtual void Initialize();
     virtual void LoadContents();

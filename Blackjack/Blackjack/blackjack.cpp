@@ -2,6 +2,7 @@
 #include "player.h"
 #include "deck.h"
 #include "dealer.h"
+
 #include <exception>
 
 BlackJack::BlackJack()
@@ -56,6 +57,28 @@ void BlackJack::RegisterPlayer(std::string name, double balance)
     _waitingPlayers.push(&_players.back());
     
 }
+
+
+std::vector<Player*> BlackJack::CheckWinners() const
+{
+    std::vector<Player*> winners;
+    for (int i = 0; i < NUM_ACTIVE_PLAYERS; ++i)
+    {
+        if (winners.empty())
+            winners.push_back(_activePlayers[i]);
+        else if (winners.at(0)->GetHand().GetScore() < _activePlayers[i]->GetHand().GetScore())
+        {
+            winners.clear();
+            winners.push_back(_activePlayers[i]);
+        }
+        else if (winners.at(0)->GetHand().GetScore() == _activePlayers[i]->GetHand().GetScore())
+        {
+            winners.push_back(_activePlayers[i]);
+        }
+    }
+    return winners;
+}
+
 
 void BlackJack::Initialize()
 {

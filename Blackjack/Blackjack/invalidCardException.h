@@ -6,6 +6,7 @@
 #include <stdexcept>
 #include <exception>
 #include <string>
+#include <ctime>
 
 class InvalidCardException : public std::exception
 {

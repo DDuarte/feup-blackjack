@@ -54,6 +54,9 @@
     <ClInclude Include="invalidCardException.h">
       <Filter>Game Exceptions\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="invalidScoreException.h">
+      <Filter>Game Exceptions\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

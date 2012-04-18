@@ -8,23 +8,34 @@
 
 #include "localization.h"
 #include "deck.h"
+#include "invalidCardException.h"
+#include "invalidScoreException.h"
 
 void CardTests()
 {
-    std::ofstream logFile("log.txt");
-
+    std::ofstream logFile("log.txt", std::ios::app);
     std::clog.set_rdbuf(logFile.rdbuf());
+
+    std::clog << std::endl;
 
     try
     {
-        Card myCard(Clubs, Ace, 10);
+        Card myCard(Clubs, Ace, 0);
         myCard.SetOutputFormat("{ N - S }");
+        myCard.SetScore(15);
         std::cout << myCard.GetFormattedName() << std::endl;
     }
-    catch (std::logic_error &e)
+    catch (InvalidCardException &e)
     {
         std::clog << e.what() << std::endl;
     }
+    catch (InvalidCardScoreException &e)
+    {
+        std::clog << e.what() << std::endl;
+    }
+
+    std::clog << std::endl;
+    logFile.close();
 }
 
 void DeckTests()
