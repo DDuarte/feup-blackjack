@@ -11,8 +11,8 @@ BlackJack::BlackJack()
 
     _activePlayers = new Player*[NUM_ACTIVE_PLAYERS];
 
-    _dealer = NULL;
-    _deck = NULL;
+    _dealer = new Dealer;
+    _deck = new Deck;
 }
 
 BlackJack::~BlackJack()

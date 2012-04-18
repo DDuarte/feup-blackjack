@@ -45,15 +45,18 @@
     <ClInclude Include="blackjack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< Updated upstream
     <ClInclude Include="utilities.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+=======
     <ClInclude Include="hand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="invalidCardException.h">
       <Filter>Game Exceptions\Header Files</Filter>
     </ClInclude>
+>>>>>>> Stashed changes
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

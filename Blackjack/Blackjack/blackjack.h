@@ -34,7 +34,7 @@ private:
 
     void SelectPlayers();
 
-    // Should these two be pointers?
+    // Should these two be pointers? Ya.
     Dealer* _dealer;
     Deck* _deck;
 };

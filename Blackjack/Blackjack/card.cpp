@@ -1,5 +1,7 @@
 #include "card.h"
 #include "localization.h"
+#include "invalidCardException.h"
+
 #include <string>
 #include <stdexcept>
 #include <sstream>
@@ -24,7 +26,7 @@ Card::Card(CardSuit suit, CardName name, unsigned int score)
 
 std::string Card::GetFormattedName() const
 {
-    if (!IsValid()) return "";
+    if (!IsValid()) throw InvalidCardException();
     std::string temp(_outputFormat);
 
     std::size_t pos = temp.find('N');
