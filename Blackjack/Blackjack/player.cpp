@@ -6,7 +6,7 @@
 #include <exception>
 #include <fstream>
 
-std::string _playersFileName = std::string("players.data");
+std::string Player::_playersFileName = std::string("players.data");
 
 Player::Player()
 {
@@ -24,9 +24,9 @@ Player::Player(std::string name, double balance)
     _hand = std::vector<Card>();
 }
 
-Player::Player( std::ifstream file )
+Player::Player(std::ifstream& file)
 {
-    if (!ReadBinary( file ))
+    if (!ReadBinary(file))
         ; //throw invalid file exception
 }
 

@@ -17,7 +17,7 @@ class Player
 public:
     Player();
     Player(std::string name, double balance);
-    Player(std::ifstream);
+    Player(std::ifstream& file);
 
     std::string GetName() const { return _name; };
     double GetBalance() const { return _balance; };
@@ -47,8 +47,6 @@ public:
 
     bool ReadBinary(std::ifstream& in);
     void WriteBinary(std::ofstream& out);
-
-    
 
 private:
     std::string _name;
