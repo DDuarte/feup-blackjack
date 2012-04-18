@@ -12,8 +12,8 @@ public:
     Hand(std::vector<Card> cards);
     unsigned int GetScore();
     
-    bool IsBusted() const { return GetScore() > 21; }
-    bool IsBlackjack() const { return GetScore() == 21; }
+    bool IsBusted() { return GetScore() > 21; }         // Cannot be const because GetScore()
+    bool IsBlackjack() { return GetScore() == 21; }     // has to modify Aces score
 
     void AddCard(Card card);
 private:
