@@ -21,7 +21,7 @@ Player::Player(std::string name, double balance)
 
 void Player::WriteBinary( std::ofstream& out )
 {
-    out << _name << '/0' << _balance << _bet;
+    out << _name << '\0' << _balance; // << _bet; It isn't needed because we don't want to save Player bet;
 }
 
 

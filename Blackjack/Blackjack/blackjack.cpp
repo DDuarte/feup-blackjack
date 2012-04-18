@@ -35,9 +35,7 @@ BlackJack::~BlackJack()
 void BlackJack::SelectPlayers()
 {
     if (_waitingPlayers.empty() || _waitingPlayers.size() < NUM_ACTIVE_PLAYERS)
-        throw InvalidPlayerException("Not enough players to start a game."); // TODO: Change this to a custom exception
-                                                                            // We need to catch it later and print error
-                                                                           // to player
+        throw InvalidPlayerException("Not enough players to start a game."); 
 
     for (unsigned int i = 0; i < NUM_ACTIVE_PLAYERS; ++i)
     {
@@ -49,17 +47,16 @@ void BlackJack::SelectPlayers()
 void BlackJack::RegisterPlayer(std::string name, double balance)
 {
     if (balance <= 0 || name.empty())
-        throw InvalidPlayerException("Invalid parameters when registering player."); // TODO: (Read above exception comment)
+        throw InvalidPlayerException("Invalid parameters when registering player.");
 
     _players.push_back(Player(name, balance));
     _waitingPlayers.push(&_players.back());
-    
 }
 
 
 std::vector<Player*> BlackJack::CheckWinners() const
 {
-    std::vector<Player*> winners;
+    std::vector<Player*> winners = std::vector<Player*>();
     for (int i = 0; i < NUM_ACTIVE_PLAYERS; ++i)
     {
         if (!winners.empty())

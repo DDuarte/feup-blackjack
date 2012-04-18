@@ -47,7 +47,4 @@ private:
     std::string _message;
 };
 
-
-
-
 #endif // GAMEEXCEPTION_H

@@ -46,7 +46,7 @@ void Deck::InitializeDeck( unsigned int numberOfDecks )
 
 Card Deck::WithdrawCard()
 {
-    Card tempCard = *(_cards._Mylast);
+    Card tempCard = _cards.back();
     _cards.pop_back();
     return tempCard;
 }

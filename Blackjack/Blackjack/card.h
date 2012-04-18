@@ -39,18 +39,17 @@ class Card
 public:
     Card();
     Card(CardSuit suit, CardName name, unsigned int score);
+
     CardSuit GetSuit() const { return _suit; };
     CardName GetName() const { return _name; };
     unsigned int GetScore() const { return _score; };
     std::string GetFormattedName() const;
-
-    bool IsValid() const { return _suit != CsNone && _name != CnNone && _score != 0; };
-
     static std::string GetOutputFormat() { return _outputFormat; };
 
     void SetScore(unsigned int score);
-
     static void SetOutputFormat(std::string outputFormat) { _outputFormat =  outputFormat; };
+
+    bool IsValid() const { return _suit != CsNone && _name != CnNone && _score != 0; };
 
 private:
     CardSuit _suit;

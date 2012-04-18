@@ -31,11 +31,11 @@ std::string Card::GetFormattedName() const
 
     std::size_t pos = temp.find('N');
     temp.erase(temp.begin()+pos);
-    temp.insert(pos, GetStr((Strings)(_name + 6)));
+    temp.insert(pos, GetStr((Strings)(_name + STR_NAMES + 1)));
     
     pos = temp.find('S');
     temp.erase(temp.begin()+pos);
-    temp.insert(pos, GetStr((Strings)(_suit + 1)));
+    temp.insert(pos, GetStr((Strings)(_suit + STR_SUITS + 1)));
 
     return temp;
 }

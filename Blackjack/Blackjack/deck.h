@@ -13,6 +13,7 @@ class Deck
 public:
     Deck();
     Deck(unsigned int numberOfDecks);
+
     Card WithdrawCard();
 
 private:

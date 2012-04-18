@@ -36,7 +36,6 @@ private:
 
     void SelectPlayers();
 
-    // Should these two be pointers?
     Deck* _deck;
 };
 
