@@ -3,6 +3,7 @@
 
 #include "card.h"
 #include "hand.h"
+#include "gameExceptions.h"
 
 #include <string>
 #include <vector>
@@ -26,7 +27,8 @@ public:
     void SetName(std::string name) { if (name.size() > 0) _name = name; };
     void SetBalance(double balance) { _balance = balance; };
 
-    void PlaceBet(double bet) { _bet = bet; /* ... */ };
+    void SetBet(double bet) { (bet > 0 ? _bet = bet : throw InvalidBetException("Invalid bet exception at Player::IncreaseBet(double bet)!")); };
+    void IncreaseBet(double bet) { (bet > 0 ? _bet += bet : throw InvalidBetException("Invalid bet exception at Player::IncreaseBet(double bet)!")); };
 
     void WriteBinary(std::ofstream& out);
 

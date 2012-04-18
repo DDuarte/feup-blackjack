@@ -37,6 +37,16 @@ private:
     std::string _message;
 };
 
+class InvalidBetException : public std::exception
+{
+public:
+    InvalidBetException(std::string message = "Invalid Bet!") : _message(message) {}
+    ~InvalidBetException() throw() {}
+    const char* what() const throw() { return _message.c_str(); }
+private:
+    std::string _message;
+};
+
 
 
 
