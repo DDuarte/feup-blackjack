@@ -44,9 +44,11 @@ void Deck::InitializeDeck( unsigned int numberOfDecks )
     Shuffle();
 }
 
-void Deck::WithdrawCard()
+Card Deck::WithdrawCard()
 {
-
+    Card tempCard = *(_cards._Mylast);
+    _cards.pop_back();
+    return tempCard;
 }
 
 void Deck::Shuffle()

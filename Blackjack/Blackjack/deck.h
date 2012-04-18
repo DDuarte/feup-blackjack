@@ -13,7 +13,7 @@ class Deck
 public:
     Deck();
     Deck(unsigned int numberOfDecks);
-    void WithdrawCard();
+    Card WithdrawCard();
 
 private:
     std::vector<Card> _cards;

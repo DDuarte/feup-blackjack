@@ -11,9 +11,10 @@ public:
     Hand();
     Hand(std::vector<Card> cards);
     unsigned int GetScore();
-
+    
     void AddCard(Card card);
 private:
     std::vector<Card> _cards;
+    
 };
 #endif // HAND_H
