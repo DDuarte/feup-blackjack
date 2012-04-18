@@ -9,7 +9,6 @@ public:
     virtual void Update() { };
     virtual void Draw() { };
     virtual void UnloadContents() { };
-
 };
 
 #endif // GAME_H

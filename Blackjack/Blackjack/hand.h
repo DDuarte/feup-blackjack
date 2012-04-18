@@ -12,6 +12,9 @@ public:
     Hand(std::vector<Card> cards);
     unsigned int GetScore();
     
+    bool IsBusted() const { return GetScore() > 21; }
+    bool IsBlackjack() const { return GetScore() == 21; }
+
     void AddCard(Card card);
 private:
     std::vector<Card> _cards;

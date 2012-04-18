@@ -32,3 +32,5 @@ ipch/
 #Others
 log.txt
 *.lang
+
+*.orig
