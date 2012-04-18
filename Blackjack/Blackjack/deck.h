@@ -7,6 +7,8 @@
 class Deck
 {
 public:
+    Deck();
+
     void DrawCard();
 
 private:

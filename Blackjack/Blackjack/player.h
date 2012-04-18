@@ -5,13 +5,13 @@
 #include <string>
 #include <vector>
 
-#include "card.h" // "class Card;" isn't enough
+class Card;
 
 class Player
 {
 public:
     Player();
-    Player(std::string name, double balance, double bet);
+    Player(std::string name, double balance);
 
     std::string GetName() const { return _name; };
     double GetBalance() const { return _balance; };
@@ -20,6 +20,8 @@ public:
 
     void SetName(std::string name) { if (name.size() > 0) _name = name; };
     void SetBalance(double balance) { _balance = balance; };
+
+    void PlaceBet(double bet) { _bet = bet; /* ... */ };
 
 private:
     std::string _name;

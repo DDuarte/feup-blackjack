@@ -47,16 +47,19 @@
     <ClCompile Include="localization.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="dealer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="deck.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dealer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="game.cpp">
+    <ClCompile Include="blackjack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

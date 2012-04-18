@@ -83,6 +83,7 @@
     <ClInclude Include="localization.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="blackjack.cpp" />
     <ClCompile Include="card.cpp" />
     <ClCompile Include="dealer.cpp" />
     <ClCompile Include="deck.cpp" />
