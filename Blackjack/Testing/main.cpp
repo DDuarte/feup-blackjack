@@ -10,6 +10,7 @@ int main()
         BlackJack game;
         std::cout << game.CanStart() << std::endl;
 
+        game.Start();
         std::cout << game.CanStart() << std::endl;
 
     }

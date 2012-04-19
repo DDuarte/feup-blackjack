@@ -18,9 +18,7 @@ class BlackJack;
 class Player
 {
 public:
-    //Player(std::string name, double balance, BlackJack* game);
     Player(std::ifstream& file, BlackJack* game);
-    // ~Player();
 
     std::string GetName() const { return _name; }
     double GetBalance() const { return _balance; }

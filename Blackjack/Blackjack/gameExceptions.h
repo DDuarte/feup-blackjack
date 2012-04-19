@@ -50,7 +50,7 @@ private:
 class FileNotFoundException : public std::exception
 {
 public:
-    FileNotFoundException(std::string filename, std::string message = "Invalid Bet!") : _message(message), _filename(filename) {}
+    FileNotFoundException(std::string filename, std::string message = "File not found!") : _message(message), _filename(filename) {}
     ~FileNotFoundException() throw() {}
     const char* what() const throw() { return _message.c_str(); }
     const char* filename() const throw() { return _filename.c_str(); }

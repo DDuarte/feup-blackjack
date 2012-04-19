@@ -35,7 +35,8 @@ public:
     void VerifyPlayersBalance();
 
     bool ShouldEnd();
-    bool CanStart();
+    bool CanStart() { return _waitingPlayers.size() >= NUM_ACTIVE_PLAYERS && _activePlayerCount == 0; }
+    void Start() { if (CanStart()) SelectPlayers(); /* ... */ }
 
     // Events-like calls
     void PlayerBet(Player* /* player*/, double bet) { _totalBets += bet; }
@@ -49,9 +50,13 @@ private:
 
     std::queue<Player*> _waitingPlayers;
     Player** _activePlayers;
+    int _activePlayerCount;
 
     void SelectPlayers(); // For the first 4 players
     Player* SelectNextPlayer(); // For each "replacement"
+    void CountActivePlayers();
+
+    void AddPlayer(Player player);
 
     Deck* _deck;
 

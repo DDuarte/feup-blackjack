@@ -13,6 +13,8 @@ BlackJack::BlackJack()
     _players = std::vector<Player>();
     _waitingPlayers = std::queue<Player*>();
 
+    _activePlayerCount = 0;
+
     _activePlayers = new Player*[NUM_ACTIVE_PLAYERS];
     for (unsigned int i = 0; i < NUM_ACTIVE_PLAYERS; ++i)
         _activePlayers[i] = NULL;
@@ -47,10 +49,7 @@ void BlackJack::SelectPlayers()
         throw InvalidPlayerException("Not enough players to start a game."); 
 
     for (unsigned int i = 0; i < NUM_ACTIVE_PLAYERS; ++i)
-    {
-        _activePlayers[i] = _waitingPlayers.front();
-        _waitingPlayers.pop();
-    }
+        _activePlayers[i] = SelectNextPlayer();
 }
 
 std::vector<Player*> BlackJack::CheckWinners() const
@@ -99,9 +98,7 @@ void BlackJack::ReadPlayersFromFile()
     {
         try
         {
-            Player tempPlayer(file, this);
-            _players.push_back(tempPlayer);
-            _waitingPlayers.push(&_players.back());
+            AddPlayer(Player(file, this));
         }
         catch (InvalidPlayerException &e)
         {
@@ -126,6 +123,8 @@ void BlackJack::RemovePlayer(Player* player)
             return;
         }
     }
+
+    _activePlayerCount--;
 }
 
 Player* BlackJack::SelectNextPlayer()
@@ -136,17 +135,14 @@ Player* BlackJack::SelectNextPlayer()
     Player* plr = _waitingPlayers.front();
     _waitingPlayers.pop();
 
+    _activePlayerCount++;
+
     return plr;
 }
 
 bool BlackJack::ShouldEnd()
 {
-    int activePlayerCount = 0;
-    for (int i = 0; i < NUM_ACTIVE_PLAYERS; ++i)
-        if (_activePlayers[i] != NULL)
-            activePlayerCount++;
-
-    return _waitingPlayers.size() == 0 && activePlayerCount > 1;
+    return _waitingPlayers.size() == 0 && _activePlayerCount > 1;
 }
 
 void BlackJack::VerifyPlayersBalance()
@@ -159,16 +155,10 @@ void BlackJack::VerifyPlayersBalance()
     }
 }
 
-bool BlackJack::CanStart()
+void BlackJack::AddPlayer(Player player)
 {
-    int activePlayerCount = 0;
-    for (int i = 0; i < NUM_ACTIVE_PLAYERS; ++i)
-    {
-        if (_activePlayers[i] != NULL)
-            activePlayerCount++;
-    }
-
-    return activePlayerCount > 1;
+    _players.push_back(player);
+    _waitingPlayers.push(&_players.back());
 }
 
 void BlackJack::WritePlayersToFile()

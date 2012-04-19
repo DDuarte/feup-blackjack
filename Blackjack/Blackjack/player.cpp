@@ -10,20 +10,14 @@
 
 std::string Player::_playersFileName = std::string("players.txt");
 
-//Player::Player(std::string name, double balance, BlackJack* game)
-//{
-//    _name = name;
-//    _balance = balance;
-//    _bet = 0.0;
-//    _hand = Hand();
-//    _game = game;
-//}
-
 Player::Player(std::ifstream& file, BlackJack* game)
 {
     if (!ReadText(file))
         throw InvalidPlayerException();
+
     _game = game;
+    _bet = 0.0;
+    _hand = Hand();
 }
 
 void Player::WriteText(std::ofstream& out) const
