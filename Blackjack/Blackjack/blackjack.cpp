@@ -155,7 +155,7 @@ void BlackJack::VerifyPlayersBalance()
     }
 }
 
-void BlackJack::AddPlayer(Player player)
+void BlackJack::AddPlayer(const Player& player)
 {
     _players.push_back(player);
     _waitingPlayers.push(&_players.back());

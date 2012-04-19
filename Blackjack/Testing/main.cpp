@@ -8,10 +8,16 @@ int main()
     try
     {
         BlackJack game;
-        std::cout << game.CanStart() << std::endl;
+        std::cout << "Number of players registered: " << game.RegisteredPlayerCount() << std::endl;
+        std::cout << "Number of players waiting: " << game.WaitingPlayerCount() << std::endl;
+        std::cout << "Number of players playing: " << game.ActivePlayerCount() << std::endl;
 
+        std::cout << "Starting game..." << std::endl;
         game.Start();
-        std::cout << game.CanStart() << std::endl;
+
+        std::cout << "Number of players registered: " << game.RegisteredPlayerCount() << std::endl;
+        std::cout << "Number of players waiting: " << game.WaitingPlayerCount() << std::endl;
+        std::cout << "Number of players playing: " << game.ActivePlayerCount() << std::endl;
 
     }
     catch (std::exception* e)

@@ -31,15 +31,18 @@ public:
     void ReadPlayersFromFile();
     void WritePlayersToFile();
 
-    void RemovePlayer(Player* player);
     void VerifyPlayersBalance();
 
     bool ShouldEnd();
     bool CanStart() { return _waitingPlayers.size() >= NUM_ACTIVE_PLAYERS && _activePlayerCount == 0; }
     void Start() { if (CanStart()) SelectPlayers(); /* ... */ }
 
+    int RegisteredPlayerCount() { return _players.size(); }
+    int WaitingPlayerCount() { return _waitingPlayers.size(); }
+    int ActivePlayerCount() { return _activePlayerCount; }
+
     // Events-like calls
-    void PlayerBet(Player* /* player*/, double bet) { _totalBets += bet; }
+    void PlayerBet(Player* /* player*/, double bet) { _totalBets += bet; /* ... */ }
     // void PlayerHit(Player* player);
     // void PlayerStand(Player* player);
     // void PlayerDouble(Player* player);
@@ -56,7 +59,8 @@ private:
     Player* SelectNextPlayer(); // For each "replacement"
     void CountActivePlayers();
 
-    void AddPlayer(Player player);
+    void AddPlayer(const Player& player);
+    void RemovePlayer(Player* player);
 
     Deck* _deck;
 
