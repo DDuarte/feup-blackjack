@@ -53,20 +53,6 @@ void BlackJack::SelectPlayers()
     }
 }
 
-//void BlackJack::RegisterPlayer(std::string name, double balance)
-//{
-//    if (balance <= 0.0 || name.empty())
-//        throw InvalidPlayerException("Invalid parameters when registering player.");
-//
-//    Player player(name, balance, this);
-//    _players.push_back(player);
-//
-//    _waitingPlayers.push(&_players.back());
-//
-//    if (_waitingPlayers.size() == NUM_ACTIVE_PLAYERS) // first four players?
-//        SelectPlayers();
-//}
-
 std::vector<Player*> BlackJack::CheckWinners() const
 {
     std::vector<Player*> winners = std::vector<Player*>();
@@ -95,6 +81,11 @@ void BlackJack::Initialize()
     {
     	return;
     }
+}
+
+void BlackJack::UnloadContents()
+{
+    WritePlayersToFile();
 }
 
 void BlackJack::ReadPlayersFromFile()
@@ -178,4 +169,15 @@ bool BlackJack::CanStart()
     }
 
     return activePlayerCount > 1;
+}
+
+void BlackJack::WritePlayersToFile()
+{
+    std::ofstream out (Player::GetPlayersFileName());
+
+    for (std::vector<Player>::const_iterator plr = _players.begin(); plr != _players.end(); ++plr)
+    {
+        plr->WriteText(out);
+        out << '\n';
+    }
 }

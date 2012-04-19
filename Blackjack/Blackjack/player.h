@@ -36,7 +36,7 @@ public:
     bool IsBlackjack() { return _hand.IsBlackjack(); }
 
     bool ReadText(std::ifstream& in);
-    void WriteBinary(std::ofstream& out);
+    void WriteText(std::ofstream& out) const;
 
     // In-game player actions
     void PlaceBet(double bet);

@@ -26,9 +26,10 @@ public:
     virtual void LoadContents() { }
     virtual void Update() { }
     virtual void Draw() { }
-    virtual void UnloadContents() { }
+    virtual void UnloadContents();
 
     void ReadPlayersFromFile();
+    void WritePlayersToFile();
 
     void RemovePlayer(Player* player);
     void VerifyPlayersBalance();

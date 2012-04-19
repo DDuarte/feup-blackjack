@@ -6,6 +6,7 @@
 #include <fstream>
 #include <exception>
 #include <fstream>
+#include <iomanip>
 
 std::string Player::_playersFileName = std::string("players.txt");
 
@@ -25,9 +26,9 @@ Player::Player(std::ifstream& file, BlackJack* game)
     _game = game;
 }
 
-void Player::WriteBinary(std::ofstream& out)
+void Player::WriteText(std::ofstream& out) const
 {
-    out << _name << '\0' << _balance; // << _bet; It isn't needed because we don't want to save Player bet;
+    out << std::fixed << std::setprecision(2) << _balance << " " << _name; // << _bet; It isn't needed because we don't want to save Player bet;
 }
 
 bool Player::ReadText(std::ifstream& file)
@@ -35,6 +36,11 @@ bool Player::ReadText(std::ifstream& file)
     file >> _balance;
 
     getline(file, _name, '\n');
+
+    while ( !_name.empty() && _name.at(0) == ' ')
+    {
+        _name.erase(_name.begin());
+    }
 
     return !_name.empty();
 }

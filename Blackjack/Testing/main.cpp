@@ -10,8 +10,6 @@ int main()
         BlackJack game;
         std::cout << game.CanStart() << std::endl;
 
-        game.ReadPlayersFromFile();
-
         std::cout << game.CanStart() << std::endl;
 
     }
