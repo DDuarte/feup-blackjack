@@ -53,19 +53,19 @@ void BlackJack::SelectPlayers()
     }
 }
 
-void BlackJack::RegisterPlayer(std::string name, double balance)
-{
-    if (balance <= 0.0 || name.empty())
-        throw InvalidPlayerException("Invalid parameters when registering player.");
-
-    Player player(name, balance, this);
-    _players.push_back(player);
-
-    _waitingPlayers.push(&_players.back());
-
-    if (_waitingPlayers.size() == NUM_ACTIVE_PLAYERS) // first four players?
-        SelectPlayers();
-}
+//void BlackJack::RegisterPlayer(std::string name, double balance)
+//{
+//    if (balance <= 0.0 || name.empty())
+//        throw InvalidPlayerException("Invalid parameters when registering player.");
+//
+//    Player player(name, balance, this);
+//    _players.push_back(player);
+//
+//    _waitingPlayers.push(&_players.back());
+//
+//    if (_waitingPlayers.size() == NUM_ACTIVE_PLAYERS) // first four players?
+//        SelectPlayers();
+//}
 
 std::vector<Player*> BlackJack::CheckWinners() const
 {
@@ -99,16 +99,23 @@ void BlackJack::Initialize()
 
 void BlackJack::ReadPlayersFromFile()
 {
-    std::ifstream file (Player::GetPlayersFileName(), std::ios::binary | std::ios::in);
+    std::ifstream file (Player::GetPlayersFileName(), std::ios::in);
 
     if (!file.is_open())
         throw FileNotFoundException(Player::GetPlayersFileName(), Player::GetPlayersFileName() + " not found!");
 
-    while (!file.fail())
+    while (!file.fail() || !file.eof())
     {
-        Player tempPlayer(file, this);
-        _players.push_back(tempPlayer);
-        _waitingPlayers.push(&_players.back());
+        try
+        {
+            Player tempPlayer(file, this);
+            _players.push_back(tempPlayer);
+            _waitingPlayers.push(&_players.back());
+        }
+        catch (InvalidPlayerException &e)
+        {
+        	break;
+        }
     }
 
     file.close();

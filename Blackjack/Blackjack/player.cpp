@@ -7,22 +7,21 @@
 #include <exception>
 #include <fstream>
 
-std::string Player::_playersFileName = std::string("players.data");
+std::string Player::_playersFileName = std::string("players.txt");
 
-Player::Player(std::string name, double balance, BlackJack* game)
-{
-    _name = name;
-    _balance = balance;
-    _bet = 0.0;
-    _hand = Hand();
-    _game = game;
-}
+//Player::Player(std::string name, double balance, BlackJack* game)
+//{
+//    _name = name;
+//    _balance = balance;
+//    _bet = 0.0;
+//    _hand = Hand();
+//    _game = game;
+//}
 
 Player::Player(std::ifstream& file, BlackJack* game)
 {
-    if (!ReadBinary(file))
-        ; //throw invalid file exception
-
+    if (!ReadText(file))
+        throw InvalidPlayerException();
     _game = game;
 }
 
@@ -31,19 +30,13 @@ void Player::WriteBinary(std::ofstream& out)
     out << _name << '\0' << _balance; // << _bet; It isn't needed because we don't want to save Player bet;
 }
 
-bool Player::ReadBinary(std::ifstream& file)
+bool Player::ReadText(std::ifstream& file)
 {
-        char phrase[200];
-        file.getline(phrase, 200, '\0');
-
-        _name = std::string(phrase);
-
-        if(*phrase == '\0')
-            return false;
-
     file >> _balance;
-    
-    return true;
+
+    getline(file, _name, '\n');
+
+    return !_name.empty();
 }
 
 void Player::SetPlayersFileName(std::string playersFileName)

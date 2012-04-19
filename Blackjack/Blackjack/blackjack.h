@@ -19,7 +19,7 @@ public:
     BlackJack();
     ~BlackJack();
 
-    void RegisterPlayer(std::string name, double balance);
+    //void RegisterPlayer(std::string name, double balance);
     std::vector<Player*> CheckWinners() const;
 
     virtual void Initialize();

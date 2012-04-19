@@ -18,7 +18,7 @@ class BlackJack;
 class Player
 {
 public:
-    Player(std::string name, double balance, BlackJack* game);
+    //Player(std::string name, double balance, BlackJack* game);
     Player(std::ifstream& file, BlackJack* game);
     // ~Player();
 
@@ -35,7 +35,7 @@ public:
     bool IsBusted() { return _hand.IsBusted(); }
     bool IsBlackjack() { return _hand.IsBlackjack(); }
 
-    bool ReadBinary(std::ifstream& in);
+    bool ReadText(std::ifstream& in);
     void WriteBinary(std::ofstream& out);
 
     // In-game player actions

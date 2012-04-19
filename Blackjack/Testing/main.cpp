@@ -10,10 +10,7 @@ int main()
         BlackJack game;
         std::cout << game.CanStart() << std::endl;
 
-        game.RegisterPlayer("Duarte", 100);
-        game.RegisterPlayer("Miguel", 100);
-        game.RegisterPlayer("O outro", 100);
-        game.RegisterPlayer("A outra", 100);
+        game.ReadPlayersFromFile();
 
         std::cout << game.CanStart() << std::endl;
 
