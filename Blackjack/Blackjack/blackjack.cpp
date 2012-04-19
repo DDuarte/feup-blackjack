@@ -14,6 +14,8 @@ BlackJack::BlackJack()
     _waitingPlayers = std::queue<Player*>();
 
     _activePlayers = new Player*[NUM_ACTIVE_PLAYERS];
+    for (unsigned int i = 0; i < NUM_ACTIVE_PLAYERS; ++i)
+        _activePlayers[i] = NULL;
 
     _deck = new Deck;
 
@@ -53,11 +55,16 @@ void BlackJack::SelectPlayers()
 
 void BlackJack::RegisterPlayer(std::string name, double balance)
 {
-    if (balance <= 0 || name.empty())
+    if (balance <= 0.0 || name.empty())
         throw InvalidPlayerException("Invalid parameters when registering player.");
 
-    _players.push_back(Player(name, balance, this));
+    Player player(name, balance, this);
+    _players.push_back(player);
+
     _waitingPlayers.push(&_players.back());
+
+    if (_waitingPlayers.size() == NUM_ACTIVE_PLAYERS) // first four players?
+        SelectPlayers();
 }
 
 std::vector<Player*> BlackJack::CheckWinners() const

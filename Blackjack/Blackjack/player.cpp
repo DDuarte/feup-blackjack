@@ -14,7 +14,8 @@ Player::Player(std::string name, double balance, BlackJack* game)
     _name = name;
     _balance = balance;
     _bet = 0.0;
-    _hand = new Hand;
+    _hand = Hand();
+    _game = game;
 }
 
 Player::Player(std::ifstream& file, BlackJack* game)
@@ -25,11 +26,6 @@ Player::Player(std::ifstream& file, BlackJack* game)
     _game = game;
 }
 
-Player::~Player()
-{
-    delete _hand;
-}
-
 void Player::WriteBinary(std::ofstream& out)
 {
     out << _name << '\0' << _balance; // << _bet; It isn't needed because we don't want to save Player bet;
@@ -37,7 +33,6 @@ void Player::WriteBinary(std::ofstream& out)
 
 bool Player::ReadBinary(std::ifstream& file)
 {
-
         char phrase[200];
         file.getline(phrase, 200, '\0');
 

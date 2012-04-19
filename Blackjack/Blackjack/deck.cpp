@@ -42,6 +42,9 @@ void Deck::InitializeDeck(unsigned int numberOfDecks)
 
 Card Deck::WithdrawCard()
 {
+    if (_cards.size() == 0)
+        return Card(CsNone, CnNone, 0);
+
     Card tempCard = _cards.back();
     _cards.pop_back();
     return tempCard;

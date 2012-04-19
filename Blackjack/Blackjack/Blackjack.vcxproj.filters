@@ -9,9 +9,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Game Exceptions">
-      <UniqueIdentifier>{35c01a25-95f5-4fae-b94b-5ed7d6c0c76a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes">
       <UniqueIdentifier>{f01ec21f-5161-4c21-bd44-c0228e2ea5df}</UniqueIdentifier>
     </Filter>
@@ -63,7 +60,7 @@
       <Filter>Classes\Hand</Filter>
     </ClInclude>
     <ClInclude Include="gameExceptions.h">
-      <Filter>Game Exceptions</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
