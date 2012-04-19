@@ -1,4 +1,5 @@
 #include "player.h"
+#include "blackjack.h"
 #include "utilities.h"
 
 #include <string>
@@ -8,18 +9,25 @@
 
 std::string Player::_playersFileName = std::string("players.data");
 
-Player::Player(std::string name, double balance)
+Player::Player(std::string name, double balance, BlackJack* game)
 {
     _name = name;
     _balance = balance;
     _bet = 0.0;
-    _hand = std::vector<Card>();
+    _hand = new Hand;
 }
 
-Player::Player(std::ifstream& file)
+Player::Player(std::ifstream& file, BlackJack* game)
 {
     if (!ReadBinary(file))
         ; //throw invalid file exception
+
+    _game = game;
+}
+
+Player::~Player()
+{
+    delete _hand;
 }
 
 void Player::WriteBinary(std::ofstream& out)
@@ -63,4 +71,6 @@ void Player::PlaceBet(double bet)
 
     _bet = bet;
     _balance -= bet;
+
+    _game->PlayerBet(this, bet);
 }

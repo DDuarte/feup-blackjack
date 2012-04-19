@@ -1,6 +1,7 @@
 #include "blackjack.h"
 #include "player.h"
 #include "deck.h"
+#include "hand.h"
 #include "localization.h"
 #include "gameExceptions.h"
 
@@ -15,6 +16,8 @@ BlackJack::BlackJack()
     _activePlayers = new Player*[NUM_ACTIVE_PLAYERS];
 
     _deck = new Deck;
+
+    _totalBets = 0.0;
 
     Initialize();
 }
@@ -53,7 +56,7 @@ void BlackJack::RegisterPlayer(std::string name, double balance)
     if (balance <= 0 || name.empty())
         throw InvalidPlayerException("Invalid parameters when registering player.");
 
-    _players.push_back(Player(name, balance));
+    _players.push_back(Player(name, balance, this));
     _waitingPlayers.push(&_players.back());
 }
 
@@ -65,9 +68,9 @@ std::vector<Player*> BlackJack::CheckWinners() const
     {
         if (!winners.empty())
         {
-            if (winners.at(0)->GetHand().GetScore() < _activePlayers[i]->GetHand().GetScore())
+            if (winners[0]->GetHand()->GetScore() < _activePlayers[i]->GetHand()->GetScore())
                 winners.clear();
-            else if (winners.at(0)->GetHand().GetScore() > _activePlayers[i]->GetHand().GetScore())
+            else if (winners[0]->GetHand()->GetScore() > _activePlayers[i]->GetHand()->GetScore())
                 continue;
         }
         winners.push_back(_activePlayers[i]);
@@ -97,7 +100,7 @@ void BlackJack::ReadPlayersFromFile()
 
     while (!file.fail())
     {
-        Player tempPlayer(file);
+        Player tempPlayer(file, this);
         _players.push_back(tempPlayer);
         _waitingPlayers.push(&_players.back());
     }

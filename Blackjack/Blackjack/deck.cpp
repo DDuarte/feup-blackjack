@@ -54,12 +54,9 @@ void Deck::Shuffle()
     for (size_t i = 0; i < _cards.size(); ++i)
     {
         int r1;
-        do 
-        {
-            r1 = rand() % size;
-        } while (r1 == i);
+        do r1 = rand() % size;
+        while (r1 == i);
         
-
         Utilities::Swap(_cards[r1], _cards[i]);
     }
 }

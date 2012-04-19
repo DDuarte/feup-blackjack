@@ -4,6 +4,7 @@
 #include "card.h"
 
 #include <vector>
+#include <algorithm>
 
 int const ACE_MAX_VAL = 11;
 int const ACE_MIN_VAL = 1;
@@ -13,15 +14,19 @@ class Hand
 {
 public:
     Hand();
-    Hand(std::vector<Card> cards);
+    ~Hand();
+
     unsigned int GetScore() const { return _score; }
     
-    bool IsBusted() { return GetScore() > BLACKJACK_HAND; }         // Cannot be const because GetScore()
-    bool IsBlackjack() { return GetScore() == BLACKJACK_HAND; }     // has to modify Aces score
+    bool IsBusted() const { return GetScore() > BLACKJACK_HAND; }
+    bool IsBlackjack() const { return GetScore() == BLACKJACK_HAND; }
 
-    void AddCard(Card card);
+    void AddCard(Card* card);
+    void RemoveCard(const Card* card);
+    void Clear();
+
 private:
-    std::vector<Card> _cards;
+    std::vector<Card*> _cards;
     unsigned int _score;
 
     void UpdateScore();

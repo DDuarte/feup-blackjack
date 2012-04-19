@@ -6,19 +6,19 @@
 
 Hand::Hand()
 {
-    _cards = std::vector<Card>();
+    _cards = std::vector<Card*>();
     _score = 0;
 }
 
-Hand::Hand(std::vector<Card> cards)
+Hand::~Hand()
 {
-    _cards = cards;
-    _score = 0;
+    for (size_t i = 0; i < _cards.size(); ++i)
+        delete _cards[i];
 }
 
-void Hand::AddCard(Card card)
+void Hand::AddCard(Card* card)
 {
-    if (card.IsValid())
+    if (card->IsValid())
     {
         _cards.push_back(card);
         UpdateScore();
@@ -37,15 +37,15 @@ void Hand::UpdateScore()
 
     int aces = 0;
 
-    for (std::vector<Card>::const_iterator card = _cards.begin(); card != _cards.end(); ++card)
+    for (std::vector<Card*>::const_iterator card = _cards.begin(); card != _cards.end(); ++card)
     {
-        if (card->GetName() == Ace)
+        if ((*card)->GetName() == Ace)
         {
             aces++;
             continue;
         }
         else
-            _score += card->GetScore();
+            _score += (*card)->GetScore();
     }
 
     for (int i = 0; i < aces; ++i)
@@ -55,4 +55,27 @@ void Hand::UpdateScore()
         else
             _score += ACE_MIN_VAL;
     }
+}
+
+void Hand::RemoveCard(const Card* card)
+{
+    std::vector<Card*>::iterator itr = std::find(_cards.begin(), _cards.end(), card);
+
+    if (itr == _cards.end())
+        return; // Throw except?
+
+    _cards.erase(itr);
+
+    if (_cards.size() > 0)
+        UpdateScore();
+}
+
+void Hand::Clear()
+{
+    for (size_t i = 0; i < _cards.size(); ++i)
+        delete _cards[i];
+
+    _cards.clear();
+
+    _score = 0;
 }

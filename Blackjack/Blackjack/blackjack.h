@@ -36,6 +36,8 @@ public:
     bool ShouldEnd();
     bool CanStart();
 
+    void PlayerBet(Player* /* player*/, double bet) { _totalBets += bet; }
+
 private:
     std::vector<Player> _players;
 
@@ -46,6 +48,9 @@ private:
     Player* SelectNextPlayer(); // For each "replacement"
 
     Deck* _deck;
+
+    double _totalBets; // TODO: This needs to be distributed to players on round (?) end and
+                       // also updated with players bets
 };
 
 #endif // BLACKJACK_H
