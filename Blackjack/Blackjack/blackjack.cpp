@@ -60,7 +60,6 @@ void BlackJack::RegisterPlayer(std::string name, double balance)
     _waitingPlayers.push(&_players.back());
 }
 
-
 std::vector<Player*> BlackJack::CheckWinners() const
 {
     std::vector<Player*> winners = std::vector<Player*>();

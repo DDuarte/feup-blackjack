@@ -36,7 +36,12 @@ public:
     bool ShouldEnd();
     bool CanStart();
 
+    // Events-like calls
     void PlayerBet(Player* /* player*/, double bet) { _totalBets += bet; }
+    // void PlayerHit(Player* player);
+    // void PlayerStand(Player* player);
+    // void PlayerDouble(Player* player);
+    // void PlayerSurrender(Player* player);
 
 private:
     std::vector<Player> _players;
