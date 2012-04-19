@@ -1,6 +1,7 @@
 #ifndef HAND_H
 #define HAND_H
 
+#include "utilities.h"
 #include "card.h"
 
 #include <vector>
@@ -16,7 +17,7 @@ public:
     Hand();
     ~Hand();
 
-    unsigned int GetScore() const { return _score; }
+    uint GetScore() const { return _score; }
     
     bool IsBusted() const { return GetScore() > BLACKJACK_HAND; }
     bool IsBlackjack() const { return GetScore() == BLACKJACK_HAND; }
@@ -27,7 +28,7 @@ public:
 
 private:
     std::vector<Card*> _cards;
-    unsigned int _score;
+    uint _score;
 
     void UpdateScore();
 };

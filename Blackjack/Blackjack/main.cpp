@@ -6,6 +6,7 @@
 #include <string>
 #include <ctime>
 
+#include "utilities.h"
 #include "localization.h"
 #include "deck.h"
 #include "gameExceptions.h"
@@ -50,7 +51,7 @@ void Tests()
 int main()
 {
     Localization::Instance()->SetLang(English); // default lang
-    srand((unsigned int)time(NULL)); // initialize seed
+    srand((uint)time(NULL)); // initialize seed
 
     Tests();
 

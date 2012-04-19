@@ -1,6 +1,7 @@
 #ifndef GAMEEXCEPTION_H
 #define GAMEEXCEPTION_H
 
+#include "utilities.h"
 #include "card.h"
 
 #include <stdexcept>
@@ -58,5 +59,6 @@ private:
     std::string _message;
     std::string _filename;
 };
+
 
 #endif // GAMEEXCEPTION_H

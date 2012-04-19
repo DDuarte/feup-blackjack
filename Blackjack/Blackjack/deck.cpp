@@ -6,12 +6,12 @@
 #include <stack>
 #include <vector>
 
-Deck::Deck(unsigned int numberOfDecks /*= DEFAULT_NUMBER_OF_DECKS*/)
+Deck::Deck(uint numberOfDecks /*= DEFAULT_NUMBER_OF_DECKS*/)
 {
     InitializeDeck(numberOfDecks);
 }
 
-void Deck::InitializeDeck(unsigned int numberOfDecks)
+void Deck::InitializeDeck(uint numberOfDecks)
 {
     _cards = std::vector<Card>();
 
@@ -19,7 +19,7 @@ void Deck::InitializeDeck(unsigned int numberOfDecks)
 
     CardSuit types[] = { Clubs, Spades, Hearts, Diamonds };
 
-    for (unsigned int i = 0; i < NUMBER_OF_SUITS*numberOfDecks; ++i)
+    for (uint i = 0; i < NUMBER_OF_SUITS*numberOfDecks; ++i)
     {
         int suit = i % NUMBER_OF_SUITS;
         _cards.push_back(Card(types[suit], Two, 2));
@@ -38,15 +38,18 @@ void Deck::InitializeDeck(unsigned int numberOfDecks)
     }
 
     Shuffle();
+
+    for (uint i = 0; i < _cards.size(); ++i)
+        _gameCards.push(&_cards[i]);
 }
 
-Card Deck::WithdrawCard()
+Card* Deck::WithdrawCard()
 {
-    if (_cards.size() == 0)
-        return Card(CsNone, CnNone, 0);
+    if (_gameCards.size() == 0)
+        return NULL;
 
-    Card tempCard = _cards.back();
-    _cards.pop_back();
+    Card* tempCard = _gameCards.top();
+    _gameCards.pop();
     return tempCard;
 }
 

@@ -26,10 +26,6 @@ public:
     const Hand* GetHand() const { return &_hand; }
     static std::string GetPlayersFileName() { return _playersFileName; }
 
-    void SetName(std::string name) { if (name.size() > 0) _name = name; }
-    // void SetBalance(double balance) { _balance = balance; }
-    static void SetPlayersFileName(std::string playersFileName);
-
     bool IsBusted() { return _hand.IsBusted(); }
     bool IsBlackjack() { return _hand.IsBlackjack(); }
 
@@ -38,9 +34,9 @@ public:
 
     // In-game player actions
     void PlaceBet(double bet);
-    void Stand() { }
-    void Hit() { }
-    void Double() { }
+    void Stand();
+    void Hit();
+    void Double();
 
     void NewHand(Card* card1, Card* card2) { _hand.Clear(); _hand.AddCard(card1); _hand.AddCard(card2); }
 
@@ -50,6 +46,8 @@ private:
     double _bet;
     
     static std::string _playersFileName;
+
+
 
     Hand _hand;
     BlackJack* _game;

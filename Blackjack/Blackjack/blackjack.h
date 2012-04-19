@@ -1,6 +1,8 @@
 #ifndef BLACKJACK_H
 #define BLACKJACK_H
 
+
+#include "utilities.h"
 #include "game.h"
 #include "player.h"
 #include "deck.h"
@@ -8,7 +10,7 @@
 #include <vector>
 #include <queue>
 
-const unsigned int NUM_ACTIVE_PLAYERS = 4;
+const uint NUM_ACTIVE_PLAYERS = 4;
 
 class Deck;
 class Player;
@@ -28,6 +30,8 @@ public:
     virtual void Draw() { }
     virtual void UnloadContents();
 
+    Deck* GetDeck() { return &_deck; }
+
     void ReadPlayersFromFile();
     void WritePlayersToFile();
 
@@ -35,7 +39,10 @@ public:
 
     bool ShouldEnd();
     bool CanStart() { return _waitingPlayers.size() >= NUM_ACTIVE_PLAYERS && _activePlayerCount == 0; }
-    void Start() { if (CanStart()) SelectPlayers(); /* ... */ }
+
+    void Start();
+    void NextPlayer() { _currentPlayerIndex = (_currentPlayerIndex + 1) % 4; }
+    void HandleOutOfCards() { }
 
     int RegisteredPlayerCount() { return _players.size(); }
     int WaitingPlayerCount() { return _waitingPlayers.size(); }
@@ -43,26 +50,30 @@ public:
 
     // Events-like calls
     void PlayerBet(Player* /* player*/, double bet) { _totalBets += bet; /* ... */ }
-    // void PlayerHit(Player* player);
-    // void PlayerStand(Player* player);
-    // void PlayerDouble(Player* player);
+    void PlayerHit(Player* player) { }
+    void PlayerStand(Player* player) { }
+    void PlayerDouble(Player* player);
     // void PlayerSurrender(Player* player);
 
 private:
+    // Application Variables
     std::vector<Player> _players;
-
     std::queue<Player*> _waitingPlayers;
+
+    // Game Variables
     Player** _activePlayers;
     int _activePlayerCount;
+    uint _currentPlayerIndex;
+
 
     void SelectPlayers(); // For the first 4 players
-    Player* SelectNextPlayer(); // For each "replacement"
+    Player* SelectNextPlayerFromQueue(); // For each "replacement"
     void CountActivePlayers();
 
     void AddPlayer(const Player& player);
     void RemovePlayer(Player* player);
 
-    Deck* _deck;
+    Deck _deck;
 
     double _totalBets; // TODO: This needs to be distributed to players on round (?) end and
                        // also updated with players bets

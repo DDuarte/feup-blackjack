@@ -1,6 +1,7 @@
 #ifndef CARD_H
 #define CARD_H
 
+#include "utilities.h"
 #include <string>
 
 enum CardSuit
@@ -35,11 +36,11 @@ const std::string DEFAULT_OUTPUT_FORMAT = "[ N - S ]";
 class Card
 {
 public:
-    Card(CardSuit suit, CardName name, unsigned int score);
+    Card(CardSuit suit, CardName name, uint score);
 
     CardSuit GetSuit() const { return _suit; }
     CardName GetName() const { return _name; }
-    unsigned int GetScore() const { return _score; }
+    uint GetScore() const { return _score; }
     std::string GetFormattedName() const;
     static std::string GetOutputFormat() { return _outputFormat; }
 
@@ -50,7 +51,7 @@ public:
 private:
     CardSuit _suit;
     CardName _name;
-    unsigned int _score;
+    uint _score;
     static std::string _outputFormat; // [ N - T ]; { N - T }
 };
 

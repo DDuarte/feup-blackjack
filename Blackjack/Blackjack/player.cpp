@@ -39,19 +39,6 @@ bool Player::ReadText(std::ifstream& file)
     return !_name.empty();
 }
 
-void Player::SetPlayersFileName(std::string playersFileName)
-{
-    if (!Utilities::FileExists(playersFileName.c_str()))
-    {
-        std::fstream out (playersFileName.c_str(), std::ios::out | std::ios::binary);
-        if (!out.is_open())
-            ;//throw exception
-        out.close();
-    }
-
-    _playersFileName = playersFileName;
-}
-
 void Player::PlaceBet(double bet)
 {
     if (bet <= 0 || bet > _balance)
@@ -62,3 +49,40 @@ void Player::PlaceBet(double bet)
 
     _game->PlayerBet(this, bet);
 }
+
+void Player::Hit()
+{
+    Card* tempCard = _game->GetDeck()->WithdrawCard();
+
+    if (tempCard != NULL)
+    {
+        _hand.AddCard(tempCard);
+        _game->PlayerHit(this);
+    }
+    else
+        _game->HandleOutOfCards();
+}
+
+void Player::Stand()
+{
+    _game->PlayerStand(this);
+}
+
+void Player::Double()
+{
+    Card* tempCard = _game->GetDeck()->WithdrawCard();
+
+    if (tempCard != NULL)
+    {
+        _hand.AddCard(tempCard);
+        _bet *= 2;
+
+
+        _game->PlayerDouble(this);
+    }
+    else
+        _game->HandleOutOfCards();
+
+    
+}
+

@@ -1,3 +1,4 @@
+#include "utilities.h"
 #include "blackjack.h"
 #include "player.h"
 #include "deck.h"
@@ -14,12 +15,13 @@ BlackJack::BlackJack()
     _waitingPlayers = std::queue<Player*>();
 
     _activePlayerCount = 0;
+    _currentPlayerIndex = 0;
 
     _activePlayers = new Player*[NUM_ACTIVE_PLAYERS];
-    for (unsigned int i = 0; i < NUM_ACTIVE_PLAYERS; ++i)
+    for (uint i = 0; i < NUM_ACTIVE_PLAYERS; ++i)
         _activePlayers[i] = NULL;
 
-    _deck = new Deck;
+    _deck = Deck();
 
     _totalBets = 0.0;
 
@@ -34,8 +36,6 @@ BlackJack::~BlackJack()
 
     delete[] _activePlayers;
 
-    delete _deck;
-
     _players.clear();
 
     while (!_waitingPlayers.empty())
@@ -48,8 +48,8 @@ void BlackJack::SelectPlayers()
     if (_waitingPlayers.empty() || _waitingPlayers.size() < NUM_ACTIVE_PLAYERS)
         throw InvalidPlayerException("Not enough players to start a game."); 
 
-    for (unsigned int i = 0; i < NUM_ACTIVE_PLAYERS; ++i)
-        _activePlayers[i] = SelectNextPlayer();
+    for (uint i = 0; i < NUM_ACTIVE_PLAYERS; ++i)
+        _activePlayers[i] = SelectNextPlayerFromQueue();
 }
 
 std::vector<Player*> BlackJack::CheckWinners() const
@@ -68,7 +68,6 @@ std::vector<Player*> BlackJack::CheckWinners() const
     }
     return winners;
 }
-
 
 void BlackJack::Initialize()
 {
@@ -115,7 +114,7 @@ void BlackJack::RemovePlayer(Player* player)
     {
         if (_activePlayers[i] == player)
         {
-            if (Player* nextPlayer = SelectNextPlayer())
+            if (Player* nextPlayer = SelectNextPlayerFromQueue())
                 _activePlayers[i] = nextPlayer; // TODO call some other function signaling that a new player was added
             else
                 _activePlayers[i] = NULL; // TODO call a function that will handle the fact that there are no new players
@@ -127,7 +126,7 @@ void BlackJack::RemovePlayer(Player* player)
     _activePlayerCount--;
 }
 
-Player* BlackJack::SelectNextPlayer()
+Player* BlackJack::SelectNextPlayerFromQueue()
 {
     if (_waitingPlayers.size() == 0)
         return NULL;
@@ -170,4 +169,19 @@ void BlackJack::WritePlayersToFile()
         plr->WriteText(out);
         out << '\n';
     }
+}
+
+void BlackJack::PlayerDouble( Player* player )
+{
+    double playerBet = player->GetBet();
+
+}
+
+void BlackJack::Start()
+{
+    if (CanStart())
+    {
+        SelectPlayers();
+    }
+            /* ... */
 }

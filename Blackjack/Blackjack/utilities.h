@@ -1,6 +1,8 @@
 #ifndef UTILITIES_H_
 #define UTILITIES_H_
 
+typedef unsigned int uint;
+
 #include <string>
 
 namespace Utilities

@@ -1,3 +1,4 @@
+#include "utilities.h"
 #include "card.h"
 #include "localization.h"
 #include "gameExceptions.h"
@@ -7,7 +8,7 @@
 
 std::string Card::_outputFormat = DEFAULT_OUTPUT_FORMAT;
 
-Card::Card(CardSuit suit, CardName name, unsigned int score) : _name(name), _suit(suit), _score(score) { }
+Card::Card(CardSuit suit, CardName name, uint score) : _name(name), _suit(suit), _score(score) { }
 
 std::string Card::GetFormattedName() const
 {
