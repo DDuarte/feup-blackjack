@@ -1,5 +1,5 @@
-#ifndef BLACKJACKUI_H
-#define BLACKJACKUI_H
+#ifndef BLACKJACK_H
+#define BLACKJACK_H
 
 #include <allegro5/allegro.h>
 #define ALLEGRO_STATICLINK
@@ -21,13 +21,13 @@ enum Constants
     CONST_FPS = 60
 };
 
-class BlackJackUI
+class BlackJack
 {
 public:
-    BlackJackUI();
+    BlackJack();
 private:
     void Initialize();
-    void LoadContents() { }
+    void LoadContents();
     void Update() { }
     void Draw();
     void UnloadContents();

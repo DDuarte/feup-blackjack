@@ -1,4 +1,5 @@
-#include "blackjackUI.h"
+#include "blackjack.h"
+#include "utilities.h"
 
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_native_dialog.h>
@@ -11,13 +12,7 @@
 
 #include <time.h>
 
-void Error(char const* message)
-{
-    al_show_native_message_box(NULL, "Error", NULL, message, NULL, ALLEGRO_MESSAGEBOX_ERROR);
-    exit(EXIT_FAILURE);
-}
-
-BlackJackUI::BlackJackUI()
+BlackJack::BlackJack()
 {
     _display = NULL;
     _eventQueue = NULL;
@@ -30,12 +25,15 @@ BlackJackUI::BlackJackUI()
     _Start();
 }
 
-void BlackJackUI::Initialize()
+void BlackJack::Initialize()
 {
     // inits
     _display = al_create_display(CONST_WIDTH, CONST_HEIGHT);
     if (!_display)
         Error("Failed to initialize display.");
+
+    al_set_system_mouse_cursor(_display, ALLEGRO_SYSTEM_MOUSE_CURSOR_PROGRESS);
+    // mouse is reseted before entering the game loop
 
     if (!al_init_primitives_addon()) Error("Failed to initialize primitives addon.");
     al_init_font_addon();
@@ -56,10 +54,10 @@ void BlackJackUI::Initialize()
 
     // miscs
     srand((unsigned int)time(NULL));
-    al_hide_mouse_cursor(_display);
+    //al_hide_mouse_cursor(_display);
 }
 
-void BlackJackUI::UnloadContents()
+void BlackJack::UnloadContents()
 {
     al_destroy_event_queue(_eventQueue);
     al_destroy_timer(_timer);
@@ -67,17 +65,18 @@ void BlackJackUI::UnloadContents()
     al_destroy_display(_display);
 }
 
-void BlackJackUI::Quit()
+void BlackJack::Quit()
 {
     _done = true;
     // Anything else?
 }
 
-void BlackJackUI::_Start()
+void BlackJack::_Start()
 {
     Initialize();
     LoadContents();
 
+    al_start_timer(_timer);
     while (!_done)
     {
         Update();
@@ -87,12 +86,22 @@ void BlackJackUI::_Start()
     UnloadContents();
 }
 
-void BlackJackUI::Draw()
+void BlackJack::Draw()
 {
+    // Only draw if something was changed
     if (!_draw)
         return;
 
     _draw = true;
 
+    al_flip_display();
+
     // ...
+}
+
+void BlackJack::LoadContents()
+{
+    // ...
+
+    al_set_system_mouse_cursor(_display, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
 }

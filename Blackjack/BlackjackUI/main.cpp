@@ -1,14 +1,14 @@
 #include <allegro5/allegro.h>
 #include "card.h"
 
-#include "blackjackUI.h"
+#include "blackjack.h"
 
 int main()
 {
     if (!al_init())
         Error("Failed to initialize Allegro.");
 
-    BlackJackUI();
+    BlackJack();
 
-    return EXIT_SUCCESS;                                                       // exit
+    return EXIT_SUCCESS;
 }

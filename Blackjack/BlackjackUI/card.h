@@ -2,75 +2,61 @@
 #define CARD_H
 
 #include "utilities.h"
-#include "utilitiesUI.h"
 
 #include <string>
 
-#include <allegro5/allegro.h>
-#include <allegro5/allegro_image.h>
-
-
 enum CardSuit
 {
-    CsNone = -1,
-    Clubs,
-    Spades,
-    Hearts,
-    Diamonds
+    CARD_SUIT_CLUBS,
+    CARD_SUIT_SPADES,
+    CARD_SUIT_HEARTS,
+    CARD_SUIT_DIAMONDS
 };
 
-enum CardName
+enum CardRank
 {
-    CnNone = -1,
-    Two,
-    Three,
-    Four,
-    Five,
-    Six,
-    Seven,
-    Eight,
-    Nine,
-    Ten,
-    Jack,
-    Queen,
-    King,
-    Ace
+    CARD_RANK_TWO,
+    CARD_RANK_THREE,
+    CARD_RANK_FOUR,
+    CARD_RANK_FIVE,
+    CARD_RANK_SIX,
+    CARD_RANK_SEVEN,
+    CARD_RANK_EIGHT,
+    CARD_RANK_NINE,
+    CARD_RANK_TEN,
+    CARD_RANK_JACK,
+    CARD_RANK_QUEEN,
+    CARD_RANK_KING,
+    CARD_RANK_ACE
 };
 
-//const std::string DEFAULT_OUTPUT_FORMAT = "[ N - S ]";
-const TwoD::vector CARD_SIZE = TwoD::vector(73,98);
+const Vector2D CARD_SIZE = { 73, 98 };
+
+struct ALLEGRO_BITMAP;
+struct ALLEGRO_DISPLAY;
 
 class Card
 {
 public:
-    Card(CardSuit suit, CardName name, uint score, ALLEGRO_BITMAP *image);
+    Card(int suit, int name, uint score, ALLEGRO_BITMAP* image);
 
-    CardSuit GetSuit() const { return _suit; }
-    CardName GetName() const { return _name; }
+    int GetSuit() const { return _suit; }
+    int GetRank() const { return _rank; }
     uint GetScore() const { return _score; }
-    float GetFrameWidth() const { return _frameSize.x; }
-    float GetFrameHeight() const { return _frameSize.y; }
+    float GetFrameWidth() const { return _frameSize.X; }
+    float GetFrameHeight() const { return _frameSize.Y; }
 
-    //std::string GetFormattedName() const;
+    bool IsValid() const { return _suit != -1 && _rank != -1 && _score != 0; }
 
-    //static std::string GetOutputFormat() { return _outputFormat; }
-
-    //static void SetOutputFormat(std::string outputFormat) { _outputFormat = outputFormat; }
-
-    bool IsValid() const { return _suit != CsNone && _name != CnNone && _score != 0; }
-
-    void Draw(ALLEGRO_DISPLAY *display, float dx, float dy);
+    void Draw(ALLEGRO_DISPLAY* display, float dx, float dy);
    
 private:
-    CardSuit _suit;
-    CardName _name;
+    int _suit;
+    int _rank;
     uint _score;
-    //static std::string _outputFormat; // [ N - T ]; { N - T }
-    ALLEGRO_BITMAP *_image;
-    TwoD::vector _frameSize;
 
-
-
+    ALLEGRO_BITMAP* _image;
+    Vector2D _frameSize;
 };
 
 #endif // CARD_H
