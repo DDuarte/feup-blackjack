@@ -7,7 +7,8 @@
 #include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_acodec.h>
 
-#include "localization.h"
+
+#include "card.h"
 
 enum State
 {

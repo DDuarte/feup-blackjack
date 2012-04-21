@@ -48,7 +48,7 @@ public:
 
     bool IsValid() const { return _suit != CsNone && _name != CnNone && _score != 0; }
 
-private:
+protected:
     CardSuit _suit;
     CardName _name;
     uint _score;

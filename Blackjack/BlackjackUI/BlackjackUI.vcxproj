@@ -65,11 +65,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="blackjackUI.cpp" />
+    <ClCompile Include="card.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="blackjackUI.h" />
-    <ClInclude Include="cardUI.h" />
+    <ClInclude Include="card.h" />
+    <ClInclude Include="utilitiesUI.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

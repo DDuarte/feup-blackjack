@@ -21,12 +21,15 @@
     <ClCompile Include="blackjackUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="card.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="cardUI.h">
+    <ClInclude Include="card.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="blackjackUI.h">
+    <ClInclude Include="utilitiesUI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
