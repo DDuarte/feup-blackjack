@@ -7,7 +7,7 @@ Blackjack
 Resources credits
 -----------------
 * `Playing cards` sprite by [John Fitzgibbon]
-* Sounds by [milton]
+* `Pack: game programmers soundset, blackjack` sounds by [milton]
 * `Linux Games 1024x768 Wallpaper Don't Play Games on Windows` downloaded from [Wallpaper Linux]
 * `Champagne & Limousines` font by [Lauren Thompson]
 
