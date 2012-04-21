@@ -97,8 +97,10 @@ void HandleMainMenu(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* eventQueue)
         if (draw)
         {
             al_draw_bitmap(mainMenu, 0, 0, 0);                               // background
+            al_draw_text(font140, shadowText, Width / 3 + 1, 1, ALLEGRO_ALIGN_CENTRE, "Blackjack");
             al_draw_text(font140, al_map_rgb(255, 255, 255), Width / 3, 0,   // title
                 ALLEGRO_ALIGN_CENTRE, "Blackjack");
+            
 
             // shadow
             al_draw_text(font50, shadowText, 51, 441, ALLEGRO_ALIGN_LEFT, "Play");
@@ -147,7 +149,7 @@ int main()
     ALLEGRO_TIMER* timer = NULL;
     
     // init allegro modules
-    //al_init_primitives_addon();
+    al_init_primitives_addon();
     al_init_font_addon();
     al_init_ttf_addon();
     al_init_image_addon();

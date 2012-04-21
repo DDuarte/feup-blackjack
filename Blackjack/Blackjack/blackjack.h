@@ -1,7 +1,6 @@
 #ifndef BLACKJACK_H
 #define BLACKJACK_H
 
-
 #include "utilities.h"
 #include "game.h"
 #include "player.h"
