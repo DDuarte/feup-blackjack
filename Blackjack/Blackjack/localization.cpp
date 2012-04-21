@@ -115,5 +115,5 @@ Language Localization::GetLanguageByShortLang(std::string lang)
     else if (lang == "pt") return Portuguese;
     else if (lang == "es") return Spanish;
     else if (lang == "fr") return French;
-    else                   return None;
+    else                   return LNone;
 }

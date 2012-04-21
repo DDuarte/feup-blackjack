@@ -32,7 +32,7 @@ enum Strings
 
 enum Language
 {
-    None,
+    LNone,
     English,
     Portuguese,
     French,
