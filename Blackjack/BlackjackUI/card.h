@@ -3,8 +3,6 @@
 
 #include "utilities.h"
 
-#include <string>
-
 enum CardSuit
 {
     CARD_SUIT_CLUBS,
@@ -38,7 +36,7 @@ struct ALLEGRO_DISPLAY;
 class Card
 {
 public:
-    Card(int suit, int name, uint score, ALLEGRO_BITMAP* image);
+    Card(int suit, int rank, uint score, ALLEGRO_BITMAP* image);
 
     int GetSuit() const { return _suit; }
     int GetRank() const { return _rank; }
