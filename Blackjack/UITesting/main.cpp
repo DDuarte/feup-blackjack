@@ -7,7 +7,7 @@
 #include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_acodec.h>
 
-#include "../Blackjack/localization.h"
+#include "localization.h"
 
 enum State
 {
@@ -80,7 +80,8 @@ void HandleMainMenu(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* eventQueue)
 
         if (ev.type == ALLEGRO_EVENT_KEY_UP)
         {
-            if (ev.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
+            if (ev.keyboard.keycode == ALLEGRO_KEY_ESCAPE ||
+                (ev.keyboard.keycode == ALLEGRO_KEY_ENTER && selectedMenu == Quit))
                 done = true;
         }
         else if (ev.type == ALLEGRO_EVENT_KEY_DOWN)
@@ -94,7 +95,7 @@ void HandleMainMenu(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* eventQueue)
             draw = true;
         }
 
-        if (draw)
+        if (draw && al_event_queue_is_empty(eventQueue))
         {
             al_draw_bitmap(mainMenu, 0, 0, 0);                               // background
             al_draw_text(font140, shadowText, Width / 3 + 1, 1, ALLEGRO_ALIGN_CENTRE, "Blackjack");
