@@ -73,6 +73,7 @@ bool S_MainMenu::Update(ALLEGRO_EVENT_QUEUE* evQueue)
                     return false;
                 }
             }
+            break;
         }
         case ALLEGRO_EVENT_KEY_DOWN:
         {
