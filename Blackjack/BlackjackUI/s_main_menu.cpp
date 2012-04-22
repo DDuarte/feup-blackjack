@@ -7,7 +7,6 @@
 #include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_acodec.h>
 
-
 S_MainMenu::S_MainMenu()
 {
     _background = NULL;
@@ -34,15 +33,12 @@ void S_MainMenu::LoadContents()
     _bgMusic = al_load_sample("../../Resources/sounds/86876__milton__title-screen.ogg");
     _nextMenuSound = al_load_sample("../../Resources/sounds/86881_milton_yes.ogg");
 
-    //al_play_sample(_bgMusic, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+    al_play_sample(_bgMusic, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 }
 
-bool S_MainMenu::Update(ALLEGRO_EVENT_QUEUE* evQueue)
+bool S_MainMenu::Update(ALLEGRO_EVENT* ev)
 {
-    ALLEGRO_EVENT ev;
-    al_wait_for_event(evQueue, &ev);
-
-    switch (ev.type)
+    switch (ev->type)
     {
         case ALLEGRO_EVENT_DISPLAY_CLOSE:
         {
@@ -51,12 +47,12 @@ bool S_MainMenu::Update(ALLEGRO_EVENT_QUEUE* evQueue)
         }
         case ALLEGRO_EVENT_KEY_UP:
         {
-            if (ev.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
+            if (ev->keyboard.keycode == ALLEGRO_KEY_ESCAPE)
             {
                 BlackJack::Instance()->Quit();
                 return false;
             }
-            else if (ev.keyboard.keycode == ALLEGRO_KEY_ENTER)
+            else if (ev->keyboard.keycode == ALLEGRO_KEY_ENTER)
             {
                 if (_selectedMenu == MENU_PLAY)
                 {
@@ -79,20 +75,21 @@ bool S_MainMenu::Update(ALLEGRO_EVENT_QUEUE* evQueue)
         case ALLEGRO_EVENT_KEY_DOWN:
         {
             int add;
-            if (ev.keyboard.keycode == ALLEGRO_KEY_DOWN)
+            if (ev->keyboard.keycode == ALLEGRO_KEY_DOWN)
                 add = 1;
-            else if (ev.keyboard.keycode == ALLEGRO_KEY_UP)
+            else if (ev->keyboard.keycode == ALLEGRO_KEY_UP)
                 add = -1;
             else
                 return false;
 
+            // _selectedMenu will always be in the range [0, 2]
             _selectedMenu = (((_selectedMenu + add) == -1) ? MENU_QUIT : ((_selectedMenu + add) % (MENU_QUIT + 1)));
 
             al_play_sample(_nextMenuSound, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
             return true;
         }
         case ALLEGRO_EVENT_TIMER:
-            return true;
+            return true; // draw every 1/60 secs
     }
 
     return false;

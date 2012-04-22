@@ -14,7 +14,7 @@ enum Menu
     MENU_QUIT,
 };
 
-struct ALLEGRO_EVENT_QUEUE;
+union ALLEGRO_EVENT;
 
 class S_MainMenu : public State
 {
@@ -22,7 +22,7 @@ public:
     S_MainMenu();
     void Initialize();
     void LoadContents();
-    bool Update(ALLEGRO_EVENT_QUEUE* evQueue);
+    bool Update(ALLEGRO_EVENT* ev);
     void Draw();
     void UnloadContents();
 private:

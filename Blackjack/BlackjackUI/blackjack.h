@@ -23,6 +23,7 @@ enum Constants
 struct ALLEGRO_DISPLAY;
 struct ALLEGRO_EVENT_QUEUE;
 struct ALLEGRO_TIMER;
+union ALLEGRO_EVENT;
 
 // Singleton, single instance
 class BlackJack // : public State
@@ -41,7 +42,7 @@ private:
 
     void Initialize();
     void LoadContents();
-    void Update();
+    void Update(ALLEGRO_EVENT* ev);
     void Draw();
     void UnloadContents();
 
