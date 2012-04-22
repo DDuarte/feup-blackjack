@@ -46,7 +46,7 @@ public:
 
     bool IsValid() const { return _suit != -1 && _rank != -1 && _score != 0; }
 
-    void Draw(ALLEGRO_DISPLAY* display, float dx, float dy);
+    void Draw(ALLEGRO_DISPLAY* display, float dx, float dy, float angle); // angle must be in radians
    
 private:
     int _suit;

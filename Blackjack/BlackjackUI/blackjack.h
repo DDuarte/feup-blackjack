@@ -34,6 +34,7 @@ public:
 
     void ChangeState(int newState);
 
+    ALLEGRO_DISPLAY* GetDisplay() { return _display; }
 private:
     BlackJack();
     static BlackJack* _instance;
