@@ -68,6 +68,7 @@
     <ClCompile Include="blackjack.cpp" />
     <ClCompile Include="card.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="s_game.cpp" />
     <ClCompile Include="s_main_menu.cpp" />
     <ClCompile Include="utilities.cpp" />
   </ItemGroup>

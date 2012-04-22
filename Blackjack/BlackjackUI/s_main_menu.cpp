@@ -38,6 +38,9 @@ void S_MainMenu::LoadContents()
 
 bool S_MainMenu::Update(ALLEGRO_EVENT* ev)
 {
+    if (!ev)
+        return false;
+
     switch (ev->type)
     {
         case ALLEGRO_EVENT_DISPLAY_CLOSE:
@@ -57,12 +60,12 @@ bool S_MainMenu::Update(ALLEGRO_EVENT* ev)
                 if (_selectedMenu == MENU_PLAY)
                 {
                     BlackJack::Instance()->ChangeState(STATE_PLAYING);
-                    return false;
+                    return true;
                 }
                 else if (_selectedMenu == MENU_SETTINGS)
                 {
                     BlackJack::Instance()->ChangeState(STATE_SETTINGS);
-                    return false;
+                    return true;
                 }
                 else if (_selectedMenu == MENU_QUIT)
                 {
@@ -118,11 +121,6 @@ void S_MainMenu::Draw()
     al_draw_text(_font50, colorP, 50, 440, ALLEGRO_ALIGN_LEFT, "Play");
     al_draw_text(_font50, colorS, 50, 440 + 45, ALLEGRO_ALIGN_LEFT, "Settings");
     al_draw_text(_font50, colorQ, 50, 440 + 90, ALLEGRO_ALIGN_LEFT, "Quit");
-
-    // TESTING METHOD DRAW OF CLASS CARD
-    //ALLEGRO_BITMAP *cardsSprite = al_load_bitmap("../../Resources/Sprites/card_sprites.png");
-    //Card c(CARD_SUIT_CLUBS, CARD_RANK_ACE, 11, cardsSprite);
-    //c.Draw(BlackJack::Instance()->GetDisplay(), 500, 500, 0);
 }
 
 void S_MainMenu::UnloadContents()

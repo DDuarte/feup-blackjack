@@ -163,4 +163,9 @@ void BlackJack::ChangeState(int newState)
 
     _states[_state]->Initialize();
     _states[_state]->LoadContents();
+
+    // Call these 3 at least once
+    _states[_state]->Update(NULL);
+    _states[_state]->Draw();
+    al_flip_display();
 }
