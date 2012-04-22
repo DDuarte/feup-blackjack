@@ -90,7 +90,6 @@ bool S_MainMenu::Update(ALLEGRO_EVENT_QUEUE* evQueue)
 
             al_play_sample(_nextMenuSound, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
             return true;
-            break;
         }
         case ALLEGRO_EVENT_TIMER:
             return true;

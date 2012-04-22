@@ -10,7 +10,7 @@
 Card::Card(int suit, int rank, uint score, ALLEGRO_BITMAP* image)
     : _rank(rank), _suit(suit), _score(score), _image(image), _frameSize(CARD_SIZE) { }
 
-void Card::Draw(ALLEGRO_DISPLAY* display, float dx, float dy, float angle) // angle must be in radians
+void Card::Draw(ALLEGRO_DISPLAY* display, float dx, float dy, float angle /*= 0.0*/) // angle must be in radians
 {
     float sx = _rank * _frameSize.X;
     float yx = _suit * _frameSize.Y;
