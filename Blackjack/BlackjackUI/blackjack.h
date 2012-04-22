@@ -1,17 +1,16 @@
 #ifndef BLACKJACK_H
 #define BLACKJACK_H
 
-#include <allegro5/allegro.h>
-#define ALLEGRO_STATICLINK
+#include "state.h"
 
-void Error(char const* message); // Move to utilities
+#include <vector>
 
-enum State
+enum GameState
 {
     STATE_MAIN_MENU,
+    STATE_SETTINGS,
     STATE_PLAYING,
     STATE_GAME_OVER,
-    STATE_SETTINGS,
 };
 
 enum Constants
@@ -21,29 +20,37 @@ enum Constants
     CONST_FPS = 60
 };
 
-class BlackJack
+struct ALLEGRO_DISPLAY;
+struct ALLEGRO_EVENT_QUEUE;
+struct ALLEGRO_TIMER;
+
+// Singleton, single instance
+class BlackJack // : public State
 {
 public:
-    BlackJack();
-private:
-    void Initialize();
-    void LoadContents();
-    void Update() { }
-    void Draw();
-    void UnloadContents();
-
+    static BlackJack* Instance();
+    void _Start();
     void Quit();
 
-    void _Start();
+private:
+    BlackJack();
+    static BlackJack* _instance;
+
+    void Initialize();
+    void LoadContents();
+    void Update();
+    void Draw();
+    void UnloadContents();
 
     ALLEGRO_DISPLAY* _display;
     ALLEGRO_EVENT_QUEUE* _eventQueue;
     ALLEGRO_TIMER* _timer;
 
-    // game 
+    // game loop
     int _state;
     bool _done;
     bool _draw;
+    std::vector<State*> _states;
 };
 
 #endif // BLACKJACKUI_H

@@ -8,7 +8,7 @@ int main()
     if (!al_init())
         Error("Failed to initialize Allegro.");
 
-    BlackJack();
+    BlackJack::Instance()->_Start();
 
     return EXIT_SUCCESS;
 }

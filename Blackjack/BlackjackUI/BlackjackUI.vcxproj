@@ -44,6 +44,7 @@
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>
       </AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>ALLEGRO_STATICLINK;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -67,11 +68,17 @@
     <ClCompile Include="blackjack.cpp" />
     <ClCompile Include="card.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="s_main_menu.cpp" />
     <ClCompile Include="utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="blackjack.h" />
     <ClInclude Include="card.h" />
+    <ClInclude Include="s_game.h" />
+    <ClInclude Include="s_game_over.h" />
+    <ClInclude Include="s_main_menu.h" />
+    <ClInclude Include="s_settings.h" />
+    <ClInclude Include="state.h" />
     <ClInclude Include="utilities.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,6 +1,11 @@
 #include "blackjack.h"
 #include "utilities.h"
 
+#include "s_settings.h"
+#include "s_game.h"
+#include "s_game_over.h"
+#include "s_main_menu.h"
+
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_native_dialog.h>
 #include <allegro5/allegro_font.h>
@@ -11,6 +16,17 @@
 #include <allegro5/allegro_acodec.h>
 
 #include <time.h>
+#include <vector>
+
+BlackJack* BlackJack::_instance = NULL; 
+
+BlackJack* BlackJack::Instance()
+{
+    if (!_instance)
+        _instance = new BlackJack;
+
+    return _instance;
+}
 
 BlackJack::BlackJack()
 {
@@ -22,7 +38,7 @@ BlackJack::BlackJack()
     _done = false;
     _draw = true;
 
-    _Start();
+    _states = std::vector<State*>();
 }
 
 void BlackJack::Initialize()
@@ -55,10 +71,29 @@ void BlackJack::Initialize()
     // miscs
     srand((unsigned int)time(NULL));
     //al_hide_mouse_cursor(_display);
+
+    _states.push_back(new S_MainMenu);
+    _states.push_back(new S_Settings);
+    _states.push_back(new S_Game);
+    _states.push_back(new S_GameOver);
+
+    for (std::vector<State*>::const_iterator itr = _states.begin(); itr != _states.end(); ++itr)
+        (*itr)->Initialize();
+
+    _state = STATE_MAIN_MENU;
 }
 
 void BlackJack::UnloadContents()
 {
+    for (std::vector<State*>::const_iterator itr = _states.begin(); itr != _states.end(); ++itr)
+    {
+        if ((*itr) == NULL)
+            continue;
+
+        (*itr)->UnloadContents();
+        delete (*itr);
+    }
+
     al_destroy_event_queue(_eventQueue);
     al_destroy_timer(_timer);
 
@@ -89,10 +124,12 @@ void BlackJack::_Start()
 void BlackJack::Draw()
 {
     // Only draw if something was changed
-    if (!_draw)
+    if (!_draw || !al_event_queue_is_empty(_eventQueue))
         return;
 
     _draw = true;
+
+    _states[_state]->Draw();
 
     al_flip_display();
 
@@ -103,5 +140,13 @@ void BlackJack::LoadContents()
 {
     // ...
 
+    for (std::vector<State*>::const_iterator itr = _states.begin(); itr != _states.end(); ++itr)
+        (*itr)->LoadContents();
+
     al_set_system_mouse_cursor(_display, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
+}
+
+void BlackJack::Update()
+{
+    _draw = _states[_state]->Update(_eventQueue);
 }

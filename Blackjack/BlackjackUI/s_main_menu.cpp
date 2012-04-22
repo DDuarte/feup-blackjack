@@ -1,0 +1,98 @@
+#include "s_main_menu.h"
+#include "blackjack.h"
+
+#include <allegro5/allegro.h>
+#include <allegro5/allegro_image.h>
+#include <allegro5/allegro_font.h>
+#include <allegro5/allegro_audio.h>
+#include <allegro5/allegro_acodec.h>
+
+S_MainMenu::S_MainMenu()
+{
+    _background = NULL;
+    _font140 = NULL;
+    _font50 = NULL;
+    _bgMusic = NULL;
+    _nextMenuSound = NULL;
+    _selectedMenu = -1;
+}
+
+void S_MainMenu::Initialize()
+{
+    _selectedMenu = MENU_PLAY;
+}
+
+void S_MainMenu::LoadContents()
+{
+    _background = al_load_bitmap("../../Resources/wallpaper.jpg");
+
+    _font140 = al_load_font("../../Resources/fonts/Champagne & Limousines.ttf", 140, 0);
+    _font50 = al_load_font("../../Resources/fonts/Champagne & Limousines.ttf", 50, 0);
+
+    al_reserve_samples(2);
+    _bgMusic = al_load_sample("../../Resources/sounds/86876__milton__title-screen.ogg");
+    _nextMenuSound = al_load_sample("../../Resources/sounds/86881_milton_yes.ogg");
+
+    al_play_sample(_bgMusic, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+}
+
+bool S_MainMenu::Update(ALLEGRO_EVENT_QUEUE* evQueue)
+{
+    ALLEGRO_EVENT ev;
+    al_wait_for_event(evQueue, &ev);
+
+    switch (ev.type)
+    {
+        case ALLEGRO_EVENT_DISPLAY_CLOSE:
+        {
+            BlackJack::Instance()->Quit();
+            return false;
+        }
+        case ALLEGRO_EVENT_KEY_UP:
+        {
+            if (ev.keyboard.keycode == ALLEGRO_KEY_ESCAPE ||
+                (ev.keyboard.keycode == ALLEGRO_KEY_ENTER && _selectedMenu == MENU_QUIT))
+                BlackJack::Instance()->Quit();
+            return false;
+        }
+        case ALLEGRO_EVENT_KEY_DOWN:
+        {
+            if (ev.keyboard.keycode == ALLEGRO_KEY_DOWN)
+                _selectedMenu = ((_selectedMenu + 1) % (MENU_QUIT + 1));
+            else if (ev.keyboard.keycode == ALLEGRO_KEY_UP)
+                _selectedMenu = _selectedMenu == 0 ? MENU_QUIT : ((_selectedMenu - 1) % (MENU_QUIT + 1));
+
+            al_play_sample(_nextMenuSound, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+            return true;
+        }
+        case ALLEGRO_EVENT_TIMER:
+            return true;
+    }
+
+    return false;
+}
+
+void S_MainMenu::Draw()
+{
+    ALLEGRO_COLOR shadowText = al_map_rgb(0, 0, 0);
+    ALLEGRO_COLOR text = al_map_rgb(200, 200, 200);
+    ALLEGRO_COLOR selectedText = al_map_rgb(255, 255, 255);
+
+    al_draw_bitmap(_background, 0, 0, 0);
+    al_draw_text(_font140, shadowText, 267, 1, ALLEGRO_ALIGN_CENTRE, "Blackjack");
+    al_draw_text(_font140, selectedText, 266, 0, ALLEGRO_ALIGN_CENTRE, "Blackjack");
+
+    // shadow
+    al_draw_text(_font50, shadowText, 51, 441, ALLEGRO_ALIGN_LEFT, "Play");
+    al_draw_text(_font50, shadowText, 51, 441 + 45, ALLEGRO_ALIGN_LEFT, "Settings");
+    al_draw_text(_font50, shadowText, 51, 441 + 90, ALLEGRO_ALIGN_LEFT, "Quit");
+
+    // the text
+    ALLEGRO_COLOR colorP = _selectedMenu == MENU_PLAY ? selectedText : text;
+    ALLEGRO_COLOR colorS = _selectedMenu == MENU_SETTINGS ? selectedText : text;
+    ALLEGRO_COLOR colorQ = _selectedMenu == MENU_QUIT ? selectedText : text;
+
+    al_draw_text(_font50, colorP, 50, 440, ALLEGRO_ALIGN_LEFT, "Play");
+    al_draw_text(_font50, colorS, 50, 440 + 45, ALLEGRO_ALIGN_LEFT, "Settings");
+    al_draw_text(_font50, colorQ, 50, 440 + 90, ALLEGRO_ALIGN_LEFT, "Quit");
+}
