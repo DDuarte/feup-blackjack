@@ -57,10 +57,15 @@ bool S_MainMenu::Update(ALLEGRO_EVENT_QUEUE* evQueue)
         }
         case ALLEGRO_EVENT_KEY_DOWN:
         {
+            int add;
             if (ev.keyboard.keycode == ALLEGRO_KEY_DOWN)
-                _selectedMenu = ((_selectedMenu + 1) % (MENU_QUIT + 1));
+                add = 1;
             else if (ev.keyboard.keycode == ALLEGRO_KEY_UP)
-                _selectedMenu = _selectedMenu == 0 ? MENU_QUIT : ((_selectedMenu - 1) % (MENU_QUIT + 1));
+                add = -1;
+            else
+                return false;
+
+            _selectedMenu = _selectedMenu + add == -1 ? MENU_QUIT : ((_selectedMenu + add) % (MENU_QUIT + 1));
 
             al_play_sample(_nextMenuSound, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
             return true;
@@ -95,4 +100,13 @@ void S_MainMenu::Draw()
     al_draw_text(_font50, colorP, 50, 440, ALLEGRO_ALIGN_LEFT, "Play");
     al_draw_text(_font50, colorS, 50, 440 + 45, ALLEGRO_ALIGN_LEFT, "Settings");
     al_draw_text(_font50, colorQ, 50, 440 + 90, ALLEGRO_ALIGN_LEFT, "Quit");
+}
+
+void S_MainMenu::UnloadContents()
+{
+    al_destroy_bitmap(_background);
+    al_destroy_font(_font140);
+    al_destroy_font(_font50);
+    al_destroy_sample(_bgMusic);
+    al_destroy_sample(_nextMenuSound);
 }

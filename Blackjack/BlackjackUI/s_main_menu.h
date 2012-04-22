@@ -24,13 +24,14 @@ public:
     void LoadContents();
     bool Update(ALLEGRO_EVENT_QUEUE* evQueue);
     void Draw();
-    void UnloadContents() { }
+    void UnloadContents();
 private:
     ALLEGRO_BITMAP* _background;
     ALLEGRO_FONT* _font140;
     ALLEGRO_FONT* _font50;
     ALLEGRO_SAMPLE* _bgMusic;
     ALLEGRO_SAMPLE* _nextMenuSound;
+
     int _selectedMenu;
 };
 

@@ -132,14 +132,10 @@ void BlackJack::Draw()
     _states[_state]->Draw();
 
     al_flip_display();
-
-    // ...
 }
 
 void BlackJack::LoadContents()
 {
-    // ...
-
     for (std::vector<State*>::const_iterator itr = _states.begin(); itr != _states.end(); ++itr)
         (*itr)->LoadContents();
 
