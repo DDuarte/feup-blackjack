@@ -32,6 +32,8 @@ public:
     void _Start();
     void Quit();
 
+    void ChangeState(int newState);
+
 private:
     BlackJack();
     static BlackJack* _instance;

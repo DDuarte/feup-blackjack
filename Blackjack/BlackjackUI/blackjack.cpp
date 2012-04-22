@@ -146,3 +146,10 @@ void BlackJack::Update()
 {
     _draw = _states[_state]->Update(_eventQueue);
 }
+
+void BlackJack::ChangeState( int newState )
+{
+    _state = newState;
+    al_flip_display();
+    al_clear_to_color(al_map_rgb(0,0,0));
+}

@@ -33,7 +33,7 @@ void S_MainMenu::LoadContents()
     _bgMusic = al_load_sample("../../Resources/sounds/86876__milton__title-screen.ogg");
     _nextMenuSound = al_load_sample("../../Resources/sounds/86881_milton_yes.ogg");
 
-    al_play_sample(_bgMusic, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+    //al_play_sample(_bgMusic, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 }
 
 bool S_MainMenu::Update(ALLEGRO_EVENT_QUEUE* evQueue)
@@ -50,10 +50,29 @@ bool S_MainMenu::Update(ALLEGRO_EVENT_QUEUE* evQueue)
         }
         case ALLEGRO_EVENT_KEY_UP:
         {
-            if (ev.keyboard.keycode == ALLEGRO_KEY_ESCAPE ||
-                (ev.keyboard.keycode == ALLEGRO_KEY_ENTER && _selectedMenu == MENU_QUIT))
+            if (ev.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
+            {
                 BlackJack::Instance()->Quit();
-            return false;
+                return false;
+            }
+            else if (ev.keyboard.keycode == ALLEGRO_KEY_ENTER)
+            {
+                if (_selectedMenu == MENU_PLAY)
+                {
+                    BlackJack::Instance()->ChangeState(STATE_PLAYING);
+                    return false;
+                }
+                else if (_selectedMenu == MENU_SETTINGS)
+                {
+                    BlackJack::Instance()->ChangeState(STATE_SETTINGS);
+                    return false;
+                }
+                else if (_selectedMenu == MENU_QUIT)
+                {
+                    BlackJack::Instance()->Quit();
+                    return false;
+                }
+            }
         }
         case ALLEGRO_EVENT_KEY_DOWN:
         {
@@ -65,7 +84,7 @@ bool S_MainMenu::Update(ALLEGRO_EVENT_QUEUE* evQueue)
             else
                 return false;
 
-            _selectedMenu = _selectedMenu + add == -1 ? MENU_QUIT : ((_selectedMenu + add) % (MENU_QUIT + 1));
+            _selectedMenu = (((_selectedMenu + add) == -1) ? MENU_QUIT : ((_selectedMenu + add) % (MENU_QUIT + 1)));
 
             al_play_sample(_nextMenuSound, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
             return true;
