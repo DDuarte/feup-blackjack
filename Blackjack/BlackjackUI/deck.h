@@ -19,11 +19,12 @@ public:
 
     Card* WithdrawCard();
 
-    uint GetGameCardsNumber() { return _gameCards.size(); }
+    uint GetGameCardsNumber() { return _cards.size(); }
+
+    void Draw(float dx, float dy, bool cardBack = false);
 
 private:
     std::vector<Card> _cards;
-    std::stack<Card*> _gameCards;
 
     void InitializeDeck(uint numberOfDecks);
     void Shuffle();

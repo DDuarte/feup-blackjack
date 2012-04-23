@@ -87,6 +87,8 @@ void BlackJack::Initialize()
 
 void BlackJack::UnloadContents()
 {
+    _states[_state]->UnloadContents(); // Nothing else is calling UnlCont for the last state
+
     for (std::vector<State*>::const_iterator itr = _states.begin(); itr != _states.end(); ++itr)
     {
         if ((*itr) == NULL)

@@ -67,6 +67,7 @@
   <ItemGroup>
     <ClCompile Include="blackjack.cpp" />
     <ClCompile Include="card.cpp" />
+    <ClCompile Include="deck.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="s_game.cpp" />
     <ClCompile Include="s_main_menu.cpp" />
@@ -75,6 +76,7 @@
   <ItemGroup>
     <ClInclude Include="blackjack.h" />
     <ClInclude Include="card.h" />
+    <ClInclude Include="deck.h" />
     <ClInclude Include="s_game.h" />
     <ClInclude Include="s_game_over.h" />
     <ClInclude Include="s_main_menu.h" />

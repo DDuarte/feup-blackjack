@@ -33,6 +33,9 @@
     <ClCompile Include="s_game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="deck.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="card.h">
@@ -57,6 +60,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="s_game_over.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="deck.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

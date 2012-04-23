@@ -36,7 +36,7 @@ struct ALLEGRO_DISPLAY;
 class Card
 {
 public:
-    Card(int suit, int rank, uint score, ALLEGRO_BITMAP* image);
+    Card(int suit, int rank, uint score);
 
     int GetSuit() const { return _suit; }
     int GetRank() const { return _rank; }
@@ -47,14 +47,18 @@ public:
     bool IsValid() const { return _suit != -1 && _rank != -1 && _score != 0; }
 
     void Draw(ALLEGRO_DISPLAY* display, float dx, float dy, float angle = 0.0); // angle must be in radians
-   
+    static void DrawBack(ALLEGRO_DISPLAY* display, float dx, float dy, float angle = 0.0); // angle must be in radians
+
+    static void DestroyBitmaps();
+
 private:
     int _suit;
     int _rank;
     uint _score;
 
-    ALLEGRO_BITMAP* _image;
-    Vector2D _frameSize;
+    static ALLEGRO_BITMAP* _image;
+    static ALLEGRO_BITMAP* _backImage;
+    static Vector2D _frameSize;
 };
 
 #endif // CARD_H
