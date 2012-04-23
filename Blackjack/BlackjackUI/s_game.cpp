@@ -7,10 +7,8 @@
 
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_image.h>
-#include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_font.h>
-
-#include <Windows.h>
+#include <allegro5/allegro_primitives.h>
 
 S_Game::S_Game()
 {
@@ -20,7 +18,6 @@ S_Game::S_Game()
 void S_Game::Initialize()
 {
     _deck = Deck();
-    _totalBets = 0.0;
 }
 
 void S_Game::LoadContents()
@@ -41,8 +38,10 @@ void S_Game::Draw()
     .Draw(82, 217, 0);
 
     Hand h2;
-    h2.AddCard(new Card(CARD_SUIT_CLUBS, CARD_RANK_JACK, 0))
-    .AddCard(new Card(CARD_SUIT_HEARTS, CARD_RANK_TWO, 0))
+    h2.AddCard(new Card(CARD_SUIT_CLUBS, CARD_RANK_ACE, 0))
+    .AddCard(new Card(CARD_SUIT_HEARTS, CARD_RANK_ACE, 0))
+    .AddCard(new Card(CARD_SUIT_SPADES, CARD_RANK_ACE, 0))
+    .AddCard(new Card(CARD_SUIT_DIAMONDS, CARD_RANK_KING, 10))
     .Draw(260, 344, 0);
 
     Hand h3;
@@ -53,8 +52,8 @@ void S_Game::Draw()
     .Draw(517, 344, 0);
 
     Hand h4;
-    h4.AddCard(new Card(rand() % 4, rand() % 13, 0))
-    .Draw(652, 217, 0);
+    h4.AddCard(new Card(rand() % 4, rand() % 13, 10));
+    h4.Draw(652, 217, 0);
 
     // Testing method draw and withdrawcard of deck
     _deck.Draw(595, 33, true);
@@ -68,5 +67,34 @@ void S_Game::UnloadContents()
 {
     al_destroy_bitmap(_background);
 
+
     Card::DestroyBitmaps();
+}
+
+bool S_Game::Update(ALLEGRO_EVENT* ev)
+{
+    if (!ev)
+        return false;
+
+    switch (ev->type)
+    {
+        case ALLEGRO_EVENT_DISPLAY_CLOSE:
+        {
+            BlackJack::Instance()->Quit();
+            return false;
+        }
+        case ALLEGRO_EVENT_KEY_UP:
+        {
+            if (ev->keyboard.keycode == ALLEGRO_KEY_ESCAPE)
+            {
+                BlackJack::Instance()->Quit();
+                return false;
+            }
+            break;
+        }
+        case ALLEGRO_EVENT_TIMER:
+            return true; // draw every 1/60 secs
+    }
+
+    return false;
 }

@@ -1,9 +1,13 @@
 #include "utilities.h"
 #include "card.h"
 #include "blackjack.h"
+#include "fonts.h"
 
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
+#include <allegro5/allegro_font.h>
+#include <allegro5/allegro_ttf.h>
+#include <allegro5/allegro_primitives.h>
 
 #include <string>
 #include <sstream>
@@ -35,9 +39,23 @@ void Card::Draw(float dx, float dy, float angle /*= 0.0*/, bool mouseHov /*= fal
     float sx = _rank * _frameSize.X;
     float yx = _suit * _frameSize.Y;
 
-    //al_set_target_bitmap(al_get_backbuffer(BlackJack::Instance()->GetDisplay())); // why is this needed?
     al_draw_tinted_scaled_rotated_bitmap_region(_image, sx, yx, _frameSize.X, _frameSize.Y,
         al_map_rgb(255, 255, 255), 0.0, 0.0, dx, dy, 1.0 + mouseHov*0.3, 1.0 + mouseHov*0.3, angle, 0);
+
+    if (mouseHov)
+    {
+        ALLEGRO_FONT *font = Fonts::GetFont20();
+        if(_rank == CARD_RANK_ACE)
+            al_draw_textf(font, al_map_rgb(0,0,0), dx+_frameSize.X*1.3 - 4 , dy, ALLEGRO_ALIGN_RIGHT, "1/11");
+        else
+        {
+            al_draw_filled_rectangle(dx + _frameSize.X*1.3 -25, dy + 4, dx+_frameSize.X*1.3 - 4, dy + 25, al_map_rgb(255,255,255));
+            al_draw_textf(font, al_map_rgb(0,0,0), dx+_frameSize.X*1.3 - 4 , dy, ALLEGRO_ALIGN_RIGHT, "%i", _score);
+        }
+    }
+        
+
+
 
 }
 
@@ -49,7 +67,6 @@ void Card::DrawBack(float dx, float dy, float angle /*= 0.0*/)
         return;
     }
 
-    al_set_target_bitmap(al_get_backbuffer(BlackJack::Instance()->GetDisplay())); // why is this needed?
     al_draw_tinted_bitmap(_backImage, al_map_rgb(_backColor, _backColor, _backColor), dx, dy, 0);
     al_draw_bitmap_region(_backImage, 1, 1, _frameSize.X -1, _frameSize.Y - 1, dx + 1, dy + 1, 0);
 }
