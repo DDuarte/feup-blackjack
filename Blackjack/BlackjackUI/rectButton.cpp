@@ -9,7 +9,7 @@
 
 #include <string>
 
-RectButton::RectButton(Vector2D size, Vector2D position, ALLEGRO_COLOR color, ALLEGRO_COLOR colorMouseHover, ALLEGRO_COLOR textColor, std::string text, uint fontSize, bool func(RectButton*))
+RectButton::RectButton(Vector2D size, Vector2D position, ALLEGRO_COLOR* color, ALLEGRO_COLOR* colorMouseHover, ALLEGRO_COLOR textColor, std::string text, uint fontSize, bool func(RectButton*), bool shadowedText)
 {
     _size = size;
     _position = position;
@@ -20,13 +20,18 @@ RectButton::RectButton(Vector2D size, Vector2D position, ALLEGRO_COLOR color, AL
     _fontSize = fontSize;
     _clicked = false;
     _func = func;
+    _shadowedText = shadowedText;
 }
 
 void RectButton::Draw()
 {
     uint x = _position.X + _clicked;
     uint y = _position.Y + _clicked;
-    al_draw_filled_rectangle(x, y, x + _size.X,y + _size.Y, (IsMouseHover() ? _colorMouseHover : _color));
+    if ((IsMouseHover() ? _colorMouseHover : _color) != NULL)
+        al_draw_filled_rectangle(x, y, x + _size.X,y + _size.Y, (IsMouseHover() ? *_colorMouseHover : *_color));
+
+    if(_shadowedText)
+        al_draw_textf(Fonts::GetFont(_fontSize), al_map_rgb(0,0,0), x + _size.X / 2 + 1, y + _size.Y / 2 - Fonts::GetFont(_fontSize)->height / 2 + 1,ALLEGRO_ALIGN_CENTRE, "%s", _text.c_str());
 
     al_draw_textf(Fonts::GetFont(_fontSize), _textColor, x + _size.X / 2, y + _size.Y / 2 - Fonts::GetFont(_fontSize)->height / 2,ALLEGRO_ALIGN_CENTRE, "%s", _text.c_str());
 }

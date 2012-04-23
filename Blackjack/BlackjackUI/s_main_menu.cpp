@@ -31,12 +31,13 @@ void S_MainMenu::Initialize()
     _objects.resize(_objects.size()+1);
     _objects[_objects.size()-1] = new RectButton(Vector2D(100, 100),
         Vector2D(250,250),
-        al_map_rgb(255,0,255),
-        al_map_rgb(255,0,0),
-        al_map_rgb(0,0,0),
+        NULL,
+        NULL,
+        al_map_rgb(255,255,255),
         "Hello!",
         40,
-        &ChangeToPlayState);
+        &ChangeToPlayState,
+        true);
 
 }
 
