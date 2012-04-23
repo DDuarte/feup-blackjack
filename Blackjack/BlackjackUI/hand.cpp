@@ -40,6 +40,8 @@ void Hand::UpdateScore()
     // TODO: Test
     bool hasAces = false;
 
+    _score = 0;
+
     if (_cards.size() == 0)
         // This should only be called by AddCard so hand must have at least 1 element
         throw InvalidCardException("Empty hand at Hand::UpdateScore()!");
