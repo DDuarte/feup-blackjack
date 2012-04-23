@@ -2,7 +2,7 @@
 #include "card.h"
 #include "gameExceptions.h"
 #include "utilities.h"
-
+#include "blackjack.h"
 #include <vector>
 
 #include <allegro5/allegro.h>
@@ -85,10 +85,57 @@ void Hand::Clear()
     _score = 0;
 }
 
+//void Hand::Draw(float dx, float dy, float angle /*= 0.0*/, bool cardBack /*= false*/)
+//{
+//    Card* mouseHoveredCard = NULL;
+//    uint indexMHCard = 0;
+//
+//    for (uint i = 0; i < _cards.size(); ++i)
+//    {
+//        float x = dx + (i*14);
+//        float y = dy - (i*15);
+//
+//        if (cardBack)
+//            _cards[i]->DrawBack(x, y, angle);
+//        else
+//            _cards[i]->Draw(x, y, angle);
+//
+//        if (_cards[i]->IsMouseHovered())
+//        {
+//            mouseHoveredCard = _cards[i];
+//            indexMHCard = i;
+//        }
+//    }
+//
+//    if (mouseHoveredCard)
+//        if (cardBack)
+//            mouseHoveredCard->DrawBack(dx + (indexMHCard*14), dy - (indexMHCard*15), angle);
+//        else
+//            mouseHoveredCard->Draw(dx + (indexMHCard*14), dy - (indexMHCard*15), angle);
+//}
 void Hand::Draw(float dx, float dy, float angle /*= 0.0*/, bool cardBack /*= false*/)
 {
     Card* mouseHoveredCard = NULL;
-    uint indexMHCard = 0;
+    int indexMHCard = -1;
+    bool mouseHov = false;
+
+    for (int i = _cards.size() - 1; i >= 0; --i)
+    {
+        float x = dx + (i*14);
+        float y = dy - (i*15);
+        mouseHov =
+            ((BlackJack::GetMousePosition().X <= x + CARD_SIZE.X) && (BlackJack::GetMousePosition().X >= x) &&
+            (BlackJack::GetMousePosition().Y <= y + CARD_SIZE.Y) && (BlackJack::GetMousePosition().Y >= y));
+        if (mouseHov)
+        {
+            indexMHCard = i; 
+            break;
+        }
+    }
+
+    mouseHov =
+        ((BlackJack::GetMousePosition().X <= dx + CARD_SIZE.X) && (BlackJack::GetMousePosition().X >= dx) &&
+        (BlackJack::GetMousePosition().Y <= dy + CARD_SIZE.Y) && (BlackJack::GetMousePosition().Y >= dy));
 
     for (uint i = 0; i < _cards.size(); ++i)
     {
@@ -99,18 +146,12 @@ void Hand::Draw(float dx, float dy, float angle /*= 0.0*/, bool cardBack /*= fal
             _cards[i]->DrawBack(x, y, angle);
         else
             _cards[i]->Draw(x, y, angle);
-
-        if (_cards[i]->IsMouseHovered())
-        {
-            mouseHoveredCard = _cards[i];
-            indexMHCard = i;
-        }
     }
 
-    if (mouseHoveredCard)
+    if (indexMHCard != -1)
         if (cardBack)
-            mouseHoveredCard->DrawBack(dx + (indexMHCard*14), dy - (indexMHCard*15), angle);
+            _cards[indexMHCard]->DrawBack(dx + (indexMHCard*14), dy - (indexMHCard*15), angle);
         else
-            mouseHoveredCard->Draw(dx + (indexMHCard*14), dy - (indexMHCard*15), angle);
+            _cards[indexMHCard]->Draw(dx + (indexMHCard*14), dy - (indexMHCard*15), angle, true);
 }
 

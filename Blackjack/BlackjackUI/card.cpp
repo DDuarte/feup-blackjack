@@ -24,7 +24,7 @@ Card::Card(int suit, int rank, uint score)
     _isMouseHovered = false;
 }
 
-void Card::Draw(float dx, float dy, float angle /*= 0.0*/) // angle must be in radians
+void Card::Draw(float dx, float dy, float angle /*= 0.0*/, bool mouseHov /*= false*/) // angle must be in radians
 {
     if (_image == NULL)
     {
@@ -32,16 +32,12 @@ void Card::Draw(float dx, float dy, float angle /*= 0.0*/) // angle must be in r
         return;
     }
 
-    _isMouseHovered =
-        ((BlackJack::GetMousePosition().X <= dx + CARD_SIZE.X) && (BlackJack::GetMousePosition().X >= dx) &&
-        (BlackJack::GetMousePosition().Y <= dy + CARD_SIZE.Y) && (BlackJack::GetMousePosition().Y >= dy));
-
     float sx = _rank * _frameSize.X;
     float yx = _suit * _frameSize.Y;
 
     //al_set_target_bitmap(al_get_backbuffer(BlackJack::Instance()->GetDisplay())); // why is this needed?
     al_draw_tinted_scaled_rotated_bitmap_region(_image, sx, yx, _frameSize.X, _frameSize.Y,
-        al_map_rgb(255, 255, 255), 0.0, 0.0, dx, dy, 1.0 + _isMouseHovered*0.3, 1.0 + _isMouseHovered*0.3, angle, 0);
+        al_map_rgb(255, 255, 255), 0.0, 0.0, dx, dy, 1.0 + mouseHov*0.3, 1.0 + mouseHov*0.3, angle, 0);
 
 }
 
