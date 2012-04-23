@@ -9,24 +9,29 @@
 
 #include <string>
 
+// Full featured button
 RectButton::RectButton(Vector2D size, Vector2D position, ALLEGRO_COLOR* color, ALLEGRO_COLOR* colorMouseHover, ALLEGRO_COLOR* textColor, std::string text, uint fontSize, bool func(RectButton*), bool shadowedText)
-{
-    _size = size;
-    _position = position;
-    _color = color;
+    : _size(size), _position(position), _color(color), _colorMouseHover(colorMouseHover), _textColor(textColor), _text(text), _fontSize(fontSize), _clicked(false), _func(func), _shadowedText(shadowedText) { }
 
-    if (colorMouseHover == NULL)
-        _colorMouseHover = color;
-    else
-        _colorMouseHover = colorMouseHover;
+// Button with mouseHover without text (with or without callback function)
+RectButton::RectButton( Vector2D size, Vector2D position, ALLEGRO_COLOR* color, ALLEGRO_COLOR* colorMouseHover, bool func(RectButton*) /*= NULL*/ )
+    : _size(size), _position(position), _color(color), _colorMouseHover(colorMouseHover), _textColor(NULL), _text(""), _fontSize(0), _clicked(false), _func(func), _shadowedText(false) { }
 
-    _textColor = textColor;
-    _text = text;
-    _fontSize = fontSize;
-    _clicked = false;
-    _func = func;
-    _shadowedText = shadowedText;
-}
+// Button without mouseHover color with text (with or without shadow)
+RectButton::RectButton( Vector2D size, Vector2D position, ALLEGRO_COLOR* color, ALLEGRO_COLOR* textColor, std::string text, uint fontSize, bool func(RectButton*), bool shadowedText /*= false*/ )
+    : _size(size), _position(position), _color(color), _colorMouseHover(NULL), _textColor(textColor), _text(text), _fontSize(fontSize), _clicked(false), _func(func), _shadowedText(shadowedText) { }
+
+// Button without mouseHover color without text (with or without callback function)
+RectButton::RectButton( Vector2D size, Vector2D position, ALLEGRO_COLOR* color, bool func(RectButton*) /*= NULL*/ )
+    : _size(size), _position(position), _color(color), _colorMouseHover(NULL), _textColor(NULL), _text(""), _fontSize(0), _clicked(false), _func(func), _shadowedText(false) { }
+
+// Transparent button with text (with or without shadow)
+RectButton::RectButton( Vector2D size, Vector2D position, ALLEGRO_COLOR* textColor, std::string text, uint fontSize, bool func(RectButton*), bool shadowedText /*= false*/ )
+    : _size(size), _position(position), _color(NULL), _colorMouseHover(NULL), _textColor(textColor), _text(text), _fontSize(fontSize), _clicked(false), _func(func), _shadowedText(shadowedText) { }
+
+// Transparent button without text (with or without callback function)
+RectButton::RectButton( Vector2D size, Vector2D position, bool func(RectButton*) /*= NULL*/ )
+    : _size(size), _position(position), _color(NULL), _colorMouseHover(NULL), _textColor(NULL), _text(""), _fontSize(0), _clicked(false), _func(func), _shadowedText(false) { }
 
 void RectButton::Draw()
 {
@@ -49,13 +54,16 @@ bool RectButton::Update(ALLEGRO_EVENT* ev)
     if (ev->type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN)
         if ((ev->mouse.button == 1) && IsMouseHovered())
             _clicked = true;
+
     if (ev->type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
+    {
         if ((ev->mouse.button == 1) && _clicked)
         {
             _clicked = false;
             if(_func != NULL && IsMouseHovered())
                 (*_func)(this);
         }
+    }
 
     return true;
 }

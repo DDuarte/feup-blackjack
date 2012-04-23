@@ -29,9 +29,7 @@ void S_MainMenu::Initialize()
     _selectedMenu = MENU_PLAY;
 
     _objects.push_back(new RectButton(Vector2D(100, 100), Vector2D(50, 440),
-        NULL, NULL, &al_map_rgb(255, 255, 255),
-        "Play", 40,
-        &ChangeToPlayState, true));
+        &al_map_rgb(255, 255, 255), "Play", 40, &ChangeToPlayState, true));
 }
 
 void S_MainMenu::LoadContents()
