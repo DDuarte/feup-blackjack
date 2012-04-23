@@ -47,13 +47,14 @@ public:
     float GetFrameWidth() const { return _frameSize.X; }
     float GetFrameHeight() const { return _frameSize.Y; }
 
+    void SetScore(int score) { if (_rank == CARD_RANK_ACE) _score = score; }
+
     bool IsValid() const { return _suit != -1 && _rank != -1 && _score != -1; }
 
     void Draw(float dx, float dy, float angle = 0.0, bool mouseHov = false); // angle must be in radians
     void DrawBack(float dx, float dy, float angle = 0.0); // angle must be in radians
 
     bool IsMouseHovered() const { return _isMouseHovered; }
-    //void SetMouseHovered(bool v) { _isMouseHovered = v; }
     static void DestroyBitmaps();
 
 private:

@@ -24,7 +24,7 @@ Card::Card(int suit, int rank)
     if (_backImage == NULL)
         _backImage = al_load_bitmap("../../Resources/cards/b1fv.png");
 
-    _backColor = 50 + rand() % 25;
+    _backColor = 50 + rand() % 25; // variations of dark grey, "3D" effect
     _isMouseHovered = false;
 }
 
@@ -44,13 +44,8 @@ void Card::Draw(float dx, float dy, float angle /*= 0.0*/, bool mouseHov /*= fal
 
     if (mouseHov)
     {
-        if(_rank == CARD_RANK_ACE)
-            al_draw_textf(Fonts::GetFont(20), al_map_rgb(0,0,0), dx+_frameSize.X*1.3 - 4 , dy, ALLEGRO_ALIGN_RIGHT, "1/11");
-        else
-        {
-            al_draw_filled_rectangle(dx + _frameSize.X*1.3 -25, dy + 4, dx+_frameSize.X*1.3 - 4, dy + 25, al_map_rgb(255,255,255));
-            al_draw_textf(Fonts::GetFont(20), al_map_rgb(0,0,0), dx+_frameSize.X*1.3 - 4 , dy, ALLEGRO_ALIGN_RIGHT, "%i", _score);
-        }
+        al_draw_filled_rectangle(dx + _frameSize.X*1.3 -25, dy + 4, dx+_frameSize.X*1.3 - 4, dy + 25, al_map_rgb(255,255,255));
+        al_draw_textf(Fonts::GetFont(20), al_map_rgb(0,0,0), dx+_frameSize.X*1.3 - 4 , dy, ALLEGRO_ALIGN_RIGHT, "%i", _score);
     }
 }
 
