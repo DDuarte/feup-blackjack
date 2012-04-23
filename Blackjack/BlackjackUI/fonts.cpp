@@ -15,12 +15,10 @@ void Fonts::UnloadFonts()
         al_destroy_font(font->second);
 }
 
-ALLEGRO_FONT* Fonts::GetFont( uint size )
+ALLEGRO_FONT* Fonts::GetFont(uint size)
 {
     if (_fonts[size] == NULL)
-    {
         _fonts[size] = al_load_font("../../Resources/fonts/Champagne & Limousines.ttf", size, 0);
-    }
 
     return _fonts[size];
 }

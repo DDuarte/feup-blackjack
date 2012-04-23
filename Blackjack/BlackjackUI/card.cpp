@@ -16,8 +16,8 @@ ALLEGRO_BITMAP* Card::_image = NULL;
 ALLEGRO_BITMAP* Card::_backImage = NULL;
 Vector2D Card::_frameSize = CARD_SIZE;
 
-Card::Card(int suit, int rank, uint score)
-    : _rank(rank), _suit(suit), _score(score)
+Card::Card(int suit, int rank)
+    : _rank(rank), _suit(suit), _score(SCORES[rank])
 {
     if (_image == NULL)
         _image = al_load_bitmap("../../Resources/Sprites/card_sprites.png");

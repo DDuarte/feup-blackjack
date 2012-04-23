@@ -28,7 +28,10 @@ enum CardRank
     CARD_RANK_ACE
 };
 
-const Vector2D CARD_SIZE = Vector2D( 73, 98 );
+const Vector2D CARD_SIZE = Vector2D(73, 98);
+
+// by rank
+const uint SCORES[] = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 10, 11 };
 
 struct ALLEGRO_BITMAP;
 struct ALLEGRO_DISPLAY;
@@ -36,7 +39,7 @@ struct ALLEGRO_DISPLAY;
 class Card
 {
 public:
-    Card(int suit, int rank, uint score);
+    Card(int suit, int rank);
 
     int GetSuit() const { return _suit; }
     int GetRank() const { return _rank; }
