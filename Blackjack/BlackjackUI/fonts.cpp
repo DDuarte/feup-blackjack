@@ -1,11 +1,11 @@
 #include "fonts.h"
 #include "utilities.h"
 
-#include <unordered_map>
-
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_ttf.h>
+
+#include <unordered_map>
 
 std::unordered_map<uint, ALLEGRO_FONT*> Fonts::_fonts = std::unordered_map<uint, ALLEGRO_FONT*>();
 

@@ -52,17 +52,13 @@ void Card::Draw(float dx, float dy, float angle /*= 0.0*/, bool mouseHov /*= fal
             al_draw_textf(Fonts::GetFont(20), al_map_rgb(0,0,0), dx+_frameSize.X*1.3 - 4 , dy, ALLEGRO_ALIGN_RIGHT, "%i", _score);
         }
     }
-        
-
-
-
 }
 
 void Card::DrawBack(float dx, float dy, float angle /*= 0.0*/)
 {
     if (_backImage == NULL)
     {
-        printf("Error: Tried to draw a card (rank: %i, suit: %i) at x: %f y: %f with no image specified", dx, dy);
+        printf("Error: Tried to draw a back card at x: %f y: %f with no image specified", dx, dy);
         return;
     }
 
