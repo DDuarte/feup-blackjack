@@ -1,7 +1,7 @@
 #ifndef FONTS_H
 #define FONTS_H
 
-#include <map>
+#include <unordered_map>
 #include "utilities.h"
 
 struct ALLEGRO_FONT;
@@ -13,7 +13,7 @@ public:
     static ALLEGRO_FONT* GetFont(uint size);
     
 private:
-    static std::map<uint, ALLEGRO_FONT*> _fonts;
+    static std::unordered_map<uint, ALLEGRO_FONT*> _fonts;
 };
 
 #endif // FONTS_H

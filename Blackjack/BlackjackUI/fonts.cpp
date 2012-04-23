@@ -1,17 +1,17 @@
 #include "fonts.h"
 #include "utilities.h"
 
-#include <map>
+#include <unordered_map>
 
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_ttf.h>
 
-std::map<uint, ALLEGRO_FONT*> Fonts::_fonts = std::map<uint, ALLEGRO_FONT*>();
+std::unordered_map<uint, ALLEGRO_FONT*> Fonts::_fonts = std::unordered_map<uint, ALLEGRO_FONT*>();
 
 void Fonts::UnloadFonts()
 {
-    for (std::map<uint, ALLEGRO_FONT*>::iterator font = _fonts.begin(); font != _fonts.end(); ++font)
+    for (std::unordered_map<uint, ALLEGRO_FONT*>::iterator font = _fonts.begin(); font != _fonts.end(); ++font)
         al_destroy_font(font->second);
 }
 
