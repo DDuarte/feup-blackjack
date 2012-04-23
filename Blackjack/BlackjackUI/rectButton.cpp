@@ -9,12 +9,17 @@
 
 #include <string>
 
-RectButton::RectButton(Vector2D size, Vector2D position, ALLEGRO_COLOR* color, ALLEGRO_COLOR* colorMouseHover, ALLEGRO_COLOR textColor, std::string text, uint fontSize, bool func(RectButton*), bool shadowedText)
+RectButton::RectButton(Vector2D size, Vector2D position, ALLEGRO_COLOR* color, ALLEGRO_COLOR textColor, std::string text, uint fontSize,ALLEGRO_COLOR* colorMouseHover, bool func(RectButton*), bool shadowedText)
 {
     _size = size;
     _position = position;
     _color = color;
-    _colorMouseHover = colorMouseHover;
+
+    if (colorMouseHover == NULL)
+        _colorMouseHover = color;
+    else
+        _colorMouseHover = colorMouseHover;
+
     _textColor = textColor;
     _text = text;
     _fontSize = fontSize;

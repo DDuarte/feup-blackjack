@@ -16,7 +16,7 @@
 class RectButton : public AllegroObject
 {
 public:
-    RectButton(Vector2D size, Vector2D position, ALLEGRO_COLOR* color, ALLEGRO_COLOR* colorMouseHover, ALLEGRO_COLOR textColor, std::string text, uint fontSize, bool func(RectButton*) = NULL, bool shadowedText = false);
+    RectButton(Vector2D size, Vector2D position, ALLEGRO_COLOR* color, ALLEGRO_COLOR textColor, std::string text, uint fontSize, ALLEGRO_COLOR* colorMouseHover = NULL, bool func(RectButton*) = NULL, bool shadowedText = false);
     void Draw();
     bool Update(ALLEGRO_EVENT* ev);
 
