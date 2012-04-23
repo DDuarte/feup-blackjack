@@ -16,7 +16,7 @@
 class RectButton : public AllegroObject
 {
 public:
-    RectButton(Vector2D size, Vector2D position, ALLEGRO_COLOR* color, ALLEGRO_COLOR textColor, std::string text, uint fontSize, ALLEGRO_COLOR* colorMouseHover = NULL, bool func(RectButton*) = NULL, bool shadowedText = false);
+    RectButton(Vector2D size, Vector2D position, ALLEGRO_COLOR* color, ALLEGRO_COLOR* colorMouseHover, ALLEGRO_COLOR* textColor, std::string text, uint fontSize, bool func(RectButton*), bool shadowedText);
     void Draw();
     bool Update(ALLEGRO_EVENT* ev);
 
@@ -29,13 +29,13 @@ private:
     bool _shadowedText;
     ALLEGRO_COLOR* _color;
     ALLEGRO_COLOR* _colorMouseHover;
-    ALLEGRO_COLOR _textColor;
+    ALLEGRO_COLOR* _textColor;
 
     bool (*_func)(RectButton*);
 
     uint _fontSize;
 
-    bool IsMouseHover() { return ((BlackJack::GetMousePosition().X <= _position.X + _size.X) && (BlackJack::GetMousePosition().X >= _position.X) &&(BlackJack::GetMousePosition().Y <= _position.Y + _size.Y) && (BlackJack::GetMousePosition().Y >=  _position.Y)); }
+    bool IsMouseHovered();
 };
 
 #endif // RECTBUTTON_H

@@ -34,7 +34,7 @@ private:
 
     int _selectedMenu;
 
-    std::vector<AllegroObject *> _objects;
+    std::vector<AllegroObject*> _objects;
 };
 
 #endif // S_MAIN_MENU_H

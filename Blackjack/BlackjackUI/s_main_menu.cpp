@@ -28,17 +28,10 @@ void S_MainMenu::Initialize()
 {
     _selectedMenu = MENU_PLAY;
 
-    _objects.resize(_objects.size()+1);
-    _objects[_objects.size()-1] = new RectButton(Vector2D(100, 100),
-        Vector2D(250,250),
-        NULL,
-        al_map_rgb(255,255,255),
-        "Hello!",
-        40,
-        NULL,
-        &ChangeToPlayState,
-        true);
-
+    _objects.push_back(new RectButton(Vector2D(100, 100), Vector2D(50, 440),
+        NULL, NULL, &al_map_rgb(255, 255, 255),
+        "Play", 40,
+        &ChangeToPlayState, true));
 }
 
 void S_MainMenu::LoadContents()
@@ -128,7 +121,7 @@ void S_MainMenu::Draw()
     al_draw_text(Fonts::GetFont(140), selectedText, 266, 0, ALLEGRO_ALIGN_CENTRE, "Blackjack");
 
     // shadow
-    al_draw_text(Fonts::GetFont(50), shadowText, 51, 441, ALLEGRO_ALIGN_LEFT, "Play");
+    //al_draw_text(Fonts::GetFont(50), shadowText, 51, 441, ALLEGRO_ALIGN_LEFT, "Play");
     al_draw_text(Fonts::GetFont(50), shadowText, 51, 441 + 45, ALLEGRO_ALIGN_LEFT, "Settings");
     al_draw_text(Fonts::GetFont(50), shadowText, 51, 441 + 90, ALLEGRO_ALIGN_LEFT, "Quit");
 
@@ -137,12 +130,12 @@ void S_MainMenu::Draw()
     ALLEGRO_COLOR colorS = _selectedMenu == MENU_SETTINGS ? selectedText : text;
     ALLEGRO_COLOR colorQ = _selectedMenu == MENU_QUIT ? selectedText : text;
 
-    al_draw_text(Fonts::GetFont(50), colorP, 50, 440, ALLEGRO_ALIGN_LEFT, "Play");
+    //al_draw_text(Fonts::GetFont(50), colorP, 50, 440, ALLEGRO_ALIGN_LEFT, "Play");
     al_draw_text(Fonts::GetFont(50), colorS, 50, 440 + 45, ALLEGRO_ALIGN_LEFT, "Settings");
     al_draw_text(Fonts::GetFont(50), colorQ, 50, 440 + 90, ALLEGRO_ALIGN_LEFT, "Quit");
 
     for (std::vector<AllegroObject*>::iterator obj = _objects.begin(); obj != _objects.end(); ++obj)
-        obj[0]->Draw();
+        (*obj)->Draw();
 }
 
 void S_MainMenu::UnloadContents()

@@ -1,17 +1,15 @@
-#ifndef ALLEGROOBJECT_H
-#define ALLEGROOBJECT_H
+#ifndef ALLEGRO_OBJECT_H
+#define ALLEGRO_OBJECT_H
 
-#include <allegro5/allegro.h>
+union ALLEGRO_EVENT;
 
 class AllegroObject
 {
 public:
-    AllegroObject() {};
+    AllegroObject() { }
 
-    virtual void Draw() { }
-    virtual bool Update(ALLEGRO_EVENT* ev){ return true; }
-
-private:
+    virtual void Draw() = 0;
+    virtual bool Update(ALLEGRO_EVENT* ev) = 0;
 };
 
-#endif // ALLEGROOBJECT_H
+#endif // ALLEGRO_OBJECT_H
