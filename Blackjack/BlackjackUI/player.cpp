@@ -1,6 +1,7 @@
 #include "player.h"
 #include "s_game.h"
 #include "utilities.h"
+#include "gameExceptions.h"
 
 #include <string>
 #include <fstream>
@@ -31,10 +32,8 @@ bool Player::ReadText(std::ifstream& file)
 
     getline(file, _name, '\n');
 
-    while ( !_name.empty() && _name.at(0) == ' ')
-    {
+    while (!_name.empty() && _name[0] == ' ')
         _name.erase(_name.begin());
-    }
 
     return !_name.empty();
 }

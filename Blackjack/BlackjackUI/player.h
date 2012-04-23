@@ -1,8 +1,6 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "gameExceptions.h"
-//#include "utilities.h"
 #include "hand.h"
 
 #include <string>
