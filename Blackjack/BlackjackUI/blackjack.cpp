@@ -5,7 +5,7 @@
 #include "s_game.h"
 #include "s_game_over.h"
 #include "s_main_menu.h"
-
+#include "fonts.h"
 #include "card.h"
 
 #include <allegro5/allegro.h>
@@ -87,6 +87,30 @@ void BlackJack::Initialize()
     ChangeState(STATE_MAIN_MENU);
 }
 
+void BlackJack::LoadContents()
+{
+    //for (std::vector<State*>::const_iterator itr = _states.begin(); itr != _states.end(); ++itr)
+    //    (*itr)->LoadContents(); done when changing states
+
+    al_set_system_mouse_cursor(_display, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
+    Fonts::LoadFonts();
+}
+
+void BlackJack::Update(ALLEGRO_EVENT* ev)
+{
+    al_get_mouse_state(_mouseState);
+    _draw = _states[_state]->Update(ev);
+}
+
+void BlackJack::Draw()
+{
+    _draw = false;
+
+    _states[_state]->Draw();
+
+    al_flip_display();
+}
+
 void BlackJack::UnloadContents()
 {
     _states[_state]->UnloadContents(); // Nothing else is calling UnlCont for the last state
@@ -105,6 +129,7 @@ void BlackJack::UnloadContents()
 
     al_destroy_display(_display);
 
+    Fonts::UnloadFonts();
 
     delete _mouseState; // only one instance of this class exists
 }
@@ -136,29 +161,6 @@ void BlackJack::_Start()
     UnloadContents();
 }
 
-void BlackJack::Draw()
-{
-    _draw = false;
-
-    _states[_state]->Draw();
-
-    al_flip_display();
-}
-
-void BlackJack::LoadContents()
-{
-    //for (std::vector<State*>::const_iterator itr = _states.begin(); itr != _states.end(); ++itr)
-    //    (*itr)->LoadContents(); done when changing states
-
-    al_set_system_mouse_cursor(_display, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
-}
-
-void BlackJack::Update(ALLEGRO_EVENT* ev)
-{
-    al_get_mouse_state(_mouseState);
-    _draw = _states[_state]->Update(ev);
-}
-
 void BlackJack::ChangeState(int newState)
 {
     al_flip_display();
@@ -171,9 +173,4 @@ void BlackJack::ChangeState(int newState)
 
     _states[_state]->Initialize();
     _states[_state]->LoadContents();
-
-    // Call these 3 at least once
-    _states[_state]->Update(NULL);
-    _states[_state]->Draw();
-    al_flip_display();
 }

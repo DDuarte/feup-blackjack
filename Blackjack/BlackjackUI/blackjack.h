@@ -55,9 +55,8 @@ private:
     ALLEGRO_DISPLAY* _display;
     ALLEGRO_EVENT_QUEUE* _eventQueue;
     ALLEGRO_TIMER* _timer;
-    
 
-    // game loop
+    // game loop & states
     int _state;
     bool _done;
     bool _draw;

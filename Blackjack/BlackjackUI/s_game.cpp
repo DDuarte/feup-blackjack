@@ -3,29 +3,29 @@
 #include "card.h"
 #include "blackjack.h"
 #include "hand.h"
+#include "fonts.h"
 
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_image.h>
-#include <allegro5/allegro_font.h>
 #include <allegro5/allegro_primitives.h>
+#include <allegro5/allegro_font.h>
+
+#include <Windows.h>
 
 S_Game::S_Game()
 {
     _background = NULL;
-    _font50 = NULL;
-    _font10 = NULL;
 }
 
 void S_Game::Initialize()
 {
     _deck = Deck();
+    _totalBets = 0.0;
 }
 
 void S_Game::LoadContents()
 {
     _background = al_load_bitmap("../../Resources/playing_table.png");
-    _font50 = al_load_font("../../Resources/fonts/Champagne & Limousines.ttf", 50, 0);
-    _font10 = al_load_font("../../Resources/fonts/Champagne & Limousines.ttf", 10, 0);
 }
 
 void S_Game::Draw()
@@ -53,24 +53,20 @@ void S_Game::Draw()
     .Draw(517, 344, 0);
 
     Hand h4;
-    h4.AddCard(new Card(rand() % 4, rand() % 13, 0));
-    h4.Draw(652, 217, 0);
+    h4.AddCard(new Card(rand() % 4, rand() % 13, 0))
+    .Draw(652, 217, 0);
 
     // Testing method draw and withdrawcard of deck
     _deck.Draw(595, 33, true);
     _deck.WithdrawCard();
 
     // debug printing
-    al_draw_textf(_font10, al_map_rgb(255, 255, 255), 0, 0, ALLEGRO_ALIGN_LEFT, "x: %3.1f y: %3.1f", BlackJack::GetMousePosition().X, BlackJack::GetMousePosition().Y);
+    al_draw_textf(Fonts::GetFont10(), al_map_rgb(255, 255, 255), 0, 0, ALLEGRO_ALIGN_LEFT, "x: %3.1f y: %3.1f", BlackJack::GetMousePosition().X, BlackJack::GetMousePosition().Y);
 }
 
 void S_Game::UnloadContents()
 {
     al_destroy_bitmap(_background);
-    al_destroy_font(_font50);
-    al_destroy_font(_font10);
 
     Card::DestroyBitmaps();
 }
-
-

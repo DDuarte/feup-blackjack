@@ -4,7 +4,6 @@
 #include "state.h"
 
 struct ALLEGRO_BITMAP;
-struct ALLEGRO_FONT;
 struct ALLEGRO_SAMPLE;
 
 enum Menu
@@ -27,8 +26,6 @@ public:
     void UnloadContents();
 private:
     ALLEGRO_BITMAP* _background;
-    ALLEGRO_FONT* _font140;
-    ALLEGRO_FONT* _font50;
     ALLEGRO_SAMPLE* _bgMusic;
     ALLEGRO_SAMPLE* _nextMenuSound;
 

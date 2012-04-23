@@ -6,11 +6,13 @@
 
 union ALLEGRO_EVENT;
 struct ALLEGRO_BITMAP;
-struct ALLEGRO_FONT;
+
+class Player;
 
 class S_Game : public State
 {
 public:
+    //- State specific
     S_Game();
     void Initialize();
     void LoadContents();
@@ -18,12 +20,23 @@ public:
     void Draw();
     void UnloadContents();
 
+    Deck* GetDeck() { return &_deck; }
+
+    //- Game specific
+    // Events-like calls
+    void PlayerBet(Player* /* player*/, double bet) { _totalBets += bet; /* ... */ }
+    void PlayerHit(Player* player) { }
+    void PlayerStand(Player* player) { }
+    void PlayerDouble(Player* player) { }
+    // void PlayerSurrender(Player* player) { }
+
+    void HandleOutOfCards() { }
+
 private:
     ALLEGRO_BITMAP* _background;
-    ALLEGRO_FONT* _font50;
-    ALLEGRO_FONT* _font10;
 
     Deck _deck;
+    double _totalBets;
 };
 
 #endif // S_GAME_H
