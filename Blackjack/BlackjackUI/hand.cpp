@@ -23,8 +23,8 @@ Hand::~Hand()
         delete _cards[i];
 }
 
-Hand& Hand::AddCard(Card* card)
-{
+Hand& Hand::AddCard(Card* card) // Returning a reference to this
+{                               // so we can chain multiple add cards
     if (card->IsValid())
     {
         _cards.push_back(card);
@@ -37,31 +37,34 @@ Hand& Hand::AddCard(Card* card)
 
 void Hand::UpdateScore()
 {
-    // TODO: Test
-    bool hasAces = false;
-
+    int aceCount = 0;
     _score = 0;
 
     if (_cards.size() == 0)
-        // This should only be called by AddCard so hand must have at least 1 element
+        // This should only be called by AddCard so hand *must* have at least 1 element
         throw InvalidCardException("Empty hand at Hand::UpdateScore()!");
 
     for (std::vector<Card*>::const_iterator card = _cards.begin(); card != _cards.end(); ++card)
+    {
         if ((*card)->GetRank() != CARD_RANK_ACE)
             _score += (*card)->GetScore();
         else
-            hasAces = true;
+            aceCount++;
+    }
     
-    for (std::vector<Card*>::const_iterator card = _cards.begin(); card != _cards.end(); ++card)
-        if ((*card)->GetRank() == CARD_RANK_ACE)
+    // special point calculation for aces, value of ace is 11 or 1, depending on what benefits the player most
+    if (aceCount > 0)
+    {
+        for (std::vector<Card*>::const_iterator card = _cards.begin(); card != _cards.end(); ++card)
         {
-            if (_score + ACE_MAX_VAL <= BLACKJACK_HAND)
-                (*card)->SetScore(ACE_MAX_VAL);
-            else
-                (*card)->SetScore(ACE_MIN_VAL);
-
-            _score += (*card)->GetScore();
+            if ((*card)->GetRank() == CARD_RANK_ACE)
+            {
+                (*card)->SetScore((_score + ACE_MAX_VAL*aceCount <= BLACKJACK_HAND) ? ACE_MAX_VAL : ACE_MIN_VAL);
+                _score += (*card)->GetScore();
+                aceCount--;
+            }
         }
+    }
 }
 
 void Hand::RemoveCard(const Card* card)
@@ -128,8 +131,7 @@ void Hand::Draw(float dx, float dy, float angle /*= 0.0*/, bool cardBack /*= fal
         else
             _cards[indexMHCard]->Draw(dx + (indexMHCard*14), dy - (indexMHCard*15), angle, true);
 
-    // Draw score
-
+    // Draw score of hand
     al_draw_rectangle(dx - 21, dy - 21, dx + 1, dy + 1, al_map_rgb(255, 255, 255), 2);
     al_draw_textf(Fonts::GetFont(19), al_map_rgb(0, 0, 0), dx - 20, dy - 20, 0, "%2.0i", _score);
 }
