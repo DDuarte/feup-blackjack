@@ -33,12 +33,10 @@ void Card::Draw(float dx, float dy, float angle /*= 0.0*/) // angle must be in r
     }
 
     // change this to 
-    ALLEGRO_MOUSE_STATE state; // TODO change to static in class BlackJack
-    al_get_mouse_state(&state);
 
     _isMouseHovered =
-        ((state.x <= dx + CARD_SIZE.X) && (state.x >= dx) &&
-        (state.y <= dy + CARD_SIZE.Y) && (state.y >= dy));
+        ((BlackJack::GetMousePosition().X <= dx + CARD_SIZE.X) && (BlackJack::GetMousePosition().X >= dx) &&
+        (BlackJack::GetMousePosition().Y <= dy + CARD_SIZE.Y) && (BlackJack::GetMousePosition().Y >= dy));
 
     float sx = _rank * _frameSize.X;
     float yx = _suit * _frameSize.Y;

@@ -87,32 +87,33 @@ void Hand::Clear()
 
 void Hand::Draw(float dx, float dy, float angle /*= 0.0*/, bool cardBack /*= false*/)
 {
-    for (uint i = 0; i < _cards.size(); ++i)
-    {
-        float x = dx + (i*14);
-        float y = dy - (i*15);
+    Card* last = NULL;
+    int lastIndex = -1;
 
+    for (int i = _cards.size() - 1; i >= 0; --i)
         if (_cards[i]->IsMouseHovered())
-            continue;
-
-        if (cardBack)
-            _cards[i]->DrawBack(x, y, angle);
-        else
-            _cards[i]->Draw(x, y, angle);
-    }
+        {
+            last = _cards[i];
+            lastIndex = i;
+            break;
+        }
 
     for (uint i = 0; i < _cards.size(); ++i)
     {
         float x = dx + (i*14);
         float y = dy - (i*15);
 
-        if (!_cards[i]->IsMouseHovered())
-            continue;
-
-        if (cardBack)
-            _cards[i]->DrawBack(x, y, angle);
-        else
-            _cards[i]->Draw(x, y, angle);
+        if (_cards[i] != last)
+            if (cardBack)
+                _cards[i]->DrawBack(x, y, angle);
+            else
+                _cards[i]->Draw(x, y, angle);
     }
+
+    if (last != NULL)
+        if (cardBack)
+            last->DrawBack(dx + (lastIndex*14), dy - (lastIndex*15), angle);
+        else
+            last->Draw(dx + (lastIndex*14), dy - (lastIndex*15), angle);
 }
 

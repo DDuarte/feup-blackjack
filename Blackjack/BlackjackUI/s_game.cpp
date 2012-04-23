@@ -66,9 +66,8 @@ void S_Game::Draw()
     Sleep(500);
 
     // debug printing
-    ALLEGRO_MOUSE_STATE state;
-    al_get_mouse_state(&state);
-    al_draw_textf(_font10, al_map_rgb(255, 255, 255), 0, 0, ALLEGRO_ALIGN_LEFT, "x: %i y: %i", state.x, state.y);
+    
+    al_draw_textf(_font10, al_map_rgb(255, 255, 255), 0, 0, ALLEGRO_ALIGN_LEFT, "x: %i y: %i", BlackJack::GetMousePosition().X, BlackJack::GetMousePosition().Y);
 }
 
 void S_Game::UnloadContents()

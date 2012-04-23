@@ -28,7 +28,7 @@ enum CardRank
     CARD_RANK_ACE
 };
 
-const Vector2D CARD_SIZE = { 73, 98 };
+const Vector2D CARD_SIZE = Vector2D( 73, 98 );
 
 struct ALLEGRO_BITMAP;
 struct ALLEGRO_DISPLAY;
