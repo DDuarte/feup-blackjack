@@ -44,7 +44,7 @@ public:
 private:
     BlackJack();
     static BlackJack* _instance;
-    static ALLEGRO_MOUSE_STATE *_mouseState;
+    static ALLEGRO_MOUSE_STATE* _mouseState;
 
     void Initialize();
     void LoadContents();

@@ -8,9 +8,6 @@
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_primitives.h>
-#include <allegro5/mouse.h>
-
-#include <Windows.h>
 
 S_Game::S_Game()
 {
@@ -63,11 +60,8 @@ void S_Game::Draw()
     _deck.Draw(595, 33, true);
     _deck.WithdrawCard();
 
-    Sleep(500);
-
     // debug printing
-    
-    al_draw_textf(_font10, al_map_rgb(255, 255, 255), 0, 0, ALLEGRO_ALIGN_LEFT, "x: %i y: %i", BlackJack::GetMousePosition().X, BlackJack::GetMousePosition().Y);
+    al_draw_textf(_font10, al_map_rgb(255, 255, 255), 0, 0, ALLEGRO_ALIGN_LEFT, "x: %3.1f y: %3.1f", BlackJack::GetMousePosition().X, BlackJack::GetMousePosition().Y);
 }
 
 void S_Game::UnloadContents()

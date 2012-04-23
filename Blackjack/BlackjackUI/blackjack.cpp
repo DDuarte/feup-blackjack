@@ -21,7 +21,7 @@
 #include <vector>
 
 BlackJack* BlackJack::_instance = NULL; 
-ALLEGRO_MOUSE_STATE* BlackJack::_mouseState = NULL;
+ALLEGRO_MOUSE_STATE* BlackJack::_mouseState = new ALLEGRO_MOUSE_STATE;
 
 BlackJack* BlackJack::Instance()
 {
@@ -67,7 +67,6 @@ void BlackJack::Initialize()
     // events
     _eventQueue = al_create_event_queue();
     _timer = al_create_timer(1.0 / CONST_FPS);
-    _mouseState = new ALLEGRO_MOUSE_STATE;
     al_register_event_source(_eventQueue, al_get_keyboard_event_source());
     al_register_event_source(_eventQueue, al_get_mouse_event_source());
     al_register_event_source(_eventQueue, al_get_display_event_source(_display));
@@ -105,6 +104,9 @@ void BlackJack::UnloadContents()
     al_destroy_timer(_timer);
 
     al_destroy_display(_display);
+
+
+    delete _mouseState; // only one instance of this class exists
 }
 
 void BlackJack::Quit()
