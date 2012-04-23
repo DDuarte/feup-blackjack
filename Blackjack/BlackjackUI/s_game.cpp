@@ -2,12 +2,15 @@
 #include "s_game.h"
 #include "card.h"
 #include "blackjack.h"
+#include "hand.h"
 
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/mouse.h>
+
+#include <Windows.h>
 
 S_Game::S_Game()
 {
@@ -32,22 +35,35 @@ void S_Game::Draw()
 {
     al_draw_bitmap(_background, 0, 0, 0);
 
-    // Testing method draw of card
-    Card(rand() % 4, rand() % 13, 0).Draw(BlackJack::Instance()->GetDisplay(), 82, 217, 0);
-    Card(rand() % 4, rand() % 13, 0).Draw(BlackJack::Instance()->GetDisplay(), 82+14, 217, 0);
+    // Testing method draw of card and draw of hand
+    
+    Hand h;
+    h.AddCard(new Card(rand() % 4, rand() % 13, 0))
+    .AddCard(new Card(rand() % 4, rand() % 13, 0))
+    .AddCard(new Card(rand() % 4, rand() % 13, 0))
+    .Draw(82, 217, 0);
 
-    Card(rand() % 4, rand() % 13, 0).Draw(BlackJack::Instance()->GetDisplay(), 260, 344, 0);
-    Card(rand() % 4, rand() % 13, 0).Draw(BlackJack::Instance()->GetDisplay(), 260+14, 344, 0);
+    Hand h2;
+    h2.AddCard(new Card(CARD_SUIT_CLUBS, CARD_RANK_JACK, 0))
+    .AddCard(new Card(CARD_SUIT_HEARTS, CARD_RANK_TWO, 0))
+    .Draw(260, 344, 0);
 
-    Card(rand() % 4, rand() % 13, 0).Draw(BlackJack::Instance()->GetDisplay(), 517, 344, 0);
-    Card(rand() % 4, rand() % 13, 0).Draw(BlackJack::Instance()->GetDisplay(), 517+14, 344, 0);
+    Hand h3;
+    h3.AddCard(new Card(rand() % 4, rand() % 13, 0))
+    .AddCard(new Card(rand() % 4, rand() % 13, 0))
+    .AddCard(new Card(rand() % 4, rand() % 13, 0))
+    .AddCard(new Card(rand() % 4, rand() % 13, 0))
+    .Draw(517, 344, 0);
 
-    Card(rand() % 4, rand() % 13, 0).Draw(BlackJack::Instance()->GetDisplay(), 652, 217, 0);
-    Card(rand() % 4, rand() % 13, 0).Draw(BlackJack::Instance()->GetDisplay(), 652+14, 217, 0);
+    Hand h4;
+    h4.AddCard(new Card(rand() % 4, rand() % 13, 0));
+    h4.Draw(652, 217, 0);
 
     // Testing method draw and withdrawcard of deck
     _deck.Draw(595, 33, true);
     _deck.WithdrawCard();
+
+    Sleep(500);
 
     // debug printing
     ALLEGRO_MOUSE_STATE state;

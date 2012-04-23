@@ -24,19 +24,19 @@ void Deck::InitializeDeck(uint numberOfDecks)
     for (uint i = 0; i < NUMBER_OF_SUITS*numberOfDecks; ++i)
     {
         int suit = i % NUMBER_OF_SUITS;
-        _cards.push_back(Card(types[suit], CARD_RANK_TWO ,2));
-        _cards.push_back(Card(types[suit], CARD_RANK_THREE ,3));
-        _cards.push_back(Card(types[suit], CARD_RANK_FOUR ,4));
-        _cards.push_back(Card(types[suit], CARD_RANK_FIVE ,5));
-        _cards.push_back(Card(types[suit], CARD_RANK_SIX ,6));
-        _cards.push_back(Card(types[suit], CARD_RANK_SEVEN ,7));
-        _cards.push_back(Card(types[suit], CARD_RANK_EIGHT ,8));
-        _cards.push_back(Card(types[suit], CARD_RANK_NINE ,9));
-        _cards.push_back(Card(types[suit], CARD_RANK_TEN ,10));
-        _cards.push_back(Card(types[suit], CARD_RANK_JACK ,10));
-        _cards.push_back(Card(types[suit], CARD_RANK_QUEEN ,10));
-        _cards.push_back(Card(types[suit], CARD_RANK_KING ,10));
-        _cards.push_back(Card(types[suit], CARD_RANK_ACE ,0)); // 11 or 1
+        _cards.push_back(Card(types[suit], CARD_RANK_TWO, 2));
+        _cards.push_back(Card(types[suit], CARD_RANK_THREE, 3));
+        _cards.push_back(Card(types[suit], CARD_RANK_FOUR, 4));
+        _cards.push_back(Card(types[suit], CARD_RANK_FIVE, 5));
+        _cards.push_back(Card(types[suit], CARD_RANK_SIX, 6));
+        _cards.push_back(Card(types[suit], CARD_RANK_SEVEN, 7));
+        _cards.push_back(Card(types[suit], CARD_RANK_EIGHT, 8));
+        _cards.push_back(Card(types[suit], CARD_RANK_NINE, 9));
+        _cards.push_back(Card(types[suit], CARD_RANK_TEN, 10));
+        _cards.push_back(Card(types[suit], CARD_RANK_JACK, 10));
+        _cards.push_back(Card(types[suit], CARD_RANK_QUEEN, 10));
+        _cards.push_back(Card(types[suit], CARD_RANK_KING, 10));
+        _cards.push_back(Card(types[suit], CARD_RANK_ACE, 0)); // 11 or 1
     }
 
     Shuffle();
@@ -68,11 +68,14 @@ void Deck::Shuffle()
 
 void Deck::Draw(float dx, float dy, bool cardBack/* = false*/)
 {
-    for (uint i = 0; i < _cards.size(); i+=5) // Drawing each card makes a very
+    for (uint i = 0; i < _cards.size(); i+=2) // Drawing each card makes a very
     {                                         // big deck on the screen
+        dx += 1;
+        dy += 1;
+
         if (cardBack)
-            _cards[i].DrawBack(BlackJack::Instance()->GetDisplay(), dx++, dy++);
+            _cards[i].DrawBack(dx, dy);
         else
-            _cards[i].Draw(BlackJack::Instance()->GetDisplay(), dx++, dy++);
+            _cards[i].Draw(dx, dy);
     }
 }

@@ -1,5 +1,6 @@
 #include "utilities.h"
 #include "card.h"
+#include "blackjack.h"
 
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
@@ -18,9 +19,12 @@ Card::Card(int suit, int rank, uint score)
         _image = al_load_bitmap("../../Resources/Sprites/card_sprites.png");
     if (_backImage == NULL)
         _backImage = al_load_bitmap("../../Resources/cards/b1fv.png");
+
+    _backColor = 50 + rand() % 25;
+    _isMouseHovered = false;
 }
 
-void Card::Draw(ALLEGRO_DISPLAY* display, float dx, float dy, float angle /*= 0.0*/) // angle must be in radians
+void Card::Draw(float dx, float dy, float angle /*= 0.0*/) // angle must be in radians
 {
     if (_image == NULL)
     {
@@ -28,15 +32,23 @@ void Card::Draw(ALLEGRO_DISPLAY* display, float dx, float dy, float angle /*= 0.
         return;
     }
 
+    // change this to 
+    ALLEGRO_MOUSE_STATE state; // TODO change to static in class BlackJack
+    al_get_mouse_state(&state);
+
+    _isMouseHovered =
+        ((state.x <= dx + CARD_SIZE.X) && (state.x >= dx) &&
+        (state.y <= dy + CARD_SIZE.Y) && (state.y >= dy));
+
     float sx = _rank * _frameSize.X;
     float yx = _suit * _frameSize.Y;
 
-    al_set_target_bitmap(al_get_backbuffer(display)); // why is this needed?
+    //al_set_target_bitmap(al_get_backbuffer(BlackJack::Instance()->GetDisplay())); // why is this needed?
     al_draw_tinted_scaled_rotated_bitmap_region(_image, sx, yx, _frameSize.X, _frameSize.Y,
-        al_map_rgb(255, 255, 255), 0.0, 0.0, dx, dy, 1.0, 1.0, angle, 0);
+        al_map_rgb(255, 255, 255), 0.0, 0.0, dx, dy, 1.0 + _isMouseHovered*0.3, 1.0 + _isMouseHovered*0.3, angle, 0);
 }
 
-void Card::DrawBack(ALLEGRO_DISPLAY* display, float dx, float dy, float angle /*= 0.0*/)
+void Card::DrawBack(float dx, float dy, float angle /*= 0.0*/)
 {
     if (_backImage == NULL)
     {
@@ -44,8 +56,9 @@ void Card::DrawBack(ALLEGRO_DISPLAY* display, float dx, float dy, float angle /*
         return;
     }
 
-    al_set_target_bitmap(al_get_backbuffer(display)); // why is this needed?
-    al_draw_bitmap(_backImage, dx, dy, 0);
+    al_set_target_bitmap(al_get_backbuffer(BlackJack::Instance()->GetDisplay())); // why is this needed?
+    al_draw_tinted_bitmap(_backImage, al_map_rgb(_backColor, _backColor, _backColor), dx, dy, 0);
+    al_draw_bitmap_region(_backImage, 1, 1, _frameSize.X -1, _frameSize.Y - 1, dx + 1, dy + 1, 0);
 }
 
 // Should only be called by S_Game::UnloadContents

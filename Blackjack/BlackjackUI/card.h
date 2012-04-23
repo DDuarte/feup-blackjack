@@ -44,17 +44,23 @@ public:
     float GetFrameWidth() const { return _frameSize.X; }
     float GetFrameHeight() const { return _frameSize.Y; }
 
-    bool IsValid() const { return _suit != -1 && _rank != -1 && _score != 0; }
+    bool IsValid() const { return _suit != -1 && _rank != -1 && _score != -1; }
 
-    void Draw(ALLEGRO_DISPLAY* display, float dx, float dy, float angle = 0.0); // angle must be in radians
-    static void DrawBack(ALLEGRO_DISPLAY* display, float dx, float dy, float angle = 0.0); // angle must be in radians
+    void Draw(float dx, float dy, float angle = 0.0); // angle must be in radians
+    void DrawBack(float dx, float dy, float angle = 0.0); // angle must be in radians
 
+    bool IsMouseHovered() const { return _isMouseHovered; }
+    //void SetMouseHovered(bool v) { _isMouseHovered = v; }
     static void DestroyBitmaps();
 
 private:
     int _suit;
     int _rank;
     uint _score;
+
+    int _backColor;
+
+    bool _isMouseHovered;
 
     static ALLEGRO_BITMAP* _image;
     static ALLEGRO_BITMAP* _backImage;
