@@ -12,6 +12,11 @@ struct Vector2D
         X = x;
         Y = y;
     }
+    Vector2D()
+    {
+        X = 0;
+        Y = 0;
+    }
 };
 
 void Error(char const* message);

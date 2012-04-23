@@ -1,14 +1,16 @@
 #ifndef ALLEGROOBJECT_H
 #define ALLEGROOBJECT_H
 
+#include <allegro5/allegro.h>
+
 class AllegroObject
 {
 public:
-    virtual void Initialize();
-    virtual void LoadContents();
-    virtual void Draw();
-    virtual void Update();
-    virtual void UnloadContents();
+    AllegroObject() {};
+
+    virtual void Draw() { }
+    virtual bool Update(ALLEGRO_EVENT* ev){ return true; }
+
 private:
 };
 

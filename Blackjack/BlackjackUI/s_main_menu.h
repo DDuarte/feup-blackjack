@@ -2,6 +2,9 @@
 #define S_MAIN_MENU_H
 
 #include "state.h"
+#include "allegroObject.h"
+
+#include <vector>
 
 struct ALLEGRO_BITMAP;
 struct ALLEGRO_SAMPLE;
@@ -30,6 +33,8 @@ private:
     ALLEGRO_SAMPLE* _nextMenuSound;
 
     int _selectedMenu;
+
+    std::vector<AllegroObject *> _objects;
 };
 
 #endif // S_MAIN_MENU_H

@@ -2,6 +2,8 @@
 #include "blackjack.h"
 #include "card.h"
 #include "fonts.h"
+#include "rectButton.h"
+#include "allegroObject.h"
 
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
@@ -9,17 +11,33 @@
 #include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_acodec.h>
 
+#include <vector>
+
+bool ChangeToPlayState(RectButton* btn);
+
 S_MainMenu::S_MainMenu()
 {
     _background = NULL;
     _bgMusic = NULL;
     _nextMenuSound = NULL;
     _selectedMenu = -1;
+    _objects = std::vector<AllegroObject*>();
 }
 
 void S_MainMenu::Initialize()
 {
     _selectedMenu = MENU_PLAY;
+
+    _objects.resize(_objects.size()+1);
+    _objects[_objects.size()-1] = new RectButton(Vector2D(100, 100),
+        Vector2D(250,250),
+        al_map_rgb(255,0,255),
+        al_map_rgb(255,0,0),
+        al_map_rgb(0,0,0),
+        "Hello!",
+        40,
+        &ChangeToPlayState);
+
 }
 
 void S_MainMenu::LoadContents()
@@ -37,6 +55,9 @@ bool S_MainMenu::Update(ALLEGRO_EVENT* ev)
 {
     if (!ev)
         return false;
+
+    for (std::vector<AllegroObject*>::iterator obj = _objects.begin(); obj != _objects.end(); ++obj)
+        obj[0]->Update(ev);
 
     switch (ev->type)
     {
@@ -118,6 +139,9 @@ void S_MainMenu::Draw()
     al_draw_text(Fonts::GetFont(50), colorP, 50, 440, ALLEGRO_ALIGN_LEFT, "Play");
     al_draw_text(Fonts::GetFont(50), colorS, 50, 440 + 45, ALLEGRO_ALIGN_LEFT, "Settings");
     al_draw_text(Fonts::GetFont(50), colorQ, 50, 440 + 90, ALLEGRO_ALIGN_LEFT, "Quit");
+
+    for (std::vector<AllegroObject*>::iterator obj = _objects.begin(); obj != _objects.end(); ++obj)
+        obj[0]->Draw();
 }
 
 void S_MainMenu::UnloadContents()
@@ -125,4 +149,10 @@ void S_MainMenu::UnloadContents()
     al_destroy_bitmap(_background);
     al_destroy_sample(_bgMusic);
     al_destroy_sample(_nextMenuSound);
+}
+
+bool ChangeToPlayState(RectButton* btn)
+{
+    BlackJack::Instance()->ChangeState(STATE_PLAYING);
+    return true;
 }
