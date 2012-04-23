@@ -77,6 +77,7 @@
     <ClCompile Include="utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="allegroObject.h" />
     <ClInclude Include="blackjack.h" />
     <ClInclude Include="card.h" />
     <ClInclude Include="deck.h" />
@@ -84,6 +85,7 @@
     <ClInclude Include="gameExceptions.h" />
     <ClInclude Include="hand.h" />
     <ClInclude Include="player.h" />
+    <ClInclude Include="rectButton.h" />
     <ClInclude Include="s_game.h" />
     <ClInclude Include="s_game_over.h" />
     <ClInclude Include="s_main_menu.h" />

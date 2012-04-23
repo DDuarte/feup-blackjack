@@ -1,24 +1,19 @@
 #ifndef FONTS_H
 #define FONTS_H
 
+#include <map>
+#include "utilities.h"
+
 struct ALLEGRO_FONT;
 
 class Fonts
 {
 public:
-    static void LoadFonts();
     static void UnloadFonts();
-
-    static ALLEGRO_FONT* GetFont10() { return _font10; }
-    static ALLEGRO_FONT* GetFont20() { return _font20; }
-    static ALLEGRO_FONT* GetFont50() { return _font50; }
-    static ALLEGRO_FONT* GetFont140() { return _font140; }
+    static ALLEGRO_FONT* GetFont(uint size);
     
 private:
-    static ALLEGRO_FONT* _font10;
-    static ALLEGRO_FONT* _font20;
-    static ALLEGRO_FONT* _font50;
-    static ALLEGRO_FONT* _font140;
+    static std::map<uint, ALLEGRO_FONT*> _fonts;
 };
 
 #endif // FONTS_H

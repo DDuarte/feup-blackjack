@@ -60,7 +60,7 @@ void S_Game::Draw()
     _deck.WithdrawCard();
 
     // debug printing
-    al_draw_textf(Fonts::GetFont10(), al_map_rgb(255, 255, 255), 0, 0, ALLEGRO_ALIGN_LEFT, "x: %3.1f y: %3.1f", BlackJack::GetMousePosition().X, BlackJack::GetMousePosition().Y);
+    al_draw_textf(Fonts::GetFont(10), al_map_rgb(255, 255, 255), 0, 0, ALLEGRO_ALIGN_LEFT, "x: %3.1f y: %3.1f", BlackJack::GetMousePosition().X, BlackJack::GetMousePosition().Y);
 }
 
 void S_Game::UnloadContents()

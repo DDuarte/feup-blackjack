@@ -86,5 +86,11 @@
     <ClInclude Include="fonts.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="allegroObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rectButton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

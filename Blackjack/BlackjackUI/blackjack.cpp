@@ -93,7 +93,6 @@ void BlackJack::LoadContents()
     //    (*itr)->LoadContents(); done when changing states
 
     al_set_system_mouse_cursor(_display, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
-    Fonts::LoadFonts();
 }
 
 void BlackJack::Update(ALLEGRO_EVENT* ev)

@@ -102,22 +102,22 @@ void S_MainMenu::Draw()
     ALLEGRO_COLOR selectedText = al_map_rgb(255, 255, 255);
 
     al_draw_bitmap(_background, 0, 0, 0);
-    al_draw_text(Fonts::GetFont140(), shadowText, 267, 1, ALLEGRO_ALIGN_CENTRE, "Blackjack");
-    al_draw_text(Fonts::GetFont140(), selectedText, 266, 0, ALLEGRO_ALIGN_CENTRE, "Blackjack");
+    al_draw_text(Fonts::GetFont(140), shadowText, 267, 1, ALLEGRO_ALIGN_CENTRE, "Blackjack");
+    al_draw_text(Fonts::GetFont(140), selectedText, 266, 0, ALLEGRO_ALIGN_CENTRE, "Blackjack");
 
     // shadow
-    al_draw_text(Fonts::GetFont50(), shadowText, 51, 441, ALLEGRO_ALIGN_LEFT, "Play");
-    al_draw_text(Fonts::GetFont50(), shadowText, 51, 441 + 45, ALLEGRO_ALIGN_LEFT, "Settings");
-    al_draw_text(Fonts::GetFont50(), shadowText, 51, 441 + 90, ALLEGRO_ALIGN_LEFT, "Quit");
+    al_draw_text(Fonts::GetFont(50), shadowText, 51, 441, ALLEGRO_ALIGN_LEFT, "Play");
+    al_draw_text(Fonts::GetFont(50), shadowText, 51, 441 + 45, ALLEGRO_ALIGN_LEFT, "Settings");
+    al_draw_text(Fonts::GetFont(50), shadowText, 51, 441 + 90, ALLEGRO_ALIGN_LEFT, "Quit");
 
     // the text
     ALLEGRO_COLOR colorP = _selectedMenu == MENU_PLAY ? selectedText : text;
     ALLEGRO_COLOR colorS = _selectedMenu == MENU_SETTINGS ? selectedText : text;
     ALLEGRO_COLOR colorQ = _selectedMenu == MENU_QUIT ? selectedText : text;
 
-    al_draw_text(Fonts::GetFont50(), colorP, 50, 440, ALLEGRO_ALIGN_LEFT, "Play");
-    al_draw_text(Fonts::GetFont50(), colorS, 50, 440 + 45, ALLEGRO_ALIGN_LEFT, "Settings");
-    al_draw_text(Fonts::GetFont50(), colorQ, 50, 440 + 90, ALLEGRO_ALIGN_LEFT, "Quit");
+    al_draw_text(Fonts::GetFont(50), colorP, 50, 440, ALLEGRO_ALIGN_LEFT, "Play");
+    al_draw_text(Fonts::GetFont(50), colorS, 50, 440 + 45, ALLEGRO_ALIGN_LEFT, "Settings");
+    al_draw_text(Fonts::GetFont(50), colorQ, 50, 440 + 90, ALLEGRO_ALIGN_LEFT, "Quit");
 }
 
 void S_MainMenu::UnloadContents()
