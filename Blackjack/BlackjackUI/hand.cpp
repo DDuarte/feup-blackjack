@@ -38,23 +38,28 @@ Hand& Hand::AddCard(Card* card)
 void Hand::UpdateScore()
 {
     // TODO: Test
+    bool hasAces = false;
 
     if (_cards.size() == 0)
         // This should only be called by AddCard so hand must have at least 1 element
         throw InvalidCardException("Empty hand at Hand::UpdateScore()!");
 
     for (std::vector<Card*>::const_iterator card = _cards.begin(); card != _cards.end(); ++card)
-    {
+        if ((*card)->GetRank() != CARD_RANK_ACE)
+            _score += (*card)->GetScore();
+        else
+            hasAces = true;
+    
+    for (std::vector<Card*>::const_iterator card = _cards.begin(); card != _cards.end(); ++card)
         if ((*card)->GetRank() == CARD_RANK_ACE)
         {
             if (_score + ACE_MAX_VAL <= BLACKJACK_HAND)
                 (*card)->SetScore(ACE_MAX_VAL);
             else
                 (*card)->SetScore(ACE_MIN_VAL);
-        }
 
-        _score += (*card)->GetScore();
-    }
+            _score += (*card)->GetScore();
+        }
 }
 
 void Hand::RemoveCard(const Card* card)
