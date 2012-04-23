@@ -32,8 +32,6 @@ void Card::Draw(float dx, float dy, float angle /*= 0.0*/) // angle must be in r
         return;
     }
 
-    // change this to 
-
     _isMouseHovered =
         ((BlackJack::GetMousePosition().X <= dx + CARD_SIZE.X) && (BlackJack::GetMousePosition().X >= dx) &&
         (BlackJack::GetMousePosition().Y <= dy + CARD_SIZE.Y) && (BlackJack::GetMousePosition().Y >= dy));
@@ -44,6 +42,7 @@ void Card::Draw(float dx, float dy, float angle /*= 0.0*/) // angle must be in r
     //al_set_target_bitmap(al_get_backbuffer(BlackJack::Instance()->GetDisplay())); // why is this needed?
     al_draw_tinted_scaled_rotated_bitmap_region(_image, sx, yx, _frameSize.X, _frameSize.Y,
         al_map_rgb(255, 255, 255), 0.0, 0.0, dx, dy, 1.0 + _isMouseHovered*0.3, 1.0 + _isMouseHovered*0.3, angle, 0);
+
 }
 
 void Card::DrawBack(float dx, float dy, float angle /*= 0.0*/)
