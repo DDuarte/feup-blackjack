@@ -14,7 +14,8 @@ int const BLACKJACK_HAND = 21;
 class Hand
 {
 public:
-    Hand(float dx, float dy, bool dealerHand = false);
+    Hand();
+    Hand(Vector2D position, bool dealerHand = false);
     ~Hand();
 
     uint GetScore() const { return _score; }
@@ -38,8 +39,7 @@ private:
     bool _drawSecondCardBack;
     int _cardJustAdded;
 
-    float _dx;
-    float _dy;
+    Vector2D _position;
 
     void UpdateScore();
 };

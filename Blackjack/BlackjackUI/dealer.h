@@ -7,6 +7,8 @@
 class Card;
 class S_Game;
 
+const Vector2D DEALER_POSITION = Vector2D(265,63);
+
 class Dealer
 {
 public:

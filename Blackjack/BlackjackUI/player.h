@@ -2,6 +2,7 @@
 #define PLAYER_H
 
 #include "hand.h"
+#include "rectButton.h"
 
 #include <string>
 #include <vector>
@@ -31,9 +32,11 @@ public:
 
     // In-game player actions
     void PlaceBet(double bet);
-    void Stand();
-    void Hit();
-    void Double();
+    bool Stand();
+    bool Hit();
+    bool Double();
+    void Lose();
+    void ResetPlayer();
 
     void NewCard(Card* card) { _hand->AddCard(card); }
     void ClearHand() { _hand->Clear(); }

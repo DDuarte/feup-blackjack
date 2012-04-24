@@ -8,7 +8,7 @@
 
 #include <allegro5/allegro.h>
 
-enum GameState
+enum StateEnum
 {
     STATE_MAIN_MENU,
     STATE_SETTINGS,

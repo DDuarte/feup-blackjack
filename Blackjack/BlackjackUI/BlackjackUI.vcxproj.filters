@@ -108,4 +108,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="testes.txt" />
+  </ItemGroup>
 </Project>

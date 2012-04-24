@@ -38,6 +38,8 @@ public:
     void Draw();
     void Draw(bool forcedMouseHovered) { _forcedMouseHovered = forcedMouseHovered; Draw(); }
 
+    std::string GetText() { return _text; }
+
     bool IsMouseHovered();
 
 private:

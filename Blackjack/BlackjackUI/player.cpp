@@ -2,6 +2,7 @@
 #include "s_game.h"
 #include "utilities.h"
 #include "gameExceptions.h"
+#include "rectButton.h"
 
 #include <string>
 #include <fstream>
@@ -18,7 +19,7 @@ Player::Player(std::ifstream& file, S_Game* game)
 
     _game = game;
     _bet = 0.0;
-    _hand = new Hand(0, 0); // Calculate hand position
+    _hand = new Hand(Vector2D(0,0)); // Calculate hand position
     // TODO Don't forget to delete this
 }
 
@@ -50,7 +51,7 @@ void Player::PlaceBet(double bet)
     _game->PlayerBet(this, bet);
 }
 
-void Player::Hit()
+bool Player::Hit()
 {
     Card* tempCard = _game->GetDeck()->WithdrawCard();
 
@@ -61,20 +62,23 @@ void Player::Hit()
     }
     else
         _game->HandleOutOfCards();
+    return true;
 }
 
-void Player::Stand()
+bool Player::Stand()
 {
     _game->PlayerStand(this);
+    return true;
 }
 
-void Player::Double()
+bool Player::Double()
 {
     Card* tempCard = _game->GetDeck()->WithdrawCard();
 
     if (tempCard != NULL)
     {
         _hand->AddCard(tempCard);
+        _balance -= _bet;
         _bet *= 2;
         _game->PlayerDouble(this);
     }
@@ -82,6 +86,7 @@ void Player::Double()
         _game->HandleOutOfCards();
 
     // ...
+    return true;
 }
 
 void Player::Lose()
@@ -89,5 +94,12 @@ void Player::Lose()
     _bet = 0;
     _hand->Clear();
 }
+
+void Player::ResetPlayer()
+{
+    _bet = 0;
+    ClearHand();
+}
+
 
 

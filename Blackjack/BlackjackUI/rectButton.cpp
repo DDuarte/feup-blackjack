@@ -1,6 +1,7 @@
 #include "rectButton.h"
 #include "utilities.h"
 #include "fonts.h"
+#include "player.h"
 
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>
