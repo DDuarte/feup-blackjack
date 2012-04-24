@@ -73,7 +73,7 @@ bool RectButton::Update(ALLEGRO_EVENT* ev)
             _clicked = false;
             if(_func != NULL && IsMouseHovered())
             {
-                (*_func)(this);
+                (*_func)(const_cast<RectButton*>(this));
                 return false; // draw shouldn't be called anymore for this state
             }
         }

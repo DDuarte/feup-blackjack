@@ -132,7 +132,7 @@ void Hand::Draw(float dx, float dy, float angle /*= 0.0*/, bool cardBack /*= fal
             _cards[indexMHCard]->Draw(dx + (indexMHCard*14), dy - (indexMHCard*15), angle, true);
 
     // Draw score of hand
-    al_draw_rectangle(dx - 21, dy - 21, dx + 1, dy + 1, al_map_rgb(255, 255, 255), 2);
+    al_draw_filled_rectangle(dx - 21, dy - 21, dx + 1, dy + 1, al_map_rgb(255, 255, 255));
     al_draw_textf(Fonts::GetFont(19), al_map_rgb(0, 0, 0), dx - 20, dy - 20, 0, "%2.0i", _score);
 }
 
