@@ -21,11 +21,11 @@ public:
     std::string GetName() const { return _name; }
     double GetBalance() const { return _balance; }
     double GetBet() const { return _bet; }
-    const Hand* GetHand() const { return &_hand; }
+    Hand* GetHand() const { return _hand; }
     static std::string GetPlayersFileName() { return _playersFileName; }
 
-    bool IsBusted() { return _hand.IsBusted(); }
-    bool IsBlackjack() { return _hand.IsBlackjack(); }
+    bool IsBusted() { return _hand->IsBusted(); }
+    bool IsBlackjack() { return _hand->IsBlackjack(); }
 
     void WriteText(std::ofstream& out) const;
 
@@ -34,9 +34,9 @@ public:
     void Stand();
     void Hit();
     void Double();
-    void Lose();
 
-    void NewHand(Card* card1, Card* card2) { _hand.Clear(); _hand.AddCard(card1); _hand.AddCard(card2); }
+    void NewCard(Card* card) { _hand->AddCard(card); }
+    void ClearHand() { _hand->Clear(); }
 
 private:
     bool ReadText(std::ifstream& in);
@@ -47,7 +47,7 @@ private:
 
     static std::string _playersFileName;
 
-    Hand _hand;
+    Hand* _hand;
     S_Game* _game;
 };
 

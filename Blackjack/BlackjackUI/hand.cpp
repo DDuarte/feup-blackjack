@@ -11,28 +11,36 @@
 
 #include <vector>
 
-Hand::Hand()
+Hand::Hand(float dx, float dy, bool dealerHand /*= false*/)
 {
     _cards = std::vector<Card*>();
     _score = 0;
+    _dealerHand = dealerHand;
+    _drawSecondCardBack = dealerHand;
+    _cardJustAdded = -1;
+    _dx = dx;
+    _dy = dy;
 }
 
 Hand::~Hand()
 {
-    for (size_t i = 0; i < _cards.size(); ++i)
-        delete _cards[i];
+    //for (size_t i = 0; i < _cards.size(); ++i)
+    //    delete _cards[i];
 }
 
 Hand& Hand::AddCard(Card* card) // Returning a reference to this
 {                               // so we can chain multiple add cards
-    if (card->IsValid())
-    {
-        _cards.push_back(card);
-        UpdateScore();
+    if (!card)
         return *this;
-    }
-    else
+    
+    if (!card->IsValid())
         throw InvalidCardException("Invalid card at Hand::AddCard(Card card)!");
+    
+    _cards.push_back(card);
+    UpdateScore();
+    _cardJustAdded = _cards.size() - 1;
+
+    return *this;
 }
 
 void Hand::UpdateScore()
@@ -90,49 +98,51 @@ void Hand::Clear()
     _score = 0;
 }
 
-void Hand::Draw(float dx, float dy, float angle /*= 0.0*/, bool cardBack /*= false*/)
+void Hand::Draw()
 {
     // Draw cards (including "zoomed" ones (when mouse hovered))
     int indexMHCard = -1;
-    bool mouseHovered = false;
+
+    float angle = 0.0;
 
     for (int i = _cards.size() - 1; i >= 0; --i)
     {
-        float x = dx + (i*14);
-        float y = dy - (i*15);
-        mouseHovered =
-            ((BlackJack::GetMousePosition().X <= x + CARD_SIZE.X) && (BlackJack::GetMousePosition().X >= x) &&
-            (BlackJack::GetMousePosition().Y <= y + CARD_SIZE.Y) && (BlackJack::GetMousePosition().Y >= y));
-        if (mouseHovered)
+        float x = _dx + (i*14);
+        float y = _dy - (i*15*!_dealerHand);
+        if ((BlackJack::GetMousePosition().X <= x + CARD_SIZE.X) && (BlackJack::GetMousePosition().X >= x) &&
+            (BlackJack::GetMousePosition().Y <= y + CARD_SIZE.Y) && (BlackJack::GetMousePosition().Y >= y))
         {
             indexMHCard = i; 
             break;
         }
     }
 
-    mouseHovered =
-        ((BlackJack::GetMousePosition().X <= dx + CARD_SIZE.X) && (BlackJack::GetMousePosition().X >= dx) &&
-        (BlackJack::GetMousePosition().Y <= dy + CARD_SIZE.Y) && (BlackJack::GetMousePosition().Y >= dy));
-
     for (uint i = 0; i < _cards.size(); ++i)
     {
-        float x = dx + (i*14);
-        float y = dy - (i*15);
+        float x = _dx + (i*14);
+        float y = _dy - (i*15*!_dealerHand);
 
-        if (cardBack)
+        if (_dealerHand && _drawSecondCardBack && i == 1)
             _cards[i]->DrawBack(x, y, angle);
         else
-            _cards[i]->Draw(x, y, angle);
+        {
+            _cards[i]->Draw(x, y, angle, _cardJustAdded == i);
+            _cardJustAdded = -1;
+        }
     }
 
     if (indexMHCard != -1)
-        if (cardBack)
-            _cards[indexMHCard]->DrawBack(dx + (indexMHCard*14), dy - (indexMHCard*15), angle);
+    {
+        if (_drawSecondCardBack && indexMHCard == 1)
+            _cards[indexMHCard]->DrawBack(_dx + (indexMHCard*14), _dy - (indexMHCard*15*!_drawSecondCardBack), angle);
         else
-            _cards[indexMHCard]->Draw(dx + (indexMHCard*14), dy - (indexMHCard*15), angle, true);
+            _cards[indexMHCard]->Draw(_dx + (indexMHCard*14), _dy - (indexMHCard*15*!_drawSecondCardBack), angle, true);
+    }
 
-    // Draw score of hand
-    al_draw_filled_rectangle(dx - 21, dy - 21, dx + 1, dy + 1, al_map_rgb(255, 255, 255));
-    al_draw_textf(Fonts::GetFont(19), al_map_rgb(0, 0, 0), dx - 20, dy - 20, 0, "%2.0i", _score);
+    // Draw score of hand if no card is hidden
+    if (!_dealerHand)
+    {
+        al_draw_filled_rectangle(_dx - 21, _dy - 21, _dx + 1, _dy + 1, al_map_rgb(255, 255, 255));
+        al_draw_textf(Fonts::GetFont(19), al_map_rgb(0, 0, 0), _dx - 20, _dy - 20, 0, "%2.0i", _score);
+    }
 }
-

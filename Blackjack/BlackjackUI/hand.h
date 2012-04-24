@@ -14,7 +14,7 @@ int const BLACKJACK_HAND = 21;
 class Hand
 {
 public:
-    Hand();
+    Hand(float dx, float dy, bool dealerHand = false);
     ~Hand();
 
     uint GetScore() const { return _score; }
@@ -26,11 +26,20 @@ public:
     void RemoveCard(const Card* card);
     void Clear();
 
-    void Draw(float dx, float dy, float angle = 0.0, bool cardBack = false);
+    void Draw();
+
+    void ShowFirstCard() { _drawSecondCardBack = false; }
 
 private:
     std::vector<Card*> _cards;
     uint _score;
+
+    bool _dealerHand;
+    bool _drawSecondCardBack;
+    int _cardJustAdded;
+
+    float _dx;
+    float _dy;
 
     void UpdateScore();
 };

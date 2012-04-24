@@ -31,36 +31,118 @@ void S_Game::LoadContents()
 void S_Game::Draw()
 {
     al_draw_bitmap(_background, 0, 0, 0);
+    al_flip_display();
 
-    // Testing method draw of card and draw of hand
-    
-    Hand h;
-    h.AddCard(new Card(rand() % 4, rand() % 13))
-    .AddCard(new Card(rand() % 4, rand() % 13))
-    .AddCard(new Card(rand() % 4, rand() % 13))
-    .Draw(82, 217, 0);
+    if (!_deck.GetGameCardsNumber())
+        return;
 
-    Hand h2;
-    h2.AddCard(new Card(CARD_SUIT_CLUBS, CARD_RANK_ACE))
-    .AddCard(new Card(CARD_SUIT_HEARTS, CARD_RANK_ACE))
-    .AddCard(new Card(CARD_SUIT_SPADES, CARD_RANK_ACE))
-    .AddCard(new Card(CARD_SUIT_DIAMONDS, CARD_RANK_KING))
-    .Draw(260, 344, 0);
+    // Testing method draw of card and draw of hand and get cards from a deck
+    Hand h5(265, 63, true);
+    h5.AddCard(_deck.WithdrawCard());
 
-    Hand h3;
-    h3.AddCard(new Card(rand() % 4, rand() % 13))
-    .AddCard(new Card(rand() % 4, rand() % 13))
-    .AddCard(new Card(rand() % 4, rand() % 13))
-    .AddCard(new Card(rand() % 4, rand() % 13))
-    .Draw(517, 344, 0);
+    al_flip_display();
+    al_clear_to_color(al_map_rgb(0, 0, 0));
+    al_draw_bitmap(_background, 0, 0, 0);
+    h5.Draw();
 
-    Hand h4;
-    h4.AddCard(new Card(rand() % 4, rand() % 13));
-    h4.Draw(652, 217, 0);
+    h5.AddCard(_deck.WithdrawCard());
+
+    al_flip_display();
+    al_clear_to_color(al_map_rgb(0, 0, 0));
+    al_draw_bitmap(_background, 0, 0, 0);
+    h5.Draw();
+
+    Hand h(82, 217);
+    h.AddCard(_deck.WithdrawCard());
+
+    al_flip_display();
+    al_clear_to_color(al_map_rgb(0, 0, 0));
+    al_draw_bitmap(_background, 0, 0, 0);
+    h.Draw();
+    h5.Draw();
+
+    h.AddCard(_deck.WithdrawCard());
+
+    al_flip_display();
+    al_clear_to_color(al_map_rgb(0, 0, 0));
+    al_draw_bitmap(_background, 0, 0, 0);
+    h.Draw();
+    h5.Draw();
+
+    Hand h2(260, 344);
+    h2.AddCard(_deck.WithdrawCard());
+
+    al_flip_display();
+    al_clear_to_color(al_map_rgb(0, 0, 0));
+    al_draw_bitmap(_background, 0, 0, 0);
+    h.Draw();
+    h2.Draw();
+    h5.Draw();
+
+    h2.AddCard(_deck.WithdrawCard());
+
+    al_flip_display();
+    al_clear_to_color(al_map_rgb(0, 0, 0));
+    al_draw_bitmap(_background, 0, 0, 0);
+    h.Draw();
+    h2.Draw();
+    h5.Draw();
+
+    Hand h3(517, 344);
+    h3.AddCard(_deck.WithdrawCard());
+
+    al_flip_display();
+    al_clear_to_color(al_map_rgb(0, 0, 0));
+    al_draw_bitmap(_background, 0, 0, 0);
+    h.Draw();
+    h2.Draw();
+    h3.Draw();
+    h5.Draw();
+
+    h3.AddCard(_deck.WithdrawCard());
+
+    al_flip_display();
+    al_clear_to_color(al_map_rgb(0, 0, 0));
+    al_draw_bitmap(_background, 0, 0, 0);
+    h.Draw();
+    h2.Draw();
+    h3.Draw();
+    h5.Draw();
+
+    Hand h4(652, 217);
+    h4.AddCard(_deck.WithdrawCard());
+
+    al_flip_display();
+    al_clear_to_color(al_map_rgb(0, 0, 0));
+    al_draw_bitmap(_background, 0, 0, 0);
+    h.Draw();
+    h2.Draw();
+    h3.Draw();
+    h4.Draw();
+    h5.Draw();
+
+    h4.AddCard(_deck.WithdrawCard());
+
+    al_flip_display();
+    al_clear_to_color(al_map_rgb(0, 0, 0));
+    al_draw_bitmap(_background, 0, 0, 0);
+    h.Draw();
+    h2.Draw();
+    h3.Draw();
+    h4.Draw();
+    h5.Draw();
 
     // Testing method draw and withdrawcard of deck
     _deck.Draw(595, 33, true);
-    _deck.WithdrawCard();
+    al_flip_display();
+    al_clear_to_color(al_map_rgb(0, 0, 0));
+    al_draw_bitmap(_background, 0, 0, 0);
+    h.Draw();
+    h2.Draw();
+    h3.Draw();
+    h4.Draw();
+    h5.Draw();
+    Sleep(500);
 
     // debug printing
     al_draw_textf(Fonts::GetFont(10), al_map_rgb(255, 255, 255), 0, 0, ALLEGRO_ALIGN_LEFT, "x: %3.1f y: %3.1f", BlackJack::GetMousePosition().X, BlackJack::GetMousePosition().Y);

@@ -18,7 +18,8 @@ Player::Player(std::ifstream& file, S_Game* game)
 
     _game = game;
     _bet = 0.0;
-    _hand = Hand();
+    _hand = new Hand(0, 0); // Calculate hand position
+    // TODO Don't forget to delete this
 }
 
 void Player::WriteText(std::ofstream& out) const
@@ -55,7 +56,7 @@ void Player::Hit()
 
     if (tempCard != NULL)
     {
-        _hand.AddCard(tempCard);
+        _hand->AddCard(tempCard);
         _game->PlayerHit(this);
     }
     else
@@ -73,14 +74,14 @@ void Player::Double()
 
     if (tempCard != NULL)
     {
-        _hand.AddCard(tempCard);
+        _hand->AddCard(tempCard);
         _bet *= 2;
-
-
         _game->PlayerDouble(this);
     }
     else
         _game->HandleOutOfCards();
+
+    // ...
 }
 
 void Player::Lose()
