@@ -39,8 +39,6 @@ private:
     RectButton* _quitButton;
 
     int _selectedMenu;
-
-    std::vector<AllegroObject*> _objects;
 };
 
 #endif // S_MAIN_MENU_H

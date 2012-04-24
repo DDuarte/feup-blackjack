@@ -24,7 +24,6 @@ S_MainMenu::S_MainMenu()
     _bgMusic = NULL;
     _nextMenuSound = NULL;
     _selectedMenu = -1;
-    _objects = std::vector<AllegroObject*>();
     _playButton = new RectButton(Vector2D(50, 440), al_map_rgb(200, 200, 200), "Play", 50, &ChangeToPlayState, true);
     _settingButton = new RectButton(Vector2D(50, 441 + 45), al_map_rgb(200, 200, 200), "Settings", 50, &ChangeToSettingsState, true);
     _quitButton = new RectButton(Vector2D(50, 441 + 90), al_map_rgb(200, 200, 200), "Quit", 50, &ChangeToQuit, true);
@@ -33,10 +32,6 @@ S_MainMenu::S_MainMenu()
 void S_MainMenu::Initialize()
 {
     _selectedMenu = MENU_PLAY;
-
-    _objects.push_back(_playButton);
-    _objects.push_back(_settingButton);
-    _objects.push_back(_quitButton);
 }
 
 void S_MainMenu::LoadContents()
@@ -55,8 +50,12 @@ bool S_MainMenu::Update(ALLEGRO_EVENT* ev)
     if (!ev)
         return false;
 
-    for (std::vector<AllegroObject*>::iterator obj = _objects.begin(); obj != _objects.end(); ++obj)
-        (*obj)->Update(ev);
+    if (_playButton)
+        _playButton->Update(ev);
+    if (_settingButton)
+        _settingButton->Update(ev);
+    if (_quitButton)
+        _quitButton->Update(ev);
 
     switch (ev->type)
     {
@@ -138,9 +137,6 @@ void S_MainMenu::Draw()
     _playButton->Draw(drawPlay);
     _settingButton->Draw(drawSettings);
     _quitButton->Draw(drawQuit);
-
-    for (uint i = 3; i < _objects.size(); ++i) // 3 is not a typo, 
-        _objects[i]->Draw();                   // we already draw the first 3 buttons
 }
 
 void S_MainMenu::UnloadContents()
@@ -149,9 +145,9 @@ void S_MainMenu::UnloadContents()
     al_destroy_sample(_bgMusic);
     al_destroy_sample(_nextMenuSound);
 
-    for (uint i = 0; i < _objects.size(); ++i)
-        delete _objects[i];
-    _objects.clear();
+    delete _playButton; _playButton = NULL;
+    delete _settingButton; _settingButton = NULL;
+    delete _quitButton; _quitButton = NULL;
 }
 
 bool ChangeToPlayState(RectButton* btn)
