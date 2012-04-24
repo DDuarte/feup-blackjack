@@ -13,7 +13,10 @@
 
 #include <vector>
 
+// mouse callback functions
 bool ChangeToPlayState(RectButton* btn);
+bool ChangeToSettingsState(RectButton* btn);
+bool ChangeToQuit(RectButton* btn);
 
 S_MainMenu::S_MainMenu()
 {
@@ -22,14 +25,18 @@ S_MainMenu::S_MainMenu()
     _nextMenuSound = NULL;
     _selectedMenu = -1;
     _objects = std::vector<AllegroObject*>();
+    _playButton = new RectButton(Vector2D(50, 440), al_map_rgb(200, 200, 200), "Play", 50, &ChangeToPlayState, true);
+    _settingButton = new RectButton(Vector2D(50, 441 + 45), al_map_rgb(200, 200, 200), "Settings", 50, &ChangeToSettingsState, true);
+    _quitButton = new RectButton(Vector2D(50, 441 + 90), al_map_rgb(200, 200, 200), "Quit", 50, &ChangeToQuit, true);
 }
 
 void S_MainMenu::Initialize()
 {
     _selectedMenu = MENU_PLAY;
 
-    _objects.push_back(new RectButton(Vector2D(100, 100), Vector2D(50, 440),
-        &al_map_rgb(255, 255, 255), "Play", 40, &ChangeToPlayState, true));
+    _objects.push_back(_playButton);
+    _objects.push_back(_settingButton);
+    _objects.push_back(_quitButton);
 }
 
 void S_MainMenu::LoadContents()
@@ -49,7 +56,7 @@ bool S_MainMenu::Update(ALLEGRO_EVENT* ev)
         return false;
 
     for (std::vector<AllegroObject*>::iterator obj = _objects.begin(); obj != _objects.end(); ++obj)
-        obj[0]->Update(ev);
+        (*obj)->Update(ev);
 
     switch (ev->type)
     {
@@ -111,29 +118,29 @@ bool S_MainMenu::Update(ALLEGRO_EVENT* ev)
 void S_MainMenu::Draw()
 {
     ALLEGRO_COLOR shadowText = al_map_rgb(0, 0, 0);
-    ALLEGRO_COLOR text = al_map_rgb(200, 200, 200);
     ALLEGRO_COLOR selectedText = al_map_rgb(255, 255, 255);
 
     al_draw_bitmap(_background, 0, 0, 0);
     al_draw_text(Fonts::GetFont(140), shadowText, 267, 1, ALLEGRO_ALIGN_CENTRE, "Blackjack");
     al_draw_text(Fonts::GetFont(140), selectedText, 266, 0, ALLEGRO_ALIGN_CENTRE, "Blackjack");
+    
+    if (_playButton->IsMouseHovered())
+        _selectedMenu = MENU_PLAY;
+    else if (_settingButton->IsMouseHovered())
+        _selectedMenu = MENU_SETTINGS;
+    else if (_quitButton->IsMouseHovered())
+        _selectedMenu = MENU_QUIT;
+    
+    bool drawPlay = _selectedMenu == MENU_PLAY;
+    bool drawSettings = _selectedMenu == MENU_SETTINGS;
+    bool drawQuit = _selectedMenu == MENU_QUIT;
 
-    // shadow
-    //al_draw_text(Fonts::GetFont(50), shadowText, 51, 441, ALLEGRO_ALIGN_LEFT, "Play");
-    al_draw_text(Fonts::GetFont(50), shadowText, 51, 441 + 45, ALLEGRO_ALIGN_LEFT, "Settings");
-    al_draw_text(Fonts::GetFont(50), shadowText, 51, 441 + 90, ALLEGRO_ALIGN_LEFT, "Quit");
+    _playButton->Draw(drawPlay);
+    _settingButton->Draw(drawSettings);
+    _quitButton->Draw(drawQuit);
 
-    // the text
-    ALLEGRO_COLOR colorP = _selectedMenu == MENU_PLAY ? selectedText : text;
-    ALLEGRO_COLOR colorS = _selectedMenu == MENU_SETTINGS ? selectedText : text;
-    ALLEGRO_COLOR colorQ = _selectedMenu == MENU_QUIT ? selectedText : text;
-
-    //al_draw_text(Fonts::GetFont(50), colorP, 50, 440, ALLEGRO_ALIGN_LEFT, "Play");
-    al_draw_text(Fonts::GetFont(50), colorS, 50, 440 + 45, ALLEGRO_ALIGN_LEFT, "Settings");
-    al_draw_text(Fonts::GetFont(50), colorQ, 50, 440 + 90, ALLEGRO_ALIGN_LEFT, "Quit");
-
-    for (std::vector<AllegroObject*>::iterator obj = _objects.begin(); obj != _objects.end(); ++obj)
-        (*obj)->Draw();
+    for (uint i = 3; i < _objects.size(); ++i) // 3 is not a typo, 
+        _objects[i]->Draw();                   // we already draw the first 3 buttons
 }
 
 void S_MainMenu::UnloadContents()
@@ -141,10 +148,26 @@ void S_MainMenu::UnloadContents()
     al_destroy_bitmap(_background);
     al_destroy_sample(_bgMusic);
     al_destroy_sample(_nextMenuSound);
+
+    for (uint i = 0; i < _objects.size(); ++i)
+        delete _objects[i];
+    _objects.clear();
 }
 
 bool ChangeToPlayState(RectButton* btn)
 {
     BlackJack::Instance()->ChangeState(STATE_PLAYING);
+    return true;
+}
+
+bool ChangeToSettingsState(RectButton* btn)
+{
+    BlackJack::Instance()->ChangeState(STATE_SETTINGS);
+    return true;
+}
+
+bool ChangeToQuit(RectButton* btn)
+{
+    BlackJack::Instance()->Quit();
     return true;
 }

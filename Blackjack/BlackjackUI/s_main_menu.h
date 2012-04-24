@@ -2,7 +2,6 @@
 #define S_MAIN_MENU_H
 
 #include "state.h"
-#include "allegroObject.h"
 
 #include <vector>
 
@@ -17,6 +16,8 @@ enum Menu
 };
 
 union ALLEGRO_EVENT;
+class RectButton;
+class AllegroObject;
 
 class S_MainMenu : public State
 {
@@ -27,10 +28,15 @@ public:
     bool Update(ALLEGRO_EVENT* ev);
     void Draw();
     void UnloadContents();
+
 private:
     ALLEGRO_BITMAP* _background;
     ALLEGRO_SAMPLE* _bgMusic;
     ALLEGRO_SAMPLE* _nextMenuSound;
+
+    RectButton* _playButton;
+    RectButton* _settingButton;
+    RectButton* _quitButton;
 
     int _selectedMenu;
 
