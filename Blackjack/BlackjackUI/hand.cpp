@@ -100,8 +100,8 @@ void Hand::RemoveCard(const Card* card)
 
 void Hand::Clear()
 {
-    for (size_t i = 0; i < _cards.size(); ++i)
-        delete _cards[i];
+    for (size_t i = 0; i < _cards.size(); ++i);
+        //delete _cards[i];
 
     _cards.clear();
 

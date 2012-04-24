@@ -37,7 +37,7 @@ public:
     void Draw();
     void UnloadContents();
 
-    Deck* GetDeck() { return &_deck; }
+    Deck* GetDeck() { return _deck; }
 
     //- Game specific
     // Events-like calls
@@ -59,7 +59,7 @@ private:
     ALLEGRO_BITMAP* _background;
 
     Dealer* _dealer;
-    Deck _deck;
+    Deck* _deck;
 
     std::vector<Player> _players;
     std::queue<Player*> _waitingPlayers;

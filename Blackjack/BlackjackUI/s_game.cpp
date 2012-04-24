@@ -9,6 +9,8 @@
 #include "gameExceptions.h"
 #include "rectButton.h"
 
+#include <string>
+
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_font.h>
@@ -37,7 +39,7 @@ S_Game::S_Game()
 
 void S_Game::Initialize()
 {
-    _deck = Deck();
+    _deck = new Deck();
 }
 
 void S_Game::LoadContents()
@@ -99,10 +101,13 @@ bool S_Game::Update(ALLEGRO_EVENT* ev)
             switch (_gameState)
             {
                 case GAME_STATE_PLACING_BETS:
+                    _activePlayerIndex = 0;
                     return HandleStatePlacingBets();
                 case GAME_STATE_DEALING_CARDS:
+                    _activePlayerIndex = 0;
                     return HandleStateDealingCards();
                 case GAME_STATE_PLAYER_TURN:
+                    _activePlayerIndex = 0;
                     return HandleStatePlayerTurn();
                 case GAME_STATE_DEALER_TURN:
                     return HandleStateDealerTurn();
@@ -121,9 +126,9 @@ bool S_Game::Update(ALLEGRO_EVENT* ev)
 
 void S_Game::PlayerHit(Player* player)
 {
-    al_show_native_message_box(BlackJack::Instance()->GetDisplay(), "Hit","Hit","Hit","ok",0 );
     if (player->IsBusted())
     {
+        al_show_native_message_box(BlackJack::Instance()->GetDisplay(), "Bust","Hit","Hit","ok",0 );
         player->Lose();
     }
 }
@@ -149,7 +154,8 @@ bool S_Game::HandleStateResetRound()
 
     _dealer->ClearHand();
 
-    _deck = Deck();
+    delete _deck;
+    _deck = new Deck();
 
     _gameState = GAME_STATE_PLACING_BETS;
 
@@ -169,7 +175,7 @@ void S_Game::ReadPlayersFromFile()
     {
         try
         {
-            _players.push_back(Player(file,this));
+            _players.push_back(Player(file,const_cast<S_Game*>(this)));
         }
         catch (InvalidPlayerException)
         {
