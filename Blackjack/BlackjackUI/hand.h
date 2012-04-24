@@ -20,7 +20,7 @@ public:
     uint GetScore() const { return _score; }
 
     bool IsBusted() const { return GetScore() > BLACKJACK_HAND; }
-    bool IsBlackjack() const { return GetScore() == BLACKJACK_HAND; }
+    bool IsBlackjack() const { return GetScore() == BLACKJACK_HAND && _cards.size() == 2; }
 
     Hand& AddCard(Card* card);
     void RemoveCard(const Card* card);

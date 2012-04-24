@@ -34,6 +34,7 @@ public:
     void Stand();
     void Hit();
     void Double();
+    void Lose();
 
     void NewHand(Card* card1, Card* card2) { _hand.Clear(); _hand.AddCard(card1); _hand.AddCard(card2); }
 

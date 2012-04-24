@@ -51,6 +51,9 @@
     <ClCompile Include="localization.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="dealer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="card.h">
@@ -99,6 +102,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="localization.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dealer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

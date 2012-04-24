@@ -4,6 +4,8 @@
 #include "blackjack.h"
 #include "hand.h"
 #include "fonts.h"
+#include "dealer.h"
+#include "player.h"
 
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_image.h>
@@ -13,6 +15,7 @@
 S_Game::S_Game()
 {
     _background = NULL;
+    _dealer = new Dealer(this);
 }
 
 void S_Game::Initialize()
@@ -67,7 +70,7 @@ void S_Game::UnloadContents()
 {
     al_destroy_bitmap(_background);
 
-
+    delete _dealer;
     Card::DestroyBitmaps();
 }
 
@@ -98,3 +101,13 @@ bool S_Game::Update(ALLEGRO_EVENT* ev)
 
     return false;
 }
+
+void S_Game::PlayerHit(Player* player)
+{
+    if (player->IsBusted())
+    {
+        player->Lose();
+    }
+}
+
+

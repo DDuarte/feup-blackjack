@@ -83,3 +83,10 @@ void Player::Double()
         _game->HandleOutOfCards();
 }
 
+void Player::Lose()
+{
+    _bet = 0;
+    _hand->Clear();
+}
+
+

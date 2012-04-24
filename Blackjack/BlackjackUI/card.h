@@ -62,7 +62,7 @@ private:
     int _rank;
     uint _score;
 
-    int _backColor;
+    int _backColorRGB;
 
     bool _isMouseHovered;
 

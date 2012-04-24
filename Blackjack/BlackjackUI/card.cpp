@@ -24,7 +24,7 @@ Card::Card(int suit, int rank)
     if (_backImage == NULL)
         _backImage = al_load_bitmap("../../Resources/cards/b1fv.png");
 
-    _backColor = 50 + rand() % 25; // variations of dark grey, "3D" effect
+    _backColorRGB = 50 + rand() % 25; // variations of dark grey, "3D" effect
     _isMouseHovered = false;
 }
 
@@ -57,7 +57,7 @@ void Card::DrawBack(float dx, float dy, float angle /*= 0.0*/)
         return;
     }
 
-    al_draw_tinted_bitmap(_backImage, al_map_rgb(_backColor, _backColor, _backColor), dx, dy, 0);
+    al_draw_tinted_bitmap(_backImage, al_map_rgb(_backColorRGB, _backColorRGB, _backColorRGB), dx, dy, 0);
     al_draw_bitmap_region(_backImage, 1, 1, _frameSize.X -1, _frameSize.Y - 1, dx + 1, dy + 1, 0);
 }
 
