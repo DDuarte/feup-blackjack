@@ -29,7 +29,7 @@ public:
 
     void Draw();
 
-    void ShowFirstCard() { _drawSecondCardBack = false; }
+    void ShowSecondCard() { _drawSecondCardBack = false; }
 
 private:
     std::vector<Card*> _cards;

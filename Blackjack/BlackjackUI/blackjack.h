@@ -28,7 +28,6 @@ struct ALLEGRO_EVENT_QUEUE;
 struct ALLEGRO_TIMER;
 union ALLEGRO_EVENT;
 
-
 // Singleton, single instance
 class BlackJack // : public State
 {

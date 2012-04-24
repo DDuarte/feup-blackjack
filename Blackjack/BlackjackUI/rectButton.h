@@ -57,7 +57,6 @@ private:
 
     uint _fontSize;
 
-    
     bool _forcedMouseHovered;
 };
 
