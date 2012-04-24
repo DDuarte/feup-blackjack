@@ -49,6 +49,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>allegro-5.0.6-monolith-mt-debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>NotSet</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -70,6 +71,7 @@
     <ClCompile Include="deck.cpp" />
     <ClCompile Include="fonts.cpp" />
     <ClCompile Include="hand.cpp" />
+    <ClCompile Include="localization.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="rectButton.cpp" />
@@ -85,6 +87,7 @@
     <ClInclude Include="fonts.h" />
     <ClInclude Include="gameExceptions.h" />
     <ClInclude Include="hand.h" />
+    <ClInclude Include="localization.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="rectButton.h" />
     <ClInclude Include="s_game.h" />

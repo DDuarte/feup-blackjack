@@ -4,6 +4,7 @@
 #include "fonts.h"
 #include "rectButton.h"
 #include "allegroObject.h"
+#include "localization.h"
 
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
@@ -24,9 +25,9 @@ S_MainMenu::S_MainMenu()
     _bgMusic = NULL;
     _nextMenuSound = NULL;
     _selectedMenu = -1;
-    _playButton = new RectButton(Vector2D(50, 440), al_map_rgb(200, 200, 200), "Play", 50, &ChangeToPlayState, true);
-    _settingButton = new RectButton(Vector2D(50, 441 + 45), al_map_rgb(200, 200, 200), "Settings", 50, &ChangeToSettingsState, true);
-    _quitButton = new RectButton(Vector2D(50, 441 + 90), al_map_rgb(200, 200, 200), "Quit", 50, &ChangeToQuit, true);
+    _playButton = new RectButton(Vector2D(50, 440), al_map_rgb(200, 200, 200), GetStr(STR_PLAY), 50, &ChangeToPlayState, true);
+    _settingButton = new RectButton(Vector2D(50, 441 + 45), al_map_rgb(200, 200, 200), GetStr(STR_OPTIONS), 50, &ChangeToSettingsState, true);
+    _quitButton = new RectButton(Vector2D(50, 441 + 90), al_map_rgb(200, 200, 200), GetStr(STR_QUIT), 50, &ChangeToQuit, true);
 }
 
 void S_MainMenu::Initialize()

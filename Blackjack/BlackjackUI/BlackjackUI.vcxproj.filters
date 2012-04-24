@@ -48,6 +48,9 @@
     <ClCompile Include="rectButton.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="localization.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="card.h">
@@ -93,6 +96,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="rectButton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="localization.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
