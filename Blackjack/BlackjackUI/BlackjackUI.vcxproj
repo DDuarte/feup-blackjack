@@ -99,6 +99,7 @@
     <ClInclude Include="s_settings.h" />
     <ClInclude Include="state.h" />
     <ClInclude Include="utilities.h" />
+    <ClInclude Include="delegate.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="testes.txt" />

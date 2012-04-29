@@ -60,5 +60,14 @@ private:
     std::string _filename;
 };
 
+class InvalidDelegateException : public std::exception
+{
+public:
+    InvalidDelegateException(std::string message = "Invalid Delegate!") : _message(message) {}
+    ~InvalidDelegateException() throw() {}
+    const char* what() const throw() { return _message.c_str(); }
+private:
+    std::string _message;
+};
 
 #endif // GAME_EXCEPTIONS_H

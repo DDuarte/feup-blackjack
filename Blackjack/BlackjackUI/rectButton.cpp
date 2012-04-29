@@ -1,7 +1,7 @@
 #include "rectButton.h"
 #include "utilities.h"
 #include "fonts.h"
-#include "player.h"
+#include "gameExceptions.h"
 
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>
@@ -11,28 +11,28 @@
 #include <string>
 
 // Full featured button
-RectButton::RectButton(Vector2D size, Vector2D position, ALLEGRO_COLOR color, ALLEGRO_COLOR colorMouseHover, ALLEGRO_COLOR textColor, std::string text, uint fontSize, bool func(RectButton*), bool shadowedText)
-    : _size(size), _position(position), _color(color), _colorMouseHover(colorMouseHover), _textColor(textColor), _text(text), _fontSize(fontSize), _clicked(false), _func(func), _shadowedText(shadowedText), _forcedMouseHovered(false) { }
+RectButton::RectButton(Vector2D size, Vector2D position, ALLEGRO_COLOR color, ALLEGRO_COLOR colorMouseHover, ALLEGRO_COLOR textColor, std::string text, uint fontSize, ButtonHandler funcHandler, bool shadowedText)
+    : _size(size), _position(position), _color(color), _colorMouseHover(colorMouseHover), _textColor(textColor), _text(text), _fontSize(fontSize), _clicked(false), _funcHandler(funcHandler), _shadowedText(shadowedText), _forcedMouseHovered(false) { }
 
 // Button with mouseHover without text (with or without callback function)
-RectButton::RectButton(Vector2D size, Vector2D position, ALLEGRO_COLOR color, ALLEGRO_COLOR colorMouseHover, bool func(RectButton*) /*= NULL*/ )
-    : _size(size), _position(position), _color(color), _colorMouseHover(colorMouseHover), _textColor(ALLEGRO_COLOR()), _text(""), _fontSize(0), _clicked(false), _func(func), _shadowedText(false), _forcedMouseHovered(false) { }
+RectButton::RectButton(Vector2D size, Vector2D position, ALLEGRO_COLOR color, ALLEGRO_COLOR colorMouseHover, ButtonHandler funcHandler /*= NULL*/ )
+    : _size(size), _position(position), _color(color), _colorMouseHover(colorMouseHover), _textColor(ALLEGRO_COLOR()), _text(""), _fontSize(0), _clicked(false), _funcHandler(funcHandler), _shadowedText(false), _forcedMouseHovered(false) { }
 
 // Button without mouseHover color with text (with or without shadow)
-RectButton::RectButton(Vector2D size, Vector2D position, ALLEGRO_COLOR color, ALLEGRO_COLOR textColor, std::string text, uint fontSize, bool func(RectButton*), bool shadowedText /*= false*/ )
-    : _size(size), _position(position), _color(color), _colorMouseHover(ALLEGRO_COLOR()), _textColor(textColor), _text(text), _fontSize(fontSize), _clicked(false), _func(func), _shadowedText(shadowedText), _forcedMouseHovered(false) { }
+RectButton::RectButton(Vector2D size, Vector2D position, ALLEGRO_COLOR color, ALLEGRO_COLOR textColor, std::string text, uint fontSize, ButtonHandler funcHandler, bool shadowedText /*= false*/ )
+    : _size(size), _position(position), _color(color), _colorMouseHover(ALLEGRO_COLOR()), _textColor(textColor), _text(text), _fontSize(fontSize), _clicked(false), _funcHandler(funcHandler), _shadowedText(shadowedText), _forcedMouseHovered(false) { }
 
 // Button without mouseHover color without text (with or without callback function)
-RectButton::RectButton(Vector2D size, Vector2D position, ALLEGRO_COLOR color, bool func(RectButton*) /*= NULL*/ )
-    : _size(size), _position(position), _color(color), _colorMouseHover(ALLEGRO_COLOR()), _textColor(ALLEGRO_COLOR()), _text(""), _fontSize(0), _clicked(false), _func(func), _shadowedText(false), _forcedMouseHovered(false) { }
+RectButton::RectButton(Vector2D size, Vector2D position, ALLEGRO_COLOR color, ButtonHandler funcHandler /*= NULL*/ )
+    : _size(size), _position(position), _color(color), _colorMouseHover(ALLEGRO_COLOR()), _textColor(ALLEGRO_COLOR()), _text(""), _fontSize(0), _clicked(false), _funcHandler(funcHandler), _shadowedText(false), _forcedMouseHovered(false) { }
 
 // Transparent button with text (with or without shadow)
-RectButton::RectButton(Vector2D position, ALLEGRO_COLOR textColor, std::string text, uint fontSize, bool func(RectButton*), bool shadowedText /*= false*/ )
-    : _size(Vector2D(0.0f, 0.0f)), _position(position), _color(ALLEGRO_COLOR()), _colorMouseHover(ALLEGRO_COLOR()), _textColor(textColor), _text(text), _fontSize(fontSize), _clicked(false), _func(func), _shadowedText(shadowedText), _forcedMouseHovered(false) { }
+RectButton::RectButton(Vector2D position, ALLEGRO_COLOR textColor, std::string text, uint fontSize, ButtonHandler funcHandler, bool shadowedText /*= false*/ )
+    : _size(Vector2D(0.0f, 0.0f)), _position(position), _color(ALLEGRO_COLOR()), _colorMouseHover(ALLEGRO_COLOR()), _textColor(textColor), _text(text), _fontSize(fontSize), _clicked(false), _funcHandler(funcHandler), _shadowedText(shadowedText), _forcedMouseHovered(false) { }
 
 // Transparent button without text (with or without callback function)
-RectButton::RectButton(Vector2D size, Vector2D position, bool func(RectButton*) /*= NULL*/ )
-    : _size(size), _position(position), _color(ALLEGRO_COLOR()), _colorMouseHover(ALLEGRO_COLOR()), _textColor(ALLEGRO_COLOR()), _text(""), _fontSize(0), _clicked(false), _func(func), _shadowedText(false), _forcedMouseHovered(false) { }
+RectButton::RectButton(Vector2D size, Vector2D position, ButtonHandler funcHandler /*= NULL*/ )
+    : _size(size), _position(position), _color(ALLEGRO_COLOR()), _colorMouseHover(ALLEGRO_COLOR()), _textColor(ALLEGRO_COLOR()), _text(""), _fontSize(0), _clicked(false), _funcHandler(funcHandler), _shadowedText(false), _forcedMouseHovered(false) { }
 
 void RectButton::Draw()
 {
@@ -71,12 +71,15 @@ bool RectButton::Update(ALLEGRO_EVENT* ev)
     {
         if ((ev->mouse.button == 1) && _clicked)
         {
-            _clicked = false;
-            if(_func != NULL && IsMouseHovered())
-            {
-                (*_func)(const_cast<RectButton*>(this));
-                return false; // draw shouldn't be called anymore for this state
-            }
+            if(!_funcHandler.IsNULL() && IsMouseHovered())
+                try
+                {
+                    return _funcHandler.Invoke(const_cast<RectButton*>(this));
+                }
+                catch (InvalidDelegateException)
+                {
+                	return false;
+                }
         }
     }
 

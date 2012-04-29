@@ -137,10 +137,10 @@ bool S_Game::HandleStatePlacingBets()
 {
     if (_buttons.size() == 0 )
     {
-        _buttons.push_back(new RectButton(Vector2D(50,100),Vector2D(300, 500),al_map_rgb(255,255,255),al_map_rgb(0,0,0),"Hit",20, &HandleButtonClick , true));
-        _buttons.push_back(new RectButton(Vector2D(50,100),Vector2D(410, 500),al_map_rgb(255,255,255),al_map_rgb(0,0,0),"Stand",20, &HandleButtonClick , true));
-        _buttons.push_back(new RectButton(Vector2D(50,100),Vector2D(520, 500),al_map_rgb(255,255,255),al_map_rgb(0,0,0),"Double",20, &HandleButtonClick , true));
-        _buttons.push_back(new RectButton(Vector2D(50,100),Vector2D(630, 500),al_map_rgb(255,255,255),al_map_rgb(0,0,0),"Give Up",20, &HandleButtonClick , true));
+        _buttons.push_back(new RectButton(Vector2D(50,100),Vector2D(300, 500),al_map_rgb(255,255,255),al_map_rgb(0,0,0),"Hit",20, RectButton::ButtonHandler().Bind<Player, &Player::Hit>(_activePlayers[_activePlayerIndex]), true));
+        _buttons.push_back(new RectButton(Vector2D(50,100),Vector2D(410, 500),al_map_rgb(255,255,255),al_map_rgb(0,0,0),"Stand",20, RectButton::ButtonHandler().Bind<Player, &Player::Stand>(_activePlayers[_activePlayerIndex]), true));
+        _buttons.push_back(new RectButton(Vector2D(50,100),Vector2D(520, 500),al_map_rgb(255,255,255),al_map_rgb(0,0,0),"Double",20, RectButton::ButtonHandler().Bind<Player, &Player::Double>(_activePlayers[_activePlayerIndex]), true));
+        //_buttons.push_back(new RectButton(Vector2D(50,100),Vector2D(630, 500),al_map_rgb(255,255,255),al_map_rgb(0,0,0),"Give Up",20, &HandleButtonClick , true));
         //_buttons.push_back(new RectButton(Vector2D(50, 440), al_map_rgb(200, 200, 200), "Hit", 50, &HandleButtonClick, true));
     }
     return true;
@@ -186,18 +186,18 @@ void S_Game::ReadPlayersFromFile()
     file.close();
 }
 
-bool HandleButtonClick( RectButton* btn )
-{
-    if (btn->GetText() == "Hit") /*Mudar string para GetString macro*/
-        S_Game::GetActivePlayers()[S_Game::GetActivePlayerIndex()]->Hit();
-    else if (btn->GetText() == "Stand")
-        S_Game::GetActivePlayers()[S_Game::GetActivePlayerIndex()]->Stand();
-    else if (btn->GetText() == "Double")
-        S_Game::GetActivePlayers()[S_Game::GetActivePlayerIndex()]->Double();
-    else if (btn->GetText() == "Give Up")
-        S_Game::GetActivePlayers()[S_Game::GetActivePlayerIndex()]->Stand();
-    return true;
-}
+//bool HandleButtonClick( RectButton* btn )
+//{
+//    if (btn->GetText() == "Hit") /*Mudar string para GetString macro*/
+//        S_Game::GetActivePlayers()[S_Game::GetActivePlayerIndex()]->Hit();
+//    else if (btn->GetText() == "Stand")
+//        S_Game::GetActivePlayers()[S_Game::GetActivePlayerIndex()]->Stand();
+//    else if (btn->GetText() == "Double")
+//        S_Game::GetActivePlayers()[S_Game::GetActivePlayerIndex()]->Double();
+//    else if (btn->GetText() == "Give Up")
+//        S_Game::GetActivePlayers()[S_Game::GetActivePlayerIndex()]->Stand();
+//    return true;
+//}
 
 void S_Game::SelectPlayers()
 {

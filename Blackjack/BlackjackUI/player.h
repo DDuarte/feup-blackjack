@@ -32,9 +32,9 @@ public:
 
     // In-game player actions
     void PlaceBet(double bet);
-    bool Stand();
-    bool Hit();
-    bool Double();
+    bool Stand(RectButton* btn);
+    bool Hit(RectButton* btn);
+    bool Double(RectButton* btn);
     void Lose();
     void ResetPlayer();
 

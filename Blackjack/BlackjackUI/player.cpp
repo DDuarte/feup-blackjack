@@ -51,7 +51,7 @@ void Player::PlaceBet(double bet)
     _game->PlayerBet(this, bet);
 }
 
-bool Player::Hit()
+bool Player::Hit(RectButton* btn)
 {
     Card* tempCard = _game->GetDeck()->WithdrawCard();
 
@@ -65,13 +65,13 @@ bool Player::Hit()
     return true;
 }
 
-bool Player::Stand()
+bool Player::Stand(RectButton* btn)
 {
     _game->PlayerStand(this);
     return true;
 }
 
-bool Player::Double()
+bool Player::Double(RectButton* btn)
 {
     Card* tempCard = _game->GetDeck()->WithdrawCard();
 
