@@ -175,7 +175,7 @@ bool S_Game::HandleStateResetRound()
 
 void S_Game::ReadPlayersFromFile()
 {
-    std::ifstream file (Player::GetPlayersFileName(), std::ios::in);
+    std::ifstream file(Player::GetPlayersFileName(), std::ios::in);
 
     if (!file.is_open())
         throw FileNotFoundException(Player::GetPlayersFileName(), Player::GetPlayersFileName() + " not found!");
@@ -184,7 +184,7 @@ void S_Game::ReadPlayersFromFile()
     {
         try
         {
-            _players.push_back(Player(file,const_cast<S_Game*>(this)));
+            _players.push_back(Player(file, const_cast<S_Game*>(this)));
         }
         catch (InvalidPlayerException)
         {

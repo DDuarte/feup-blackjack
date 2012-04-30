@@ -6,12 +6,13 @@
 #include "deck.h"
 #include "hand.h"
 #include "fonts.h"
+#include "localization.h"
 
 #include <string>
 #include <fstream>
 #include <exception>
-#include <fstream>
 #include <iomanip>
+#include <sstream>
 
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_font.h>
@@ -111,9 +112,20 @@ void Player::Draw()
 {
     // must draw hand, player name and total money
 
+    const char* name = _name.c_str();
+
+    std::stringstream ss;
+    ss << _balance << ' ' << "â‚¬"; // euro symbol
+
+    // must convert to USTR because we got the euro special symbol
+    // P.S Encodings suck.
+    ALLEGRO_USTR* balance = al_ustr_new(ss.str().c_str());
+
+    al_draw_text(Fonts::GetFont(20), al_map_rgb(255, 255, 255),
+        _drawPosition.X + 10, _drawPosition.Y + 10 + 105, 0, name);
+    al_draw_ustr(Fonts::GetFont(20), al_map_rgb(255, 255, 255),
+        _drawPosition.X + 10, _drawPosition.Y - 10 + 105, 0, balance);
+
     _hand->SetPosition(_drawPosition); // should only be called once, NOT every draw
     _hand->Draw();
-
-    al_draw_textf(Fonts::GetFont(20), al_map_rgb(255, 255, 255), _drawPosition.X + 10, _drawPosition.Y + 10 + 105, 0,  "%s", _name.c_str());
-    al_draw_textf(Fonts::GetFont(20), al_map_rgb(255, 255, 255), _drawPosition.X + 10, _drawPosition.Y - 10 + 105, 0,  "%.2f €", _balance);
 }
