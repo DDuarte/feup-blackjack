@@ -1,7 +1,6 @@
 #ifndef BLACKJACK_H
 #define BLACKJACK_H
 
-#include "state.h"
 #include "utilities.h"
 
 #include <vector>
@@ -27,9 +26,10 @@ struct ALLEGRO_DISPLAY;
 struct ALLEGRO_EVENT_QUEUE;
 struct ALLEGRO_TIMER;
 union ALLEGRO_EVENT;
+class State;
 
 // Singleton, single instance
-class BlackJack // : public State
+class BlackJack
 {
 public:
     static BlackJack* Instance();

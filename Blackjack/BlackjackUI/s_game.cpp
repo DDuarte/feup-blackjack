@@ -186,19 +186,6 @@ void S_Game::ReadPlayersFromFile()
     file.close();
 }
 
-//bool HandleButtonClick( RectButton* btn )
-//{
-//    if (btn->GetText() == "Hit") /*Mudar string para GetString macro*/
-//        S_Game::GetActivePlayers()[S_Game::GetActivePlayerIndex()]->Hit();
-//    else if (btn->GetText() == "Stand")
-//        S_Game::GetActivePlayers()[S_Game::GetActivePlayerIndex()]->Stand();
-//    else if (btn->GetText() == "Double")
-//        S_Game::GetActivePlayers()[S_Game::GetActivePlayerIndex()]->Double();
-//    else if (btn->GetText() == "Give Up")
-//        S_Game::GetActivePlayers()[S_Game::GetActivePlayerIndex()]->Stand();
-//    return true;
-//}
-
 void S_Game::SelectPlayers()
 {
     if (_waitingPlayers.empty() || _waitingPlayers.size() < NUM_ACTIVE_PLAYERS)
@@ -220,4 +207,3 @@ Player* S_Game::SelectNextPlayerFromQueue()
 
     return plr;
 }
-

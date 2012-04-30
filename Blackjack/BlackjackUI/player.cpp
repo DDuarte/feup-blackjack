@@ -3,6 +3,7 @@
 #include "utilities.h"
 #include "gameExceptions.h"
 #include "rectButton.h"
+#include "deck.h"
 
 #include <string>
 #include <fstream>
@@ -100,6 +101,3 @@ void Player::ResetPlayer()
     _bet = 0;
     ClearHand();
 }
-
-
-

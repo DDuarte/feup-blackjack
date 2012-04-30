@@ -2,17 +2,17 @@
 #define S_GAME_H
 
 #include "state.h"
-#include "deck.h"
-#include "dealer.h"
-#include "rectButton.h"
+#include "utilities.h"
 
 #include <vector>
 #include <queue>
 
 union ALLEGRO_EVENT;
 struct ALLEGRO_BITMAP;
-
+class Deck;
 class Player;
+class Dealer;
+class RectButton;
 
 enum GameState
 {

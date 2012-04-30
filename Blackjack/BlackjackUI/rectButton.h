@@ -4,8 +4,7 @@
 #include "allegroObject.h"
 #include "utilities.h"
 #include "blackjack.h"
-
-
+#include "delegate.h"
 
 #include <string>
 
@@ -15,15 +14,8 @@
 #include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_acodec.h>
 
-#include "delegate.h"
-
-
-
 class RectButton : public AllegroObject
 {
-
-    
-
 public:
 
     typedef Delegate<bool (RectButton*)> ButtonHandler;
@@ -72,7 +64,5 @@ private:
 
     bool _forcedMouseHovered;
 };
-
-
 
 #endif // RECTBUTTON_H

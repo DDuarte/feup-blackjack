@@ -5,7 +5,6 @@
 
 #include <unordered_map>
 
-
 struct ALLEGRO_FONT;
 
 // Needed fonts are loaded "on demand" however, since we are using a map,

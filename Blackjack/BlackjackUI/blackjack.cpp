@@ -1,6 +1,5 @@
 #include "blackjack.h"
 #include "utilities.h"
-
 #include "s_settings.h"
 #include "s_game.h"
 #include "s_game_over.h"

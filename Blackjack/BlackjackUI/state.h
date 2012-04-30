@@ -1,5 +1,5 @@
-#ifndef STATE_H_
-#define STATE_H_
+#ifndef STATE_H
+#define STATE_H
 
 union ALLEGRO_EVENT;
 
@@ -13,4 +13,4 @@ public:
     virtual void UnloadContents() = 0;
 };
 
-#endif // STATE_H_
+#endif // STATE_H

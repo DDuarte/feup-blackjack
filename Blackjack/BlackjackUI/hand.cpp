@@ -10,6 +10,7 @@
 #include <allegro5/allegro_font.h>
 
 #include <vector>
+#include <algorithm>
 
 Hand::Hand(Vector2D position, bool dealerHand /*= false*/)
 {

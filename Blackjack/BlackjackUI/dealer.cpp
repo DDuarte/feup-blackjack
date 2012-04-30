@@ -1,6 +1,7 @@
 #include "s_game.h"
 #include "dealer.h"
 #include "hand.h"
+#include "deck.h"
 
 Dealer::Dealer(S_Game* game)
 {

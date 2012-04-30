@@ -2,14 +2,14 @@
 #define HAND_H
 
 #include "utilities.h"
-#include "card.h"
 
 #include <vector>
-#include <algorithm>
 
 int const ACE_MAX_VAL = 11;
 int const ACE_MIN_VAL = 1;
 int const BLACKJACK_HAND = 21;
+
+class Card;
 
 class Hand
 {
