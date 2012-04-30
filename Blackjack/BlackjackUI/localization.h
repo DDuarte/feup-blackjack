@@ -29,7 +29,11 @@ enum Strings
     STR_ACE,
     STR_PLAY,
     STR_OPTIONS,
-    STR_QUIT
+    STR_QUIT,
+    STR_HIT,
+    STR_STAND,
+    STR_DOUBLE,
+    STR_GIVEUP
     // more here
 };
 

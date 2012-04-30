@@ -8,6 +8,7 @@
 #include "player.h"
 #include "gameExceptions.h"
 #include "rectButton.h"
+#include "localization.h"
 
 #include <string>
 
@@ -62,6 +63,13 @@ void S_Game::Draw()
 
     // Debug printing
     al_draw_textf(Fonts::GetFont(10), al_map_rgb(255, 255, 255), 0, 0, ALLEGRO_ALIGN_LEFT, "x: %3.1f y: %3.1f", BlackJack::GetMousePosition().X, BlackJack::GetMousePosition().Y);
+
+    if (_activePlayers[0] != NULL) _activePlayers[0]->Draw(Vector2D(652, 217));
+    if (_activePlayers[1] != NULL) _activePlayers[1]->Draw(Vector2D(517, 344));
+    if (_activePlayers[2] != NULL) _activePlayers[2]->Draw(Vector2D(260, 344));
+    if (_activePlayers[3] != NULL) _activePlayers[3]->Draw(Vector2D(82, 217));
+    
+    // _dealer->Draw(265, 63);
 }
 
 void S_Game::UnloadContents()
@@ -128,7 +136,7 @@ void S_Game::PlayerHit(Player* player)
 {
     if (player->IsBusted())
     {
-        al_show_native_message_box(BlackJack::Instance()->GetDisplay(), "Bust","Hit","Hit","ok",0 );
+        //al_show_native_message_box(BlackJack::Instance()->GetDisplay(), "Bust","Hit","Hit","ok",0 );
         player->Lose();
     }
 }
@@ -137,10 +145,11 @@ bool S_Game::HandleStatePlacingBets()
 {
     if (_buttons.size() == 0 )
     {
-        _buttons.push_back(new RectButton(Vector2D(50,100),Vector2D(300, 500),al_map_rgb(255,255,255),al_map_rgb(0,0,0),"Hit",20, RectButton::ButtonHandler().Bind<Player, &Player::Hit>(_activePlayers[_activePlayerIndex]), true));
-        _buttons.push_back(new RectButton(Vector2D(50,100),Vector2D(410, 500),al_map_rgb(255,255,255),al_map_rgb(0,0,0),"Stand",20, RectButton::ButtonHandler().Bind<Player, &Player::Stand>(_activePlayers[_activePlayerIndex]), true));
-        _buttons.push_back(new RectButton(Vector2D(50,100),Vector2D(520, 500),al_map_rgb(255,255,255),al_map_rgb(0,0,0),"Double",20, RectButton::ButtonHandler().Bind<Player, &Player::Double>(_activePlayers[_activePlayerIndex]), true));
-        //_buttons.push_back(new RectButton(Vector2D(50,100),Vector2D(630, 500),al_map_rgb(255,255,255),al_map_rgb(0,0,0),"Give Up",20, &HandleButtonClick , true));
+        _buttons.push_back(new RectButton(Vector2D(50,50), Vector2D(300, 500), al_map_rgb(255, 255, 255), al_map_rgb(238, 233, 233), al_map_rgb(0, 0, 0), GetStr(STR_HIT), 20, RectButton::ButtonHandler().Bind<Player, &Player::Hit>(_activePlayers[_activePlayerIndex]), true));
+        _buttons.push_back(new RectButton(Vector2D(50,50), Vector2D(410, 500), al_map_rgb(255, 255, 255), al_map_rgb(238, 233, 233), al_map_rgb(0, 0, 0), GetStr(STR_STAND), 20, RectButton::ButtonHandler().Bind<Player, &Player::Stand>(_activePlayers[_activePlayerIndex]), true));
+        _buttons.push_back(new RectButton(Vector2D(50,50), Vector2D(520, 500), al_map_rgb(255, 255, 255), al_map_rgb(238, 233, 233), al_map_rgb(0, 0, 0), GetStr(STR_DOUBLE), 20, RectButton::ButtonHandler().Bind<Player, &Player::Double>(_activePlayers[_activePlayerIndex]), true));
+        
+        //_buttons.push_back(new RectButton(Vector2D(50,100),Vector2D(630, 500),al_map_rgb(255,255,255),al_map_rgb(0,0,0), GetStr(STR_GIVEUP), 20, &HandleButtonClick , true));
         //_buttons.push_back(new RectButton(Vector2D(50, 440), al_map_rgb(200, 200, 200), "Hit", 50, &HandleButtonClick, true));
     }
     return true;

@@ -4,12 +4,17 @@
 #include "gameExceptions.h"
 #include "rectButton.h"
 #include "deck.h"
+#include "hand.h"
+#include "fonts.h"
 
 #include <string>
 #include <fstream>
 #include <exception>
 #include <fstream>
 #include <iomanip>
+
+#include <allegro5/allegro.h>
+#include <allegro5/allegro_font.h>
 
 std::string Player::_playersFileName = std::string("players.txt");
 
@@ -26,7 +31,7 @@ Player::Player(std::ifstream& file, S_Game* game)
 
 void Player::WriteText(std::ofstream& out) const
 {
-    out << std::fixed << std::setprecision(2) << _balance << " " << _name; // << _bet; It isn't needed because we don't want to save Player bet;
+    out << std::fixed << std::setprecision(2) << _balance << " " << _name;
 }
 
 bool Player::ReadText(std::ifstream& file)
@@ -100,4 +105,15 @@ void Player::ResetPlayer()
 {
     _bet = 0;
     ClearHand();
+}
+
+void Player::Draw()
+{
+    // must draw hand, player name and total money
+
+    _hand->SetPosition(_drawPosition); // should only be called once, NOT every draw
+    _hand->Draw();
+
+    al_draw_textf(Fonts::GetFont(20), al_map_rgb(255, 255, 255), _drawPosition.X + 10, _drawPosition.Y + 10 + 105, 0,  "%s", _name.c_str());
+    al_draw_textf(Fonts::GetFont(20), al_map_rgb(255, 255, 255), _drawPosition.X + 10, _drawPosition.Y - 10 + 105, 0,  "%.2f €", _balance);
 }

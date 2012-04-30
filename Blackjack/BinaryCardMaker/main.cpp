@@ -80,6 +80,10 @@ int main()
         { "Play"    , "Jogar" },
         { "Options" , "Opções" },
         { "Quit"    , "Sair" },
+        { "Hit"     , "Pedir" },
+        { "Stand"   , "Ficar" },
+        { "Double"  , "Dobrar" },
+        { "Give Up" , "Desistir" },
     };
 
     const int count = sizeof(strings) / sizeof(strings[0]);

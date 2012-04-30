@@ -72,14 +72,17 @@ bool RectButton::Update(ALLEGRO_EVENT* ev)
         if ((ev->mouse.button == 1) && _clicked)
         {
             if(!_funcHandler.IsNULL() && IsMouseHovered())
+            {
                 try
                 {
+                    _clicked = false;
                     return _funcHandler.Invoke(const_cast<RectButton*>(this));
                 }
                 catch (InvalidDelegateException)
                 {
                 	return false;
                 }
+            }
         }
     }
 

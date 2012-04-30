@@ -2,7 +2,6 @@
 #define PLAYER_H
 
 #include "hand.h"
-#include "rectButton.h"
 
 #include <string>
 #include <vector>
@@ -10,6 +9,8 @@
 
 class Card;
 class S_Game;
+class RectButton;
+union ALLEGRO_EVENT;
 
 // Only s_game class will create objects of this type
 // _game should be used to tell "BlackJack" that this player did a bet/stand/etc
@@ -41,6 +42,11 @@ public:
     void NewCard(Card* card) { _hand->AddCard(card); }
     void ClearHand() { _hand->Clear(); }
 
+    void Draw();
+    void Draw(Vector2D position) { _drawPosition = position; Draw(); }
+
+    bool Update(ALLEGRO_EVENT* ev); // ?
+
 private:
     bool ReadText(std::ifstream& in);
 
@@ -52,6 +58,8 @@ private:
 
     Hand* _hand;
     S_Game* _game;
+    
+    Vector2D _drawPosition;
 };
 
 #endif // PLAYER_H

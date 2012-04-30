@@ -32,13 +32,6 @@ Hand::Hand()
     _position = Vector2D(0,0);
 }
 
-
-Hand::~Hand()
-{
-    //for (size_t i = 0; i < _cards.size(); ++i)
-    //    delete _cards[i];
-}
-
 Hand& Hand::AddCard(Card* card) // Returning a reference to this
 {                               // so we can chain multiple add cards
     if (!card)
@@ -101,9 +94,6 @@ void Hand::RemoveCard(const Card* card)
 
 void Hand::Clear()
 {
-    for (size_t i = 0; i < _cards.size(); ++i);
-        //delete _cards[i];
-
     _cards.clear();
 
     _score = 0;
@@ -130,8 +120,8 @@ void Hand::Draw()
 
     for (uint i = 0; i < _cards.size(); ++i)
     {
-        float x = _position.X + (i*14);
-        float y = _position.Y - (i*15*!_dealerHand);
+        float x = _position.X + i * 14;
+        float y = _position.Y - i * 15 * !_dealerHand;
 
         if (_dealerHand && _drawSecondCardBack && i == 1)
             _cards[i]->DrawBack(x, y, angle);
@@ -144,14 +134,17 @@ void Hand::Draw()
 
     if (indexMHCard != -1)
     {
+        float x = _position.X + indexMHCard * 14;
+        float y = _position.Y - indexMHCard * 15 * !_drawSecondCardBack;
+
         if (_drawSecondCardBack && indexMHCard == 1)
-            _cards[indexMHCard]->DrawBack(_position.X + (indexMHCard*14), _position.Y - (indexMHCard*15*!_drawSecondCardBack), angle);
+            _cards[indexMHCard]->DrawBack(x, y, angle);
         else
-            _cards[indexMHCard]->Draw(_position.X + (indexMHCard*14), _position.Y - (indexMHCard*15*!_drawSecondCardBack), angle, true);
+            _cards[indexMHCard]->Draw(x, y, angle, true);
     }
 
-    // Draw score of hand if no card is hidden
-    if (!_dealerHand)
+    // Draw score of hand if no card is hidden and if score is not zero
+    if (!_dealerHand && _score > 0 /* && _cards.size() != 0*/)
     {
         al_draw_filled_rectangle(_position.X - 21, _position.Y - 21, _position.X + 1, _position.Y + 1, al_map_rgb(255, 255, 255));
         al_draw_textf(Fonts::GetFont(19), al_map_rgb(0, 0, 0), _position.X - 20, _position.Y - 20, 0, "%2.0i", _score);

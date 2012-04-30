@@ -16,7 +16,6 @@ class Hand
 public:
     Hand();
     Hand(Vector2D position, bool dealerHand = false);
-    ~Hand();
 
     uint GetScore() const { return _score; }
 
@@ -30,6 +29,8 @@ public:
     void Draw();
 
     void ShowSecondCard() { _drawSecondCardBack = false; }
+
+    void SetPosition(Vector2D position) { _position = position; }
 
 private:
     std::vector<Card*> _cards;

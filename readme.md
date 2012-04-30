@@ -18,6 +18,8 @@ Resources credits
 * `Pack: game programmers soundset, blackjack` sounds by [milton]
 * `Linux Games 1024x768 Wallpaper Don't Play Games on Windows` downloaded from [Wallpaper Linux]
 * `Champagne & Limousines` font by [Lauren Thompson]
+* `Chip 1` downloaded from [freepatentsonline]
+* `Casino Chip 50` downloaded from [4shared]
 
  [John Fitzgibbon]: http://www.jfitz.com/
  [milton]: http://www.freesound.org/people/milton./
@@ -25,3 +27,5 @@ Resources credits
  [Lauren Thompson]: http://www.nymFont.com
  [dirent.h]: http://www.softagalleria.net/dirent.php
  [Allegro 5.0.6]: http://alleg.sourceforge.net/
+ [freepatentsonline]: http://www.freepatentsonline.com
+ [4shared]: http://www.4shared.com
