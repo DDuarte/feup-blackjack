@@ -26,8 +26,8 @@ S_MainMenu::S_MainMenu()
     _nextMenuSound = NULL;
     _selectedMenu = -1;
     _playButton = new RectButton(Vector2D(50, 440), al_map_rgb(200, 200, 200), GetStr(STR_PLAY), 50, RectButton::ButtonHandler().Bind<&ChangeToPlayState>(), true);
-    _settingButton = new RectButton(Vector2D(50, 441 + 45), al_map_rgb(200, 200, 200), GetStr(STR_OPTIONS), 50, RectButton::ButtonHandler().Bind<&ChangeToSettingsState>(), true);
-    _quitButton = new RectButton(Vector2D(50, 441 + 90), al_map_rgb(200, 200, 200), GetStr(STR_QUIT), 50, RectButton::ButtonHandler().Bind<&ChangeToQuit>(), true);
+    _settingButton = new RectButton(Vector2D(50, 441 + 50), al_map_rgb(200, 200, 200), GetStr(STR_OPTIONS), 50, RectButton::ButtonHandler().Bind<&ChangeToSettingsState>(), true);
+    _quitButton = new RectButton(Vector2D(50, 441 + 100), al_map_rgb(200, 200, 200), GetStr(STR_QUIT), 50, RectButton::ButtonHandler().Bind<&ChangeToQuit>(), true);
 }
 
 void S_MainMenu::Initialize()
@@ -124,12 +124,21 @@ void S_MainMenu::Draw()
     al_draw_text(Fonts::GetFont(140), shadowText, 267, 1, ALLEGRO_ALIGN_CENTRE, "Blackjack");
     al_draw_text(Fonts::GetFont(140), selectedText, 266, 0, ALLEGRO_ALIGN_CENTRE, "Blackjack");
     
-    if (_playButton->IsMouseHovered())
+    if (_playButton->IsMouseHovered() && _selectedMenu != MENU_PLAY)
+    {
+        al_play_sample(_nextMenuSound, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
         _selectedMenu = MENU_PLAY;
-    else if (_settingButton->IsMouseHovered())
+    }
+    else if (_settingButton->IsMouseHovered() && _selectedMenu != MENU_SETTINGS)
+    {
+        al_play_sample(_nextMenuSound, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
         _selectedMenu = MENU_SETTINGS;
-    else if (_quitButton->IsMouseHovered())
+    }
+    else if (_quitButton->IsMouseHovered() && _selectedMenu != MENU_QUIT)
+    {
+        al_play_sample(_nextMenuSound, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
         _selectedMenu = MENU_QUIT;
+    }
     
     bool drawPlay = _selectedMenu == MENU_PLAY;
     bool drawSettings = _selectedMenu == MENU_SETTINGS;

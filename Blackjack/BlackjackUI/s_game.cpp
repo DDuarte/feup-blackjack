@@ -36,6 +36,8 @@ S_Game::S_Game()
     for (uint i = 0; i < NUM_ACTIVE_PLAYERS; ++i)
         _activePlayers[i] = NULL;
     
+    _activePlayerIndex = 0;
+    
 }
 
 void S_Game::Initialize()
@@ -65,7 +67,7 @@ void S_Game::Draw()
     al_draw_textf(Fonts::GetFont(10), al_map_rgb(255, 255, 255), 0, 0, ALLEGRO_ALIGN_LEFT, "x: %3.1f y: %3.1f", BlackJack::GetMousePosition().X, BlackJack::GetMousePosition().Y);
 
     if (_activePlayers[0] != NULL) _activePlayers[0]->Draw(Vector2D(652, 217));
-    if (_activePlayers[1] != NULL) _activePlayers[1]->Draw(Vector2D(517, 344));
+    if (_activePlayers[1] != NULL) _activePlayers[1]->Draw(Vector2D(/*517*/417, 344));
     if (_activePlayers[2] != NULL) _activePlayers[2]->Draw(Vector2D(260, 344));
     if (_activePlayers[3] != NULL) _activePlayers[3]->Draw(Vector2D(82, 217));
     
@@ -86,7 +88,12 @@ bool S_Game::Update(ALLEGRO_EVENT* ev)
         return false;
 
     for (std::vector<RectButton*>::iterator btn = _buttons.begin(); btn != _buttons.end(); ++btn)
+    {
+        int temp = _activePlayerIndex;
         (*btn)->Update(ev);
+        if (_activePlayerIndex != temp)
+            break;
+    }
 
     switch (ev->type)
     {
@@ -109,7 +116,7 @@ bool S_Game::Update(ALLEGRO_EVENT* ev)
             switch (_gameState)
             {
                 case GAME_STATE_PLACING_BETS:
-                    _activePlayerIndex = 0;
+                    //_activePlayerIndex = 0;
                     return HandleStatePlacingBets();
                 case GAME_STATE_DEALING_CARDS:
                     _activePlayerIndex = 0;
@@ -134,10 +141,13 @@ bool S_Game::Update(ALLEGRO_EVENT* ev)
 
 void S_Game::PlayerHit(Player* player)
 {
-    if (player->IsBusted())
+    
+    if (player->HasLost())
     {
+        _activePlayerIndex++;
+        _buttons.erase(_buttons.begin(), _buttons.end());
         //al_show_native_message_box(BlackJack::Instance()->GetDisplay(), "Bust","Hit","Hit","ok",0 );
-        player->Lose();
+        //player->Lose();
     }
 }
 
@@ -215,4 +225,11 @@ Player* S_Game::SelectNextPlayerFromQueue()
     _activePlayerCount++;
 
     return plr;
+}
+
+void S_Game::NextPlayer()
+{
+    _activePlayerIndex++;
+    if (_activePlayerIndex >= NUM_ACTIVE_PLAYERS)
+        _gameState++;
 }

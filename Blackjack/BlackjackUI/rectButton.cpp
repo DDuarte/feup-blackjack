@@ -43,7 +43,7 @@ void RectButton::Draw()
     {
         if (_text.length() != 0)
             _size.X = Fonts::GetFont(_fontSize)->vtable->text_length(Fonts::GetFont(_fontSize), al_ustr_new(_text.c_str()));
-        _size.Y = Fonts::GetFont(_fontSize)->height - 2;
+        _size.Y = Fonts::GetFont(_fontSize)->height - 10;
     }
 
     al_draw_filled_rectangle(x, y, x + _size.X, y + _size.Y, (IsMouseHovered() ? _colorMouseHover : _color));
@@ -66,26 +66,24 @@ bool RectButton::Update(ALLEGRO_EVENT* ev)
     if (ev->type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN)
         if ((ev->mouse.button == 1) && IsMouseHovered())
             _clicked = true;
-
     if (ev->type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
-    {
-        if ((ev->mouse.button == 1) && _clicked)
+        if ((ev->mouse.button == 1) && !IsMouseHovered())
+            _clicked = false;
+        else if ((ev->mouse.button == 1) && _clicked)
         {
             if(!_funcHandler.IsNULL() && IsMouseHovered())
             {
+                _clicked = false;
                 try
                 {
-                    _clicked = false;
                     return _funcHandler.Invoke(const_cast<RectButton*>(this));
                 }
                 catch (InvalidDelegateException)
-                {
-                	return false;
+                {   
+                    return false;
                 }
             }
         }
-    }
-
     return true;
 }
 

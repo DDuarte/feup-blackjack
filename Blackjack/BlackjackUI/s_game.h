@@ -81,6 +81,7 @@ private:
     void ReadPlayersFromFile();
 
     void SelectPlayers();
+    void NextPlayer();
     Player* SelectNextPlayerFromQueue();
 };
 

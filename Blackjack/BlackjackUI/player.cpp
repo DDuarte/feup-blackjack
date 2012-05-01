@@ -99,7 +99,7 @@ bool Player::Double(RectButton* btn)
 void Player::Lose()
 {
     _bet = 0;
-    _hand->Clear();
+    _hand->Clear(); // This must be taken because if not when a player busts he doesn't see the last card
 }
 
 void Player::ResetPlayer()

@@ -28,6 +28,7 @@ public:
 
     bool IsBusted() { return _hand->IsBusted(); }
     bool IsBlackjack() { return _hand->IsBlackjack(); }
+    bool HasLost() { return _hand->IsBusted(); }
 
     void WriteText(std::ofstream& out) const;
 
