@@ -3,6 +3,7 @@
 
 #include "hand.h"
 #include "s_game.h"
+#include "utilities.h"
 
 class Card;
 class S_Game;
@@ -24,6 +25,8 @@ public:
     
     void AddNewCard(Card* card) { _hand.AddCard(card); }
     void ClearHand() { _hand.Clear(); }
+
+    void Draw();
 
 private:
     Hand _hand;

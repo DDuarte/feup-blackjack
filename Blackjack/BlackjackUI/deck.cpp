@@ -71,7 +71,7 @@ void Deck::Draw(float dx, float dy, bool cardBack/* = false*/)
     for (uint i = 0; i < _cards.size(); i+=2) // Drawing each card makes a very
     {                                         // big deck on the screen
         dx += 1;
-        dy += 1;
+        dy -= 1;
 
         if (cardBack)
             _cards[i].DrawBack(dx, dy);

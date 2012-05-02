@@ -74,7 +74,9 @@ void S_Game::Draw()
             _activePlayers[i]->Draw();
     }
     
-    //_dealer->Draw(265, 63);
+    _dealer->Draw();
+
+    _deck->Draw(650, 80, true);
 }
 
 void S_Game::UnloadContents()
@@ -281,8 +283,6 @@ void S_Game::NextInternalGameState()
     _gameState++;
     _activePlayerIndex = 0;
     _tempCounter = 0;
-    if (_gameState > GameState::GAME_STATE_POST_GAME)
+    if (_gameState > GAME_STATE_POST_GAME)
         _gameState = 0;
 }
-
-

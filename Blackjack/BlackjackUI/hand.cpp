@@ -147,8 +147,9 @@ void Hand::Draw()
     }
 
     // Draw score of hand if no card is hidden and if score is not zero
-    if (!_dealerHand && _score > 0 /* && _cards.size() != 0*/)
+    if ((!_dealerHand && _score > 0 && _cards.size() >= 2) || (_dealerHand && _cards.size() > 0 && _cards[0]->GetScore() >= 10))
     {
+        ShowSecondCard();
         al_draw_filled_rectangle(_position.X - 21, _position.Y - 21, _position.X + 1, _position.Y + 1, al_map_rgb(255, 255, 255));
         al_draw_textf(Fonts::GetFont(19), al_map_rgb(0, 0, 0), _position.X - 20, _position.Y - 20, 0, "%2.0i", _score);
     }
