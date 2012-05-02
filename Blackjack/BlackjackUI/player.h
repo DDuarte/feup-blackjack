@@ -2,13 +2,13 @@
 #define PLAYER_H
 
 #include "hand.h"
+#include "s_game.h"
 
 #include <string>
 #include <vector>
 #include <fstream>
 
 class Card;
-class S_Game;
 class RectButton;
 union ALLEGRO_EVENT;
 
@@ -38,17 +38,20 @@ public:
     bool Hit(RectButton* btn);
     bool Double(RectButton* btn);
     void Lose();
+    void DealerBusts()  { _balance += (2*(S_Game::GetBet() * (1 + _doubleBet) )); }
+    void WinsItAll()    { _balance += (3*(S_Game::GetBet() * (1 + _doubleBet) )); }
+    void Wins()         { _balance += (S_Game::GetBet() * (1 + _doubleBet)); }
     void ResetPlayer();
 
     void NewCard(Card* card) { _hand->AddCard(card); }
     void ClearHand() { _hand->Clear(); }
 
-    void Draw();
+    void Draw(bool activePlayer = false);
 
     void SetPosition(Vector2D position);
     bool IsPositionSet() { return _drawPosition.X != 0 && _drawPosition.Y != 0; }
 
-    bool Update(ALLEGRO_EVENT* ev); // ?
+    bool Update(ALLEGRO_EVENT* ev);
 
 private:
     bool ReadText(std::ifstream& in);

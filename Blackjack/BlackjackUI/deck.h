@@ -11,7 +11,7 @@ const uint DEFAULT_NUMBER_OF_DECKS = 1;
 const uint NUMBER_OF_CARDS = 52;
 const uint NUMBER_OF_SUITS = 4;
 const uint NUMBER_OF_CARDS_PER_SUIT = NUMBER_OF_CARDS/NUMBER_OF_SUITS;
-const Vector2D DECK_POSITION = Vector2D(650, 80);
+const Vector2D DECK_POSITION = Vector2D(550, 80);
 
 class Deck
 {

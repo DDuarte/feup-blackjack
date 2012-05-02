@@ -23,6 +23,8 @@ public:
     void Hit();
     void Stand();
     
+    void ShowSecondCard() { _hand.ShowSecondCard(); }
+
     void AddNewCard(Card* card) { _hand.AddCard(card); }
     void ClearHand() { _hand.Clear(); }
 

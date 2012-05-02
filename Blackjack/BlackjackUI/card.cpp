@@ -28,9 +28,15 @@ Card::Card(int suit, int rank)
     _isMouseHovered = false;
 }
 
-void Card::Draw(float dx, float dy, float angle /*= 0.0*/, bool mouseHov /*= false*/) // angle must be in radians
+void Card::Draw(float dx, float dy, float angle /*= 0.0*/, bool mouseHov /*= false*/, bool drawBack/*=false*/) // angle must be in radians
 {
-    if (_image == NULL)
+    if (_backImage == NULL && drawBack)
+    {
+        printf("Error: Tried to draw a back card at x: %f y: %f with no image specified", dx, dy);
+        return;
+    }
+
+    if (_image == NULL && !drawBack)
     {
         printf("Error: Tried to draw a card (rank: %i, suit: %i) at x: %f y: %f with no image specified", _rank, _suit, dx, dy);
         return;
@@ -39,28 +45,33 @@ void Card::Draw(float dx, float dy, float angle /*= 0.0*/, bool mouseHov /*= fal
     float sx = _rank * _frameSize.X;
     float yx = _suit * _frameSize.Y;
 
-    al_draw_tinted_scaled_rotated_bitmap_region(_image, sx, yx, _frameSize.X, _frameSize.Y,
-        al_map_rgb(255, 255, 255), 0.0, 0.0, dx, dy, 1.0 + mouseHov*0.3, 1.0 + mouseHov*0.3, angle, 0);
-
-    if (mouseHov)
+    if (drawBack)
     {
-        al_draw_filled_rectangle(dx + _frameSize.X*1.3 -25, dy + 4, dx+_frameSize.X*1.3 - 4, dy + 25, al_map_rgb(255,255,255));
-        al_draw_textf(Fonts::GetFont(20), al_map_rgb(0,0,0), dx+_frameSize.X*1.3 - 4 , dy, ALLEGRO_ALIGN_RIGHT, "%i", _score);
+ 
+        //al_draw_bitmap_region(_backImage, 1, 1, _frameSize.X -1, _frameSize.Y - 1, dx + 1, dy + 1, 0);
+
+       //al_draw_tinted_scaled_rotated_bitmap_region(_backImage, 1, 1, _frameSize.X -1, _frameSize.Y -1,
+            //al_map_rgb(_backColorRGB, _backColorRGB, _backColorRGB), 0.0, 0.0, dx + 1, dy - 1 , 1.0 + mouseHov*0.3, 1.0 + mouseHov*0.3, angle, 0);
+
+        al_draw_tinted_scaled_rotated_bitmap_region(_backImage, 1, 1, _frameSize.X -1, _frameSize.Y -1,
+            al_map_rgb(255, 255, 255), 0.0, 0.0, dx + 1, dy + 1, 1.0 + mouseHov*0.3, 1.0 + mouseHov*0.3, angle, 0);
+        al_draw_tinted_bitmap(_backImage, al_map_rgb(_backColorRGB, _backColorRGB, _backColorRGB), dx, dy, 0);
+        al_draw_bitmap_region(_backImage, 1, 1, _frameSize.X -1, _frameSize.Y - 1, dx + 1, dy + 1, 0);
+
+
+    }
+    else
+    {
+        al_draw_tinted_scaled_rotated_bitmap_region(_image, sx, yx, _frameSize.X, _frameSize.Y,
+            al_map_rgb(255, 255, 255), 0.0, 0.0, dx, dy, 1.0 + mouseHov*0.3, 1.0 + mouseHov*0.3, angle, 0);
+
+        if (mouseHov)
+        {
+            al_draw_filled_rectangle(dx + _frameSize.X*1.3 -25, dy + 4, dx+_frameSize.X*1.3 - 4, dy + 25, al_map_rgb(255,255,255));
+            al_draw_textf(Fonts::GetFont(20), al_map_rgb(0,0,0), dx+_frameSize.X*1.3 - 4 , dy, ALLEGRO_ALIGN_RIGHT, "%i", _score);
+        }
     }
 }
-
-void Card::DrawBack(float dx, float dy, float angle /*= 0.0*/)
-{
-    if (_backImage == NULL)
-    {
-        printf("Error: Tried to draw a back card at x: %f y: %f with no image specified", dx, dy);
-        return;
-    }
-
-    al_draw_tinted_bitmap(_backImage, al_map_rgb(_backColorRGB, _backColorRGB, _backColorRGB), dx, dy, 0);
-    al_draw_bitmap_region(_backImage, 1, 1, _frameSize.X -1, _frameSize.Y - 1, dx + 1, dy + 1, 0);
-}
-
 // Should only be called by S_Game::UnloadContents
 void Card::DestroyBitmaps()
 {

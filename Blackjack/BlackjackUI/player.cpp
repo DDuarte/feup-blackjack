@@ -111,7 +111,7 @@ void Player::ResetPlayer()
     ClearHand();
 }
 
-void Player::Draw()
+void Player::Draw(bool activePlayer /*= false*/)
 {
     if (_drawPosition.X == 0 && _drawPosition.Y == 0)
         return;
@@ -126,6 +126,12 @@ void Player::Draw()
     // P.S Encodings suck.
     ALLEGRO_USTR* balance = al_ustr_new(ss.str().c_str());
 
+    if (activePlayer) al_draw_filled_rectangle(
+        _drawPosition.X + 10, 
+        _drawPosition.Y + 10 + 105, 
+        _drawPosition.X + Fonts::GetFont(20)->vtable->text_length(Fonts::GetFont(20), al_ustr_new(name)) + 10,
+        _drawPosition.Y + 10 + 105 + Fonts::GetFont(20)->height,
+        al_map_rgb(120,120,255));
     al_draw_text(Fonts::GetFont(20), al_map_rgb(255, 255, 255),
         _drawPosition.X + 10, _drawPosition.Y + 10 + 105, 0, name);
     al_draw_ustr(Fonts::GetFont(20), al_map_rgb(255, 255, 255),
@@ -143,3 +149,4 @@ void Player::SetPosition(Vector2D position)
     _drawPosition = position;
     _hand->SetPosition(position);
 }
+

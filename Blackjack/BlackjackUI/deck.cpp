@@ -76,9 +76,6 @@ void Deck::Draw(bool cardBack /* = true*/)
         dx += 1;
         dy -= 1;
 
-        if (cardBack)
-            _cards[i].DrawBack(dx, dy);
-        else
-            _cards[i].Draw(dx, dy);
+        _cards[i].Draw(dx, dy, 0.0, false, cardBack);
     }
 }

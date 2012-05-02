@@ -51,8 +51,8 @@ public:
 
     bool IsValid() const { return _suit != -1 && _rank != -1 && _score != -1; }
 
-    void Draw(float dx, float dy, float angle = 0.0, bool mouseHovered = false); // angle must be in radians
-    void DrawBack(float dx, float dy, float angle = 0.0); // angle must be in radians
+    void Draw(float dx, float dy, float angle = 0.0, bool mouseHovered = false, bool drawBack = false); // angle must be in radians
+    //void DrawBack(float dx, float dy, float angle = 0.0, bool mouseHovered = false); // angle must be in radians
 
     bool IsMouseHovered() const { return _isMouseHovered; }
     static void DestroyBitmaps();

@@ -11,6 +11,7 @@
 #include "localization.h"
 
 #include <string>
+#include <Windows.h>
 
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_image.h>
@@ -34,7 +35,7 @@ S_Game::S_Game()
 
     for (uint i = 0; i < NUM_ACTIVE_PLAYERS; ++i)
         _activePlayers[i] = NULL;
-    
+
     _activePlayerIndex = 0;
 
     _chip = NULL;
@@ -61,7 +62,7 @@ void S_Game::Draw()
 {
     // Draw Background
     al_draw_bitmap(_background, 0, 0, 0);
-    
+
     for (std::vector<RectButton*>::iterator btn = _buttons.begin(); btn != _buttons.end(); ++btn)
         (*btn)->Draw();
 
@@ -71,9 +72,9 @@ void S_Game::Draw()
     for (int i = 0; i < NUM_ACTIVE_PLAYERS; ++i)
     {
         if (_activePlayers[i] != NULL)
-            _activePlayers[i]->Draw();
+            _activePlayers[i]->Draw(i==_activePlayerIndex && _gameState == GAME_STATE_PLAYER_TURN);
     }
-    
+
     _dealer->Draw();
 
     _deck->Draw();
@@ -103,12 +104,12 @@ bool S_Game::Update(ALLEGRO_EVENT* ev)
 
     switch (ev->type)
     {
-        case ALLEGRO_EVENT_DISPLAY_CLOSE:
+    case ALLEGRO_EVENT_DISPLAY_CLOSE:
         {
             BlackJack::Instance()->Quit();
             return false;
         }
-        case ALLEGRO_EVENT_KEY_UP:
+    case ALLEGRO_EVENT_KEY_UP:
         {
             if (ev->keyboard.keycode == ALLEGRO_KEY_ESCAPE)
             {
@@ -117,7 +118,7 @@ bool S_Game::Update(ALLEGRO_EVENT* ev)
             }
             break;
         }
-        case ALLEGRO_EVENT_TIMER:
+    case ALLEGRO_EVENT_TIMER:
         {
             if (_activePlayers[0] != NULL && !_activePlayers[0]->IsPositionSet()) _activePlayers[0]->SetPosition(Vector2D(652, 217));
             if (_activePlayers[1] != NULL && !_activePlayers[1]->IsPositionSet()) _activePlayers[1]->SetPosition(Vector2D(460, 344));
@@ -126,21 +127,23 @@ bool S_Game::Update(ALLEGRO_EVENT* ev)
 
             switch (_gameState)
             {
-                case GAME_STATE_PLACING_BETS:
-                    NextInternalGameState();
-                    return false;
-                case GAME_STATE_DEALING_CARDS:
-                    return HandleStateDealingCards();
-                case GAME_STATE_PLAYER_TURN:
-                    return HandleStatePlayerTurn();
-                case GAME_STATE_DEALER_TURN:
-                    return HandleStateDealerTurn();
-                case GAME_STATE_RESET_ROUND:
-                    return HandleStateResetRound();
-                case GAME_STATE_POST_GAME:
-                    return HandleStatePostGame();
-                default:
-                    return false;
+            case GAME_STATE_PLACING_BETS:
+                NextInternalGameState();
+                return false;
+            case GAME_STATE_DEALING_CARDS:
+                return HandleStateDealingCards();
+            case GAME_STATE_PLAYER_TURN:
+                return HandleStatePlayerTurn();
+            case GAME_STATE_DEALER_TURN:
+                return HandleStateDealerTurn();
+            case GAME_STATE_CHECK_RESULTS:
+                return HandleStateCheckResults();
+            case GAME_STATE_RESET_ROUND:
+                return HandleStateResetRound();
+            case GAME_STATE_POST_GAME:
+                return HandleStatePostGame();
+            default:
+                return false;
             }
         }
     }
@@ -150,7 +153,7 @@ bool S_Game::Update(ALLEGRO_EVENT* ev)
 
 void S_Game::PlayerHit(Player* player)
 {
-    
+
     if (player->HasLost())
     {
         NextPlayer();
@@ -160,70 +163,16 @@ void S_Game::PlayerHit(Player* player)
     }
 }
 
-bool S_Game::HandleStatePlacingBets()
+void S_Game::PlayerStand( Player* player )
 {
-    if (_buttons.size() == 0 )
-    {
-        _buttons.push_back(new RectButton(Vector2D(50,50), Vector2D(300, 500), al_map_rgb(255, 255, 255), al_map_rgb(238, 233, 233), al_map_rgb(0, 0, 0), GetStr(STR_HIT), 20, RectButton::ButtonHandler().Bind<Player, &Player::Hit>(_activePlayers[_activePlayerIndex]), true));
-        _buttons.push_back(new RectButton(Vector2D(50,50), Vector2D(410, 500), al_map_rgb(255, 255, 255), al_map_rgb(238, 233, 233), al_map_rgb(0, 0, 0), GetStr(STR_STAND), 20, RectButton::ButtonHandler().Bind<Player, &Player::Stand>(_activePlayers[_activePlayerIndex]), true));
-        _buttons.push_back(new RectButton(Vector2D(50,50), Vector2D(520, 500), al_map_rgb(255, 255, 255), al_map_rgb(238, 233, 233), al_map_rgb(0, 0, 0), GetStr(STR_DOUBLE), 20, RectButton::ButtonHandler().Bind<Player, &Player::Double>(_activePlayers[_activePlayerIndex]), true));
-        
-        //_buttons.push_back(new RectButton(Vector2D(50,100),Vector2D(630, 500),al_map_rgb(255,255,255),al_map_rgb(0,0,0), GetStr(STR_GIVEUP), 20, &HandleButtonClick , true));
-        //_buttons.push_back(new RectButton(Vector2D(50, 440), al_map_rgb(200, 200, 200), "Hit", 50, &HandleButtonClick, true));
-    }
-    return true;
+    NextPlayer();
+    _buttons.erase(_buttons.begin(), _buttons.end());
 }
 
-bool S_Game::HandleStateDealingCards()
+
+void S_Game::PlayerDouble( Player* player )
 {
-    static bool dealerDealingTurn = true;
-
-    if (_tempCounter == 20)
-    {
-        _tempCounter = 0;
-        if (dealerDealingTurn)
-        {
-            dealerDealingTurn = false;
-            _dealer->AddNewCard(_deck->WithdrawCard());
-        }
-        else
-        {
-            _activePlayers[_activePlayerIndex]->NewCard(_deck->WithdrawCard());
-            _activePlayerIndex++;
-            if (_activePlayerIndex >= NUM_ACTIVE_PLAYERS)
-            {
-                _activePlayerIndex = 0;
-                if (_dealer->GetHand()->GetNumberOfCards() < 2)
-                    dealerDealingTurn = true;
-                else
-                    NextInternalGameState();
-            }
-        }
-        _tempCounter++;
-
-    }
-    else
-        _tempCounter++;
-
-    return true;
-}
-
-bool S_Game::HandleStateResetRound()
-{
-
-    for (uint i = 0; i < NUM_ACTIVE_PLAYERS; ++i)
-        _activePlayers[i]->ResetPlayer();
-
-    _dealer->ClearHand();
-
-    delete _deck;
-    _deck = new Deck();
-
-    _gameState = GAME_STATE_PLACING_BETS;
-
-    _activePlayerIndex = 0;
-
-    return true;
+    PlayerStand(player);
 }
 
 void S_Game::ReadPlayersFromFile()
@@ -286,8 +235,122 @@ void S_Game::NextInternalGameState()
         _gameState = 0;
 }
 
-bool S_Game::HandleStatePlayerTurn()
+bool S_Game::HandleStatePlacingBets()
 {
     return true;
 }
+
+bool S_Game::HandleStateDealingCards()
+{
+    static bool dealerDealingTurn = true;
+
+    if (_tempCounter == 20)
+    {
+        _tempCounter = 0;
+        if (dealerDealingTurn)
+        {
+            dealerDealingTurn = false;
+            _dealer->AddNewCard(_deck->WithdrawCard());
+        }
+        else
+        {
+            _activePlayers[_activePlayerIndex]->NewCard(_deck->WithdrawCard());
+            _activePlayerIndex++;
+            if (_activePlayerIndex >= NUM_ACTIVE_PLAYERS)
+            {
+                _activePlayerIndex = 0;
+                if (_dealer->GetHand()->GetNumberOfCards() < 2)
+                    dealerDealingTurn = true;
+                else
+                    NextInternalGameState();
+            }
+        }
+        _tempCounter++;
+
+    }
+    else
+        _tempCounter++;
+
+    return true;
+}
+
+bool S_Game::HandleStatePlayerTurn()
+{
+    if (_buttons.size() == 0 )
+    {
+        _buttons.push_back(new RectButton(Vector2D(50,50), Vector2D(300, 500), al_map_rgb(255, 255, 255), al_map_rgb(238, 233, 233), al_map_rgb(0, 0, 0), GetStr(STR_HIT), 20, RectButton::ButtonHandler().Bind<Player, &Player::Hit>(_activePlayers[_activePlayerIndex]), true));
+        _buttons.push_back(new RectButton(Vector2D(50,50), Vector2D(410, 500), al_map_rgb(255, 255, 255), al_map_rgb(238, 233, 233), al_map_rgb(0, 0, 0), GetStr(STR_STAND), 20, RectButton::ButtonHandler().Bind<Player, &Player::Stand>(_activePlayers[_activePlayerIndex]), true));
+        _buttons.push_back(new RectButton(Vector2D(50,50), Vector2D(520, 500), al_map_rgb(255, 255, 255), al_map_rgb(238, 233, 233), al_map_rgb(0, 0, 0), GetStr(STR_DOUBLE), 20, RectButton::ButtonHandler().Bind<Player, &Player::Double>(_activePlayers[_activePlayerIndex]), true));
+
+        //_buttons.push_back(new RectButton(Vector2D(50,100),Vector2D(630, 500),al_map_rgb(255,255,255),al_map_rgb(0,0,0), GetStr(STR_GIVEUP), 20, &HandleButtonClick , true));
+        //_buttons.push_back(new RectButton(Vector2D(50, 440), al_map_rgb(200, 200, 200), "Hit", 50, &HandleButtonClick, true));
+    }
+
+    return true;
+}
+
+bool S_Game::HandleStateDealerTurn()
+{
+    static uint tempCounter = 0;
+    _dealer->ShowSecondCard();
+    if (tempCounter == 20)
+    {
+        tempCounter = 0;
+        if (_dealer->GetHand()->GetScore() < 17)
+            _dealer->AddNewCard(_deck->WithdrawCard());
+        else
+            NextInternalGameState();
+        tempCounter++;
+    }
+    else
+        tempCounter++;
+
+    return true;
+}
+
+bool S_Game::HandleStateCheckResults()
+{
+    for (uint i = 0; i < NUM_ACTIVE_PLAYERS; i++)
+    {
+        if (_activePlayers[i] != NULL)
+        {
+            if (_activePlayers[i]->IsBusted())
+                _activePlayers[i]->Lose();
+            else if (_dealer->IsBusted())
+                _activePlayers[i]->DealerBusts();
+            else if (_activePlayers[i]->IsBlackjack() && !_dealer->IsBlackjack())
+                _activePlayers[i]->WinsItAll();
+            else if (_activePlayers[i]->GetHand()->GetScore() >= _dealer->GetHand()->GetScore())
+                _activePlayers[i]->Wins();
+        }
+    }
+
+    NextInternalGameState();
+    return true;
+}
+
+bool S_Game::HandleStateResetRound()
+{
+    if (false)
+    {
+        for (uint i = 0; i < NUM_ACTIVE_PLAYERS; ++i)
+            _activePlayers[i]->ResetPlayer();
+
+        _dealer->ClearHand();
+
+        delete _deck;
+        _deck = new Deck();
+
+        _gameState = GAME_STATE_PLACING_BETS;
+
+        _activePlayerIndex = 0;
+    }
+
+    return true;
+}
+
+
+
+
+
 

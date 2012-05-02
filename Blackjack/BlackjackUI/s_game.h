@@ -3,6 +3,7 @@
 
 #include "state.h"
 #include "utilities.h"
+#include "s_game.h"
 
 #include <vector>
 #include <queue>
@@ -20,6 +21,7 @@ enum GameState
     GAME_STATE_DEALING_CARDS,
     GAME_STATE_PLAYER_TURN,
     GAME_STATE_DEALER_TURN,
+    GAME_STATE_CHECK_RESULTS,
     GAME_STATE_RESET_ROUND,
     GAME_STATE_POST_GAME
 };
@@ -43,8 +45,8 @@ public:
     // Events-like calls
     void PlayerBet(Player* /* player*/) { /*_totalBets += bet;*/ /* ... */ }
     void PlayerHit(Player* player);
-    void PlayerStand(Player* player) { NextPlayer(); }
-    void PlayerDouble(Player* player) { }
+    void PlayerStand(Player* player);
+    void PlayerDouble(Player* player);
     // void PlayerSurrender(Player* player) { }
 
     static Player** GetActivePlayers() { return _activePlayers; }
@@ -81,10 +83,11 @@ private:
     bool HandleStatePlacingBets();   // Initial placement of bets
     bool HandleStateDealingCards();  // Dealer deals cards
     bool HandleStatePlayerTurn();    // Players make hit, stand or double
-    bool HandleStateDealerTurn() { return true; }    // Dealer Hits and checks for winning hands or not
+    bool HandleStateDealerTurn();    // Dealer Hits until 17
+    bool HandleStateCheckResults();  // Checks the result of the game and pays to the players or not
     bool HandleStateResetRound();       // Resets
     bool HandleStatePostGame() { return true; }     // Handle player surrender, etc.
-
+    
     void ReadPlayersFromFile();
 
     void SelectPlayers();

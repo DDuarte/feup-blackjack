@@ -17,6 +17,7 @@ Hand::Hand(Vector2D position, bool dealerHand /*= false*/)
     _cards = std::vector<Card*>();
     _score = 0;
     _dealerHand = dealerHand;
+    _tempCounter = 0;
     _drawSecondCardBack = dealerHand;
     _cardJustAdded = -1;
     _position = position;
@@ -25,6 +26,7 @@ Hand::Hand(Vector2D position, bool dealerHand /*= false*/)
 Hand::Hand()
 {
     _cards = std::vector<Card*>();
+    _tempCounter = 0;
     _score = 0;
     _dealerHand = false;
     _drawSecondCardBack = _dealerHand;
@@ -123,38 +125,38 @@ void Hand::Draw()
 
     for (uint i = 0; i < _cards.size(); ++i)
     {
-        static uint tempCounter = 0;
         float x = _position.X + i * 14;
         float y = _position.Y - i * 15 * !_dealerHand;
 
-        if (_dealerHand && _drawSecondCardBack && i == 1)
-            _cards[i]->DrawBack(x, y, angle);
+        if (_drawSecondCardBack && i == 1)
+            _cards[i]->Draw(x, y, angle, _cardJustAdded == i, true);
         else
         {
             _cards[i]->Draw(x, y, angle, _cardJustAdded == i);
-            if (tempCounter == 2)
-            {
-                _cardJustAdded = -1;
-                tempCounter = 0;
-            }
-            else
-                tempCounter++;
         }
+
+        if (_tempCounter == 3)
+        {
+            _cardJustAdded = -1;
+            _tempCounter = 0;
+        }
+        else
+            _tempCounter++;
     }
 
     if (indexMHCard != -1)
     {
         float x = _position.X + indexMHCard * 14;
-        float y = _position.Y - indexMHCard * 15 * !_drawSecondCardBack;
+        float y = _position.Y - indexMHCard * 15 * !_dealerHand;
 
         if (_drawSecondCardBack && indexMHCard == 1)
-            _cards[indexMHCard]->DrawBack(x, y, angle);
+            _cards[indexMHCard]->Draw(x, y, angle, false, true);
         else
             _cards[indexMHCard]->Draw(x, y, angle, true);
     }
 
     // Draw score of hand if no card is hidden and if score is not zero
-    if ((!_dealerHand && _score > 0 && _cards.size() >= 2) || (_dealerHand && _cards.size() > 0 && _cards[0]->GetScore() >= 10))
+    if ((!_dealerHand && _score > 0 && _cards.size() >= 2) || (_dealerHand && _cards.size() > 0 && _cards[0]->GetScore() >= 10) || !_drawSecondCardBack)
     {
         ShowSecondCard();
         al_draw_filled_rectangle(_position.X - 21, _position.Y - 21, _position.X + 1, _position.Y + 1, al_map_rgb(255, 255, 255));

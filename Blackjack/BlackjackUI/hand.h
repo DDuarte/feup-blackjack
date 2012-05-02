@@ -28,7 +28,6 @@ public:
     void Clear();
 
     void Draw();
-
     void ShowSecondCard() { _drawSecondCardBack = false; }
 
     void SetPosition(Vector2D position) { _position = position; }
@@ -37,6 +36,8 @@ public:
 private:
     std::vector<Card*> _cards;
     uint _score;
+
+    uint _tempCounter;
 
     bool _dealerHand;
     bool _drawSecondCardBack;
