@@ -132,7 +132,6 @@ bool S_Game::Update(ALLEGRO_EVENT* ev)
                 case GAME_STATE_DEALING_CARDS:
                     return HandleStateDealingCards();
                 case GAME_STATE_PLAYER_TURN:
-                    _activePlayerIndex = 0;
                     return HandleStatePlayerTurn();
                 case GAME_STATE_DEALER_TURN:
                     return HandleStateDealerTurn();
@@ -286,3 +285,9 @@ void S_Game::NextInternalGameState()
     if (_gameState > GAME_STATE_POST_GAME)
         _gameState = 0;
 }
+
+bool S_Game::HandleStatePlayerTurn()
+{
+    return true;
+}
+

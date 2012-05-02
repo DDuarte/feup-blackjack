@@ -80,7 +80,7 @@ private:
     
     bool HandleStatePlacingBets();   // Initial placement of bets
     bool HandleStateDealingCards();  // Dealer deals cards
-    bool HandleStatePlayerTurn() { return true; }    // Players make hit, stand or double
+    bool HandleStatePlayerTurn();    // Players make hit, stand or double
     bool HandleStateDealerTurn() { return true; }    // Dealer Hits and checks for winning hands or not
     bool HandleStateResetRound();       // Resets
     bool HandleStatePostGame() { return true; }     // Handle player surrender, etc.

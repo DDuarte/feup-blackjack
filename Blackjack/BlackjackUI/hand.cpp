@@ -123,6 +123,7 @@ void Hand::Draw()
 
     for (uint i = 0; i < _cards.size(); ++i)
     {
+        static uint tempCounter = 0;
         float x = _position.X + i * 14;
         float y = _position.Y - i * 15 * !_dealerHand;
 
@@ -131,7 +132,13 @@ void Hand::Draw()
         else
         {
             _cards[i]->Draw(x, y, angle, _cardJustAdded == i);
-            _cardJustAdded = -1;
+            if (tempCounter == 2)
+            {
+                _cardJustAdded = -1;
+                tempCounter = 0;
+            }
+            else
+                tempCounter++;
         }
     }
 
