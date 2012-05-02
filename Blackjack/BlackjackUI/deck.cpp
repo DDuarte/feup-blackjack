@@ -66,8 +66,11 @@ void Deck::Shuffle()
     }
 }
 
-void Deck::Draw(float dx, float dy, bool cardBack/* = false*/)
+void Deck::Draw(bool cardBack /* = true*/)
 {
+    float dx = DECK_POSITION.X;
+    float dy = DECK_POSITION.Y;
+
     for (uint i = 0; i < _cards.size(); i+=2) // Drawing each card makes a very
     {                                         // big deck on the screen
         dx += 1;

@@ -76,7 +76,7 @@ void S_Game::Draw()
     
     _dealer->Draw();
 
-    _deck->Draw(650, 80, true);
+    _deck->Draw();
 }
 
 void S_Game::UnloadContents()
