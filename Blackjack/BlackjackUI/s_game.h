@@ -41,7 +41,7 @@ public:
 
     //- Game specific
     // Events-like calls
-    void PlayerBet(Player* /* player*/, double bet) { /*_totalBets += bet;*/ /* ... */ }
+    void PlayerBet(Player* /* player*/) { /*_totalBets += bet;*/ /* ... */ }
     void PlayerHit(Player* player);
     void PlayerStand(Player* player) { }
     void PlayerDouble(Player* player) { }
@@ -55,8 +55,13 @@ public:
 
     void HandleOutOfCards() { }
 
+    static double GetBet() { return _bet; }
+
+    ALLEGRO_BITMAP* GetChip() { return _chip; }
+
 private:
     ALLEGRO_BITMAP* _background;
+    ALLEGRO_BITMAP* _chip;
 
     Dealer* _dealer;
     Deck* _deck;
@@ -83,6 +88,8 @@ private:
     void SelectPlayers();
     void NextPlayer();
     Player* SelectNextPlayerFromQueue();
+
+    static double _bet;
 };
 
 #endif // S_GAME_H

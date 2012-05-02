@@ -101,6 +101,9 @@ void Hand::Clear()
 
 void Hand::Draw()
 {
+    if (!IsPositionSet())
+        return;
+
     // Draw cards (including "zoomed" ones (when mouse hovered))
     int indexMHCard = -1;
 

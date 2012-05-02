@@ -31,6 +31,7 @@ public:
     void ShowSecondCard() { _drawSecondCardBack = false; }
 
     void SetPosition(Vector2D position) { _position = position; }
+    bool IsPositionSet() { return _position.X != 0 && _position.Y != 0; }
 
 private:
     std::vector<Card*> _cards;

@@ -25,9 +25,10 @@ Player::Player(std::ifstream& file, S_Game* game)
         throw InvalidPlayerException();
 
     _game = game;
-    _bet = 0.0;
-    _hand = new Hand(Vector2D(0,0)); // Calculate hand position
+    _hand = new Hand(Vector2D(0,0));
     // TODO Don't forget to delete this
+
+    _doubleBet = false;
 }
 
 void Player::WriteText(std::ofstream& out) const
@@ -47,15 +48,16 @@ bool Player::ReadText(std::ifstream& file)
     return !_name.empty();
 }
 
-void Player::PlaceBet(double bet)
+void Player::PlaceBet()
 {
-    if (bet <= 0 || bet > _balance)
-        throw InvalidBetException("Invalid bet exception at Player::Set(double bet)!");
+    double bet = S_Game::GetBet();
 
-    _bet = bet;
+    if (bet <= 0 || bet > _balance)
+        throw InvalidBetException("Invalid bet exception at Player::PlaceBet(double bet)!");
+
     _balance -= bet;
 
-    _game->PlayerBet(this, bet);
+    _game->PlayerBet(this);
 }
 
 bool Player::Hit(RectButton* btn)
@@ -85,8 +87,8 @@ bool Player::Double(RectButton* btn)
     if (tempCard != NULL)
     {
         _hand->AddCard(tempCard);
-        _balance -= _bet;
-        _bet *= 2;
+        _balance -= S_Game::GetBet();
+        _doubleBet = true;
         _game->PlayerDouble(this);
     }
     else
@@ -98,20 +100,23 @@ bool Player::Double(RectButton* btn)
 
 void Player::Lose()
 {
-    _bet = 0;
-    _hand->Clear(); // This must be taken because if not when a player busts he doesn't see the last card
+    // ...
+
+    // ResetPlayer();
 }
 
 void Player::ResetPlayer()
 {
-    _bet = 0;
+    _doubleBet = false;
     ClearHand();
 }
 
 void Player::Draw()
 {
-    // must draw hand, player name and total money
+    if (_drawPosition.X == 0 && _drawPosition.Y == 0)
+        return;
 
+    // must draw hand, player name and total money
     const char* name = _name.c_str();
 
     std::stringstream ss;
@@ -126,6 +131,15 @@ void Player::Draw()
     al_draw_ustr(Fonts::GetFont(20), al_map_rgb(255, 255, 255),
         _drawPosition.X + 10, _drawPosition.Y - 10 + 105, 0, balance);
 
-    _hand->SetPosition(_drawPosition); // should only be called once, NOT every draw
     _hand->Draw();
+
+    al_draw_scaled_bitmap(_game->GetChip(), 0, 0, al_get_bitmap_width(_game->GetChip()), al_get_bitmap_height(_game->GetChip()), _drawPosition.X - 30 - 5, _drawPosition.Y + 5, 30, 30, 0);
+    if (_doubleBet)
+        al_draw_scaled_bitmap(_game->GetChip(), 0, 0, al_get_bitmap_width(_game->GetChip()), al_get_bitmap_height(_game->GetChip()), _drawPosition.X - 30 - 5, _drawPosition.Y + 5 + 30 + 5, 30, 30, 0);
+}
+
+void Player::SetPosition(Vector2D position)
+{
+    _drawPosition = position;
+    _hand->SetPosition(position);
 }

@@ -20,6 +20,7 @@
 
 Player** S_Game::_activePlayers = new Player*[NUM_ACTIVE_PLAYERS];
 int S_Game::_activePlayerIndex = -1;
+double S_Game::_bet = 5.0;
 
 bool HandleButtonClick(RectButton* btn);
 
@@ -37,7 +38,8 @@ S_Game::S_Game()
         _activePlayers[i] = NULL;
     
     _activePlayerIndex = 0;
-    
+
+    _chip = NULL;
 }
 
 void S_Game::Initialize()
@@ -48,6 +50,8 @@ void S_Game::Initialize()
 void S_Game::LoadContents()
 {
     _background = al_load_bitmap("../../Resources/playing_table.png");
+    _chip = al_load_bitmap("../../Resources/chip1.png");
+
     ReadPlayersFromFile();
     for (std::vector<Player>::iterator plr = _players.begin(); plr != _players.end(); ++plr)
         _waitingPlayers.push(&(*plr));
@@ -66,17 +70,19 @@ void S_Game::Draw()
     // Debug printing
     al_draw_textf(Fonts::GetFont(10), al_map_rgb(255, 255, 255), 0, 0, ALLEGRO_ALIGN_LEFT, "x: %3.1f y: %3.1f", BlackJack::GetMousePosition().X, BlackJack::GetMousePosition().Y);
 
-    if (_activePlayers[0] != NULL) _activePlayers[0]->Draw(Vector2D(652, 217));
-    if (_activePlayers[1] != NULL) _activePlayers[1]->Draw(Vector2D(/*517*/417, 344));
-    if (_activePlayers[2] != NULL) _activePlayers[2]->Draw(Vector2D(260, 344));
-    if (_activePlayers[3] != NULL) _activePlayers[3]->Draw(Vector2D(82, 217));
+    for (int i = 0; i < NUM_ACTIVE_PLAYERS; ++i)
+    {
+        if (_activePlayers[i] != NULL)
+            _activePlayers[i]->Draw();
+    }
     
-    // _dealer->Draw(265, 63);
+    //_dealer->Draw(265, 63);
 }
 
 void S_Game::UnloadContents()
 {
     al_destroy_bitmap(_background);
+    al_destroy_bitmap(_chip);
 
     delete _dealer;
     Card::DestroyBitmaps();
@@ -113,6 +119,11 @@ bool S_Game::Update(ALLEGRO_EVENT* ev)
         }
         case ALLEGRO_EVENT_TIMER:
         {
+            if (_activePlayers[0] != NULL && !_activePlayers[0]->IsPositionSet()) _activePlayers[0]->SetPosition(Vector2D(652, 217));
+            if (_activePlayers[1] != NULL && !_activePlayers[1]->IsPositionSet()) _activePlayers[1]->SetPosition(Vector2D(460, 344));
+            if (_activePlayers[2] != NULL && !_activePlayers[2]->IsPositionSet()) _activePlayers[2]->SetPosition(Vector2D(260, 344));
+            if (_activePlayers[3] != NULL && !_activePlayers[3]->IsPositionSet()) _activePlayers[3]->SetPosition(Vector2D(82, 217));
+
             switch (_gameState)
             {
                 case GAME_STATE_PLACING_BETS:

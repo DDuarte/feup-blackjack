@@ -22,7 +22,7 @@ public:
 
     std::string GetName() const { return _name; }
     double GetBalance() const { return _balance; }
-    double GetBet() const { return _bet; }
+    double IsDoubleBet() const { return _doubleBet; }
     Hand* GetHand() const { return _hand; }
     static std::string GetPlayersFileName() { return _playersFileName; }
 
@@ -33,7 +33,7 @@ public:
     void WriteText(std::ofstream& out) const;
 
     // In-game player actions
-    void PlaceBet(double bet);
+    void PlaceBet();
     bool Stand(RectButton* btn);
     bool Hit(RectButton* btn);
     bool Double(RectButton* btn);
@@ -44,7 +44,9 @@ public:
     void ClearHand() { _hand->Clear(); }
 
     void Draw();
-    void Draw(Vector2D position) { _drawPosition = position; Draw(); }
+
+    void SetPosition(Vector2D position);
+    bool IsPositionSet() { return _drawPosition.X != 0 && _drawPosition.Y != 0; }
 
     bool Update(ALLEGRO_EVENT* ev); // ?
 
@@ -53,7 +55,7 @@ private:
 
     std::string _name;
     double _balance;
-    double _bet;
+    bool _doubleBet;
 
     static std::string _playersFileName;
 
