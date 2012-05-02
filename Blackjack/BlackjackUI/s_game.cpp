@@ -22,8 +22,6 @@ Player** S_Game::_activePlayers = new Player*[NUM_ACTIVE_PLAYERS];
 int S_Game::_activePlayerIndex = -1;
 double S_Game::_bet = 5.0;
 
-bool HandleButtonClick(RectButton* btn);
-
 S_Game::S_Game()
 {
     _players = std::vector<Player>();
@@ -127,10 +125,9 @@ bool S_Game::Update(ALLEGRO_EVENT* ev)
             switch (_gameState)
             {
                 case GAME_STATE_PLACING_BETS:
-                    //_activePlayerIndex = 0;
-                    return HandleStatePlacingBets();
+                    NextInternalGameState();
+                    return false;
                 case GAME_STATE_DEALING_CARDS:
-                    _activePlayerIndex = 0;
                     return HandleStateDealingCards();
                 case GAME_STATE_PLAYER_TURN:
                     _activePlayerIndex = 0;
@@ -155,7 +152,7 @@ void S_Game::PlayerHit(Player* player)
     
     if (player->HasLost())
     {
-        _activePlayerIndex++;
+        NextPlayer();
         _buttons.erase(_buttons.begin(), _buttons.end());
         //al_show_native_message_box(BlackJack::Instance()->GetDisplay(), "Bust","Hit","Hit","ok",0 );
         //player->Lose();
@@ -173,6 +170,40 @@ bool S_Game::HandleStatePlacingBets()
         //_buttons.push_back(new RectButton(Vector2D(50,100),Vector2D(630, 500),al_map_rgb(255,255,255),al_map_rgb(0,0,0), GetStr(STR_GIVEUP), 20, &HandleButtonClick , true));
         //_buttons.push_back(new RectButton(Vector2D(50, 440), al_map_rgb(200, 200, 200), "Hit", 50, &HandleButtonClick, true));
     }
+    return true;
+}
+
+bool S_Game::HandleStateDealingCards()
+{
+    static bool dealerDealingTurn = true;
+
+    if (_tempCounter == 20)
+    {
+        _tempCounter = 0;
+        if (dealerDealingTurn)
+        {
+            dealerDealingTurn = false;
+            _dealer->AddNewCard(_deck->WithdrawCard());
+        }
+        else
+        {
+            _activePlayers[_activePlayerIndex]->NewCard(_deck->WithdrawCard());
+            _activePlayerIndex++;
+            if (_activePlayerIndex >= NUM_ACTIVE_PLAYERS)
+            {
+                _activePlayerIndex = 0;
+                if (_dealer->GetHand()->GetNumberOfCards() < 2)
+                    dealerDealingTurn = true;
+                else
+                    NextInternalGameState();
+            }
+        }
+        _tempCounter++;
+
+    }
+    else
+        _tempCounter++;
+
     return true;
 }
 
@@ -242,5 +273,16 @@ void S_Game::NextPlayer()
 {
     _activePlayerIndex++;
     if (_activePlayerIndex >= NUM_ACTIVE_PLAYERS)
-        _gameState++;
+        NextInternalGameState();
 }
+
+void S_Game::NextInternalGameState()
+{
+    _gameState++;
+    _activePlayerIndex = 0;
+    _tempCounter = 0;
+    if (_gameState > GameState::GAME_STATE_POST_GAME)
+        _gameState = 0;
+}
+
+

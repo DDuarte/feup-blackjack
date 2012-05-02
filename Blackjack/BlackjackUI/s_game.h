@@ -43,7 +43,7 @@ public:
     // Events-like calls
     void PlayerBet(Player* /* player*/) { /*_totalBets += bet;*/ /* ... */ }
     void PlayerHit(Player* player);
-    void PlayerStand(Player* player) { }
+    void PlayerStand(Player* player) { NextPlayer(); }
     void PlayerDouble(Player* player) { }
     // void PlayerSurrender(Player* player) { }
 
@@ -74,10 +74,12 @@ private:
     int _gameState;
     static int _activePlayerIndex;
 
+    uint _tempCounter;
+
     std::vector<RectButton*> _buttons;
     
     bool HandleStatePlacingBets();   // Initial placement of bets
-    bool HandleStateDealingCards() { return true; }  // Dealer deals cards
+    bool HandleStateDealingCards();  // Dealer deals cards
     bool HandleStatePlayerTurn() { return true; }    // Players make hit, stand or double
     bool HandleStateDealerTurn() { return true; }    // Dealer Hits and checks for winning hands or not
     bool HandleStateResetRound();       // Resets
@@ -90,6 +92,7 @@ private:
     Player* SelectNextPlayerFromQueue();
 
     static double _bet;
+    void NextInternalGameState();
 };
 
 #endif // S_GAME_H

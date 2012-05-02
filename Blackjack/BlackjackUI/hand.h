@@ -18,6 +18,7 @@ public:
     Hand(Vector2D position, bool dealerHand = false);
 
     uint GetScore() const { return _score; }
+    uint GetNumberOfCards()const { return _cards.size(); }
 
     bool IsBusted() const { return GetScore() > BLACKJACK_HAND; }
     bool IsBlackjack() const { return GetScore() == BLACKJACK_HAND && _cards.size() == 2; }
