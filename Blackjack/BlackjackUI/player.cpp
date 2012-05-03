@@ -62,12 +62,7 @@ void Player::PlaceBet()
 
 bool Player::Hit(RectButton* btn)
 {
-    Card* tempCard = NULL;
-    if (S_Game* game = _game)
-        if (Deck* deck = game->GetDeck())
-            tempCard = deck->WithdrawCard();
-
-    if (tempCard != NULL)
+    if (Card* tempCard = _game->GetDeck()->WithdrawCard())
     {
         _hand->AddCard(tempCard);
         _game->PlayerHit(this);
