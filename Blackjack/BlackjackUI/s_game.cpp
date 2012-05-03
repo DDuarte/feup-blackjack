@@ -128,8 +128,7 @@ bool S_Game::Update(ALLEGRO_EVENT* ev)
             switch (_gameState)
             {
             case GAME_STATE_PLACING_BETS:
-                NextInternalGameState();
-                return false;
+                return HandleStatePlacingBets();
             case GAME_STATE_DEALING_CARDS:
                 return HandleStateDealingCards();
             case GAME_STATE_PLAYER_TURN:
@@ -237,6 +236,11 @@ void S_Game::NextInternalGameState()
 
 bool S_Game::HandleStatePlacingBets()
 {
+    for (uint i = 0; i < NUM_ACTIVE_PLAYERS; i++)
+        if (_activePlayers[i] != NULL)
+            _activePlayers[i]->PlaceBet();
+
+    NextInternalGameState();
     return true;
 }
 
@@ -316,7 +320,7 @@ bool S_Game::HandleStateCheckResults()
         {
             if (_activePlayers[i]->IsBusted())
                 _activePlayers[i]->Lose();
-            else if (_dealer->IsBusted())
+            else if (_dealer->IsBusted()) // assumes player did NOT bust
                 _activePlayers[i]->DealerBusts();
             else if (_activePlayers[i]->IsBlackjack() && !_dealer->IsBlackjack())
                 _activePlayers[i]->WinsItAll();
@@ -348,9 +352,3 @@ bool S_Game::HandleStateResetRound()
 
     return true;
 }
-
-
-
-
-
-

@@ -47,6 +47,7 @@ BlackJack::BlackJack()
 void BlackJack::Initialize()
 {
     // inits
+    //al_set_new_display_flags(ALLEGRO_FULLSCREEN);
     _display = al_create_display(CONST_WIDTH, CONST_HEIGHT);
     if (!_display)
         Error("Failed to initialize display.");

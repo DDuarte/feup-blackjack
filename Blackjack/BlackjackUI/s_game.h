@@ -3,7 +3,6 @@
 
 #include "state.h"
 #include "utilities.h"
-#include "s_game.h"
 
 #include <vector>
 #include <queue>

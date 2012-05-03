@@ -1,6 +1,7 @@
-100.00 Miguel Marques
-120.02 Duarte
-200.00 asd ad asd
-555.25 Joao
-1256.35 Almeida
-2656.25 Zé
+100 Albertina
+100 Bia
+100 CÃ¡tia
+100 Daniela
+100 Eva
+100 Francisca
+100 Gina
