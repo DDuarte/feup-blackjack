@@ -20,9 +20,6 @@ public:
     bool IsBusted() { return _hand.IsBusted(); }
     bool IsBlackjack() { return _hand.IsBlackjack(); }
 
-    void Hit();
-    void Stand();
-    
     void ShowSecondCard() { _hand.ShowSecondCard(); }
 
     void NewCard(Card* card) { _hand.AddCard(card); }

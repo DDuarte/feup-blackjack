@@ -13,22 +13,6 @@ Dealer::Dealer(S_Game* game)
     _hand = Hand(DEALER_POSITION, true);
 }
 
-void Dealer::Hit()
-{
-    Card* tempCard = _game->GetDeck()->WithdrawCard();
-
-    if (tempCard != NULL)
-    {
-        _hand.AddCard(tempCard);
-    }
-    else
-        _game->HandleOutOfCards();
-}
-
-void Dealer::Stand()
-{
-}
-
 void Dealer::Draw()
 {
     const char* name = "Dealer";
