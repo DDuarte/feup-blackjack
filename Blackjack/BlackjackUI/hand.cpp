@@ -103,6 +103,9 @@ void Hand::Clear()
 
 void Hand::Draw()
 {
+    if (!_cards.size())
+        return;
+
     if (!IsPositionSet())
         return;
 

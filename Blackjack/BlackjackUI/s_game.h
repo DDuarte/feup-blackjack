@@ -13,6 +13,7 @@ class Deck;
 class Player;
 class Dealer;
 class RectButton;
+class ICardOwner;
 
 enum GameState
 {
@@ -42,17 +43,14 @@ public:
 
     //- Game specific
     // Events-like calls
-    void PlayerBet(Player* /* player*/) { /*_totalBets += bet;*/ /* ... */ }
+    void PlayerBet(Player* /* player*/) { }
     void PlayerHit(Player* player);
     void PlayerStand(Player* player);
     void PlayerDouble(Player* player);
     // void PlayerSurrender(Player* player) { }
 
-    static Player** GetActivePlayers() { return _activePlayers; }
-    static int GetActivePlayerIndex() { return _activePlayerIndex; }
-
-    void DealerHit(Dealer* dealer) { }
-    void DealerStand(Dealer* dealer) { }
+    Player** GetActivePlayers() { return _activePlayers; }
+    int GetActivePlayerIndex() { return _activePlayerIndex; }
 
     void HandleOutOfCards() { }
 
@@ -69,32 +67,29 @@ private:
 
     std::vector<Player> _players;
     std::queue<Player*> _waitingPlayers;
-    static Player** _activePlayers;
-    int _activePlayerCount;
+    Player** _activePlayers;
     
     int _gameState;
-    static int _activePlayerIndex;
-
-    uint _tempCounter;
+    int _activePlayerIndex;
 
     std::vector<RectButton*> _buttons;
     
     bool HandleStatePlacingBets();   // Initial placement of bets
-    bool HandleStateDealingCards();  // Dealer deals cards
+    bool HandleStateDealingCards(uint i);  // Dealer deals cards
     bool HandleStatePlayerTurn();    // Players make hit, stand or double
     bool HandleStateDealerTurn();    // Dealer Hits until 17
     bool HandleStateCheckResults();  // Checks the result of the game and pays to the players or not
-    bool HandleStateResetRound();       // Resets
-    bool HandleStatePostGame() { return true; }     // Handle player surrender, etc.
-    
+    bool HandleStateResetRound();    // Resets
+    bool HandleStatePostGame();      // Handle player surrender, etc.
+
     void ReadPlayersFromFile();
 
     void SelectPlayers();
-    void NextPlayer();
     Player* SelectNextPlayerFromQueue();
 
     static double _bet;
     void NextInternalGameState();
+    bool _playerPlayed;
 };
 
 #endif // S_GAME_H

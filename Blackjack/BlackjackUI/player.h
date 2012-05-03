@@ -12,9 +12,6 @@ class Card;
 class RectButton;
 union ALLEGRO_EVENT;
 
-// Only s_game class will create objects of this type
-// _game should be used to tell "BlackJack" that this player did a bet/stand/etc
-
 class Player
 {
 public:
@@ -50,8 +47,6 @@ public:
 
     void SetPosition(Vector2D position);
     bool IsPositionSet() { return _drawPosition.X != 0 && _drawPosition.Y != 0; }
-
-    bool Update(ALLEGRO_EVENT* ev);
 
 private:
     bool ReadText(std::ifstream& in);

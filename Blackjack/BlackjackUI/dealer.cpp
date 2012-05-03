@@ -20,7 +20,6 @@ void Dealer::Hit()
     if (tempCard != NULL)
     {
         _hand.AddCard(tempCard);
-        _game->DealerHit(this);
     }
     else
         _game->HandleOutOfCards();
@@ -28,7 +27,6 @@ void Dealer::Hit()
 
 void Dealer::Stand()
 {
-    _game->DealerHit(this);
 }
 
 void Dealer::Draw()

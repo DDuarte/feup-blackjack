@@ -25,7 +25,7 @@ public:
     
     void ShowSecondCard() { _hand.ShowSecondCard(); }
 
-    void AddNewCard(Card* card) { _hand.AddCard(card); }
+    void NewCard(Card* card) { _hand.AddCard(card); }
     void ClearHand() { _hand.Clear(); }
 
     void Draw();

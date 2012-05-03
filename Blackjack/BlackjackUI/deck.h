@@ -24,6 +24,8 @@ public:
 
     void Draw(bool cardBack = true);
 
+    void ReInitializeDeck(uint numberOfDecks = DEFAULT_NUMBER_OF_DECKS) { InitializeDeck(numberOfDecks); }
+
 private:
     std::vector<Card> _cards;
 

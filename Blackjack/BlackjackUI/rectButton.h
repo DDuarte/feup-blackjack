@@ -46,6 +46,8 @@ public:
 
     bool IsMouseHovered();
 
+    ButtonHandler* Handler() { return &_funcHandler; }
+
 private:
     Vector2D _size;
     Vector2D _position;
@@ -58,7 +60,6 @@ private:
     ALLEGRO_COLOR _textColor;
     
     ButtonHandler _funcHandler;
-    //bool (*_func)(RectButton*);
     
     uint _fontSize;
 
