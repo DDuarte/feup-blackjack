@@ -25,7 +25,7 @@ enum GameState
     GAME_STATE_POST_GAME
 };
 
-const uint NUM_ACTIVE_PLAYERS = 4;
+const uint MAX_ACTIVE_PLAYERS = 4;
 
 class S_Game : public State
 {

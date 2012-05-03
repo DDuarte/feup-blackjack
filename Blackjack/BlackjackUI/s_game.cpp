@@ -19,7 +19,7 @@
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_native_dialog.h>
 
-Player** S_Game::_activePlayers = new Player*[NUM_ACTIVE_PLAYERS];
+Player** S_Game::_activePlayers = new Player*[MAX_ACTIVE_PLAYERS];
 int S_Game::_activePlayerIndex = -1;
 double S_Game::_bet = 5.0;
 
@@ -33,7 +33,7 @@ S_Game::S_Game()
     _gameState = -1;
     _activePlayerCount = 0;
 
-    for (uint i = 0; i < NUM_ACTIVE_PLAYERS; ++i)
+    for (uint i = 0; i < MAX_ACTIVE_PLAYERS; ++i)
         _activePlayers[i] = NULL;
 
     _activePlayerIndex = 0;
@@ -69,7 +69,7 @@ void S_Game::Draw()
     // Debug printing
     al_draw_textf(Fonts::GetFont(10), al_map_rgb(255, 255, 255), 0, 0, ALLEGRO_ALIGN_LEFT, "x: %3.1f y: %3.1f", BlackJack::GetMousePosition().X, BlackJack::GetMousePosition().Y);
 
-    for (int i = 0; i < NUM_ACTIVE_PLAYERS; ++i)
+    for (int i = 0; i < MAX_ACTIVE_PLAYERS; ++i)
     {
         if (_activePlayers[i] != NULL)
             _activePlayers[i]->Draw(i==_activePlayerIndex && _gameState == GAME_STATE_PLAYER_TURN);
@@ -198,10 +198,10 @@ void S_Game::ReadPlayersFromFile()
 
 void S_Game::SelectPlayers()
 {
-    if (_waitingPlayers.empty() || _waitingPlayers.size() < NUM_ACTIVE_PLAYERS)
+    if (_waitingPlayers.empty() || _waitingPlayers.size() < MAX_ACTIVE_PLAYERS)
         throw InvalidPlayerException("Not enough players to start a game."); 
 
-    for (uint i = 0; i < NUM_ACTIVE_PLAYERS; ++i)
+    for (uint i = 0; i < MAX_ACTIVE_PLAYERS; ++i)
         _activePlayers[i] = SelectNextPlayerFromQueue();
 }
 
@@ -221,7 +221,7 @@ Player* S_Game::SelectNextPlayerFromQueue()
 void S_Game::NextPlayer()
 {
     _activePlayerIndex++;
-    if (_activePlayerIndex >= NUM_ACTIVE_PLAYERS)
+    if (_activePlayerIndex >= MAX_ACTIVE_PLAYERS)
         NextInternalGameState();
 }
 
@@ -236,7 +236,7 @@ void S_Game::NextInternalGameState()
 
 bool S_Game::HandleStatePlacingBets()
 {
-    for (uint i = 0; i < NUM_ACTIVE_PLAYERS; i++)
+    for (uint i = 0; i < MAX_ACTIVE_PLAYERS; i++)
         if (_activePlayers[i] != NULL)
             _activePlayers[i]->PlaceBet();
 
@@ -260,7 +260,7 @@ bool S_Game::HandleStateDealingCards()
         {
             _activePlayers[_activePlayerIndex]->NewCard(_deck->WithdrawCard());
             _activePlayerIndex++;
-            if (_activePlayerIndex >= NUM_ACTIVE_PLAYERS)
+            if (_activePlayerIndex >= MAX_ACTIVE_PLAYERS)
             {
                 _activePlayerIndex = 0;
                 if (_dealer->GetHand()->GetNumberOfCards() < 2)
@@ -314,7 +314,7 @@ bool S_Game::HandleStateDealerTurn()
 
 bool S_Game::HandleStateCheckResults()
 {
-    for (uint i = 0; i < NUM_ACTIVE_PLAYERS; i++)
+    for (uint i = 0; i < MAX_ACTIVE_PLAYERS; i++)
     {
         if (_activePlayers[i] != NULL)
         {
@@ -337,7 +337,7 @@ bool S_Game::HandleStateResetRound()
 {
     if (false)
     {
-        for (uint i = 0; i < NUM_ACTIVE_PLAYERS; ++i)
+        for (uint i = 0; i < MAX_ACTIVE_PLAYERS; ++i)
             _activePlayers[i]->ResetPlayer();
 
         _dealer->ClearHand();
