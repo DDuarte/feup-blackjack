@@ -15,16 +15,14 @@ class Dealer
 public:
     Dealer(S_Game* game);
 
-    const Hand* GetHand() const { return &_hand; }
-
     bool IsBusted() { return _hand.IsBusted(); }
     bool IsBlackjack() { return _hand.IsBlackjack(); }
 
-    void ShowSecondCard() { _hand.ShowSecondCard(); }
-
     void NewCard(Card* card) { _hand.AddCard(card); }
     void ClearHand() { _hand.Clear(); }
+    uint GetScore() const { return _hand.GetScore(); }
 
+    void ShowSecondCard() { _hand.ShowSecondCard(); }
     void Draw();
 
 private:

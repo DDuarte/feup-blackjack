@@ -23,8 +23,7 @@ public:
     bool IsBusted() const { return GetScore() > BLACKJACK_HAND; }
     bool IsBlackjack() const { return GetScore() == BLACKJACK_HAND && _cards.size() == 2; }
 
-    Hand& AddCard(Card* card);
-    void RemoveCard(const Card* card);
+    void AddCard(Card* card);
     void Clear();
 
     void Draw();
@@ -36,8 +35,6 @@ public:
 private:
     std::vector<Card*> _cards;
     uint _score;
-
-    uint _tempCounter;
 
     bool _dealerHand;
     bool _drawSecondCardBack;

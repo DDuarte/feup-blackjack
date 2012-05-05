@@ -29,9 +29,10 @@ Player::Player(std::ifstream& file, S_Game* game)
     // TODO Don't forget to delete this
 
     _doubleBet = false;
+    _index = -1;
 }
 
-void Player::WriteText(std::ofstream& out) const
+void Player::Save(std::ofstream& out) const
 {
     out << std::fixed << std::setprecision(2) << _balance << " " << _name;
 }
@@ -62,9 +63,9 @@ void Player::PlaceBet()
 
 bool Player::Hit(RectButton* btn)
 {
-    if (Card* tempCard = _game->GetDeck()->WithdrawCard())
+    if (Card* card = _game->GetDeck()->WithdrawCard())
     {
-        _hand->AddCard(tempCard);
+        _hand->AddCard(card);
         _game->PlayerHit(this);
     }
     else
@@ -80,11 +81,9 @@ bool Player::Stand(RectButton* btn)
 
 bool Player::Double(RectButton* btn)
 {
-    Card* tempCard = _game->GetDeck()->WithdrawCard();
-
-    if (tempCard != NULL)
+    if (Card* card = _game->GetDeck()->WithdrawCard())
     {
-        _hand->AddCard(tempCard);
+        _hand->AddCard(card);
         _balance -= S_Game::GetBet();
         _doubleBet = true;
         _game->PlayerDouble(this);
@@ -96,13 +95,6 @@ bool Player::Double(RectButton* btn)
     return true;
 }
 
-void Player::Lose()
-{
-    // ...
-
-    // ResetPlayer();
-}
-
 void Player::ResetPlayer()
 {
     _doubleBet = false;
@@ -111,10 +103,9 @@ void Player::ResetPlayer()
 
 void Player::Draw(bool activePlayer /*= false*/)
 {
-    if (_drawPosition.X == 0 && _drawPosition.Y == 0)
+    if (_index == -1)
         return;
 
-    // must draw hand, player name and total money
     const char* name = _name.c_str();
 
     std::stringstream ss;
@@ -125,26 +116,25 @@ void Player::Draw(bool activePlayer /*= false*/)
     ALLEGRO_USTR* balance = al_ustr_new(ss.str().c_str());
 
     if (activePlayer) al_draw_filled_rectangle(
-        _drawPosition.X + 10, 
-        _drawPosition.Y + 10 + 105, 
-        _drawPosition.X + Fonts::GetFont(20)->vtable->text_length(Fonts::GetFont(20), al_ustr_new(name)) + 10,
-        _drawPosition.Y + 10 + 105 + Fonts::GetFont(20)->height,
-        al_map_rgb(120,120,255));
+        PLAYER_POSITIONS[_index].X + 10, 
+        PLAYER_POSITIONS[_index].Y + 10 + 105, 
+        PLAYER_POSITIONS[_index].X + Fonts::GetFont(20)->vtable->text_length(Fonts::GetFont(20), al_ustr_new(name)) + 10,
+        PLAYER_POSITIONS[_index].Y + 10 + 105 + Fonts::GetFont(20)->height, al_map_rgb(120, 120, 255));
     al_draw_text(Fonts::GetFont(20), al_map_rgb(255, 255, 255),
-        _drawPosition.X + 10, _drawPosition.Y + 10 + 105, 0, name);
+        PLAYER_POSITIONS[_index].X + 10, PLAYER_POSITIONS[_index].Y + 10 + 105, 0, name);
     al_draw_ustr(Fonts::GetFont(20), al_map_rgb(255, 255, 255),
-        _drawPosition.X + 10, _drawPosition.Y - 10 + 105, 0, balance);
+        PLAYER_POSITIONS[_index].X + 10, PLAYER_POSITIONS[_index].Y - 10 + 105, 0, balance);
 
     _hand->Draw();
 
-    al_draw_scaled_bitmap(_game->GetChip(), 0, 0, al_get_bitmap_width(_game->GetChip()), al_get_bitmap_height(_game->GetChip()), _drawPosition.X - 30 - 5, _drawPosition.Y + 5, 30, 30, 0);
+    al_draw_scaled_bitmap(_game->GetChip(), 0, 0, al_get_bitmap_width(_game->GetChip()), al_get_bitmap_height(_game->GetChip()), PLAYER_POSITIONS[_index].X - 30 - 5, PLAYER_POSITIONS[_index].Y + 5, 30, 30, 0);
     if (_doubleBet)
-        al_draw_scaled_bitmap(_game->GetChip(), 0, 0, al_get_bitmap_width(_game->GetChip()), al_get_bitmap_height(_game->GetChip()), _drawPosition.X - 30 - 5, _drawPosition.Y + 5 + 30 + 5, 30, 30, 0);
+        al_draw_scaled_bitmap(_game->GetChip(), 0, 0, al_get_bitmap_width(_game->GetChip()), al_get_bitmap_height(_game->GetChip()), PLAYER_POSITIONS[_index].X - 30 - 5, PLAYER_POSITIONS[_index].Y + 5 + 30 + 5, 30, 30, 0);
 }
 
-void Player::SetPosition(Vector2D position)
+void Player::EnterGame(int index)
 {
-    _drawPosition = position;
-    _hand->SetPosition(position);
+    ResetPlayer();
+    _hand->SetPosition(PLAYER_POSITIONS[index]);
+    _index = index;
 }
-

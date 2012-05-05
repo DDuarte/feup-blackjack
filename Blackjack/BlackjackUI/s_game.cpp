@@ -126,11 +126,6 @@ bool S_Game::Update(ALLEGRO_EVENT* ev)
         }
         case ALLEGRO_EVENT_TIMER:
         {
-            if (_activePlayers[0] != NULL && !_activePlayers[0]->IsPositionSet()) _activePlayers[0]->SetPosition(Vector2D(652, 217));
-            if (_activePlayers[1] != NULL && !_activePlayers[1]->IsPositionSet()) _activePlayers[1]->SetPosition(Vector2D(460, 344));
-            if (_activePlayers[2] != NULL && !_activePlayers[2]->IsPositionSet()) _activePlayers[2]->SetPosition(Vector2D(260, 344));
-            if (_activePlayers[3] != NULL && !_activePlayers[3]->IsPositionSet()) _activePlayers[3]->SetPosition(Vector2D(82, 217));
-
             switch (_gameState)
             {
                 case GAME_STATE_PLACING_BETS:
@@ -172,7 +167,10 @@ bool S_Game::Update(ALLEGRO_EVENT* ev)
                     }
 
                     if (_activePlayerIndex >= MAX_ACTIVE_PLAYERS)
+                    {
+                        _activePlayerIndex = 0;
                         break;
+                    }
 
                     return true;
                 }
@@ -214,7 +212,6 @@ void S_Game::PlayerHit(Player* player)
 {
     if (player->HasLost())
     {
-        player->Lose();
         _playerPlayed = true;
         return;
     }
@@ -261,7 +258,10 @@ void S_Game::SelectPlayers()
         throw InvalidPlayerException("Not enough players to start a game."); 
 
     for (uint i = 0; i < MAX_ACTIVE_PLAYERS; ++i)
+    {
         _activePlayers[i] = SelectNextPlayerFromQueue();
+        _activePlayers[i]->EnterGame(i);
+    }
 }
 
 Player* S_Game::SelectNextPlayerFromQueue()
@@ -320,13 +320,13 @@ bool S_Game::HandleStatePlayerTurn()
 bool S_Game::HandleStateDealerTurn()
 {
     _dealer->ShowSecondCard();
-    if (_dealer->GetHand()->GetScore() < 17)
+    if (_dealer->GetScore() < 17)
     {
         _dealer->NewCard(_deck->WithdrawCard());
         return false;
     }
-    else
-        return true;
+
+    return true;
 }
 
 bool S_Game::HandleStateCheckResults()
@@ -336,12 +336,12 @@ bool S_Game::HandleStateCheckResults()
         if (_activePlayers[i] != NULL)
         {
             if (_activePlayers[i]->IsBusted())
-                _activePlayers[i]->Lose();
+                ;//_activePlayers[i]->Lose();
             else if (_dealer->IsBusted()) // assumes player did NOT bust
                 _activePlayers[i]->DealerBusts();
             else if (_activePlayers[i]->IsBlackjack() && !_dealer->IsBlackjack())
                 _activePlayers[i]->WinsItAll();
-            else if (_activePlayers[i]->GetHand()->GetScore() >= _dealer->GetHand()->GetScore())
+            else if (_activePlayers[i]->GetScore() >= _dealer->GetScore())
                 _activePlayers[i]->Wins();
         }
     }
@@ -375,6 +375,7 @@ bool S_Game::HandleStatePostGame()
             if (_activePlayers[i]->GetBalance() <= 0)
             {
                 _activePlayers[i] = this->SelectNextPlayerFromQueue();
+                _activePlayers[i]->EnterGame(i);
             }
         }
     }

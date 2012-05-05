@@ -17,7 +17,6 @@ Hand::Hand(Vector2D position, bool dealerHand /*= false*/)
     _cards = std::vector<Card*>();
     _score = 0;
     _dealerHand = dealerHand;
-    _tempCounter = 0;
     _drawSecondCardBack = dealerHand;
     _cardJustAdded = -1;
     _position = position;
@@ -26,7 +25,6 @@ Hand::Hand(Vector2D position, bool dealerHand /*= false*/)
 Hand::Hand()
 {
     _cards = std::vector<Card*>();
-    _tempCounter = 0;
     _score = 0;
     _dealerHand = false;
     _drawSecondCardBack = _dealerHand;
@@ -34,10 +32,10 @@ Hand::Hand()
     _position = Vector2D(0,0);
 }
 
-Hand& Hand::AddCard(Card* card) // Returning a reference to this
-{                               // so we can chain multiple add cards
+void Hand::AddCard(Card* card)
+{
     if (!card)
-        return *this;
+        return;
     
     if (!card->IsValid())
         throw InvalidCardException("Invalid card at Hand::AddCard(Card card)!");
@@ -45,8 +43,6 @@ Hand& Hand::AddCard(Card* card) // Returning a reference to this
     _cards.push_back(card);
     UpdateScore();
     _cardJustAdded = _cards.size() - 1;
-
-    return *this;
 }
 
 void Hand::UpdateScore()
@@ -81,21 +77,9 @@ void Hand::UpdateScore()
     }
 }
 
-void Hand::RemoveCard(const Card* card)
-{
-    std::vector<Card*>::iterator itr = std::find(_cards.begin(), _cards.end(), card);
-
-    if (itr == _cards.end())
-        return; // Throw except?
-
-    _cards.erase(itr);
-
-    if (_cards.size() > 0)
-        UpdateScore();
-}
-
 void Hand::Clear()
 {
+    //while (!_cards.empty()) delete _cards.back(), _cards.pop_back();
     _cards.clear();
 
     _score = 0;
@@ -103,7 +87,7 @@ void Hand::Clear()
 
 void Hand::Draw()
 {
-    if (!_cards.size())
+    if (_cards.size() == 0)
         return;
 
     if (!IsPositionSet())
@@ -131,20 +115,18 @@ void Hand::Draw()
         float x = _position.X + i * 14;
         float y = _position.Y - i * 15 * !_dealerHand;
 
-        if (_drawSecondCardBack && i == 1)
-            _cards[i]->Draw(x, y, angle, _cardJustAdded == i, true);
-        else
-        {
-            _cards[i]->Draw(x, y, angle, _cardJustAdded == i);
-        }
+        _cards[i]->Draw(x, y, angle, (uint)_cardJustAdded <= i, _drawSecondCardBack && i == 1);
+    }
 
-        if (_tempCounter == 3)
-        {
-            _cardJustAdded = -1;
-            _tempCounter = 0;
-        }
+    // Effect when dealing cards
+    if (_cardJustAdded > -1)
+    {
+        static int timer = 0;
+
+        if (timer == 10)
+            _cardJustAdded--;
         else
-            _tempCounter++;
+            timer++;
     }
 
     if (indexMHCard != -1)
