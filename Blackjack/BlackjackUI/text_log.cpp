@@ -35,12 +35,9 @@ void TextLog::Draw()
 
         al_draw_text(Fonts::GetFont(TEXT_SIZE), al_map_rgb(255, 255, 0), posX, posY, ALLEGRO_ALIGN_LEFT, row.c_str());
 
+        // Remove texts that are no longer shown
         if (_texts.size() > MAX_TEXT_SCREEN)
-        {
-            std::deque<std::string>::iterator itr;
-            std::advance(itr, 5);
-            _texts.erase(itr, _texts.end());
-        }
+            _texts.pop_back();
     }
 }
 

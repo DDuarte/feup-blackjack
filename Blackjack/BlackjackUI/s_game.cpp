@@ -251,7 +251,7 @@ void S_Game::PlayerStand(Player* player)
 }
 
 
-void S_Game::PlayerDouble( Player* player )
+void S_Game::PlayerDouble(Player* player)
 {
     _log->AddString("Jogador %s fez dobrar.", player->GetName().c_str());
 
