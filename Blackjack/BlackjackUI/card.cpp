@@ -2,6 +2,7 @@
 #include "card.h"
 #include "blackjack.h"
 #include "fonts.h"
+#include "localization.h"
 
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
@@ -69,4 +70,14 @@ void Card::DestroyBitmaps()
 {
     al_destroy_bitmap(_image);
     al_destroy_bitmap(_backImage);
+}
+
+std::string Card::GetName() const
+{
+    std::stringstream ss("[");
+    ss << GetStr((Strings)(_rank + STR_NAMES + 1));
+    ss << " - ";
+    ss << GetStr((Strings)(_suit + STR_SUITS + 1));
+
+    return ss.str();
 }

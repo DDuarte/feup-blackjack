@@ -50,11 +50,10 @@ void S_Game::Initialize()
     for (uint i = 0; i < MAX_ACTIVE_PLAYERS; ++i)
         _activePlayers[i] = NULL;
 
-    _buttons.push_back(new RectButton(Vector2D(50,50), Vector2D(300, 500), al_map_rgb(255, 255, 255), al_map_rgb(238, 233, 233), al_map_rgb(0, 0, 0), GetStr(STR_HIT), 20, RectButton::ButtonHandler().Bind<Player, &Player::Hit>(_activePlayers[_activePlayerIndex]), true));
-    _buttons.push_back(new RectButton(Vector2D(50,50), Vector2D(410, 500), al_map_rgb(255, 255, 255), al_map_rgb(238, 233, 233), al_map_rgb(0, 0, 0), GetStr(STR_STAND), 20, RectButton::ButtonHandler().Bind<Player, &Player::Stand>(_activePlayers[_activePlayerIndex]), true));
-    _buttons.push_back(new RectButton(Vector2D(50,50), Vector2D(520, 500), al_map_rgb(255, 255, 255), al_map_rgb(238, 233, 233), al_map_rgb(0, 0, 0), GetStr(STR_DOUBLE), 20, RectButton::ButtonHandler().Bind<Player, &Player::Double>(_activePlayers[_activePlayerIndex]), true));
-    //_buttons.push_back(new RectButton(Vector2D(50,100),Vector2D(630, 500),al_map_rgb(255,255,255),al_map_rgb(0,0,0), GetStr(STR_GIVEUP), 20, &HandleButtonClick , true));
-    //_buttons.push_back(new RectButton(Vector2D(50, 440), al_map_rgb(200, 200, 200), "Hit", 50, &HandleButtonClick, true));
+    _buttons.push_back(new RectButton(Vector2D(95,35), Vector2D(325, 550), al_map_rgb(70, 4, 4), al_map_rgb(238, 233, 233), al_map_rgb(255, 255, 255), GetStr(STR_HIT),    36, RectButton::ButtonHandler().Bind<Player, &Player::Hit>(_activePlayers[_activePlayerIndex]), true));
+    _buttons.push_back(new RectButton(Vector2D(95,35), Vector2D(435, 550), al_map_rgb(70, 4, 4), al_map_rgb(238, 233, 233), al_map_rgb(255, 255, 255), GetStr(STR_STAND),  36, RectButton::ButtonHandler().Bind<Player, &Player::Stand>(_activePlayers[_activePlayerIndex]), true));
+    _buttons.push_back(new RectButton(Vector2D(95,35), Vector2D(540, 550), al_map_rgb(70, 4, 4), al_map_rgb(238, 233, 233), al_map_rgb(255, 255, 255), GetStr(STR_DOUBLE), 36, RectButton::ButtonHandler().Bind<Player, &Player::Double>(_activePlayers[_activePlayerIndex]), true));
+    _buttons.push_back(new RectButton(Vector2D(95,35), Vector2D(650, 550), al_map_rgb(70, 4, 4), al_map_rgb(238, 233, 233), al_map_rgb(255, 255, 255), GetStr(STR_GIVEUP), 36, RectButton::ButtonHandler().Bind<Player, &Player::Surrender>(_activePlayers[_activePlayerIndex]) , true));
 }
 
 void S_Game::LoadContents()
@@ -228,9 +227,9 @@ bool S_Game::Update(ALLEGRO_EVENT* ev)
     return false;
 }
 
-void S_Game::PlayerHit(Player* player)
+void S_Game::PlayerHit(Player* player, Card* card)
 {
-    _log->AddString("Jogador %s fez pedir.", player->GetName().c_str());
+    _log->AddString("Jogador: %s | Acção: pedir | Carta %s", player->GetName().c_str(), card->GetName().c_str());
 
     al_play_sample(_dealCardSound, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 
@@ -245,19 +244,25 @@ void S_Game::PlayerHit(Player* player)
 
 void S_Game::PlayerStand(Player* player)
 {
-    _log->AddString("Jogador %s fez ficar.", player->GetName().c_str());
+    _log->AddString("Jogador: %s | Acção: ficar", player->GetName().c_str());
 
     _playerPlayed = true;
 }
 
 
-void S_Game::PlayerDouble(Player* player)
+void S_Game::PlayerDouble(Player* player, Card* card)
 {
-    _log->AddString("Jogador %s fez dobrar.", player->GetName().c_str());
+    _log->AddString("Jogador: %s | Acção: dobrar | Carta %s", player->GetName().c_str(), card->GetName().c_str());
 
     al_play_sample(_doubleSound, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
     _playerPlayed = true;
 }
+
+void S_Game::PlayerBet( Player* /* player*/ )
+{
+
+}
+
 
 void S_Game::ReadPlayersFromFile()
 {

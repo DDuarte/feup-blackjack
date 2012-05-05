@@ -5,9 +5,9 @@
 #include <deque>
 #include "utilities.h"
 
-const int MAX_TEXT_SCREEN = 5;
+const int MAX_TEXT_SCREEN = 4;
 const int TEXT_SIZE = 15;
-const Vector2D LOG_POSITION = Vector2D(6.0, 480.0);
+const Vector2D LOG_POSITION = Vector2D(8.0, 509.0);
 
 class TextLog
 {

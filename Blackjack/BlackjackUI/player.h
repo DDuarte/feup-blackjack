@@ -45,6 +45,7 @@ public:
     bool Stand(RectButton* btn);
     bool Hit(RectButton* btn);
     bool Double(RectButton* btn);
+    bool Surrender(RectButton* btn) { return true; }
 
     // Rewards
     void DealerBusts()  { _balance += (2*(S_Game::GetBet() * (1 + _doubleBet))); }

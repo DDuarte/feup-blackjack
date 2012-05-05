@@ -66,7 +66,7 @@ bool Player::Hit(RectButton* btn)
     if (Card* card = _game->GetDeck()->WithdrawCard())
     {
         _hand->AddCard(card);
-        _game->PlayerHit(this);
+        _game->PlayerHit(this, card);
     }
     else
         _game->HandleOutOfCards();
@@ -86,7 +86,7 @@ bool Player::Double(RectButton* btn)
         _hand->AddCard(card);
         _balance -= S_Game::GetBet();
         _doubleBet = true;
-        _game->PlayerDouble(this);
+        _game->PlayerDouble(this, card);
     }
     else
         _game->HandleOutOfCards();

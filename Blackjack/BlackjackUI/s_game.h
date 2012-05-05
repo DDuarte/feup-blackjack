@@ -16,6 +16,7 @@ class Dealer;
 class RectButton;
 class ICardOwner;
 class TextLog;
+class Card;
 
 enum GameState
 {
@@ -45,10 +46,10 @@ public:
 
     //- Game specific
     // Events-like calls
-    void PlayerBet(Player* /* player*/) { }
-    void PlayerHit(Player* player);
+    void PlayerBet(Player* /* player*/);
+    void PlayerHit(Player* player, Card* card);
     void PlayerStand(Player* player);
-    void PlayerDouble(Player* player);
+    void PlayerDouble(Player* player, Card* card);
     // void PlayerSurrender(Player* player) { }
 
     Player** GetActivePlayers() { return _activePlayers; }

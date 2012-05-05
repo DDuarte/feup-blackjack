@@ -2,6 +2,7 @@
 #define CARD_H
 
 #include "utilities.h"
+#include <string>
 
 enum CardSuit
 {
@@ -46,6 +47,7 @@ public:
     uint GetScore() const { return _score; }
     float GetFrameWidth() const { return _frameSize.X; }
     float GetFrameHeight() const { return _frameSize.Y; }
+    std::string GetName() const;;
 
     void SetScore(int score) { if (_rank == CARD_RANK_ACE) _score = score; }
 

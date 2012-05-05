@@ -28,12 +28,14 @@ void TextLog::Draw()
 {
     for (uint i = 0; i < min(_texts.size(), MAX_TEXT_SCREEN); ++i)
     {
-        std::string row = _texts.at(i);
-
         float posX = LOG_POSITION.X;
         float posY = LOG_POSITION.Y + i * (TEXT_SIZE + 5);
 
-        al_draw_text(Fonts::GetFont(TEXT_SIZE), al_map_rgb(255, 255, 0), posX, posY, ALLEGRO_ALIGN_LEFT, row.c_str());
+        // this will do a fade out effect for "older" entries
+        // last action will be displayed brighter
+        int color = 255 - (i * 10);
+
+        al_draw_text(Fonts::GetFont(TEXT_SIZE), al_map_rgb(color, color, color), posX, posY, ALLEGRO_ALIGN_LEFT, _texts.at(i).c_str());
 
         // Remove texts that are no longer shown
         if (_texts.size() > MAX_TEXT_SCREEN)
