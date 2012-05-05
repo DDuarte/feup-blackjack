@@ -1,5 +1,5 @@
-#include "utilities.h"
 #include "deck.h"
+#include "utilities.h"
 #include "card.h"
 #include "blackjack.h"
 

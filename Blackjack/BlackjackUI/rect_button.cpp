@@ -1,7 +1,7 @@
-#include "rectButton.h"
+#include "rect_button.h"
 #include "utilities.h"
 #include "fonts.h"
-#include "gameExceptions.h"
+#include "game_exceptions.h"
 
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>

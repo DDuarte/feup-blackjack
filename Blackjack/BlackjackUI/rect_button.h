@@ -14,7 +14,7 @@
 #include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_acodec.h>
 
-class RectButton : public AllegroObject
+class RectButton
 {
 public:
 

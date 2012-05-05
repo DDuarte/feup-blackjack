@@ -4,7 +4,6 @@
 #include "utilities.h"
 #include "card.h"
 
-#include <stack>
 #include <vector>
 
 const uint DEFAULT_NUMBER_OF_DECKS = 1;
@@ -22,11 +21,9 @@ public:
 
     Card* WithdrawCard();
 
-    uint GetGameCardsNumber() { return _cards.size(); }
+    void ReInitializeDeck(uint numberOfDecks = DEFAULT_NUMBER_OF_DECKS) { InitializeDeck(numberOfDecks); }
 
     void Draw(bool cardBack = true);
-
-    void ReInitializeDeck(uint numberOfDecks = DEFAULT_NUMBER_OF_DECKS) { InitializeDeck(numberOfDecks); }
 
 private:
     std::vector<Card> _cards;

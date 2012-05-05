@@ -2,8 +2,7 @@
 #include "blackjack.h"
 #include "card.h"
 #include "fonts.h"
-#include "rectButton.h"
-#include "allegroObject.h"
+#include "rect_button.h"
 #include "localization.h"
 
 #include <allegro5/allegro.h>

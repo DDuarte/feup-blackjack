@@ -1,7 +1,7 @@
 #ifndef DELEGATE_H
 #define DELEGATE_H
 
-#include "gameExceptions.h"
+#include "game_exceptions.h"
 
 template<typename T>
 class Delegate {};

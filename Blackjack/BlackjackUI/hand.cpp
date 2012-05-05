@@ -1,6 +1,6 @@
 #include "hand.h"
 #include "card.h"
-#include "gameExceptions.h"
+#include "game_exceptions.h"
 #include "utilities.h"
 #include "blackjack.h"
 #include "fonts.h"

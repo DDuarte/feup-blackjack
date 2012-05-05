@@ -45,13 +45,13 @@
     <ClCompile Include="fonts.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="rectButton.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="localization.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="dealer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rect_button.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -86,19 +86,10 @@
     <ClInclude Include="hand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="gameExceptions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="fonts.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="allegroObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="rectButton.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="localization.h">
@@ -108,6 +99,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="delegate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game_exceptions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rect_button.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

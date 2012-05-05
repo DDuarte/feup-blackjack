@@ -6,8 +6,8 @@
 #include "fonts.h"
 #include "dealer.h"
 #include "player.h"
-#include "gameExceptions.h"
-#include "rectButton.h"
+#include "game_exceptions.h"
+#include "rect_button.h"
 #include "localization.h"
 
 #include <string>
