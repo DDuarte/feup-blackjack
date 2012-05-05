@@ -79,6 +79,7 @@
     <ClCompile Include="rect_button.cpp" />
     <ClCompile Include="s_game.cpp" />
     <ClCompile Include="s_main_menu.cpp" />
+    <ClCompile Include="text_log.cpp" />
     <ClCompile Include="utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -97,6 +98,7 @@
     <ClInclude Include="s_main_menu.h" />
     <ClInclude Include="s_settings.h" />
     <ClInclude Include="state.h" />
+    <ClInclude Include="text_log.h" />
     <ClInclude Include="utilities.h" />
     <ClInclude Include="delegate.h" />
   </ItemGroup>

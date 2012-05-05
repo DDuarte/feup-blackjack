@@ -15,6 +15,7 @@ class Player;
 class Dealer;
 class RectButton;
 class ICardOwner;
+class TextLog;
 
 enum GameState
 {
@@ -94,6 +95,8 @@ private:
     static double _bet;
     void NextInternalGameState();
     bool _playerPlayed;
+
+    TextLog* _log;
 };
 
 #endif // S_GAME_H

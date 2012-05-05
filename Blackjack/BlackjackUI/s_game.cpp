@@ -9,6 +9,7 @@
 #include "game_exceptions.h"
 #include "rect_button.h"
 #include "localization.h"
+#include "text_log.h"
 
 #include <string>
 #include <Windows.h>
@@ -37,6 +38,8 @@ S_Game::S_Game()
     _gameState = -1;
     _dealer = NULL;
     _playerPlayed = false;
+
+    _log = new TextLog;
 }
 
 void S_Game::Initialize()
@@ -71,6 +74,21 @@ void S_Game::LoadContents()
     _gameState = 0;
 }
 
+void S_Game::UnloadContents()
+{
+    al_destroy_bitmap(_background);
+    al_destroy_bitmap(_chip);
+    al_destroy_sample(_dealCardSound);
+    al_destroy_sample(_doubleSound);
+    al_destroy_sample(_dealerBlackjackSound);
+
+    delete _dealer;
+    delete _deck;
+    delete _log;
+
+    Card::DestroyBitmaps();
+}
+
 void S_Game::Draw()
 {
     // Draw Background
@@ -90,20 +108,7 @@ void S_Game::Draw()
 
     _dealer->Draw();
     _deck->Draw();
-}
-
-void S_Game::UnloadContents()
-{
-    al_destroy_bitmap(_background);
-    al_destroy_bitmap(_chip);
-    al_destroy_sample(_dealCardSound);
-    al_destroy_sample(_doubleSound);
-    al_destroy_sample(_dealerBlackjackSound);
-
-    delete _dealer;
-    delete _deck;
-
-    Card::DestroyBitmaps();
+    _log->Draw();
 }
 
 bool S_Game::Update(ALLEGRO_EVENT* ev)
@@ -225,6 +230,8 @@ bool S_Game::Update(ALLEGRO_EVENT* ev)
 
 void S_Game::PlayerHit(Player* player)
 {
+    _log->AddString("Jogador %s fez pedir.", player->GetName().c_str());
+
     al_play_sample(_dealCardSound, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 
     if (player->HasLost())
@@ -236,14 +243,18 @@ void S_Game::PlayerHit(Player* player)
     _playerPlayed = false;
 }
 
-void S_Game::PlayerStand( Player* player )
+void S_Game::PlayerStand(Player* player)
 {
+    _log->AddString("Jogador %s fez ficar.", player->GetName().c_str());
+
     _playerPlayed = true;
 }
 
 
 void S_Game::PlayerDouble( Player* player )
 {
+    _log->AddString("Jogador %s fez dobrar.", player->GetName().c_str());
+
     al_play_sample(_doubleSound, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
     _playerPlayed = true;
 }

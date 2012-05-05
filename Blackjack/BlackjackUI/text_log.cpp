@@ -1,0 +1,60 @@
+#include "text_log.h"
+#include "utilities.h"
+#include "fonts.h"
+
+#include <deque>
+#include <string>
+#include <cstdarg>
+
+#include <allegro5/allegro.h>
+#include <allegro5/allegro_font.h>
+
+TextLog::TextLog()
+{
+    _texts = std::deque<std::string>();
+}
+
+void TextLog::AddString(const char* fmt, ...)
+{
+    va_list marker = NULL; 
+    va_start(marker, fmt);
+
+    _texts.push_front(Format(fmt, marker));
+
+    va_end(marker);
+}
+
+void TextLog::Draw()
+{
+    for (uint i = 0; i < min(_texts.size(), MAX_TEXT_SCREEN); ++i)
+    {
+        std::string row = _texts.at(i);
+
+        float posX = LOG_POSITION.X;
+        float posY = LOG_POSITION.Y + i * (TEXT_SIZE + 5);
+
+        al_draw_text(Fonts::GetFont(TEXT_SIZE), al_map_rgb(255, 255, 0), posX, posY, ALLEGRO_ALIGN_LEFT, row.c_str());
+
+        if (_texts.size() > MAX_TEXT_SCREEN)
+        {
+            std::deque<std::string>::iterator itr;
+            std::advance(itr, 5);
+            _texts.erase(itr, _texts.end());
+        }
+    }
+}
+
+std::string TextLog::Format(const char *fmt, va_list list) // By Nitron, modified
+{
+    std::string result("");
+
+    // Get formatted string length adding one for NULL
+    size_t len = _vscprintf(fmt, list) + 1;
+
+    // Create a char vector to hold the formatted string.
+    std::vector<char> buffer(len, '\0');
+    if (_vsnprintf_s(&buffer[0], buffer.size(), len, fmt, list))
+        result = &buffer[0];
+
+    return result; 
+}
