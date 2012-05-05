@@ -9,6 +9,7 @@
 
 union ALLEGRO_EVENT;
 struct ALLEGRO_BITMAP;
+struct ALLEGRO_SAMPLE;
 class Deck;
 class Player;
 class Dealer;
@@ -61,6 +62,9 @@ public:
 private:
     ALLEGRO_BITMAP* _background;
     ALLEGRO_BITMAP* _chip;
+    ALLEGRO_SAMPLE* _dealCardSound;
+    ALLEGRO_SAMPLE* _doubleSound;
+    ALLEGRO_SAMPLE* _dealerBlackjackSound;
 
     Dealer* _dealer;
     Deck* _deck;

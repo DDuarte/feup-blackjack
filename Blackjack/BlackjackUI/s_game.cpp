@@ -28,15 +28,14 @@ S_Game::S_Game()
     _activePlayers = new Player*[MAX_ACTIVE_PLAYERS];
 
     _background = NULL;
-    _dealer = NULL;
-    _gameState = -1;
-
-    for (uint i = 0; i < MAX_ACTIVE_PLAYERS; ++i)
-        _activePlayers[i] = NULL;
+    _chip = NULL;
+    _dealCardSound = NULL;
+    _doubleSound = NULL;
+    _dealerBlackjackSound = NULL;
 
     _activePlayerIndex = -1;
-
-    _chip = NULL;
+    _gameState = -1;
+    _dealer = NULL;
     _playerPlayed = false;
 }
 
@@ -44,6 +43,9 @@ void S_Game::Initialize()
 {
     _deck = new Deck();
     _dealer = new Dealer(this);
+
+    for (uint i = 0; i < MAX_ACTIVE_PLAYERS; ++i)
+        _activePlayers[i] = NULL;
 
     _buttons.push_back(new RectButton(Vector2D(50,50), Vector2D(300, 500), al_map_rgb(255, 255, 255), al_map_rgb(238, 233, 233), al_map_rgb(0, 0, 0), GetStr(STR_HIT), 20, RectButton::ButtonHandler().Bind<Player, &Player::Hit>(_activePlayers[_activePlayerIndex]), true));
     _buttons.push_back(new RectButton(Vector2D(50,50), Vector2D(410, 500), al_map_rgb(255, 255, 255), al_map_rgb(238, 233, 233), al_map_rgb(0, 0, 0), GetStr(STR_STAND), 20, RectButton::ButtonHandler().Bind<Player, &Player::Stand>(_activePlayers[_activePlayerIndex]), true));
@@ -56,6 +58,9 @@ void S_Game::LoadContents()
 {
     _background = al_load_bitmap("../../Resources/playing_table.png");
     _chip = al_load_bitmap("../../Resources/chip1.png");
+    _dealCardSound = al_load_sample("../../Resources/sounds/86854__milton__cardfall.ogg");
+    _doubleSound = al_load_sample("../../Resources/sounds/86859__milton__double.ogg");
+    _dealerBlackjackSound = al_load_sample("../../Resources/sounds/86857__milton__dealerblackjack.ogg");
 
     ReadPlayersFromFile();
     for (std::vector<Player>::iterator plr = _players.begin(); plr != _players.end(); ++plr)
@@ -91,8 +96,13 @@ void S_Game::UnloadContents()
 {
     al_destroy_bitmap(_background);
     al_destroy_bitmap(_chip);
+    al_destroy_sample(_dealCardSound);
+    al_destroy_sample(_doubleSound);
+    al_destroy_sample(_dealerBlackjackSound);
 
     delete _dealer;
+    delete _deck;
+
     Card::DestroyBitmaps();
 }
 
@@ -145,6 +155,11 @@ bool S_Game::Update(ALLEGRO_EVENT* ev)
                             {
                                 counter = 0;
                                 counter2 = 0;
+
+                                if (_dealer->IsBlackjack())
+                                {
+                                    al_play_sample(_dealerBlackjackSound, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+                                }
                                 break;
                             }
                         }
@@ -210,6 +225,8 @@ bool S_Game::Update(ALLEGRO_EVENT* ev)
 
 void S_Game::PlayerHit(Player* player)
 {
+    al_play_sample(_dealCardSound, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+
     if (player->HasLost())
     {
         _playerPlayed = true;
@@ -227,6 +244,7 @@ void S_Game::PlayerStand( Player* player )
 
 void S_Game::PlayerDouble( Player* player )
 {
+    al_play_sample(_doubleSound, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
     _playerPlayed = true;
 }
 
@@ -300,10 +318,16 @@ bool S_Game::HandleStateDealingCards(uint i)
     if (i < MAX_ACTIVE_PLAYERS)
     {
         if (_activePlayers[i] != NULL)
+        {
             _activePlayers[i]->NewCard(_deck->WithdrawCard());
+            al_play_sample(_dealCardSound, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+        }
     }
     else
+    {
         _dealer->NewCard(_deck->WithdrawCard());
+        al_play_sample(_dealCardSound, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+    }
 
     return false;
 }
@@ -323,6 +347,7 @@ bool S_Game::HandleStateDealerTurn()
     if (_dealer->GetScore() < 17)
     {
         _dealer->NewCard(_deck->WithdrawCard());
+        al_play_sample(_dealCardSound, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
         return false;
     }
 
@@ -372,7 +397,7 @@ bool S_Game::HandleStatePostGame()
     {
         if (_activePlayers[i] != NULL)
         {
-            if (_activePlayers[i]->GetBalance() <= 0)
+            if (_activePlayers[i]->GetBalance() <= _bet)
             {
                 _activePlayers[i] = this->SelectNextPlayerFromQueue();
                 _activePlayers[i]->EnterGame(i);

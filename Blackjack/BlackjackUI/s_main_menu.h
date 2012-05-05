@@ -5,9 +5,6 @@
 
 #include <vector>
 
-struct ALLEGRO_BITMAP;
-struct ALLEGRO_SAMPLE;
-
 enum Menu
 {
     MENU_PLAY,
@@ -18,6 +15,8 @@ enum Menu
 union ALLEGRO_EVENT;
 class RectButton;
 class AllegroObject;
+struct ALLEGRO_BITMAP;
+struct ALLEGRO_SAMPLE;
 
 class S_MainMenu : public State
 {

@@ -7,8 +7,13 @@
 #include <stack>
 #include <vector>
 
+#include <allegro5/allegro5.h>
+#include <allegro5/allegro_audio.h>
+
 Deck::Deck(uint numberOfDecks /*= DEFAULT_NUMBER_OF_DECKS*/)
 {
+    _shuffleSound = al_load_sample("../../Resources/sounds/86873__milton__shuffle.ogg");
+
     InitializeDeck(numberOfDecks);
 }
 
@@ -54,6 +59,8 @@ Card* Deck::WithdrawCard()
 
 void Deck::Shuffle()
 {
+    al_play_sample(_shuffleSound, 1.0, 0.0, 2.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+
     size_t size = _cards.size();
 
     for (size_t i = 0; i < _cards.size(); ++i)
