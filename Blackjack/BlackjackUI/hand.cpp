@@ -43,6 +43,7 @@ void Hand::AddCard(Card* card)
     _cards.push_back(card);
     UpdateScore();
     _cardJustAdded = _cards.size() - 1;
+    _cards[_cardJustAdded]->SetPosition(Vector2D(_position.X + _cardJustAdded * 14, _position.Y - (_cardJustAdded * 15 * !_dealerHand)));
 }
 
 void Hand::UpdateScore()
@@ -115,7 +116,7 @@ void Hand::Draw()
         float x = _position.X + i * 14;
         float y = _position.Y - i * 15 * !_dealerHand;
 
-        _cards[i]->Draw(x, y, angle, (uint)_cardJustAdded <= i, _drawSecondCardBack && i == 1);
+        _cards[i]->Draw(angle, (uint)_cardJustAdded <= i, _drawSecondCardBack && i == 1);
     }
 
     // Effect when dealing cards
@@ -135,9 +136,9 @@ void Hand::Draw()
         float y = _position.Y - indexMHCard * 15 * !_dealerHand;
 
         if (_drawSecondCardBack && indexMHCard == 1)
-            _cards[indexMHCard]->Draw(x, y, angle, false, true);
+            _cards[indexMHCard]->Draw(angle, false, true);
         else
-            _cards[indexMHCard]->Draw(x, y, angle, true);
+            _cards[indexMHCard]->Draw(angle, true);
     }
 
     // Draw score of hand if no card is hidden and if score is not zero

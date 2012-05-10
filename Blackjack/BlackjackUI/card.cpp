@@ -26,42 +26,52 @@ Card::Card(int suit, int rank)
         _backImage = al_load_bitmap("../../Resources/cards/b1fv.png");
 
     _backColorRGB = 50 + rand() % 25; // variations of dark grey, "3D" effect
+
+    _BMP = Bitmap(_image, GetPosition(), Vector2D(_rank * _frameSize.X, _suit * _frameSize.Y), _frameSize);
 }
 
-void Card::Draw(float dx, float dy, float angle /*= 0.0*/, bool mouseHovered /*= false*/, bool drawBack/*=false*/) // angle must be in radians
+void Card::Draw(float angle /*= 0.0*/, bool mouseHovered /*= false*/, bool drawBack/*=false*/) // angle must be in radians
 {
     if (_backImage == NULL && drawBack)
     {
-        printf("Error: Tried to draw a back card at x: %f y: %f with no image specified", dx, dy);
+        printf("Error: Tried to draw a back card at x: %f y: %f with no image specified", GetPosition().X, GetPosition().Y);
         return;
     }
 
     if (_image == NULL && !drawBack)
     {
-        printf("Error: Tried to draw a card (rank: %i, suit: %i) at x: %f y: %f with no image specified", _rank, _suit, dx, dy);
+        printf("Error: Tried to draw a card (rank: %i, suit: %i) at x: %f y: %f with no image specified", _rank, _suit, GetPosition().X, GetPosition().Y);
         return;
     }
 
     float sx = _rank * _frameSize.X;
-    float yx = _suit * _frameSize.Y;
+    float sy = _suit * _frameSize.Y;
 
     if (drawBack)
     {
-        al_draw_tinted_scaled_rotated_bitmap_region(_backImage, 1, 1, _frameSize.X - 1, _frameSize.Y - 1,
-            al_map_rgb(255, 255, 255), 0.0, 0.0, dx + 1, dy + 1, 1.0 + mouseHovered*0.3, 1.0 + mouseHovered*0.3, angle, 0);
-        al_draw_tinted_bitmap(_backImage, al_map_rgb(_backColorRGB, _backColorRGB, _backColorRGB), dx, dy, 0);
-        al_draw_bitmap_region(_backImage, 1, 1, _frameSize.X -1, _frameSize.Y - 1, dx + 1, dy + 1, 0);
+        Bitmap backTemp(_backImage, Vector2D(GetPosition().X + 1, GetPosition().Y + 1),Vector2D(1,1),Vector2D(_frameSize.X - 1, _frameSize.Y - 1),Vector2D(0,0),Vector2D(1.0 + mouseHovered*0.3, 1.0 + mouseHovered*0.3),al_map_rgb(255,255,255),angle);
+        backTemp.Draw();
+
+        backTemp.SetDestinationCoordinates(GetPosition());
+        backTemp.SetTint(al_map_rgb(_backColorRGB, _backColorRGB, _backColorRGB));
+        backTemp.Draw();
+
+        backTemp.SetDestinationCoordinates(Vector2D(GetPosition().X + 1, GetPosition().Y + 1));
+        backTemp.SetTint(al_map_rgb(255,255,255));
+        backTemp.Draw();
     }
     else
     {
-        al_draw_tinted_scaled_rotated_bitmap_region(_image, sx, yx, _frameSize.X, _frameSize.Y,
-            al_map_rgb(255, 255, 255), 0.0, 0.0, dx, dy, 1.0 + mouseHovered*0.3, 1.0 + mouseHovered*0.3, angle, 0);
-
         if (mouseHovered) // score top left
         {
-            al_draw_filled_rectangle(dx + _frameSize.X*1.3 -25, dy + 4, dx+_frameSize.X*1.3 - 4, dy + 25, al_map_rgb(255,255,255));
-            al_draw_textf(Fonts::GetFont(20), al_map_rgb(0,0,0), dx+_frameSize.X*1.3 - 4 , dy, ALLEGRO_ALIGN_RIGHT, "%i", _score);
+            _BMP.SetScale(Vector2D(1.3,1.3));
+            _BMP.Draw();
+            _BMP.SetScale(Vector2D(1,1));
+            al_draw_filled_rectangle(GetPosition().X + _frameSize.X*1.3 -25, GetPosition().Y + 4, GetPosition().X+_frameSize.X*1.3 - 4, GetPosition().Y + 25, al_map_rgb(255,255,255));
+            al_draw_textf(Fonts::GetFont(20), al_map_rgb(0,0,0), GetPosition().X+_frameSize.X*1.3 - 4 , GetPosition().Y, ALLEGRO_ALIGN_RIGHT, "%i", _score);
         }
+        else
+            _BMP.Draw();
     }
 }
 

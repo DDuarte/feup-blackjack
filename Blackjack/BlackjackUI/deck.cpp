@@ -45,6 +45,17 @@ void Deck::InitializeDeck(uint numberOfDecks)
     }
 
     Shuffle();
+
+    float dx = DECK_POSITION.X;
+    float dy = DECK_POSITION.Y;
+
+    for (uint i = 0; i < _cards.size(); i+=2) // Drawing each card makes a very
+    {
+        dx++;
+        dy--;
+        _cards[i].SetPosition(Vector2D(dx,dy));
+        _cards[i+1].SetPosition(Vector2D(dx,dy));
+    }
 }
 
 Card* Deck::WithdrawCard()
@@ -75,14 +86,8 @@ void Deck::Shuffle()
 
 void Deck::Draw(bool cardBack /* = true*/)
 {
-    float dx = DECK_POSITION.X;
-    float dy = DECK_POSITION.Y;
 
-    for (uint i = 0; i < _cards.size(); i+=2) // Drawing each card makes a very
-    {                                         // big deck on the screen
-        dx += 1;
-        dy -= 1;
+    for (uint i = 0; i < _cards.size(); i+=2) // Drawing each card makes a very big Deck
+        _cards[i].Draw(0.0, false, cardBack);
 
-        _cards[i].Draw(dx, dy, 0.0, false, cardBack);
-    }
 }

@@ -2,6 +2,8 @@
 #define CARD_H
 
 #include "utilities.h"
+#include "bitmap.h"
+
 #include <string>
 
 enum CardSuit
@@ -39,6 +41,7 @@ struct ALLEGRO_DISPLAY;
 
 class Card
 {
+
 public:
     Card(int suit, int rank);
 
@@ -51,9 +54,12 @@ public:
 
     void SetScore(int score) { if (_rank == CARD_RANK_ACE) _score = score; }
 
+    Vector2D GetPosition() { return _BMP.GetDestinationCoordinates(); }
+    void SetPosition(Vector2D val) { _BMP.SetDestinationCoordinates(val); }
+
     bool IsValid() const { return _suit != -1 && _rank != -1 && _score != -1; }
 
-    void Draw(float dx, float dy, float angle = 0.0, bool mouseHovered = false, bool drawBack = false); // angle must be in radians
+    void Draw(float angle = 0.0, bool mouseHovered = false, bool drawBack = false); // angle must be in radians
 
     static void DestroyBitmaps();
 
@@ -61,6 +67,8 @@ private:
     int _suit;
     int _rank;
     uint _score;
+
+    Bitmap _BMP;
 
     int _backColorRGB;
 
