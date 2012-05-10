@@ -18,10 +18,13 @@ public:
     bool IsBusted() { return _hand.IsBusted(); }
     bool IsBlackjack() { return _hand.IsBlackjack(); }
 
-    void NewCard(Card* card) { _hand.AddCard(card); }
+    bool Hit();
+
+    void NewCard(Card* card);
     void ClearHand() { _hand.Clear(); }
     uint GetScore() const { return _hand.GetScore(); }
 
+    void NoShowSecondCard() { _hand.NoShowSecondCard(); }
     void ShowSecondCard() { _hand.ShowSecondCard(); }
     void Draw();
 

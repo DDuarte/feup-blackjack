@@ -52,6 +52,8 @@ public:
     void PlayerDouble(Player* player, Card* card);
     // void PlayerSurrender(Player* player) { }
 
+    void DealerHit(Dealer* dealer, Card* card);
+
     Player** GetActivePlayers() { return _activePlayers; }
     int GetActivePlayerIndex() { return _activePlayerIndex; }
 

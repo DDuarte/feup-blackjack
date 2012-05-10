@@ -22,3 +22,20 @@ void Dealer::Draw()
 
     _hand.Draw();
 }
+
+void Dealer::NewCard( Card* card )
+{
+    _hand.AddCard(card);
+}
+
+bool Dealer::Hit()
+{
+    if (Card* card = _game->GetDeck()->WithdrawCard())
+    {
+        NewCard(card);
+        _game->DealerHit(this, card);
+    }
+    else
+        _game->HandleOutOfCards();
+    return true;
+}

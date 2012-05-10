@@ -101,8 +101,8 @@ void Hand::Draw()
 
     for (int i = _cards.size() - 1; i >= 0; --i)
     {
-        float x = _position.X + (i*14);
-        float y = _position.Y - (i*15*!_dealerHand);
+        float x = _cards[i]->GetPosition().X;
+        float y = _cards[i]->GetPosition().Y;
         if ((BlackJack::GetMousePosition().X <= x + CARD_SIZE.X) && (BlackJack::GetMousePosition().X >= x) &&
             (BlackJack::GetMousePosition().Y <= y + CARD_SIZE.Y) && (BlackJack::GetMousePosition().Y >= y))
         {
@@ -112,12 +112,7 @@ void Hand::Draw()
     }
 
     for (uint i = 0; i < _cards.size(); ++i)
-    {
-        float x = _position.X + i * 14;
-        float y = _position.Y - i * 15 * !_dealerHand;
-
         _cards[i]->Draw(angle, (uint)_cardJustAdded <= i, _drawSecondCardBack && i == 1);
-    }
 
     // Effect when dealing cards
     if (_cardJustAdded > -1)
@@ -132,8 +127,8 @@ void Hand::Draw()
 
     if (indexMHCard != -1)
     {
-        float x = _position.X + indexMHCard * 14;
-        float y = _position.Y - indexMHCard * 15 * !_dealerHand;
+        float x = _cards[indexMHCard]->GetPosition().X;
+        float y = _cards[indexMHCard]->GetPosition().Y;
 
         if (_drawSecondCardBack && indexMHCard == 1)
             _cards[indexMHCard]->Draw(angle, false, true);

@@ -362,7 +362,7 @@ bool S_Game::HandleStateDealerTurn()
     _dealer->ShowSecondCard();
     if (_dealer->GetScore() < 17)
     {
-        _dealer->NewCard(_deck->WithdrawCard());
+        _dealer->Hit();
         al_play_sample(_dealCardSound, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
         return false;
     }
@@ -397,6 +397,7 @@ bool S_Game::HandleStateResetRound()
             _activePlayers[i]->ResetPlayer();
 
     _dealer->ClearHand();
+    _dealer->NoShowSecondCard();
 
     _deck->ReInitializeDeck();
 
@@ -422,4 +423,9 @@ bool S_Game::HandleStatePostGame()
     }
 
     return true;
+}
+
+void S_Game::DealerHit(Dealer* dealer, Card* card)
+{
+    _log->AddString("Dealer | Acção: pedir | Carta %s", card->GetName().c_str());
 }

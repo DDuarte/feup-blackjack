@@ -28,6 +28,7 @@ public:
 
     void Draw();
     void ShowSecondCard() { _drawSecondCardBack = false; }
+    void NoShowSecondCard() { _drawSecondCardBack = true; }
 
     void SetPosition(Vector2D position) { _position = position; }
     bool IsPositionSet() { return _position.X != 0 && _position.Y != 0; }
