@@ -3,6 +3,7 @@
 
 #include "state.h"
 #include "utilities.h"
+#include "bitmaps.h"
 
 #include <vector>
 #include <queue>
@@ -61,11 +62,9 @@ public:
 
     static double GetBet() { return _bet; }
 
-    ALLEGRO_BITMAP* GetChip() { return _chip; }
+    ALLEGRO_BITMAP* GetChip() { return Bitmaps::GetBitmap(BITMAP_GAME_CHIP); }
 
 private:
-    ALLEGRO_BITMAP* _background;
-    ALLEGRO_BITMAP* _chip;
     ALLEGRO_SAMPLE* _dealCardSound;
     ALLEGRO_SAMPLE* _doubleSound;
     ALLEGRO_SAMPLE* _dealerBlackjackSound;

@@ -48,6 +48,8 @@ public:
 
     ButtonHandler* Handler() { return &_funcHandler; }
 
+    bool Visible;
+
 private:
     Vector2D _size;
     Vector2D _position;

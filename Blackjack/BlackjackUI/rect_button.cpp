@@ -12,27 +12,27 @@
 
 // Full featured button
 RectButton::RectButton(Vector2D size, Vector2D position, ALLEGRO_COLOR color, ALLEGRO_COLOR colorMouseHover, ALLEGRO_COLOR textColor, std::string text, uint fontSize, ButtonHandler funcHandler, bool shadowedText)
-    : _size(size), _position(position), _color(color), _colorMouseHover(colorMouseHover), _textColor(textColor), _text(text), _fontSize(fontSize), _clicked(false), _funcHandler(funcHandler), _shadowedText(shadowedText), _forcedMouseHovered(false) { }
+    : _size(size), _position(position), _color(color), _colorMouseHover(colorMouseHover), _textColor(textColor), _text(text), _fontSize(fontSize), _clicked(false), _funcHandler(funcHandler), _shadowedText(shadowedText), _forcedMouseHovered(false) , Visible(true) {  }
 
 // Button with mouseHover without text (with or without callback function)
 RectButton::RectButton(Vector2D size, Vector2D position, ALLEGRO_COLOR color, ALLEGRO_COLOR colorMouseHover, ButtonHandler funcHandler /*= NULL*/ )
-    : _size(size), _position(position), _color(color), _colorMouseHover(colorMouseHover), _textColor(ALLEGRO_COLOR()), _text(""), _fontSize(0), _clicked(false), _funcHandler(funcHandler), _shadowedText(false), _forcedMouseHovered(false) { }
+    : _size(size), _position(position), _color(color), _colorMouseHover(colorMouseHover), _textColor(ALLEGRO_COLOR()), _text(""), _fontSize(0), _clicked(false), _funcHandler(funcHandler), _shadowedText(false), _forcedMouseHovered(false) , Visible(true) {  }
 
 // Button without mouseHover color with text (with or without shadow)
 RectButton::RectButton(Vector2D size, Vector2D position, ALLEGRO_COLOR color, ALLEGRO_COLOR textColor, std::string text, uint fontSize, ButtonHandler funcHandler, bool shadowedText /*= false*/ )
-    : _size(size), _position(position), _color(color), _colorMouseHover(ALLEGRO_COLOR()), _textColor(textColor), _text(text), _fontSize(fontSize), _clicked(false), _funcHandler(funcHandler), _shadowedText(shadowedText), _forcedMouseHovered(false) { }
+    : _size(size), _position(position), _color(color), _colorMouseHover(ALLEGRO_COLOR()), _textColor(textColor), _text(text), _fontSize(fontSize), _clicked(false), _funcHandler(funcHandler), _shadowedText(shadowedText), _forcedMouseHovered(false) , Visible(true) {  }
 
 // Button without mouseHover color without text (with or without callback function)
 RectButton::RectButton(Vector2D size, Vector2D position, ALLEGRO_COLOR color, ButtonHandler funcHandler /*= NULL*/ )
-    : _size(size), _position(position), _color(color), _colorMouseHover(ALLEGRO_COLOR()), _textColor(ALLEGRO_COLOR()), _text(""), _fontSize(0), _clicked(false), _funcHandler(funcHandler), _shadowedText(false), _forcedMouseHovered(false) { }
+    : _size(size), _position(position), _color(color), _colorMouseHover(ALLEGRO_COLOR()), _textColor(ALLEGRO_COLOR()), _text(""), _fontSize(0), _clicked(false), _funcHandler(funcHandler), _shadowedText(false), _forcedMouseHovered(false) , Visible(true) {  }
 
 // Transparent button with text (with or without shadow)
 RectButton::RectButton(Vector2D position, ALLEGRO_COLOR textColor, std::string text, uint fontSize, ButtonHandler funcHandler, bool shadowedText /*= false*/ )
-    : _size(Vector2D(0.0f, 0.0f)), _position(position), _color(ALLEGRO_COLOR()), _colorMouseHover(ALLEGRO_COLOR()), _textColor(textColor), _text(text), _fontSize(fontSize), _clicked(false), _funcHandler(funcHandler), _shadowedText(shadowedText), _forcedMouseHovered(false) { }
+    : _size(Vector2D(0.0f, 0.0f)), _position(position), _color(ALLEGRO_COLOR()), _colorMouseHover(ALLEGRO_COLOR()), _textColor(textColor), _text(text), _fontSize(fontSize), _clicked(false), _funcHandler(funcHandler), _shadowedText(shadowedText), _forcedMouseHovered(false) , Visible(true) {  }
 
 // Transparent button without text (with or without callback function)
 RectButton::RectButton(Vector2D size, Vector2D position, ButtonHandler funcHandler /*= NULL*/ )
-    : _size(size), _position(position), _color(ALLEGRO_COLOR()), _colorMouseHover(ALLEGRO_COLOR()), _textColor(ALLEGRO_COLOR()), _text(""), _fontSize(0), _clicked(false), _funcHandler(funcHandler), _shadowedText(false), _forcedMouseHovered(false) { }
+    : _size(size), _position(position), _color(ALLEGRO_COLOR()), _colorMouseHover(ALLEGRO_COLOR()), _textColor(ALLEGRO_COLOR()), _text(""), _fontSize(0), _clicked(false), _funcHandler(funcHandler), _shadowedText(false), _forcedMouseHovered(false) , Visible(true) {  }
 
 void RectButton::Draw()
 {

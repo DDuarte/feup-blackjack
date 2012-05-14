@@ -72,8 +72,6 @@ private:
 
     int _backColorRGB;
 
-    static ALLEGRO_BITMAP* _image;
-    static ALLEGRO_BITMAP* _backImage;
     static Vector2D _frameSize;
 };
 

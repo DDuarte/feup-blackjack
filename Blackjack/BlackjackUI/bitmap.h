@@ -67,28 +67,28 @@ public:
     void SetImage(ALLEGRO_BITMAP* val) { _image = val; }
 
     ALLEGRO_COLOR GetTint() const { return _tint; }
-    void SetTint(ALLEGRO_COLOR val) { _tint = val; }
+    Bitmap& SetTint(ALLEGRO_COLOR val) { _tint = val; return *this; }
 
     Vector2D GetSize() const { return _size; }
-    void SetSize(Vector2D val) { _size = val; }
+    Bitmap& SetSize(Vector2D val) { _size = val; return *this; }
 
     Vector2D GetDestinationCoordinates() const { return _destinationCoordinates; }
-    void SetDestinationCoordinates(Vector2D val) { _destinationCoordinates = val; }
+    Bitmap& SetDestinationCoordinates(Vector2D val) { _destinationCoordinates = val; return *this; }
 
     Vector2D GetSourceCoordinates() const { return _sourceCoordinates; }
-    void SetSourceCoordinates(Vector2D val) { _sourceCoordinates = val; }
+    Bitmap& SetSourceCoordinates(Vector2D val) { _sourceCoordinates = val; return *this; }
 
     Vector2D GetCenterCoordinates() const { return _centerCoordinates; }
-    void SetCenterCoordinates(Vector2D val) { _centerCoordinates = val; }
+    Bitmap& SetCenterCoordinates(Vector2D val) { _centerCoordinates = val; return *this;}
 
     Vector2D GetScale() const { return _scale; }
-    void SetScale(Vector2D val) { _scale = val; }
+    Bitmap& SetScale(Vector2D val) { _scale = val;  return *this;}
 
     float GetAngle() const { return _angle; }
-    void SetAngle(float val) { _angle = val; }
+    Bitmap& SetAngle(float val) { _angle = val; return *this;}
 
     int GetFlags() const { return _flags; }
-    void SetFlags(int val) { _flags = val; }
+    Bitmap& SetFlags(int val) { _flags = val; return *this; }
 
     void Draw();
 protected:

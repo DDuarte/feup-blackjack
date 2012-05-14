@@ -4,6 +4,7 @@
 #include "fonts.h"
 #include "rect_button.h"
 #include "localization.h"
+#include "bitmaps.h"
 
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
@@ -20,7 +21,6 @@ bool ChangeToQuit(RectButton* btn);
 
 S_MainMenu::S_MainMenu()
 {
-    _background = NULL;
     _bgMusic = NULL;
     _nextMenuSound = NULL;
     _selectedMenu = -1;
@@ -36,8 +36,6 @@ void S_MainMenu::Initialize()
 
 void S_MainMenu::LoadContents()
 {
-    _background = al_load_bitmap("../../Resources/wallpaper.jpg");
-
     al_reserve_samples(2);
     _bgMusic = al_load_sample("../../Resources/sounds/86876__milton__title-screen.ogg");
     _nextMenuSound = al_load_sample("../../Resources/sounds/86881_milton_yes.ogg");
@@ -119,7 +117,7 @@ void S_MainMenu::Draw()
     ALLEGRO_COLOR shadowText = al_map_rgb(0, 0, 0);
     ALLEGRO_COLOR selectedText = al_map_rgb(255, 255, 255);
 
-    al_draw_bitmap(_background, 0, 0, 0);
+    al_draw_bitmap(Bitmaps::GetBitmap(BITMAP_MENU_BACKGROUND), 0, 0, 0);
     al_draw_text(Fonts::GetFont(140), shadowText, 267, 1, ALLEGRO_ALIGN_CENTRE, "Blackjack");
     al_draw_text(Fonts::GetFont(140), selectedText, 266, 0, ALLEGRO_ALIGN_CENTRE, "Blackjack");
     
@@ -150,7 +148,6 @@ void S_MainMenu::Draw()
 
 void S_MainMenu::UnloadContents()
 {
-    al_destroy_bitmap(_background);
     al_destroy_sample(_bgMusic);
     al_destroy_sample(_nextMenuSound);
 

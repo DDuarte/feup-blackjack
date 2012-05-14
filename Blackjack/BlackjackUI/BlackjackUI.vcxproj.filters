@@ -60,6 +60,9 @@
     <ClCompile Include="bitmap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="bitmaps.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="card.h">
@@ -117,6 +120,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="bitmap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="animation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bitmaps.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

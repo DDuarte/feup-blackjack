@@ -68,6 +68,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="bitmap.cpp" />
+    <ClCompile Include="bitmaps.cpp" />
     <ClCompile Include="blackjack.cpp" />
     <ClCompile Include="card.cpp" />
     <ClCompile Include="dealer.cpp" />
@@ -84,7 +85,9 @@
     <ClCompile Include="utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="animation.h" />
     <ClInclude Include="bitmap.h" />
+    <ClInclude Include="bitmaps.h" />
     <ClInclude Include="blackjack.h" />
     <ClInclude Include="card.h" />
     <ClInclude Include="dealer.h" />

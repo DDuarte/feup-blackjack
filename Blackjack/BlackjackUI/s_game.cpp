@@ -10,6 +10,7 @@
 #include "rect_button.h"
 #include "localization.h"
 #include "text_log.h"
+#include "bitmaps.h"
 
 #include <string>
 #include <Windows.h>
@@ -28,8 +29,6 @@ S_Game::S_Game()
     _waitingPlayers = std::queue<Player*>();
     _activePlayers = new Player*[MAX_ACTIVE_PLAYERS];
 
-    _background = NULL;
-    _chip = NULL;
     _dealCardSound = NULL;
     _doubleSound = NULL;
     _dealerBlackjackSound = NULL;
@@ -58,8 +57,6 @@ void S_Game::Initialize()
 
 void S_Game::LoadContents()
 {
-    _background = al_load_bitmap("../../Resources/playing_table.png");
-    _chip = al_load_bitmap("../../Resources/chip1.png");
     _dealCardSound = al_load_sample("../../Resources/sounds/86854__milton__cardfall.ogg");
     _doubleSound = al_load_sample("../../Resources/sounds/86859__milton__double.ogg");
     _dealerBlackjackSound = al_load_sample("../../Resources/sounds/86857__milton__dealerblackjack.ogg");
@@ -75,8 +72,6 @@ void S_Game::LoadContents()
 
 void S_Game::UnloadContents()
 {
-    al_destroy_bitmap(_background);
-    al_destroy_bitmap(_chip);
     al_destroy_sample(_dealCardSound);
     al_destroy_sample(_doubleSound);
     al_destroy_sample(_dealerBlackjackSound);
@@ -91,10 +86,10 @@ void S_Game::UnloadContents()
 void S_Game::Draw()
 {
     // Draw Background
-    al_draw_bitmap(_background, 0, 0, 0);
+    al_draw_bitmap(Bitmaps::GetBitmap(BITMAP_GAME_BACKGROUND), 0, 0, 0);
 
     for (std::vector<RectButton*>::iterator btn = _buttons.begin(); btn != _buttons.end(); ++btn)
-        (*btn)->Draw();
+        if ((*btn)->Visible) (*btn)->Draw();
 
     // Debug printing
     al_draw_textf(Fonts::GetFont(10), al_map_rgb(255, 255, 255), 0, 0, ALLEGRO_ALIGN_LEFT, "x: %3.1f y: %3.1f", BlackJack::GetMousePosition().X, BlackJack::GetMousePosition().Y);
@@ -121,7 +116,7 @@ bool S_Game::Update(ALLEGRO_EVENT* ev)
         case ALLEGRO_EVENT_MOUSE_BUTTON_UP:
         {
             for (std::vector<RectButton*>::iterator btn = _buttons.begin(); btn != _buttons.end(); ++btn)
-                (*btn)->Update(ev);
+                if ((*btn)->Visible) (*btn)->Update(ev);
             return false;
         }
         case ALLEGRO_EVENT_DISPLAY_CLOSE:
@@ -147,6 +142,9 @@ bool S_Game::Update(ALLEGRO_EVENT* ev)
                     break;
                 case GAME_STATE_DEALING_CARDS:
                 {
+                    for (std::vector<RectButton*>::iterator btn = _buttons.begin(); btn != _buttons.end(); ++btn)
+                        (*btn)->Visible = false;
+
                     static int timer = 10;
                     if (!timer)
                     {
@@ -176,7 +174,10 @@ bool S_Game::Update(ALLEGRO_EVENT* ev)
                 }
                 case GAME_STATE_PLAYER_TURN:
                 {
-                    HandleStatePlayerTurn();
+                    for (std::vector<RectButton*>::iterator btn = _buttons.begin(); btn != _buttons.end(); ++btn)
+                        (*btn)->Visible = true;
+
+                    HandleStatePlayerTurn();                  
 
                     if (_playerPlayed)
                     {
@@ -195,6 +196,8 @@ bool S_Game::Update(ALLEGRO_EVENT* ev)
                 }
                 case GAME_STATE_DEALER_TURN:
                 {
+                    for (std::vector<RectButton*>::iterator btn = _buttons.begin(); btn != _buttons.end(); ++btn)
+                        (*btn)->Visible = false;
                     static int timer = 15;
                     if (!timer)
                     {
