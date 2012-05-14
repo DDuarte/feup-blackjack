@@ -143,8 +143,16 @@ bool S_Game::Update(ALLEGRO_EVENT* ev)
             switch (_gameState)
             {
                 case GAME_STATE_PLACING_BETS:
+                {
+                    if (CountActivePlayers() <= 1)
+                    {
+                        BlackJack::Instance()->ChangeState(STATE_GAME_OVER);
+                        return true;
+                    }
+
                     while (!HandleStatePlacingBets()) ;
                     break;
+                }
                 case GAME_STATE_DEALING_CARDS:
                 {
                     for (std::vector<RectButton*>::iterator btn = _buttons.begin(); btn != _buttons.end(); ++btn)
@@ -181,9 +189,7 @@ bool S_Game::Update(ALLEGRO_EVENT* ev)
                     for (std::vector<RectButton*>::iterator btn = _buttons.begin(); btn != _buttons.end(); ++btn)
                         (*btn)->Visible = true;
 
-                    HandleStatePlayerTurn();                  
-
-                    if (_playerPlayed)
+                    if (HandleStatePlayerTurn())
                     {
                         _activePlayerIndex++;
                         _playerPlayed = false;
@@ -218,9 +224,7 @@ bool S_Game::Update(ALLEGRO_EVENT* ev)
                     break;
                 case GAME_STATE_STAY_OR_GIVE_UP:
                 {
-                    HandleStateStayOrGiveUp();                  
-
-                    if (_playerPlayed)
+                    if (HandleStateStayOrGiveUp())
                     {
                         _activePlayerIndex++;
                         _playerPlayed = false;
@@ -324,12 +328,16 @@ void S_Game::ReadPlayersFromFile()
 
 void S_Game::SelectPlayers()
 {
-    if (_waitingPlayers.empty() || _waitingPlayers.size() < MAX_ACTIVE_PLAYERS)
+    if (_waitingPlayers.size() <= 1)
         throw InvalidPlayerException("Not enough players to start a game."); 
 
     for (uint i = 0; i < MAX_ACTIVE_PLAYERS; ++i)
     {
-        _activePlayers[i] = SelectNextPlayerFromQueue();
+        Player* player = SelectNextPlayerFromQueue();
+        if (player == NULL)
+            break;
+
+        _activePlayers[i] = player;
         _activePlayers[i]->EnterGame(i);
     }
 }
@@ -389,6 +397,9 @@ bool S_Game::HandleStatePlayerTurn()
     if (_activePlayerIndex >= MAX_ACTIVE_PLAYERS)
         return false;
 
+    if (_activePlayers[_activePlayerIndex] == NULL)
+        return true;
+
     _buttons[BUTTON_HIT]->Handler()->Bind<Player, &Player::Hit>(_activePlayers[_activePlayerIndex]);
     _buttons[BUTTON_STAND]->Handler()->Bind<Player, &Player::Stand>(_activePlayers[_activePlayerIndex]);
     _buttons[BUTTON_DOUBLE]->Handler()->Bind<Player, &Player::Double>(_activePlayers[_activePlayerIndex]);
@@ -440,6 +451,9 @@ bool S_Game::HandleStateStayOrGiveUp()
     if (_activePlayerIndex >= MAX_ACTIVE_PLAYERS)
         return false;
 
+    if (_activePlayers[_activePlayerIndex] == NULL)
+        return true;
+
     _buttons[BUTTON_GIVE_UP]->Handler()->Bind<Player, &Player::Surrender>(_activePlayers[_activePlayerIndex]);
     _buttons[BUTTON_STAY_GAME]->Handler()->Bind<Player, &Player::Stay>(_activePlayers[_activePlayerIndex]);
 
@@ -451,6 +465,9 @@ bool S_Game::HandleStateStayOrGiveUp()
 
 bool S_Game::HandleStateResetRound()
 {
+    _buttons[BUTTON_GIVE_UP]->Visible = false;
+    _buttons[BUTTON_STAY_GAME]->Visible = false;
+
     for (uint i = 0; i < MAX_ACTIVE_PLAYERS; ++i)
         if (_activePlayers[i] != NULL)
             _activePlayers[i]->ResetPlayer();
@@ -467,16 +484,15 @@ bool S_Game::HandleStateResetRound()
 
 bool S_Game::HandleStatePostGame()
 {
-    // Show surrender button
-
     for (uint i = 0; i < MAX_ACTIVE_PLAYERS; ++i)
     {
         if (_activePlayers[i] != NULL)
         {
             if (_activePlayers[i]->GetBalance() <= _bet || _activePlayers[i]->WantsSurrender())
             {
-                _activePlayers[i] = this->SelectNextPlayerFromQueue();
-                _activePlayers[i]->EnterGame(i);
+                _activePlayers[i] = SelectNextPlayerFromQueue();
+                if (_activePlayers[i] != NULL)
+                    _activePlayers[i]->EnterGame(i);
             }
         }
     }
@@ -487,4 +503,13 @@ bool S_Game::HandleStatePostGame()
 void S_Game::DealerHit(Dealer* dealer, Card* card)
 {
     _log->AddString("Dealer | Acção: pedir | Carta %s", card->GetName().c_str());
+}
+
+int S_Game::CountActivePlayers() const
+{
+    int count = 0;
+    for (uint i = 0; i < MAX_ACTIVE_PLAYERS; ++i)
+        if (_activePlayers[_activePlayerIndex] != NULL)
+            count++;
+    return count;
 }

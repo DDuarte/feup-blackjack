@@ -110,6 +110,8 @@ private:
     void NextInternalGameState();
     bool _playerPlayed;
 
+    int CountActivePlayers() const;
+
     TextLog* _log;
 };
 
