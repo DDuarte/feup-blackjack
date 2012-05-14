@@ -86,7 +86,7 @@ void S_Game::UnloadContents()
 void S_Game::Draw()
 {
     // Draw Background
-    al_draw_bitmap(Bitmaps::GetBitmap(BITMAP_GAME_BACKGROUND), 0, 0, 0);
+    Bitmap(BITMAP_GAME_BACKGROUND).Draw();
 
     for (std::vector<RectButton*>::iterator btn = _buttons.begin(); btn != _buttons.end(); ++btn)
         if ((*btn)->Visible) (*btn)->Draw();

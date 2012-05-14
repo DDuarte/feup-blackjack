@@ -2,6 +2,7 @@
 #define BITMAP_H
 
 #include "utilities.h"
+#include "bitmaps.h"
 
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
@@ -14,57 +15,57 @@ public:
     Bitmap();
 
     // Basic Bitmap
-    Bitmap(ALLEGRO_BITMAP* image, Vector2D destinationCoordinates, int flags = 0);
+    Bitmap(int image, Vector2D destinationCoordinates = Vector2D(0,0), int flags = 0);
 
     // Tinted Bitmap
-    Bitmap(ALLEGRO_BITMAP* image, Vector2D destinationCoordinates, ALLEGRO_COLOR tint, int flags = 0);
+    Bitmap(int image, Vector2D destinationCoordinates, ALLEGRO_COLOR tint, int flags = 0);
 
     // Scaled Bitmap
-    Bitmap(ALLEGRO_BITMAP* image, Vector2D destinationCoordinates, Vector2D scale, int flags = 0);
+    Bitmap(int image, Vector2D destinationCoordinates, Vector2D scale, int flags = 0);
 
     // Rotated Bitmap
-    Bitmap(ALLEGRO_BITMAP* image, Vector2D destinationCoordinates, Vector2D centerCoordinates, float angle, int flags = 0);
+    Bitmap(int image, Vector2D destinationCoordinates, Vector2D centerCoordinates, float angle, int flags = 0);
 
     // Bitmap Region
-    Bitmap(ALLEGRO_BITMAP* image, Vector2D destinationCoordinates, Vector2D sourceCoordinates, Vector2D size, int flags = 0);
+    Bitmap(int image, Vector2D destinationCoordinates, Vector2D sourceCoordinates, Vector2D size, int flags = 0);
 
     // Tinted Bitmap Region
-    Bitmap(ALLEGRO_BITMAP* image, Vector2D destinationCoordinates, Vector2D sourceCoordinates, Vector2D size, ALLEGRO_COLOR tint, int flags = 0);
+    Bitmap(int image, Vector2D destinationCoordinates, Vector2D sourceCoordinates, Vector2D size, ALLEGRO_COLOR tint, int flags = 0);
 
     // Scaled Bitmap Region
-    Bitmap(ALLEGRO_BITMAP* image, Vector2D destinationCoordinates, Vector2D sourceCoordinates, Vector2D size, Vector2D scale, int flags = 0);
+    Bitmap(int image, Vector2D destinationCoordinates, Vector2D sourceCoordinates, Vector2D size, Vector2D scale, int flags = 0);
 
     // Rotated Bitmap Region
-    Bitmap(ALLEGRO_BITMAP* image, Vector2D destinationCoordinates, Vector2D sourceCoordinates, Vector2D size, Vector2D centerCoordinates, float angle, int flags = 0);
+    Bitmap(int image, Vector2D destinationCoordinates, Vector2D sourceCoordinates, Vector2D size, Vector2D centerCoordinates, float angle, int flags = 0);
 
     // Tinted Scaled Bitmap
-    Bitmap(ALLEGRO_BITMAP* image, Vector2D destinationCoordinates, Vector2D scale, ALLEGRO_COLOR tint, int flags = 0);
+    Bitmap(int image, Vector2D destinationCoordinates, Vector2D scale, ALLEGRO_COLOR tint, int flags = 0);
 
     // Tinted Rotated Bitmap
-    Bitmap(ALLEGRO_BITMAP* image, Vector2D destinationCoordinates, Vector2D centerCoordinates, ALLEGRO_COLOR tint,  float angle, int flags = 0);
+    Bitmap(int image, Vector2D destinationCoordinates, Vector2D centerCoordinates, ALLEGRO_COLOR tint,  float angle, int flags = 0);
 
     // Scaled Rotated Bitmap
-    Bitmap(ALLEGRO_BITMAP* image, Vector2D destinationCoordinates, Vector2D centerCoordinates, Vector2D scale, float angle, int flags = 0);
+    Bitmap(int image, Vector2D destinationCoordinates, Vector2D centerCoordinates, Vector2D scale, float angle, int flags = 0);
 
     // Tinted Scaled Bitmap Region
-    Bitmap(ALLEGRO_BITMAP* image, Vector2D destinationCoordinates, Vector2D sourceCoordinates, Vector2D size, Vector2D centerCoordinates, Vector2D scale, ALLEGRO_COLOR tint, int flags = 0);
+    Bitmap(int image, Vector2D destinationCoordinates, Vector2D sourceCoordinates, Vector2D size, Vector2D centerCoordinates, Vector2D scale, ALLEGRO_COLOR tint, int flags = 0);
 
     // Tinted Rotated Bitmap Region
-    Bitmap(ALLEGRO_BITMAP* image, Vector2D destinationCoordinates, Vector2D sourceCoordinates, Vector2D size, Vector2D centerCoordinates, ALLEGRO_COLOR tint,  float angle, int flags = 0);
+    Bitmap(int image, Vector2D destinationCoordinates, Vector2D sourceCoordinates, Vector2D size, Vector2D centerCoordinates, ALLEGRO_COLOR tint,  float angle, int flags = 0);
 
     // Scaled Rotated Bitmap Region
-    Bitmap(ALLEGRO_BITMAP* image, Vector2D destinationCoordinates, Vector2D sourceCoordinates, Vector2D size, Vector2D centerCoordinates, Vector2D scale, float angle, int flags = 0);
+    Bitmap(int image, Vector2D destinationCoordinates, Vector2D sourceCoordinates, Vector2D size, Vector2D centerCoordinates, Vector2D scale, float angle, int flags = 0);
 
     // Tinted Scaled Rotated Bitmap
-    Bitmap(ALLEGRO_BITMAP* image, Vector2D destinationCoordinates, Vector2D centerCoordinates, Vector2D scale, ALLEGRO_COLOR tint, float angle, int flags = 0);
+    Bitmap(int image, Vector2D destinationCoordinates, Vector2D centerCoordinates, Vector2D scale, ALLEGRO_COLOR tint, float angle, int flags = 0);
 
     // Tinted Scaled Rotated Bitmap Region
-    Bitmap(ALLEGRO_BITMAP* image, Vector2D destinationCoordinates, Vector2D sourceCoordinates, Vector2D size, Vector2D centerCoordinates, Vector2D scale, ALLEGRO_COLOR tint, float angle, int flags = 0);
+    Bitmap(int image, Vector2D destinationCoordinates, Vector2D sourceCoordinates, Vector2D size, Vector2D centerCoordinates, Vector2D scale, ALLEGRO_COLOR tint, float angle, int flags = 0);
 
     //~Bitmap();
 
-    ALLEGRO_BITMAP* GetImage() const { return _image; }
-    void SetImage(ALLEGRO_BITMAP* val) { _image = val; }
+    ALLEGRO_BITMAP* GetImage() const { return Bitmaps::GetBitmap(_image); }
+    //void SetImage(int val) { _image = val; }
 
     ALLEGRO_COLOR GetTint() const { return _tint; }
     Bitmap& SetTint(ALLEGRO_COLOR val) { _tint = val; return *this; }
@@ -92,7 +93,7 @@ public:
 
     void Draw();
 protected:
-    ALLEGRO_BITMAP* _image;
+    int _image;
     ALLEGRO_COLOR _tint;
     Vector2D _size;
     Vector2D _destinationCoordinates;

@@ -127,9 +127,12 @@ void Player::Draw(bool activePlayer /*= false*/)
 
     _hand->Draw();
 
-    al_draw_scaled_bitmap(_game->GetChip(), 0, 0, al_get_bitmap_width(_game->GetChip()), al_get_bitmap_height(_game->GetChip()), PLAYER_POSITIONS[_index].X - 30 - 5, PLAYER_POSITIONS[_index].Y + 5, 30, 30, 0);
+    Vector2D chipScale((double)30/al_get_bitmap_width(Bitmaps::GetBitmap(BITMAP_GAME_CHIP)),(double)30/al_get_bitmap_height(Bitmaps::GetBitmap(BITMAP_GAME_CHIP)));
+
+    Bitmap(BITMAP_GAME_CHIP, Vector2D(PLAYER_POSITIONS[_index].X - 30 - 5, PLAYER_POSITIONS[_index].Y + 5), chipScale).Draw();
+
     if (_doubleBet)
-        al_draw_scaled_bitmap(_game->GetChip(), 0, 0, al_get_bitmap_width(_game->GetChip()), al_get_bitmap_height(_game->GetChip()), PLAYER_POSITIONS[_index].X - 30 - 5, PLAYER_POSITIONS[_index].Y + 5 + 30 + 5, 30, 30, 0);
+        Bitmap(BITMAP_GAME_CHIP, Vector2D(PLAYER_POSITIONS[_index].X - 30 - 5, PLAYER_POSITIONS[_index].Y + 5 + 35), chipScale).Draw();
 }
 
 void Player::EnterGame(int index)
