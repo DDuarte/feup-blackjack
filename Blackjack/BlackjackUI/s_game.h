@@ -26,8 +26,18 @@ enum GameState
     GAME_STATE_PLAYER_TURN,
     GAME_STATE_DEALER_TURN,
     GAME_STATE_CHECK_RESULTS,
-    GAME_STATE_RESET_ROUND,
-    GAME_STATE_POST_GAME
+    GAME_STATE_STAY_OR_GIVE_UP,
+    GAME_STATE_POST_GAME,
+    GAME_STATE_RESET_ROUND
+};
+
+enum Buttons
+{
+    BUTTON_HIT,
+    BUTTON_STAND,
+    BUTTON_DOUBLE,
+    BUTTON_GIVE_UP,
+    BUTTON_STAY_GAME
 };
 
 const uint MAX_ACTIVE_PLAYERS = 4;
@@ -51,7 +61,8 @@ public:
     void PlayerHit(Player* player, Card* card);
     void PlayerStand(Player* player);
     void PlayerDouble(Player* player, Card* card);
-    // void PlayerSurrender(Player* player) { }
+    void PlayerSurrender(Player* player);
+    void PlayerStay(Player* player);
 
     void DealerHit(Dealer* dealer, Card* card);
 
@@ -86,9 +97,10 @@ private:
     bool HandleStatePlayerTurn();    // Players make hit, stand or double
     bool HandleStateDealerTurn();    // Dealer Hits until 17
     bool HandleStateCheckResults();  // Checks the result of the game and pays to the players or not
+    bool HandleStateStayOrGiveUp();  // Asks the player if staying or giving up
+    bool HandleStatePostGame();      // Handles player removal
     bool HandleStateResetRound();    // Resets
-    bool HandleStatePostGame();      // Handle player surrender, etc.
-
+    
     void ReadPlayersFromFile();
 
     void SelectPlayers();

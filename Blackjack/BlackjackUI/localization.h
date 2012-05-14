@@ -33,7 +33,8 @@ enum Strings
     STR_HIT,
     STR_STAND,
     STR_DOUBLE,
-    STR_GIVEUP
+    STR_GIVEUP,
+    STR_STAY,
     // more here
 };
 

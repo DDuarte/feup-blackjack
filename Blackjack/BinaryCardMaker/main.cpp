@@ -84,6 +84,7 @@ int main()
         { "Stand"   , "Ficar" },
         { "Double"  , "Dobrar" },
         { "Give Up" , "Desistir" },
+        { "Stay"    , "Ficar" }
     };
 
     const int count = sizeof(strings) / sizeof(strings[0]);

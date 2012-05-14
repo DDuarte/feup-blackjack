@@ -95,9 +95,24 @@ bool Player::Double(RectButton* btn)
     return true;
 }
 
+bool Player::Stay(RectButton* btn)
+{
+    _surrender = false;
+    _game->PlayerStay(this);
+    return true;
+}
+
+bool Player::Surrender(RectButton* btn)
+{
+    _surrender = true;
+    _game->PlayerSurrender(this);
+    return true;
+}
+
 void Player::ResetPlayer()
 {
     _doubleBet = false;
+    _surrender = false;
     ClearHand();
 }
 

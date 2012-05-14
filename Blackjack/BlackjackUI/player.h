@@ -33,11 +33,11 @@ public:
     uint GetScore() const { return _hand->GetScore(); }
     static std::string GetPlayersFileName() { return _playersFileName; }
 
-    bool IsBusted() { return _hand->IsBusted(); }
-    bool IsBlackjack() { return _hand->IsBlackjack(); }
-    bool CanDouble() { return (_hand->GetScore() == 9 || _hand->GetScore() == 10 || _hand->GetScore() == 11) && _hand->GetNumberOfCards() == 2; }
+    bool IsBusted() const { return _hand->IsBusted(); }
+    bool IsBlackjack() const { return _hand->IsBlackjack(); }
+    bool CanDouble() const { return (_hand->GetScore() == 9 || _hand->GetScore() == 10 || _hand->GetScore() == 11) && _hand->GetNumberOfCards() == 2; }
 
-    bool HasLost() { return _hand->IsBusted(); }
+    bool HasLost() const { return _hand->IsBusted(); }
 
     void EnterGame(int index);
     // void ExitGame();
@@ -47,7 +47,10 @@ public:
     bool Stand(RectButton* btn);
     bool Hit(RectButton* btn);
     bool Double(RectButton* btn);
-    bool Surrender(RectButton* btn) { return true; }
+    bool Surrender(RectButton* btn);
+    bool Stay(RectButton* btn);
+
+    bool WantsSurrender() const { return _surrender; }
 
     // Rewards
     void DealerBusts()  { _balance += (2*(S_Game::GetBet() * (1 + _doubleBet))); }
@@ -75,6 +78,8 @@ private:
     S_Game* _game;
     
     int _index;
+
+    bool _surrender;
 };
 
 #endif // PLAYER_H

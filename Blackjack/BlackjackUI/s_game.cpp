@@ -49,10 +49,11 @@ void S_Game::Initialize()
     for (uint i = 0; i < MAX_ACTIVE_PLAYERS; ++i)
         _activePlayers[i] = NULL;
 
-    _buttons.push_back(new RectButton(Vector2D(95,35), Vector2D(325, 550), al_map_rgb(70, 4, 4), al_map_rgb(238, 233, 233), al_map_rgb(255, 255, 255), GetStr(STR_HIT),    36, RectButton::ButtonHandler().Bind<Player, &Player::Hit>(_activePlayers[_activePlayerIndex]), true));
-    _buttons.push_back(new RectButton(Vector2D(95,35), Vector2D(435, 550), al_map_rgb(70, 4, 4), al_map_rgb(238, 233, 233), al_map_rgb(255, 255, 255), GetStr(STR_STAND),  36, RectButton::ButtonHandler().Bind<Player, &Player::Stand>(_activePlayers[_activePlayerIndex]), true));
-    _buttons.push_back(new RectButton(Vector2D(95,35), Vector2D(540, 550), al_map_rgb(70, 4, 4), al_map_rgb(238, 233, 233), al_map_rgb(255, 255, 255), GetStr(STR_DOUBLE), 36, RectButton::ButtonHandler().Bind<Player, &Player::Double>(_activePlayers[_activePlayerIndex]), true));
-    _buttons.push_back(new RectButton(Vector2D(95,35), Vector2D(650, 550), al_map_rgb(70, 4, 4), al_map_rgb(238, 233, 233), al_map_rgb(255, 255, 255), GetStr(STR_GIVEUP), 36, RectButton::ButtonHandler().Bind<Player, &Player::Surrender>(_activePlayers[_activePlayerIndex]) , true));
+    _buttons.push_back(new RectButton(Vector2D(95,35), Vector2D(325, 550) , al_map_rgb(70, 4, 4), al_map_rgb(238, 233, 233), al_map_rgb(255, 255, 255), GetStr(STR_HIT),    36, RectButton::ButtonHandler(), true));
+    _buttons.push_back(new RectButton(Vector2D(95,35), Vector2D(435, 550) , al_map_rgb(70, 4, 4), al_map_rgb(238, 233, 233), al_map_rgb(255, 255, 255), GetStr(STR_STAND),  36, RectButton::ButtonHandler(), true));
+    _buttons.push_back(new RectButton(Vector2D(95,35), Vector2D(540, 550) , al_map_rgb(70, 4, 4), al_map_rgb(238, 233, 233), al_map_rgb(255, 255, 255), GetStr(STR_DOUBLE), 36, RectButton::ButtonHandler(), true));
+    _buttons.push_back(new RectButton(Vector2D(205,35), Vector2D(540, 550), al_map_rgb(70, 4, 4), al_map_rgb(238, 233, 233), al_map_rgb(255, 255, 255), GetStr(STR_GIVEUP), 36, RectButton::ButtonHandler(), true));
+    _buttons.push_back(new RectButton(Vector2D(205,35), Vector2D(325, 550), al_map_rgb(70, 4, 4), al_map_rgb(238, 233, 233), al_map_rgb(255, 255, 255), GetStr(STR_STAY),   36, RectButton::ButtonHandler(), true));
 }
 
 void S_Game::LoadContents()
@@ -94,11 +95,9 @@ void S_Game::Draw()
     // Debug printing
     al_draw_textf(Fonts::GetFont(10), al_map_rgb(255, 255, 255), 0, 0, ALLEGRO_ALIGN_LEFT, "x: %3.1f y: %3.1f", BlackJack::GetMousePosition().X, BlackJack::GetMousePosition().Y);
 
-    for (int i = 0; i < MAX_ACTIVE_PLAYERS; ++i)
-    {
+    for (uint i = 0; i < MAX_ACTIVE_PLAYERS; ++i)
         if (_activePlayers[i] != NULL)
-            _activePlayers[i]->Draw(i == _activePlayerIndex && _gameState == GAME_STATE_PLAYER_TURN);
-    }
+            _activePlayers[i]->Draw(i == _activePlayerIndex && (_gameState == GAME_STATE_PLAYER_TURN || _gameState == GAME_STATE_STAY_OR_GIVE_UP));
 
     _dealer->Draw();
     _deck->Draw();
@@ -165,9 +164,8 @@ bool S_Game::Update(ALLEGRO_EVENT* ev)
                                 counter2 = 0;
 
                                 if (_dealer->IsBlackjack())
-                                {
                                     al_play_sample(_dealerBlackjackSound, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
-                                }
+
                                 break;
                             }
                         }
@@ -187,9 +185,9 @@ bool S_Game::Update(ALLEGRO_EVENT* ev)
 
                     if (_playerPlayed)
                     {
-                            _activePlayerIndex++;
-                            _playerPlayed = false;
-                            return true;
+                        _activePlayerIndex++;
+                        _playerPlayed = false;
+                        return true;
                     }
 
                     if (_activePlayerIndex >= MAX_ACTIVE_PLAYERS)
@@ -218,12 +216,32 @@ bool S_Game::Update(ALLEGRO_EVENT* ev)
                 case GAME_STATE_CHECK_RESULTS:
                     while (!HandleStateCheckResults()) ;
                     break;
-                case GAME_STATE_RESET_ROUND:
-                    while (!HandleStateResetRound()) ;
-                    break;
+                case GAME_STATE_STAY_OR_GIVE_UP:
+                {
+                    HandleStateStayOrGiveUp();                  
+
+                    if (_playerPlayed)
+                    {
+                        _activePlayerIndex++;
+                        _playerPlayed = false;
+                        return true;
+                    }
+
+                    if (_activePlayerIndex >= MAX_ACTIVE_PLAYERS)
+                    {
+                        _activePlayerIndex = 0;
+                        break;
+                    }
+
+                    return true;
+                }
                 case GAME_STATE_POST_GAME:
                     while (!HandleStatePostGame()) ;
                     break;
+                case GAME_STATE_RESET_ROUND:
+                    while (!HandleStateResetRound()) ;
+                    break;
+                
                 default:
                     return false;
             }
@@ -267,11 +285,20 @@ void S_Game::PlayerDouble(Player* player, Card* card)
     _playerPlayed = true;
 }
 
-void S_Game::PlayerBet( Player* /* player*/ )
+void S_Game::PlayerSurrender(Player* player)
+{
+    _playerPlayed = true;
+}
+
+void S_Game::PlayerStay(Player* player)
+{
+    _playerPlayed = true;
+}
+
+void S_Game::PlayerBet(Player* player)
 {
 
 }
-
 
 void S_Game::ReadPlayersFromFile()
 {
@@ -322,7 +349,7 @@ void S_Game::NextInternalGameState()
 {
     _gameState++;
     _activePlayerIndex = 0;
-    if (_gameState > GAME_STATE_POST_GAME)
+    if (_gameState > GAME_STATE_RESET_ROUND)
         _gameState = GAME_STATE_PLACING_BETS;
 }
 
@@ -362,12 +389,15 @@ bool S_Game::HandleStatePlayerTurn()
     if (_activePlayerIndex >= MAX_ACTIVE_PLAYERS)
         return false;
 
-    _buttons[0]->Handler()->Bind<Player, &Player::Hit>(_activePlayers[_activePlayerIndex]);
-    _buttons[1]->Handler()->Bind<Player, &Player::Stand>(_activePlayers[_activePlayerIndex]);
-    _buttons[2]->Handler()->Bind<Player, &Player::Double>(_activePlayers[_activePlayerIndex]);
+    _buttons[BUTTON_HIT]->Handler()->Bind<Player, &Player::Hit>(_activePlayers[_activePlayerIndex]);
+    _buttons[BUTTON_STAND]->Handler()->Bind<Player, &Player::Stand>(_activePlayers[_activePlayerIndex]);
+    _buttons[BUTTON_DOUBLE]->Handler()->Bind<Player, &Player::Double>(_activePlayers[_activePlayerIndex]);
 
     if (!_activePlayers[_activePlayerIndex]->CanDouble())
-        _buttons[2]->Visible = false;
+        _buttons[BUTTON_DOUBLE]->Visible = false;
+
+    _buttons[BUTTON_GIVE_UP]->Visible = false;
+    _buttons[BUTTON_STAY_GAME]->Visible = false;
 
     return _playerPlayed;
 }
@@ -405,6 +435,20 @@ bool S_Game::HandleStateCheckResults()
     return true;
 }
 
+bool S_Game::HandleStateStayOrGiveUp()
+{
+    if (_activePlayerIndex >= MAX_ACTIVE_PLAYERS)
+        return false;
+
+    _buttons[BUTTON_GIVE_UP]->Handler()->Bind<Player, &Player::Surrender>(_activePlayers[_activePlayerIndex]);
+    _buttons[BUTTON_STAY_GAME]->Handler()->Bind<Player, &Player::Stay>(_activePlayers[_activePlayerIndex]);
+
+    _buttons[BUTTON_GIVE_UP]->Visible = true;
+    _buttons[BUTTON_STAY_GAME]->Visible = true;
+
+    return _playerPlayed;
+}
+
 bool S_Game::HandleStateResetRound()
 {
     for (uint i = 0; i < MAX_ACTIVE_PLAYERS; ++i)
@@ -429,7 +473,7 @@ bool S_Game::HandleStatePostGame()
     {
         if (_activePlayers[i] != NULL)
         {
-            if (_activePlayers[i]->GetBalance() <= _bet)
+            if (_activePlayers[i]->GetBalance() <= _bet || _activePlayers[i]->WantsSurrender())
             {
                 _activePlayers[i] = this->SelectNextPlayerFromQueue();
                 _activePlayers[i]->EnterGame(i);
