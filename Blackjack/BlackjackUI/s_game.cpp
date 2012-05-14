@@ -128,8 +128,14 @@ bool S_Game::Update(ALLEGRO_EVENT* ev)
         {
             if (ev->keyboard.keycode == ALLEGRO_KEY_ESCAPE)
             {
-                BlackJack::Instance()->Quit();
-                return false;
+                int result = al_show_native_message_box(BlackJack::Instance()->GetDisplay(), "Sair", "", "Deseja sair?", NULL, ALLEGRO_MESSAGEBOX_QUESTION|ALLEGRO_MESSAGEBOX_OK_CANCEL);
+                if (result == 2 || result == 0)
+                    return true;
+                else
+                {
+                    BlackJack::Instance()->Quit();
+                    return false;
+                }
             }
             break;
         }
