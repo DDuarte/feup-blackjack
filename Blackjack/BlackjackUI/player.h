@@ -35,6 +35,8 @@ public:
 
     bool IsBusted() { return _hand->IsBusted(); }
     bool IsBlackjack() { return _hand->IsBlackjack(); }
+    bool CanDouble() { return (_hand->GetScore() == 9 || _hand->GetScore() == 10 || _hand->GetScore() == 11) && _hand->GetNumberOfCards() == 2; }
+
     bool HasLost() { return _hand->IsBusted(); }
 
     void EnterGame(int index);

@@ -359,9 +359,15 @@ bool S_Game::HandleStateDealingCards(uint i)
 
 bool S_Game::HandleStatePlayerTurn()
 {
+    if (_activePlayerIndex >= MAX_ACTIVE_PLAYERS)
+        return false;
+
     _buttons[0]->Handler()->Bind<Player, &Player::Hit>(_activePlayers[_activePlayerIndex]);
     _buttons[1]->Handler()->Bind<Player, &Player::Stand>(_activePlayers[_activePlayerIndex]);
     _buttons[2]->Handler()->Bind<Player, &Player::Double>(_activePlayers[_activePlayerIndex]);
+
+    if (!_activePlayers[_activePlayerIndex]->CanDouble())
+        _buttons[2]->Visible = false;
 
     return _playerPlayed;
 }
