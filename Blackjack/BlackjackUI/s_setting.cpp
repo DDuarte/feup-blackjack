@@ -36,7 +36,10 @@ void S_Settings::LoadContents() { }
 bool S_Settings::Update(ALLEGRO_EVENT* ev)
 {
     for (std::vector<RectButton*>::const_iterator itr = _buttons.begin(); itr != _buttons.end(); ++itr)
-        (*itr)->Update(ev);
+    {
+        if (!(*itr)->Update(ev))
+            break;
+    }
 
     return true;
 }
@@ -72,5 +75,5 @@ bool HandleButtonClicked(RectButton* btn)
 bool ChangeToMenuState(RectButton* btn)
 {
     BlackJack::Instance()->ChangeState(STATE_MAIN_MENU);
-    return true;
+    return false;
 }
