@@ -92,6 +92,7 @@ public:
     Bitmap& SetFlags(int val) { _flags = val; return *this; }
 
     void Draw();
+
 protected:
     int _image;
     ALLEGRO_COLOR _tint;

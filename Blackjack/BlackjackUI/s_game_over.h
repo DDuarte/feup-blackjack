@@ -17,7 +17,7 @@ public:
     void Initialize() { }
     void LoadContents() { }
     bool Update(ALLEGRO_EVENT* ev) { return true; }
-    void Draw() { al_draw_text(Fonts::GetFont(100), al_map_rgb(255,255,255), 400, 250, ALLEGRO_ALIGN_CENTRE, "Game Over"); }
+    void Draw();
     void UnloadContents() { }
 };
 

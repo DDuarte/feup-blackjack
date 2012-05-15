@@ -15,10 +15,10 @@ void Bitmaps::UnloadBitmaps()
         al_destroy_bitmap(bmp->second);
 }
 
-ALLEGRO_BITMAP* Bitmaps::GetBitmap(int bitmaps_path_number)
+ALLEGRO_BITMAP* Bitmaps::GetBitmap(int bitmapsPathNumber)
 {
-    if (_bitmaps.find(bitmaps_path[bitmaps_path_number]) == _bitmaps.end())
-        _bitmaps[bitmaps_path[bitmaps_path_number]] = al_load_bitmap(bitmaps_path[bitmaps_path_number].c_str());
+    if (_bitmaps.find(bitmaps_path[bitmapsPathNumber]) == _bitmaps.end())
+        _bitmaps[bitmaps_path[bitmapsPathNumber]] = al_load_bitmap(bitmaps_path[bitmapsPathNumber].c_str());
 
-    return _bitmaps[bitmaps_path[bitmaps_path_number]];
+    return _bitmaps[bitmaps_path[bitmapsPathNumber]];
 }

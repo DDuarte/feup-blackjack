@@ -80,6 +80,7 @@
     <ClCompile Include="player.cpp" />
     <ClCompile Include="rect_button.cpp" />
     <ClCompile Include="s_game.cpp" />
+    <ClCompile Include="s_game_over.cpp" />
     <ClCompile Include="s_main_menu.cpp" />
     <ClCompile Include="s_setting.cpp" />
     <ClCompile Include="text_log.cpp" />

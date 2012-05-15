@@ -129,6 +129,7 @@ void BlackJack::UnloadContents()
     al_destroy_display(_display);
 
     Fonts::UnloadFonts();
+    Bitmaps::UnloadBitmaps();
 
     delete _mouseState; // only one instance of this class exists
 }
