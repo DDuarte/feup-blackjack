@@ -193,6 +193,12 @@ bool S_Game::Update(ALLEGRO_EVENT* ev)
                 }
                 case GAME_STATE_PLAYER_TURN:
                 {
+                    if (_dealer->IsBlackjack())
+                    {
+                        NextInternalGameState();
+                        NextInternalGameState(); // go to check results
+                    }
+
                     for (std::vector<RectButton*>::iterator btn = _buttons.begin(); btn != _buttons.end(); ++btn)
                         (*btn)->Visible = true;
 
@@ -449,6 +455,8 @@ bool S_Game::HandleStateCheckResults()
                 _activePlayers[i]->DealerBusts();
             else if (_activePlayers[i]->IsBlackjack() && !_dealer->IsBlackjack())
                 _activePlayers[i]->WinsItAll();
+            //else if (_activePlayers[i]->IsBlackjack() && _dealer->IsBlackjack()) already covered in next case
+            //    _activePlayers[i]->Wins();
             else if (_activePlayers[i]->GetScore() >= _dealer->GetScore())
                 _activePlayers[i]->Wins();
         }
