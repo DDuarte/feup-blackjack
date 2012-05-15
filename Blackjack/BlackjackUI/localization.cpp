@@ -121,3 +121,8 @@ Language Localization::GetLanguageByShortLang(std::string lang)
     else if (lang == "fr") return LANGUAGE_FRENCH;
     else                   return LANGUAGE_NONE;
 }
+
+std::string Localization::GetCurrentLanguage() const
+{
+    return LanguageComplete[_currLang];
+}

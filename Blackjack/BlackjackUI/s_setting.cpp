@@ -1,8 +1,12 @@
-#include "s_settings.h"
+﻿#include "s_settings.h"
 #include "bitmaps.h"
 #include "localization.h"
 #include "rect_button.h"
 #include "fonts.h"
+
+#include <allegro5/allegro.h>
+#include <allegro5/allegro_primitives.h>
+#include <allegro5/allegro_font.h>
 
 #include <vector>
 #include <string>
@@ -22,12 +26,12 @@ void S_Settings::Initialize()
     for (uint i = 0; i < languages.size(); ++i)
     {
         int indice = languages[i];
-        LanguageButton* temp = new LanguageButton(RectButton(Vector2D(x,y), al_map_rgb(255,255,255), LanguageComplete[indice], 100, RectButton::ButtonHandler().Bind<&HandleButtonClicked>(), true), indice);
+        LanguageButton* temp = new LanguageButton(RectButton(Vector2D(x,y), al_map_rgb(255,255,255), LanguageComplete[indice], 50, RectButton::ButtonHandler().Bind<&HandleButtonClicked>(), true), indice);
         _buttons.push_back(temp);
-        y += 100;
+        y += 80;
     }
 
-    RectButton* btn = new RectButton (Vector2D(x,y), al_map_rgb(255,255,255), std::string("Menu"), 100, RectButton::ButtonHandler().Bind<&ChangeToMenuState>(), true);
+    RectButton* btn = new RectButton (Vector2D(800-200,600-120), al_map_rgb(255,255,255), std::string("Menu"), 50, RectButton::ButtonHandler().Bind<&ChangeToMenuState>(), true);
     _buttons.push_back(btn);
 }
 
@@ -47,6 +51,10 @@ bool S_Settings::Update(ALLEGRO_EVENT* ev)
 void S_Settings::Draw() 
 {
     Bitmap(BITMAP_MENU_BACKGROUND).Draw();
+
+    al_draw_filled_rounded_rectangle(40, 40, 800-40, 600-40, 10, 10, al_map_rgba(0, 0, 0, 175));
+
+    al_draw_textf(Fonts::GetFont(30), al_map_rgb(255,255,255), 800-80, 80, ALLEGRO_ALIGN_RIGHT, "Atual: %s", Localization::Instance()->GetCurrentLanguage().c_str());
 
     for (std::vector<RectButton*>::const_iterator itr = _buttons.begin(); itr != _buttons.end(); ++itr)
         (*itr)->Draw();

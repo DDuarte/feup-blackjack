@@ -1,4 +1,4 @@
-﻿#ifndef LOCALIZATION_H
+#ifndef LOCALIZATION_H
 #define LOCALIZATION_H
 
 #include <vector>
@@ -48,7 +48,7 @@ enum Language
 };
 
 static char* LanguageShort[] = { "uk", "en", "pt", "fr", "es" };
-static char* LanguageComplete[] = { "Unknown", "English", "Português", "Français", "Español" };
+static std::string LanguageComplete[] = { "Unknown", "English", "Português", "Français", "Español" };
 
 // Singleton since we need to use it all around the code
 // To get a string of the current language use the macro GetStr() and pass an element of the Strings element
@@ -60,6 +60,7 @@ public:
     std::vector<Language> GetAvailableLanguages() const { return _languages; }
 
     std::string GetString(Strings index) const;
+    std::string GetCurrentLanguage() const;
 
     void SetLang(Language lang);
 
