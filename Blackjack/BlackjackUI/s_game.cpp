@@ -336,7 +336,11 @@ void S_Game::ReadPlayersFromFile()
 void S_Game::SelectPlayers()
 {
     if (_waitingPlayers.size() <= 1)
-        throw InvalidPlayerException("Not enough players to start a game."); 
+    {
+        al_show_native_message_box(BlackJack::Instance()->GetDisplay(), "Error", "", "Not enough players to start a game. Fill in players.txt.", 0, ALLEGRO_MESSAGEBOX_ERROR);
+        BlackJack::Instance()->Quit();
+        return;
+    }
 
     for (uint i = 0; i < MAX_ACTIVE_PLAYERS; ++i)
     {
