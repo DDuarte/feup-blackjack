@@ -29,7 +29,6 @@ public:
     void UnloadContents();
 
 private:
-    ALLEGRO_BITMAP* _background;
     ALLEGRO_SAMPLE* _bgMusic;
     ALLEGRO_SAMPLE* _nextMenuSound;
 

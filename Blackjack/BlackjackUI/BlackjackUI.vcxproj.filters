@@ -63,6 +63,9 @@
     <ClCompile Include="bitmaps.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="s_setting.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="card.h">

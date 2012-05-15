@@ -48,6 +48,7 @@ enum Language
 };
 
 static char* LanguageShort[] = { "uk", "en", "pt", "fr", "es" };
+static char* LanguageComplete[] = { "English (UK)", "English", "Potuguês", "Français", "Español" };
 
 // Singleton since we need to use it all around the code
 // To get a string of the current language use the macro GetStr() and pass an element of the Strings element

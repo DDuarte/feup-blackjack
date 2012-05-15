@@ -171,6 +171,13 @@ bool S_Game::Update(ALLEGRO_EVENT* ev)
                                 counter = 0;
                                 counter2 = 0;
 
+                                for (uint i = 0; i < MAX_ACTIVE_PLAYERS; i++)
+                                {
+                                    if (_activePlayers[i] != NULL)
+                                        if (_activePlayers[i]->IsBlackjack() && !_dealer->IsBlackjack())
+                                            _activePlayers[i]->WinsItAll();
+                                }
+
                                 if (_dealer->IsBlackjack())
                                     al_play_sample(_dealerBlackjackSound, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 

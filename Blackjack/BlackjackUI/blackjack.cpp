@@ -153,7 +153,7 @@ void BlackJack::_Start()
         Update(&ev);
 
         // Only draw if something was changed
-        if (_draw /*&& al_event_queue_is_empty(_eventQueue)*/)
+        if (_draw && al_event_queue_is_empty(_eventQueue))
             Draw();
     }
 
