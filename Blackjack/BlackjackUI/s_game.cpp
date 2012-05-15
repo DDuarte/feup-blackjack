@@ -64,7 +64,10 @@ void S_Game::LoadContents()
 
     ReadPlayersFromFile();
     for (std::vector<Player>::iterator plr = _players.begin(); plr != _players.end(); ++plr)
-        _waitingPlayers.push(&(*plr));
+    {
+        if (plr->GetBalance() >= _bet)
+            _waitingPlayers.push(&(*plr));
+    }
 
     SelectPlayers();
     _activePlayerIndex = 0;
