@@ -30,10 +30,7 @@ public:
     void UnloadContents();
 
 private:
-
     std::vector<RectButton*> _buttons;
-
-
 };
 
 

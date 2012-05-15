@@ -24,18 +24,15 @@ S_MainMenu::S_MainMenu()
     _bgMusic = NULL;
     _nextMenuSound = NULL;
     _selectedMenu = -1;
-    _playButton = new RectButton(Vector2D(50, 440), al_map_rgb(200, 200, 200), GetStr(STR_PLAY), 50, RectButton::ButtonHandler().Bind<&ChangeToPlayState>(), true);
-    _settingButton = new RectButton(Vector2D(50, 441 + 50), al_map_rgb(200, 200, 200), GetStr(STR_OPTIONS), 50, RectButton::ButtonHandler().Bind<&ChangeToSettingsState>(), true);
-    _quitButton = new RectButton(Vector2D(50, 441 + 100), al_map_rgb(200, 200, 200), GetStr(STR_QUIT), 50, RectButton::ButtonHandler().Bind<&ChangeToQuit>(), true);
 }
 
 void S_MainMenu::Initialize()
 {
     _selectedMenu = MENU_PLAY;
     
-    if (_playButton == NULL) _playButton = new RectButton(Vector2D(50, 440), al_map_rgb(200, 200, 200), GetStr(STR_PLAY), 50, RectButton::ButtonHandler().Bind<&ChangeToPlayState>(), true);
-    if (_settingButton == NULL)  _settingButton = new RectButton(Vector2D(50, 441 + 50), al_map_rgb(200, 200, 200), GetStr(STR_OPTIONS), 50, RectButton::ButtonHandler().Bind<&ChangeToSettingsState>(), true);
-    if (_quitButton == NULL)  _quitButton = new RectButton(Vector2D(50, 441 + 100), al_map_rgb(200, 200, 200), GetStr(STR_QUIT), 50, RectButton::ButtonHandler().Bind<&ChangeToQuit>(), true);
+    _playButton = new RectButton(Vector2D(50, 440), al_map_rgb(200, 200, 200), GetStr(STR_PLAY), 50, RectButton::ButtonHandler().Bind<&ChangeToPlayState>(), true);
+    _settingButton = new RectButton(Vector2D(50, 441 + 50), al_map_rgb(200, 200, 200), GetStr(STR_OPTIONS), 50, RectButton::ButtonHandler().Bind<&ChangeToSettingsState>(), true);
+    _quitButton = new RectButton(Vector2D(50, 441 + 100), al_map_rgb(200, 200, 200), GetStr(STR_QUIT), 50, RectButton::ButtonHandler().Bind<&ChangeToQuit>(), true);
 }
 
 void S_MainMenu::LoadContents()
