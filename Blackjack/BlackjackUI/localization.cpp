@@ -62,7 +62,7 @@ bool Localization::ReadLangFile(char* lang)
 
 bool Localization::FindLangs()
 {
-    char* ext = ".lang";
+    std::string ext = ".lang";
 
     char currentPath[FILENAME_MAX];
 
@@ -75,8 +75,12 @@ bool Localization::FindLangs()
     if (dir != NULL)
     {
         while ((ent = readdir(dir)) != NULL)
-            if (strstr(ent->d_name, ext))
-                _languages.push_back(GetLanguageByShortLang(std::string(ent->d_name).substr(0, 2)));
+        {
+            std::string fileName = ent->d_name;
+            if (fileName.size() > (ext.size() + 1) && fileName.substr(fileName.size() - ext.size(), ext.size()) == ext)
+                _languages.push_back(GetLanguageByShortLang(fileName.substr(0, 2)));
+        }
+
         closedir(dir);
     }
     else
