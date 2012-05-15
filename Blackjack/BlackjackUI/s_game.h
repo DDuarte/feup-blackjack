@@ -72,6 +72,7 @@ public:
     void HandleOutOfCards() { }
 
     static double GetBet() { return _bet; }
+    static void SetBet(double bet) { _bet = bet; }
 
     ALLEGRO_BITMAP* GetChip() { return Bitmaps::GetBitmap(BITMAP_GAME_CHIP); }
 

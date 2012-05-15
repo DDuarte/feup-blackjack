@@ -9,6 +9,9 @@
 
 union ALLEGRO_EVENT;
 
+bool HandleBetUp(RectButton* btn);
+bool HandleBetDown(RectButton* btn);
+
 class S_Settings : public State
 {
     friend bool HandleButtonClicked(RectButton* btn);
