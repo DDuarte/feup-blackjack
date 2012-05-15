@@ -473,11 +473,15 @@ bool S_Game::HandleStateStayOrGiveUp()
     if (_activePlayers[_activePlayerIndex] == NULL)
         return true;
 
-    _buttons[BUTTON_GIVE_UP]->Handler()->Bind<Player, &Player::Surrender>(_activePlayers[_activePlayerIndex]);
-    _buttons[BUTTON_STAY_GAME]->Handler()->Bind<Player, &Player::Stay>(_activePlayers[_activePlayerIndex]);
-
-    _buttons[BUTTON_GIVE_UP]->Visible = true;
-    _buttons[BUTTON_STAY_GAME]->Visible = true;
+    if (_activePlayers[_activePlayerIndex]->GetBalance() > _bet)
+    {
+        _buttons[BUTTON_GIVE_UP]->Handler()->Bind<Player, &Player::Surrender>(_activePlayers[_activePlayerIndex]);
+        _buttons[BUTTON_STAY_GAME]->Handler()->Bind<Player, &Player::Stay>(_activePlayers[_activePlayerIndex]);
+        _buttons[BUTTON_GIVE_UP]->Visible = true;
+        _buttons[BUTTON_STAY_GAME]->Visible = true;
+    }
+    else
+        _playerPlayed = true; // will be replaced next round
 
     return _playerPlayed;
 }
