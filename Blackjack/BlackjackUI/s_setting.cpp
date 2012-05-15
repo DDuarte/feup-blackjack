@@ -56,15 +56,15 @@ void S_Settings::UnloadContents()
 {
     for (uint i = 0; i < _buttons.size(); ++i)
         delete _buttons[i];
-
+    
     _buttons.clear();
 }
 
 bool HandleButtonClicked(RectButton* btn)
 {
-    int newLang = ((S_Settings::LanguageButton*)(btn))->Language;
+    int newLang = ((S_Settings::LanguageButton*)(btn))->GetLanguage();
 
-    if (newLang == -1)
+    if (newLang <= 0)
         return false;
 
     Localization::Instance()->SetLang((Language)newLang);

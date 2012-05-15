@@ -14,11 +14,13 @@ class S_Settings : public State
     friend bool HandleButtonClicked(RectButton* btn);
     class LanguageButton : public RectButton
     {
-        public:
-            LanguageButton(const RectButton& btn) : RectButton(btn), Language(-1) { }
-            LanguageButton(const RectButton& btn, int lang) : RectButton(btn), Language(lang) { }
+    public:
+        LanguageButton(const RectButton& btn) : RectButton(btn), _language(-1) { }
+        LanguageButton(const RectButton& btn, int lang) : RectButton(btn), _language(lang) { }
+        int GetLanguage() const { return _language; }
 
-            int Language;
+    private:
+        int _language;
     };
 
 public:

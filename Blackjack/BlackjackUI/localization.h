@@ -1,4 +1,4 @@
-#ifndef LOCALIZATION_H
+ï»¿#ifndef LOCALIZATION_H
 #define LOCALIZATION_H
 
 #include <vector>
@@ -48,7 +48,7 @@ enum Language
 };
 
 static char* LanguageShort[] = { "uk", "en", "pt", "fr", "es" };
-static char* LanguageComplete[] = { "Unknown", "English", "Potuguês", "Français", "Español" };
+static char* LanguageComplete[] = { "Unknown", "English", "PortuguÃªs", "FranÃ§ais", "EspaÃ±ol" };
 
 // Singleton since we need to use it all around the code
 // To get a string of the current language use the macro GetStr() and pass an element of the Strings element
