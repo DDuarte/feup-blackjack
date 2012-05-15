@@ -473,7 +473,7 @@ bool S_Game::HandleStateStayOrGiveUp()
     if (_activePlayers[_activePlayerIndex] == NULL)
         return true;
 
-    if (_activePlayers[_activePlayerIndex]->GetBalance() > _bet)
+    if (_activePlayers[_activePlayerIndex]->GetBalance() >= _bet)
     {
         _buttons[BUTTON_GIVE_UP]->Handler()->Bind<Player, &Player::Surrender>(_activePlayers[_activePlayerIndex]);
         _buttons[BUTTON_STAY_GAME]->Handler()->Bind<Player, &Player::Stay>(_activePlayers[_activePlayerIndex]);
