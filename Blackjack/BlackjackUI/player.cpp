@@ -30,6 +30,10 @@ Player::Player(std::ifstream& file, S_Game* game)
 
     _doubleBet = false;
     _index = -1;
+
+    Vector2D chipScale(30.0/al_get_bitmap_width(Bitmaps::GetBitmap(BITMAP_GAME_CHIP)),30.0/al_get_bitmap_height(Bitmaps::GetBitmap(BITMAP_GAME_CHIP)));
+    _chip = Bitmap(BITMAP_GAME_CHIP, Vector2D(PLAYER_POSITIONS[_index].X - 30 - 5, PLAYER_POSITIONS[_index].Y + 5), chipScale);
+    _doubleChip = Bitmap(BITMAP_GAME_CHIP, Vector2D(PLAYER_POSITIONS[_index].X - 30 - 5, PLAYER_POSITIONS[_index].Y + 5 + 35), chipScale);
 }
 
 void Player::Save(std::ofstream& out) const
@@ -154,18 +158,17 @@ void Player::Draw(bool activePlayer /*= false*/)
         al_draw_text(Fonts::GetFont(20), al_map_rgb(255, 242, 0),
             PLAYER_POSITIONS[_index].X + 10, PLAYER_POSITIONS[_index].Y + 30 + 105, 0, "Stand");
 
-    _hand->Draw();
+    _hand->Draw(); 
 
-    Vector2D chipScale(30.0/al_get_bitmap_width(Bitmaps::GetBitmap(BITMAP_GAME_CHIP)),30.0/al_get_bitmap_height(Bitmaps::GetBitmap(BITMAP_GAME_CHIP)));
+    _chip.SetDestinationCoordinates(Vector2D(PLAYER_POSITIONS[_index].X - 30 - 5, PLAYER_POSITIONS[_index].Y + 5));
 
-    static Bitmap chip1(BITMAP_GAME_CHIP, Vector2D(PLAYER_POSITIONS[_index].X - 30 - 5, PLAYER_POSITIONS[_index].Y + 5), chipScale);
-    chip1.Draw();
-
+    _chip.Draw();
     if (_doubleBet)
     {
-        static Bitmap chip2(BITMAP_GAME_CHIP, Vector2D(PLAYER_POSITIONS[_index].X - 30 - 5, PLAYER_POSITIONS[_index].Y + 5 + 35), chipScale);
-        chip2.Draw();
+        _doubleChip.SetDestinationCoordinates(Vector2D(PLAYER_POSITIONS[_index].X - 30 - 5, PLAYER_POSITIONS[_index].Y + 5 + 35));
+        _doubleChip.Draw();
     }
+    al_ustr_free(balance);
 }
 
 void Player::EnterGame(int index)

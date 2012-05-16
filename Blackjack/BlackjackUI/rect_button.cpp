@@ -42,8 +42,10 @@ void RectButton::Draw()
     if (!_size.X && !_size.Y)
     {
         if (_text.length() != 0)
+        {
             _size.X = Fonts::GetFont(_fontSize)->vtable->text_length(Fonts::GetFont(_fontSize), al_ustr_new(_text.c_str()));
-        _size.Y = Fonts::GetFont(_fontSize)->height - 10;
+            _size.Y = Fonts::GetFont(_fontSize)->height - 10;
+        }
     }
 
     al_draw_filled_rectangle(x, y, x + _size.X, y + _size.Y, (IsMouseHovered() ? _colorMouseHover : _color));

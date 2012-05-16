@@ -3,6 +3,7 @@
 
 #include "hand.h"
 #include "utilities.h"
+#include "bitmap.h"
 
 #include <string>
 #include <vector>
@@ -26,6 +27,7 @@ class Player
 public:
     Player(std::ifstream& file, S_Game* game);
     void Save(std::ofstream& out) const;
+    ~Player() { /*delete _hand;*/ }
 
     std::string GetName() const { return _name; }
     double GetBalance() const { return _balance; }
@@ -79,8 +81,12 @@ private:
     S_Game* _game;
     
     int _index;
-
+    
     bool _surrender;
+
+    Bitmap _chip;
+    Bitmap _doubleChip;
+
 };
 
 #endif // PLAYER_H

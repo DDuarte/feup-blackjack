@@ -72,6 +72,7 @@ void S_Game::UnloadContents()
     delete _dealer;
     delete _deck;
     delete _log;
+    delete _activePlayers;
 
     Card::DestroyBitmaps();
 }
