@@ -21,12 +21,12 @@ enum BitmapsEnum
 
 static std::string bitmaps_path[] = 
 {
-    "../../Resources/Sprites/wallpaper.jpg", 
-    "../../Resources/Sprites/playing_table.png", 
-    "../../Resources/Sprites/chip1.png",
-    "../../Resources/Sprites/card_sprites.png", 
-    "../../Resources/Sprites/b1fv.png",
-    "../../Resources/Sprites/gameoverscreen.png"
+    "res/wallpaper.jpg", 
+    "res/playing_table.png", 
+    "res/chip1.png",
+    "res/card_sprites.png", 
+    "res/b1fv.png",
+    "res/gameoverscreen.png"
 };
 
 class Bitmaps

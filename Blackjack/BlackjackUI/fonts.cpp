@@ -20,7 +20,7 @@ void Fonts::UnloadFonts()
 ALLEGRO_FONT* Fonts::GetFont(uint size)
 {
     if (_fonts.find(size) == _fonts.end())
-        _fonts[size] = al_load_font("../../Resources/fonts/Champagne & Limousines.ttf", size, 0);
+        _fonts[size] = al_load_font("res/Champagne & Limousines.ttf", size, 0);
 
     return _fonts[size];
 }

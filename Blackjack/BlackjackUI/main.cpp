@@ -8,7 +8,7 @@ int main()
     if (!al_init())
         Error("Failed to initialize Allegro.");
 
-    Localization::Instance()->SetLang(LANGUAGE_PORTUGUESE);
+    Localization::Instance()->SetLang(LANGUAGE_ENGLISH);
     BlackJack::Instance()->_Start();
 
     return EXIT_SUCCESS;

@@ -30,14 +30,12 @@ enum SoundsEnum
 
 static std::string sounds_path[] = 
 {
-    "../../Resources/sounds/86876__milton__title-screen.ogg",
-    "../../Resources/sounds/86881_milton_yes.ogg",
-    "../../Resources/sounds/86873__milton__shuffle.ogg",
-    "../../Resources/sounds/86854__milton__cardfall.ogg", 
-    "../../Resources/sounds/86859__milton__double.ogg",
-    "../../Resources/sounds/86857__milton__dealerblackjack.ogg", 
-    "../../Resources/Sprites/b1fv.png",
-    "../../Resources/Sprites/gameoverscreen.png"
+    "res/86876__milton__title-screen.ogg",
+    "res/86881_milton_yes.ogg",
+    "res/86873__milton__shuffle.ogg",
+    "res/86854__milton__cardfall.ogg", 
+    "res/86859__milton__double.ogg",
+    "res/86857__milton__dealerblackjack.ogg", 
 };
 
 class Sounds
