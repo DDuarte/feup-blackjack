@@ -21,8 +21,8 @@ public:
     void LoadContents() { }
     bool Update(ALLEGRO_EVENT* ev);
     void Draw();
-    void UnloadContents() { }
+    void UnloadContents();
 private:
-    std::vector<RectButton*> _buttons;
+    RectButton* _menuButton;
 };
 #endif // S_GAME_OVER_H

@@ -64,9 +64,8 @@ void S_Settings::Draw()
     for (std::vector<RectButton*>::const_iterator itr = _buttons.begin(); itr != _buttons.end(); ++itr)
         (*itr)->Draw();
 
-    // Debug printing
-    al_draw_textf(Fonts::GetFont(10), al_map_rgb(255, 255, 255), 0, 0, ALLEGRO_ALIGN_LEFT, "x: %3.1f y: %3.1f", BlackJack::GetMousePosition().X, BlackJack::GetMousePosition().Y);
 
+    // triangle1 points
     int ux1 = 570;
     int uy1 = 182;
     int ux2 = ux1 + 17;
@@ -74,6 +73,7 @@ void S_Settings::Draw()
     int ux3 = ux1 - (ux2 - ux1);
     int uy3 = uy2;
 
+    // triangle2 points
     int bx1 = ux1;
     int by1 = 261;
     int bx2 = ux1 + 17;
