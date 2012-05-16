@@ -84,7 +84,31 @@ int main()
         { "Stand"   , "Ficar" },
         { "Double"  , "Dobrar" },
         { "Give Up" , "Desistir" },
-        { "Stay"    , "Ficar" }
+        { "Stay"    , "Ficar" },
+        { "Busted"  , "Rebentou" },
+        { "Stood"   , "Ficou" },
+        { "Exit"    ,  "Sair" },
+        { "Do you wish to quit?" , "Tem a certeza que deseja sair?" },
+        { "Player: %s | Action: hit | Card: %s" ,  "Jogador: %s | Acção: pedir | Carta: %s" },
+        { "Player: %s | Action: stand" ,  "Jogador: %s | Acção: ficar" },
+        { "Player: %s | Action: double | Card: %s" ,  "Jogador: %s | Acção: dobrar | Carta: %s" },
+        { "Dealer | Action: hit | Card: %s", "Dealer | Acção: pedir | Carta: %s"},
+        { "Winner is...", "O vencedor é..." },
+        { "Bets:", "Apostas:" },
+        { "Rounds:", "Rondas:" },
+        { "Hits:", "Pedidos:" },
+        { "Stands:", "Ficares:" },
+        { "Doubles:", "Duplas:" },
+        { "Blackjacks:", "Blackjacks:" },
+        { "Busts:", "Rebentado:" },
+        { "Spent money:", "Dinheiro gasto:" },
+        { "Received money:", "Dinheiro recebido:" },
+        { "Player won more:", "Jogador que ganhou mais:" },
+        { "Player lost more::", "Jogador que perdeu mais:" },
+        { "Player      Initial Balance  Final Balance", "Jogador     Saldo Inicial    Saldo Final" },
+        { "Sound", "Som" },
+        { "Actual: %s", "Atual: %s" },
+        { "Bet:", "Aposta:" }
     };
 
     const int count = sizeof(strings) / sizeof(strings[0]);

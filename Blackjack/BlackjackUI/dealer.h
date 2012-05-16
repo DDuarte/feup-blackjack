@@ -31,9 +31,6 @@ public:
 private:
     Hand _hand;
     S_Game* _game;
-
-    //Statistics
-    /*double _totalBets;*/ //Only used to final statistics
 };
 
 #endif // DEALER_H

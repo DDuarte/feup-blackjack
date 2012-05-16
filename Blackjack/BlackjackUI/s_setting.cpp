@@ -33,7 +33,7 @@ void S_Settings::Initialize()
         y += 80;
     }
 
-    RectButton* btn = new RectButton(Vector2D(800-200, 600-120), al_map_rgb(255, 255, 255), std::string("Menu"), 50, RectButton::ButtonHandler().Bind<&ChangeToMenuState>(), true);
+    RectButton* btn = new RectButton(Vector2D(800-200, 600-120), al_map_rgb(255, 255, 255), "Menu", 50, RectButton::ButtonHandler().Bind<&ChangeToMenuState>(), true);
     _buttons.push_back(btn);
 
     RectButton* betUp = new RectButton(Vector2D(34, 15), Vector2D(553, 182), RectButton::ButtonHandler().Bind<&HandleBetUp>());
@@ -41,7 +41,7 @@ void S_Settings::Initialize()
     _buttons.push_back(betUp);
     _buttons.push_back(betDown);
 
-    RectButton* muteBtn = new RectButton(Vector2D(488, 308),al_map_rgb(255,255,255),"Sound",25, RectButton::ButtonHandler().Bind<&HandleMuteClick>(),true);
+    RectButton* muteBtn = new RectButton(Vector2D(488, 308), al_map_rgb(255,255,255), GetStr(STR_SOUND) ,25, RectButton::ButtonHandler().Bind<&HandleMuteClick>(),true);
     _buttons.push_back(muteBtn);
 }
 
@@ -68,11 +68,10 @@ void S_Settings::Draw()
 
     al_draw_filled_rounded_rectangle(40, 40, 800-40, 600-40, 10, 10, al_map_rgba(0, 0, 0, 175));
 
-    al_draw_textf(Fonts::GetFont(30), al_map_rgb(255,255,255), 800-80, 80, ALLEGRO_ALIGN_RIGHT, "Atual: %s", Localization::Instance()->GetCurrentLanguage().c_str());
+    al_draw_textf(Fonts::GetFont(30), al_map_rgb(255,255,255), 800-80, 80, ALLEGRO_ALIGN_RIGHT, GetStr(STR_ACTUAL_F).c_str(), Localization::Instance()->GetCurrentLanguage().c_str());
 
     for (std::vector<RectButton*>::const_iterator itr = _buttons.begin(); itr != _buttons.end(); ++itr)
         (*itr)->Draw();
-
 
     // triangle1 points
     int ux1 = 570;
@@ -93,9 +92,9 @@ void S_Settings::Draw()
     al_draw_filled_triangle(ux1, uy1, ux2, uy2, ux3, uy3, al_map_rgb(0, 255, 0));
     al_draw_filled_triangle(bx1, by1, bx2, by2, bx3, by3, al_map_rgb(0, 255, 0));
 
-    if (BlackJack::Instance()->Mute()) al_draw_line(0+488, 5+308, 62+488, 25+308, al_map_rgb(255,255,255), 2.0);
+    if (BlackJack::Instance()->GetMute()) al_draw_line(0+488, 5+308, 62+488, 25+308, al_map_rgb(255,255,255), 2.0);
 
-    al_draw_text(Fonts::GetFont(25), al_map_rgb(255, 255, 255), 488, 208, 0, "Aposta:");
+    al_draw_text(Fonts::GetFont(25), al_map_rgb(255, 255, 255), 488, 208, 0, GetStr(STR_BET).c_str());
     al_draw_textf(Fonts::GetFont(25), al_map_rgb(255, 255, 100), 570, 208, 0, "%2.0f", S_Game::GetBet());
 }
 
@@ -142,7 +141,6 @@ bool ChangeToMenuState(RectButton* btn)
 
 bool HandleMuteClick(RectButton* btn)
 {
-    BlackJack::Instance()->Mute(!BlackJack::Instance()->Mute());
+    BlackJack::Instance()->SetMute(!BlackJack::Instance()->GetMute());
     return false;
 }
-

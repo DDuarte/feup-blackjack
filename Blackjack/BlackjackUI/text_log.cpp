@@ -45,7 +45,7 @@ void TextLog::Draw()
 
 std::string TextLog::Format(const char *fmt, va_list list) // By Nitron, modified
 {
-    std::string result("");
+    std::string result;
 
     // Get formatted string length adding one for NULL
     size_t len = _vscprintf(fmt, list) + 1;

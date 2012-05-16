@@ -39,11 +39,11 @@ public:
 
     void ChangeState(int newState);
 
-    
-    bool Mute() const { return _mute; }
-    void Mute(bool val) { _mute = val; if (!val) Sounds::StopAllSounds(); }
+    bool GetMute() const { return _mute; }
+    void SetMute(bool mute) { _mute = mute; if (mute) Sounds::StopAllSounds(); }
 
     ALLEGRO_DISPLAY* GetDisplay() { return _display; }
+
 private:
     BlackJack();
     static BlackJack* _instance;

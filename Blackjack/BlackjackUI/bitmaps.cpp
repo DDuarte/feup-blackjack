@@ -11,7 +11,7 @@ std::map<std::string, ALLEGRO_BITMAP*> Bitmaps::_bitmaps = std::map<std::string,
 
 void Bitmaps::UnloadBitmaps()
 {
-    for (std::map<std::string, ALLEGRO_BITMAP*>::iterator bmp = _bitmaps.begin(); bmp != _bitmaps.end(); ++bmp)
+    for (std::map<std::string, ALLEGRO_BITMAP*>::const_iterator bmp = _bitmaps.begin(); bmp != _bitmaps.end(); ++bmp)
         al_destroy_bitmap(bmp->second);
 
     _bitmaps.clear();

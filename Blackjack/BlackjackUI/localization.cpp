@@ -94,7 +94,7 @@ std::string Localization::GetString(Strings index) const
     if (_strings.size() > (unsigned)index)
         return _strings[index];
     else
-        return std::string();
+        return "";
 }
 
 void Localization::SetLang(Language lang)

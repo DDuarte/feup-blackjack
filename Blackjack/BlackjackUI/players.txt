@@ -1,4 +1,4 @@
-100 Albertina
-100 Bia
-100 Cátia
-10 Daniela
+55 Albertina
+65 Bia
+75 Cátia
+0 Daniela

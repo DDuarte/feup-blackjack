@@ -7,6 +7,7 @@
 #include "fonts.h"
 #include "card.h"
 #include "sounds.h"
+#include "localization.h"
 
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_native_dialog.h>
@@ -37,7 +38,6 @@ BlackJack::BlackJack()
     _eventQueue = NULL;
     _timer = NULL;
     
-
     _state = -1;
     _done = false;
     _draw = true;
@@ -48,7 +48,7 @@ BlackJack::BlackJack()
 void BlackJack::Initialize()
 {
     // inits
-    al_set_new_display_flags(ALLEGRO_FULLSCREEN);
+    //al_set_new_display_flags(ALLEGRO_FULLSCREEN);
     _display = al_create_display(CONST_WIDTH, CONST_HEIGHT);
     if (!_display)
         Error("Failed to initialize display.");
@@ -75,24 +75,18 @@ void BlackJack::Initialize()
 
     // miscs
     srand((unsigned int)time(NULL));
-    //al_hide_mouse_cursor(_display);
 
     _states.push_back(new S_MainMenu);
     _states.push_back(new S_Settings);
     _states.push_back(new S_Game);
     _states.push_back(new S_GameOver);
 
-    //for (std::vector<State*>::const_iterator itr = _states.begin(); itr != _states.end(); ++itr)
-    //    (*itr)->Initialize(); done when changing states
     _mute = false;
     ChangeState(STATE_MAIN_MENU);
 }
 
 void BlackJack::LoadContents()
 {
-    //for (std::vector<State*>::const_iterator itr = _states.begin(); itr != _states.end(); ++itr)
-    //    (*itr)->LoadContents(); done when changing states
-
     al_set_system_mouse_cursor(_display, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
 }
 
@@ -120,7 +114,6 @@ void BlackJack::UnloadContents()
         if ((*itr) == NULL)
             continue;
 
-        // (*itr)->UnloadContents(); done when changing states
         delete (*itr);
     }
 
@@ -133,12 +126,12 @@ void BlackJack::UnloadContents()
     Bitmaps::UnloadBitmaps();
     Sounds::UnloadSounds();
 
-    delete _mouseState; // only one instance of this class exists
+    delete _mouseState;
 }
 
 bool BlackJack::Quit(bool promptUser/*= false*/)
 {
-    int result = (promptUser ? al_show_native_message_box(BlackJack::Instance()->GetDisplay(), "Sair", "", "Deseja sair?", NULL, ALLEGRO_MESSAGEBOX_QUESTION|ALLEGRO_MESSAGEBOX_OK_CANCEL) : true);
+    int result = (promptUser ? al_show_native_message_box(BlackJack::Instance()->GetDisplay(), GetStr(STR_EXIT).c_str(), "", GetStr(STR_SURE_EXIT).c_str(), NULL, ALLEGRO_MESSAGEBOX_QUESTION|ALLEGRO_MESSAGEBOX_OK_CANCEL) : true);
     _done = !(result == 2 || result == 0);
     return _done;
 }
@@ -157,7 +150,7 @@ void BlackJack::_Start()
         Update(&ev);
 
         // Only draw if something was changed
-        if (_draw /*&& al_event_queue_is_empty(_eventQueue)*/)
+        if (_draw && al_event_queue_is_empty(_eventQueue))
             Draw();
     }
 

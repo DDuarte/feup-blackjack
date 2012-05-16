@@ -22,7 +22,7 @@ Card::Card(int suit, int rank)
 
     _backColorRGB = 50 + rand() % 25; // variations of dark grey, "3D" effect
 
-    _BMP = Bitmap(BITMAP_GAME_CARDS_SPRITE, GetPosition(), Vector2D(_rank * _frameSize.X, _suit * _frameSize.Y), _frameSize);
+    _bitmap = Bitmap(BITMAP_GAME_CARDS_SPRITE, GetPosition(), Vector2D(_rank * _frameSize.X, _suit * _frameSize.Y), _frameSize);
 }
 
 void Card::Draw(float angle /*= 0.0*/, bool mouseHovered /*= false*/, bool drawBack/*=false*/) // angle must be in radians
@@ -43,19 +43,14 @@ void Card::Draw(float angle /*= 0.0*/, bool mouseHovered /*= false*/, bool drawB
     {
         if (mouseHovered) // score top left
         {
-            _BMP.SetScale(Vector2D(1.3,1.3)).Draw();
-            _BMP.SetScale(Vector2D(1,1));
+            _bitmap.SetScale(Vector2D(1.3,1.3)).Draw();
+            _bitmap.SetScale(Vector2D(1,1));
             al_draw_filled_rectangle(GetPosition().X + _frameSize.X*1.3 -25, GetPosition().Y + 4, GetPosition().X+_frameSize.X*1.3 - 4, GetPosition().Y + 25, al_map_rgb(255,255,255));
             al_draw_textf(Fonts::GetFont(20), al_map_rgb(0,0,0), GetPosition().X+_frameSize.X*1.3 - 4 , GetPosition().Y, ALLEGRO_ALIGN_RIGHT, "%i", _score);
         }
         else
-            _BMP.Draw();
+            _bitmap.Draw();
     }
-}
-
-// Should only be called by S_Game::UnloadContents
-void Card::DestroyBitmaps()
-{
 }
 
 std::string Card::GetName() const

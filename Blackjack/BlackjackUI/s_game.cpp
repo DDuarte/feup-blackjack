@@ -25,27 +25,23 @@
 double S_Game::_bet = 5.0;
 Stats S_Game::Statistics;
 
-S_Game::S_Game()
+S_Game::S_Game() { }
+
+void S_Game::Initialize()
 {
     _players = std::vector<Player>();
     _waitingPlayers = std::queue<Player*>();
     _activePlayers = new Player*[MAX_ACTIVE_PLAYERS];
-
-    _activePlayerIndex = -1;
-    _gameState = -1;
-    _dealer = NULL;
-    _playerPlayed = false;
-
     _log = new TextLog;
-}
-
-void S_Game::Initialize()
-{
     _deck = new Deck();
     _dealer = new Dealer(this);
 
     for (uint i = 0; i < MAX_ACTIVE_PLAYERS; ++i)
         _activePlayers[i] = NULL;
+
+    _activePlayerIndex = 0;
+    _gameState = 0;
+    _playerPlayed = false;
 
     _buttons.push_back(new RectButton(Vector2D(95,35), Vector2D(325, 550) , al_map_rgb(70, 4, 4), al_map_rgb(238, 233, 233), al_map_rgb(255, 255, 255), GetStr(STR_HIT),    36, RectButton::ButtonHandler(), true));
     _buttons.push_back(new RectButton(Vector2D(95,35), Vector2D(435, 550) , al_map_rgb(70, 4, 4), al_map_rgb(238, 233, 233), al_map_rgb(255, 255, 255), GetStr(STR_STAND),  36, RectButton::ButtonHandler(), true));
@@ -58,14 +54,10 @@ void S_Game::LoadContents()
 {
     ReadPlayersFromFile();
     for (std::vector<Player>::iterator plr = _players.begin(); plr != _players.end(); ++plr)
-    {
         if (plr->GetBalance() >= _bet)
             _waitingPlayers.push(&(*plr));
-    }
 
     SelectPlayers();
-    _activePlayerIndex = 0;
-    _gameState = 0;
 }
 
 void S_Game::UnloadContents()
@@ -75,7 +67,9 @@ void S_Game::UnloadContents()
     delete _log;
     delete _activePlayers;
 
-    Card::DestroyBitmaps();
+    _buttons.clear();
+    _players.clear();
+    while (!_waitingPlayers.empty()) _waitingPlayers.pop();
 }
 
 void S_Game::Draw()
@@ -84,15 +78,22 @@ void S_Game::Draw()
     static Bitmap bg(BITMAP_GAME_BACKGROUND);
     bg.Draw();
 
+    // Draw buttons
     for (std::vector<RectButton*>::iterator btn = _buttons.begin(); btn != _buttons.end(); ++btn)
         if ((*btn)->Visible) (*btn)->Draw();
 
+    // Draw each player
     for (uint i = 0; i < MAX_ACTIVE_PLAYERS; ++i)
         if (_activePlayers[i] != NULL)
             _activePlayers[i]->Draw(i == _activePlayerIndex && (_gameState == GAME_STATE_PLAYER_TURN || _gameState == GAME_STATE_STAY_OR_GIVE_UP));
 
+    // Draw dealer
     _dealer->Draw();
+
+    // Draw deck
     _deck->Draw();
+
+    // Draw log text box
     _log->Draw();
 }
 
@@ -264,7 +265,7 @@ bool S_Game::Update(ALLEGRO_EVENT* ev)
 
 void S_Game::PlayerHit(Player* player, Card* card)
 {
-    _log->AddString("Jogador: %s | Acção: pedir | Carta %s", player->GetName().c_str(), card->GetName().c_str());
+    _log->AddString(GetStr(STR_PLAYER_HIT_F).c_str(), player->GetName().c_str(), card->GetName().c_str());
 
     PlaySoundOnceS(SAMPLE_DEAL_CARD_SOUND, 2.0);
 
@@ -281,7 +282,7 @@ void S_Game::PlayerHit(Player* player, Card* card)
 
 void S_Game::PlayerStand(Player* player)
 {
-    _log->AddString("Jogador: %s | Acção: ficar", player->GetName().c_str());
+    _log->AddString(GetStr(STR_PLAYER_STAND_F).c_str(), player->GetName().c_str());
 
     _playerPlayed = true;
     Statistics.StandCount += 1;
@@ -289,7 +290,7 @@ void S_Game::PlayerStand(Player* player)
 
 void S_Game::PlayerDouble(Player* player, Card* card)
 {
-    _log->AddString("Jogador: %s | Acção: dobrar | Carta %s", player->GetName().c_str(), card->GetName().c_str());
+    _log->AddString(GetStr(STR_PLAYER_DOUBLE_F).c_str(), player->GetName().c_str(), card->GetName().c_str());
 
     PlaySoundOnce(SAMPLE_DOUBLE_SOUND);
     _playerPlayed = true;
@@ -347,8 +348,7 @@ void S_Game::SelectPlayers()
     for (uint i = 0; i < MAX_ACTIVE_PLAYERS; ++i)
     {
         Player* player = SelectNextPlayerFromQueue();
-        if (player == NULL)
-            break;
+        if (!player) break;
 
         _activePlayers[i] = player;
         _activePlayers[i]->EnterGame(i);
@@ -540,7 +540,7 @@ bool S_Game::HandleStatePostGame()
 
 void S_Game::DealerHit(Dealer* dealer, Card* card)
 {
-    _log->AddString("Dealer | Acção: pedir | Carta %s", card->GetName().c_str());
+    _log->AddString(GetStr(STR_DEALER_HIT_F).c_str(), card->GetName().c_str());
 }
 
 int S_Game::CountActivePlayers() const
@@ -549,6 +549,7 @@ int S_Game::CountActivePlayers() const
     for (uint i = 0; i < MAX_ACTIVE_PLAYERS; ++i)
         if (_activePlayers[i] != NULL)
             count++;
+
     return count;
 }
 

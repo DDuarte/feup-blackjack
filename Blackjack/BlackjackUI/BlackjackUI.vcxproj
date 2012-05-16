@@ -88,7 +88,6 @@
     <ClCompile Include="utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="animation.h" />
     <ClInclude Include="bitmap.h" />
     <ClInclude Include="bitmaps.h" />
     <ClInclude Include="blackjack.h" />

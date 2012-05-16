@@ -3,6 +3,7 @@
 #include "hand.h"
 #include "deck.h"
 #include "fonts.h"
+#include "localization.h"
 
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_font.h>
@@ -22,13 +23,13 @@ void Dealer::Draw()
 
     if (IsBusted())
         al_draw_text(Fonts::GetFont(20), al_map_rgb(255, 242, 0),
-        DEALER_POSITION.X + 10, DEALER_POSITION.Y + 30 + 105, 0, "Busted");
+        DEALER_POSITION.X + 10, DEALER_POSITION.Y + 30 + 105, 0, GetStr(STR_BUSTED).c_str());
     else if (IsBlackjack())
         al_draw_text(Fonts::GetFont(20), al_map_rgb(255, 242, 0),
-        DEALER_POSITION.X + 10, DEALER_POSITION.Y + 30 + 105, 0, "BlackJack");
+        DEALER_POSITION.X + 10, DEALER_POSITION.Y + 30 + 105, 0, "BlackJack'ed");
     else if (_game->GetState() > GAME_STATE_DEALER_TURN)
         al_draw_text(Fonts::GetFont(20), al_map_rgb(255, 242, 0),
-        DEALER_POSITION.X + 10, DEALER_POSITION.Y + 30 + 105, 0, "Stand");
+        DEALER_POSITION.X + 10, DEALER_POSITION.Y + 30 + 105, 0, GetStr(STR_STOOD).c_str());
 
     _hand.Draw();
 }

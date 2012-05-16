@@ -54,21 +54,19 @@ public:
 
     void SetScore(int score) { if (_rank == CARD_RANK_ACE) _score = score; }
 
-    Vector2D GetPosition() { return _BMP.GetDestinationCoordinates(); }
-    void SetPosition(Vector2D val) { _BMP.SetDestinationCoordinates(val); }
+    Vector2D GetPosition() { return _bitmap.GetDestinationCoordinates(); }
+    void SetPosition(Vector2D val) { _bitmap.SetDestinationCoordinates(val); }
 
     bool IsValid() const { return _suit != -1 && _rank != -1 && _score != -1; }
 
     void Draw(float angle = 0.0, bool mouseHovered = false, bool drawBack = false); // angle must be in radians
-
-    static void DestroyBitmaps();
 
 private:
     int _suit;
     int _rank;
     uint _score;
 
-    Bitmap _BMP;
+    Bitmap _bitmap;
 
     int _backColorRGB;
 

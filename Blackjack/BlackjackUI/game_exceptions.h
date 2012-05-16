@@ -18,16 +18,6 @@ private:
     std::string _message;
 };
 
-class InvalidScoreException : public std::exception
-{
-public:
-    InvalidScoreException(std::string message = "Invalid Score!") : _message(message) {}
-    ~InvalidScoreException() throw() {}
-    const char* what() const throw() { return _message.c_str(); }
-private:
-    std::string _message;
-};
-
 class InvalidPlayerException : public std::exception
 {
 public:

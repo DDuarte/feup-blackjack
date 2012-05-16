@@ -1,10 +1,10 @@
 #ifndef SOUNDS_H
 #define SOUNDS_H
 
-#define PlaySoundOnce(sampleNumber) if (!BlackJack::Instance()->Mute()) al_play_sample_instance(Sounds::GetSound(sampleNumber));
-#define PlaySoundLoop(sampleNumber) if (!BlackJack::Instance()->Mute()) al_play_sample_instance(Sounds::GetSound(sampleNumber, ALLEGRO_PLAYMODE_LOOP));
-#define PlaySoundOnceS(sampleNumber, speed) if (!BlackJack::Instance()->Mute()) al_play_sample_instance(Sounds::GetSound(sampleNumber, ALLEGRO_PLAYMODE_ONCE, speed));
-#define PlaySoundLoopS(sampleNumber, speed) if (!BlackJack::Instance()->Mute()) al_play_sample_instance(Sounds::GetSound(sampleNumber, ALLEGRO_PLAYMODE_LOOP, speed));
+#define PlaySoundOnce(sampleNumber) if (!BlackJack::Instance()->GetMute()) al_play_sample_instance(Sounds::GetSound(sampleNumber));
+#define PlaySoundLoop(sampleNumber) if (!BlackJack::Instance()->GetMute()) al_play_sample_instance(Sounds::GetSound(sampleNumber, ALLEGRO_PLAYMODE_LOOP));
+#define PlaySoundOnceS(sampleNumber, speed) if (!BlackJack::Instance()->GetMute()) al_play_sample_instance(Sounds::GetSound(sampleNumber, ALLEGRO_PLAYMODE_ONCE, speed));
+#define PlaySoundLoopS(sampleNumber, speed) if (!BlackJack::Instance()->GetMute()) al_play_sample_instance(Sounds::GetSound(sampleNumber, ALLEGRO_PLAYMODE_LOOP, speed));
 
 #include "utilities.h"
 

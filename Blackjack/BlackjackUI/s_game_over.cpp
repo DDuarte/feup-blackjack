@@ -4,6 +4,7 @@
 #include "s_game.h"
 #include "utilities.h"
 #include "rect_button.h"
+#include "localization.h"
 
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>
@@ -41,27 +42,27 @@ void S_GameOver::Draw()
     _menuButton->Draw();
 
     // First column
-    std::pair<const char*, std::string> column1[] =
+    std::pair<std::string, std::string> column1[] =
     {
-        std::make_pair("O vencedor é...", Stats.Winner ? Stats.Winner->GetName() : "N/A"),
-        std::make_pair("Apostas:", ToString(Stats.BetCount)),
-        std::make_pair("Rondas:", ToString(Stats.RoundCount)),
-        std::make_pair("Hits:", ToString(Stats.HitCount)),
-        std::make_pair("Stands:", ToString(Stats.StandCount)),
-        std::make_pair("Doubles:", ToString(Stats.DoubleCount)),
-        std::make_pair("Blackjacks:", ToString(Stats.BlackjackCount)),
-        std::make_pair("Busts:", ToString(Stats.BustedCount)),
-        std::make_pair("Dinheiro gasto:", ToString(Stats.TotalMoneyBetPlayers) + "€"),
-        std::make_pair("Dinheiro recebido:", ToString(Stats.TotalMoneyReceivedPlayers) + "€"),
-        std::make_pair("Jogador que ganhou mais:", Stats.PlayerWonMoreMoney ? (Stats.PlayerWonMoreMoney->GetName() + " (" + ToString(Stats.PlayerWonMoreMoney->GetBalanceDiff()) + "€)") : "N/A"),
-        std::make_pair("Jogador que perdeu mais:", Stats.PlayerLostMoreMoney ? (Stats.PlayerLostMoreMoney->GetName() + " (" + ToString(Stats.PlayerLostMoreMoney->GetBalanceDiff()) + "€)") : "N/A")
+        std::make_pair(GetStr(STR_STAT_WINNER_IS), Stats.Winner ? Stats.Winner->GetName() : "N/A"),
+        std::make_pair(GetStr(STR_STAT_BETS), ToString(Stats.BetCount)),
+        std::make_pair(GetStr(STR_STAT_ROUNDS), ToString(Stats.RoundCount)),
+        std::make_pair(GetStr(STR_STAT_HITS), ToString(Stats.HitCount)),
+        std::make_pair(GetStr(STR_STAT_STANDS), ToString(Stats.StandCount)),
+        std::make_pair(GetStr(STR_STAT_DOUBLES), ToString(Stats.DoubleCount)),
+        std::make_pair(GetStr(STR_STAT_BJS), ToString(Stats.BlackjackCount)),
+        std::make_pair(GetStr(STR_STAT_BUSTS), ToString(Stats.BustedCount)),
+        std::make_pair(GetStr(STR_STAT_SPENT_MONEY), ToString(Stats.TotalMoneyBetPlayers) + "€"),
+        std::make_pair(GetStr(STR_STAT_RECEIVED_MONEY), ToString(Stats.TotalMoneyReceivedPlayers) + "€"),
+        std::make_pair(GetStr(STR_STAT_PLR_WON_MORE), Stats.PlayerWonMoreMoney ? (Stats.PlayerWonMoreMoney->GetName() + " (" + ToString(Stats.PlayerWonMoreMoney->GetBalanceDiff()) + "€)") : "N/A"),
+        std::make_pair(GetStr(STR_STAT_PLR_LOST_MORE), Stats.PlayerLostMoreMoney ? (Stats.PlayerLostMoreMoney->GetName() + " (" + ToString(Stats.PlayerLostMoreMoney->GetBalanceDiff()) + "€)") : "N/A")
     };
 
     int y1 = 119;
     for (int i = 0; i < 12; ++i)
     {
         y1 += 25;
-        al_draw_text(Fonts::GetFont(20), al_map_rgb(255, 255, 255), 50, y1, ALLEGRO_ALIGN_LEFT, column1[i].first);
+        al_draw_text(Fonts::GetFont(20), al_map_rgb(255, 255, 255), 50, y1, ALLEGRO_ALIGN_LEFT, column1[i].first.c_str());
         al_draw_text(Fonts::GetFont(20), al_map_rgb(255, 255, 255), 300, y1, ALLEGRO_ALIGN_LEFT, column1[i].second.c_str());
     }
 
@@ -71,7 +72,7 @@ void S_GameOver::Draw()
         al_draw_line(390, 140, 390, 380, al_map_rgb(255, 255, 255), 1);
 
         int y2 = 144;
-        al_draw_text(Fonts::GetFont(25), al_map_rgb(255, 255, 255), 405, y2, ALLEGRO_ALIGN_LEFT, "Jogador     Saldo Inicial    Saldo Final");
+        al_draw_text(Fonts::GetFont(25), al_map_rgb(255, 255, 255), 405, y2, ALLEGRO_ALIGN_LEFT, GetStr(STR_STAT_PLR_HEADER).c_str());
 
         y2 += 10;
 
