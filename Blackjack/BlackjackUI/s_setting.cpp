@@ -54,7 +54,8 @@ bool S_Settings::Update(ALLEGRO_EVENT* ev)
 
 void S_Settings::Draw() 
 {
-    Bitmap(BITMAP_MENU_BACKGROUND).Draw();
+    static Bitmap bg(BITMAP_MENU_BACKGROUND);
+    bg.Draw();
 
     al_draw_filled_rounded_rectangle(40, 40, 800-40, 600-40, 10, 10, al_map_rgba(0, 0, 0, 175));
 

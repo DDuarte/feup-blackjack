@@ -113,6 +113,7 @@ public:
 
     Player** GetActivePlayers() { return _activePlayers; }
     int GetActivePlayerIndex() { return _activePlayerIndex; }
+    int GetState() { return _gameState; }
 
     void HandleOutOfCards() { }
 

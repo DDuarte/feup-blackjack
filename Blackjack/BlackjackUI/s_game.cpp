@@ -79,7 +79,8 @@ void S_Game::UnloadContents()
 void S_Game::Draw()
 {
     // Draw Background
-    Bitmap(BITMAP_GAME_BACKGROUND).Draw();
+    static Bitmap bg(BITMAP_GAME_BACKGROUND);
+    bg.Draw();
 
     for (std::vector<RectButton*>::iterator btn = _buttons.begin(); btn != _buttons.end(); ++btn)
         if ((*btn)->Visible) (*btn)->Draw();
@@ -269,7 +270,7 @@ void S_Game::PlayerHit(Player* player, Card* card)
 {
     _log->AddString("Jogador: %s | Acção: pedir | Carta %s", player->GetName().c_str(), card->GetName().c_str());
 
-    PlaySoundOnce(SAMPLE_DEAL_CARD_SOUND);
+    PlaySoundOnceS(SAMPLE_DEAL_CARD_SOUND, 2.0);
 
     Statistics.HitCount += 1;
 
@@ -397,13 +398,13 @@ bool S_Game::HandleStateDealingCards(uint i)
         if (_activePlayers[i] != NULL)
         {
             _activePlayers[i]->NewCard(_deck->WithdrawCard());
-            PlaySoundOnce(SAMPLE_DEAL_CARD_SOUND);
+            PlaySoundOnceS(SAMPLE_DEAL_CARD_SOUND, 2.0);
         }
     }
     else
     {
         _dealer->NewCard(_deck->WithdrawCard());
-        PlaySoundOnce(SAMPLE_DEAL_CARD_SOUND);
+        PlaySoundOnceS(SAMPLE_DEAL_CARD_SOUND, 2.0);
     }
 
     return false;
@@ -444,7 +445,7 @@ bool S_Game::HandleStateDealerTurn()
     if (_dealer->GetScore() < 17)
     {
         _dealer->Hit();
-        PlaySoundOnce(SAMPLE_DEAL_CARD_SOUND);
+        PlaySoundOnceS(SAMPLE_DEAL_CARD_SOUND, 2.0);
         return false;
     }
 
@@ -529,7 +530,7 @@ bool S_Game::HandleStatePostGame()
     {
         if (_activePlayers[i] != NULL)
         {
-            if (_activePlayers[i]->GetBalance() <= _bet || _activePlayers[i]->WantsSurrender())
+            if (_activePlayers[i]->GetBalance() < _bet || _activePlayers[i]->WantsSurrender())
             {
                 _activePlayers[i] = SelectNextPlayerFromQueue();
                 if (_activePlayers[i] != NULL)

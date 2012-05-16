@@ -20,6 +20,16 @@ void Dealer::Draw()
     al_draw_text(Fonts::GetFont(20), al_map_rgb(255, 255, 255),
         DEALER_POSITION.X + 10, DEALER_POSITION.Y + 10 + 105, 0, name);
 
+    if (IsBusted())
+        al_draw_text(Fonts::GetFont(20), al_map_rgb(255, 242, 0),
+        DEALER_POSITION.X + 10, DEALER_POSITION.Y + 30 + 105, 0, "Busted");
+    else if (IsBlackjack())
+        al_draw_text(Fonts::GetFont(20), al_map_rgb(255, 242, 0),
+        DEALER_POSITION.X + 10, DEALER_POSITION.Y + 30 + 105, 0, "BlackJack");
+    else if (_game->GetState() > GAME_STATE_DEALER_TURN)
+        al_draw_text(Fonts::GetFont(20), al_map_rgb(255, 242, 0),
+        DEALER_POSITION.X + 10, DEALER_POSITION.Y + 30 + 105, 0, "Stand");
+
     _hand.Draw();
 }
 

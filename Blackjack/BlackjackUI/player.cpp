@@ -141,14 +141,31 @@ void Player::Draw(bool activePlayer /*= false*/)
     al_draw_ustr(Fonts::GetFont(20), al_map_rgb(255, 255, 255),
         PLAYER_POSITIONS[_index].X + 10, PLAYER_POSITIONS[_index].Y - 10 + 105, 0, balance);
 
+    if (IsBusted())
+        al_draw_text(Fonts::GetFont(20), al_map_rgb(255, 242, 0),
+            PLAYER_POSITIONS[_index].X + 10, PLAYER_POSITIONS[_index].Y + 30 + 105, 0, "Busted");
+    else if (IsBlackjack())
+        al_draw_text(Fonts::GetFont(20), al_map_rgb(255, 242, 0),
+            PLAYER_POSITIONS[_index].X + 10, PLAYER_POSITIONS[_index].Y + 30 + 105, 0, "BlackJack");
+    else if (HasLost())
+        al_draw_text(Fonts::GetFont(20), al_map_rgb(255, 242, 0),
+            PLAYER_POSITIONS[_index].X + 10, PLAYER_POSITIONS[_index].Y + 30 + 105, 0, "Lost");
+    else if ((_index < _game->GetActivePlayerIndex() && _game->GetState() != GAME_STATE_DEALING_CARDS && _game->GetState() != GAME_STATE_PLACING_BETS && _game->GetState() != GAME_STATE_POST_GAME) || _game->GetState() == GAME_STATE_STAY_OR_GIVE_UP || _game->GetState() == GAME_STATE_DEALER_TURN)
+        al_draw_text(Fonts::GetFont(20), al_map_rgb(255, 242, 0),
+            PLAYER_POSITIONS[_index].X + 10, PLAYER_POSITIONS[_index].Y + 30 + 105, 0, "Stand");
+
     _hand->Draw();
 
-    Vector2D chipScale((double)30/al_get_bitmap_width(Bitmaps::GetBitmap(BITMAP_GAME_CHIP)),(double)30/al_get_bitmap_height(Bitmaps::GetBitmap(BITMAP_GAME_CHIP)));
+    Vector2D chipScale(30.0/al_get_bitmap_width(Bitmaps::GetBitmap(BITMAP_GAME_CHIP)),30.0/al_get_bitmap_height(Bitmaps::GetBitmap(BITMAP_GAME_CHIP)));
 
-    Bitmap(BITMAP_GAME_CHIP, Vector2D(PLAYER_POSITIONS[_index].X - 30 - 5, PLAYER_POSITIONS[_index].Y + 5), chipScale).Draw();
+    static Bitmap chip1(BITMAP_GAME_CHIP, Vector2D(PLAYER_POSITIONS[_index].X - 30 - 5, PLAYER_POSITIONS[_index].Y + 5), chipScale);
+    chip1.Draw();
 
     if (_doubleBet)
-        Bitmap(BITMAP_GAME_CHIP, Vector2D(PLAYER_POSITIONS[_index].X - 30 - 5, PLAYER_POSITIONS[_index].Y + 5 + 35), chipScale).Draw();
+    {
+        static Bitmap chip2(BITMAP_GAME_CHIP, Vector2D(PLAYER_POSITIONS[_index].X - 30 - 5, PLAYER_POSITIONS[_index].Y + 5 + 35), chipScale);
+        chip2.Draw();
+    }
 }
 
 void Player::EnterGame(int index)

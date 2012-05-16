@@ -12,7 +12,8 @@ bool S_GameOver::Update(ALLEGRO_EVENT* ev)
 
 void S_GameOver::Draw()
 {
-    Bitmap(BITMAP_MENU_GAME_OVER).Draw();
+    al_draw_text(Fonts::GetFont(100), al_map_rgb(255,255,255), 400, 250, ALLEGRO_ALIGN_CENTRE, "Game Over");
+    static Bitmap bg (BITMAP_MENU_GAME_OVER);
 
     // Debug printing
     al_draw_textf(Fonts::GetFont(10), al_map_rgb(255, 255, 255), 0, 0, ALLEGRO_ALIGN_LEFT, "x: %3.1f y: %3.1f", BlackJack::GetMousePosition().X, BlackJack::GetMousePosition().Y);

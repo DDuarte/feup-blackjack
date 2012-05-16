@@ -32,7 +32,7 @@ void Card::Draw(float angle /*= 0.0*/, bool mouseHovered /*= false*/, bool drawB
 
     if (drawBack)
     {
-        Bitmap backTemp(BITMAP_GAME_CARDS_BACK_SPRITE, Vector2D(GetPosition().X + 1, GetPosition().Y + 1),Vector2D(1,1),Vector2D(_frameSize.X - 1, _frameSize.Y - 1),Vector2D(0,0),Vector2D(1.0 + mouseHovered*0.3, 1.0 + mouseHovered*0.3),al_map_rgb(255,255,255),angle);
+        static Bitmap backTemp(BITMAP_GAME_CARDS_BACK_SPRITE, Vector2D(GetPosition().X + 1, GetPosition().Y + 1),Vector2D(1,1),Vector2D(_frameSize.X - 1, _frameSize.Y - 1),Vector2D(0,0),Vector2D(1.0 + mouseHovered*0.3, 1.0 + mouseHovered*0.3),al_map_rgb(255,255,255),angle);
         backTemp.Draw();
 
         backTemp.SetDestinationCoordinates(GetPosition()).SetTint(al_map_rgb(_backColorRGB, _backColorRGB, _backColorRGB)).Draw();
