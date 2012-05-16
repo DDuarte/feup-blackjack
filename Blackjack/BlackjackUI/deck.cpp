@@ -2,6 +2,7 @@
 #include "utilities.h"
 #include "card.h"
 #include "blackjack.h"
+#include "sounds.h"
 
 #include <ctime>
 #include <stack>
@@ -12,8 +13,6 @@
 
 Deck::Deck(uint numberOfDecks /*= DEFAULT_NUMBER_OF_DECKS*/)
 {
-    _shuffleSound = al_load_sample("../../Resources/sounds/86873__milton__shuffle.ogg");
-
     InitializeDeck(numberOfDecks);
 }
 
@@ -70,7 +69,7 @@ Card* Deck::WithdrawCard()
 
 void Deck::Shuffle()
 {
-    al_play_sample(_shuffleSound, 1.0, 0.0, 2.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+    PlaySoundOnceS(SAMPLE_SHUFFLE_SOUND, 2.0);
 
     size_t size = _cards.size();
 

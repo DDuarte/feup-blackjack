@@ -5,6 +5,7 @@
 #include "rect_button.h"
 #include "localization.h"
 #include "bitmaps.h"
+#include "sounds.h"
 
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
@@ -21,8 +22,6 @@ bool ChangeToQuit(RectButton* btn);
 
 S_MainMenu::S_MainMenu()
 {
-    _bgMusic = NULL;
-    _nextMenuSound = NULL;
     _selectedMenu = -1;
 }
 
@@ -38,10 +37,8 @@ void S_MainMenu::Initialize()
 void S_MainMenu::LoadContents()
 {
     al_reserve_samples(2);
-    _bgMusic = al_load_sample("../../Resources/sounds/86876__milton__title-screen.ogg");
-    _nextMenuSound = al_load_sample("../../Resources/sounds/86881_milton_yes.ogg");
 
-    al_play_sample(_bgMusic, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+    PlaySoundLoop(SAMPLE_MENU_BACKGROUND_MUSIC);
 }
 
 bool S_MainMenu::Update(ALLEGRO_EVENT* ev)
@@ -103,7 +100,7 @@ bool S_MainMenu::Update(ALLEGRO_EVENT* ev)
             // _selectedMenu will always be in the range [0, 2]
             _selectedMenu = (((_selectedMenu + add) == -1) ? MENU_QUIT : ((_selectedMenu + add) % (MENU_QUIT + 1)));
 
-            al_play_sample(_nextMenuSound, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+            PlaySoundOnce(SAMPLE_MENU_NEXTM_SOUND);
             return true;
         }
         case ALLEGRO_EVENT_TIMER:
@@ -124,17 +121,17 @@ void S_MainMenu::Draw()
     
     if (_playButton->IsMouseHovered() && _selectedMenu != MENU_PLAY)
     {
-        al_play_sample(_nextMenuSound, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+        PlaySoundOnce(SAMPLE_MENU_NEXTM_SOUND);
         _selectedMenu = MENU_PLAY;
     }
     else if (_settingButton->IsMouseHovered() && _selectedMenu != MENU_SETTINGS)
     {
-        al_play_sample(_nextMenuSound, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+        PlaySoundOnce(SAMPLE_MENU_NEXTM_SOUND);
         _selectedMenu = MENU_SETTINGS;
     }
     else if (_quitButton->IsMouseHovered() && _selectedMenu != MENU_QUIT)
     {
-        al_play_sample(_nextMenuSound, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+        PlaySoundOnce(SAMPLE_MENU_NEXTM_SOUND);
         _selectedMenu = MENU_QUIT;
     }
     
@@ -149,9 +146,6 @@ void S_MainMenu::Draw()
 
 void S_MainMenu::UnloadContents()
 {
-    al_destroy_sample(_bgMusic);
-    al_destroy_sample(_nextMenuSound);
-
     delete _playButton; _playButton = NULL;
     delete _settingButton; _settingButton = NULL;
     delete _quitButton; _quitButton = NULL;

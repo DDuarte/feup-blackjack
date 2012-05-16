@@ -6,6 +6,7 @@
 #include "s_main_menu.h"
 #include "fonts.h"
 #include "card.h"
+#include "sounds.h"
 
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_native_dialog.h>
@@ -130,6 +131,7 @@ void BlackJack::UnloadContents()
 
     Fonts::UnloadFonts();
     Bitmaps::UnloadBitmaps();
+    Sounds::UnloadSounds();
 
     delete _mouseState; // only one instance of this class exists
 }
@@ -168,6 +170,8 @@ void BlackJack::ChangeState(int newState)
 
     if (_state != -1)
         _states[_state]->UnloadContents();
+
+    Sounds::StopAllSounds();
 
     _state = newState;
 

@@ -10,7 +10,6 @@
 
 union ALLEGRO_EVENT;
 struct ALLEGRO_BITMAP;
-struct ALLEGRO_SAMPLE;
 class Deck;
 class Player;
 class Dealer;
@@ -77,10 +76,6 @@ public:
     ALLEGRO_BITMAP* GetChip() { return Bitmaps::GetBitmap(BITMAP_GAME_CHIP); }
 
 private:
-    ALLEGRO_SAMPLE* _dealCardSound;
-    ALLEGRO_SAMPLE* _doubleSound;
-    ALLEGRO_SAMPLE* _dealerBlackjackSound;
-
     Dealer* _dealer;
     Deck* _deck;
 

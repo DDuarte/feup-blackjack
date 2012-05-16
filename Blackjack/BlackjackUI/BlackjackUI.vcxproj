@@ -79,6 +79,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="rect_button.cpp" />
+    <ClCompile Include="sounds.cpp" />
     <ClCompile Include="s_game.cpp" />
     <ClCompile Include="s_game_over.cpp" />
     <ClCompile Include="s_main_menu.cpp" />
@@ -100,6 +101,7 @@
     <ClInclude Include="localization.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="rect_button.h" />
+    <ClInclude Include="sounds.h" />
     <ClInclude Include="s_game.h" />
     <ClInclude Include="s_game_over.h" />
     <ClInclude Include="s_main_menu.h" />

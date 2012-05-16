@@ -11,6 +11,7 @@
 #include "localization.h"
 #include "text_log.h"
 #include "bitmaps.h"
+#include "sounds.h"
 
 #include <string>
 #include <Windows.h>
@@ -28,10 +29,6 @@ S_Game::S_Game()
     _players = std::vector<Player>();
     _waitingPlayers = std::queue<Player*>();
     _activePlayers = new Player*[MAX_ACTIVE_PLAYERS];
-
-    _dealCardSound = NULL;
-    _doubleSound = NULL;
-    _dealerBlackjackSound = NULL;
 
     _activePlayerIndex = -1;
     _gameState = -1;
@@ -58,10 +55,6 @@ void S_Game::Initialize()
 
 void S_Game::LoadContents()
 {
-    _dealCardSound = al_load_sample("../../Resources/sounds/86854__milton__cardfall.ogg");
-    _doubleSound = al_load_sample("../../Resources/sounds/86859__milton__double.ogg");
-    _dealerBlackjackSound = al_load_sample("../../Resources/sounds/86857__milton__dealerblackjack.ogg");
-
     ReadPlayersFromFile();
     for (std::vector<Player>::iterator plr = _players.begin(); plr != _players.end(); ++plr)
     {
@@ -76,10 +69,6 @@ void S_Game::LoadContents()
 
 void S_Game::UnloadContents()
 {
-    al_destroy_sample(_dealCardSound);
-    al_destroy_sample(_doubleSound);
-    al_destroy_sample(_dealerBlackjackSound);
-
     delete _dealer;
     delete _deck;
     delete _log;
@@ -182,7 +171,7 @@ bool S_Game::Update(ALLEGRO_EVENT* ev)
                                 }
 
                                 if (_dealer->IsBlackjack())
-                                    al_play_sample(_dealerBlackjackSound, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+                                    PlaySoundOnce(SAMPLE_DEALER_BLACKJACK_SOUND);
 
                                 break;
                             }
@@ -278,7 +267,7 @@ void S_Game::PlayerHit(Player* player, Card* card)
 {
     _log->AddString("Jogador: %s | Acção: pedir | Carta %s", player->GetName().c_str(), card->GetName().c_str());
 
-    al_play_sample(_dealCardSound, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+    PlaySoundOnce(SAMPLE_DEAL_CARD_SOUND);
 
     if (player->HasLost())
     {
@@ -301,7 +290,7 @@ void S_Game::PlayerDouble(Player* player, Card* card)
 {
     _log->AddString("Jogador: %s | Acção: dobrar | Carta %s", player->GetName().c_str(), card->GetName().c_str());
 
-    al_play_sample(_doubleSound, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+    PlaySoundOnce(SAMPLE_DOUBLE_SOUND);
     _playerPlayed = true;
 }
 
@@ -377,6 +366,7 @@ void S_Game::NextInternalGameState()
 {
     _gameState++;
     _activePlayerIndex = 0;
+    al_stop_samples();
     if (_gameState > GAME_STATE_RESET_ROUND)
         _gameState = GAME_STATE_PLACING_BETS;
 }
@@ -400,13 +390,13 @@ bool S_Game::HandleStateDealingCards(uint i)
         if (_activePlayers[i] != NULL)
         {
             _activePlayers[i]->NewCard(_deck->WithdrawCard());
-            al_play_sample(_dealCardSound, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+            PlaySoundOnce(SAMPLE_DEAL_CARD_SOUND);
         }
     }
     else
     {
         _dealer->NewCard(_deck->WithdrawCard());
-        al_play_sample(_dealCardSound, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+        PlaySoundOnce(SAMPLE_DEAL_CARD_SOUND);
     }
 
     return false;
@@ -439,7 +429,7 @@ bool S_Game::HandleStateDealerTurn()
     if (_dealer->GetScore() < 17)
     {
         _dealer->Hit();
-        al_play_sample(_dealCardSound, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+        PlaySoundOnce(SAMPLE_DEAL_CARD_SOUND);
         return false;
     }
 

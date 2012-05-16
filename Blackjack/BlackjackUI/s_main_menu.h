@@ -16,7 +16,6 @@ union ALLEGRO_EVENT;
 class RectButton;
 class AllegroObject;
 struct ALLEGRO_BITMAP;
-struct ALLEGRO_SAMPLE;
 
 class S_MainMenu : public State
 {
@@ -29,9 +28,6 @@ public:
     void UnloadContents();
 
 private:
-    ALLEGRO_SAMPLE* _bgMusic;
-    ALLEGRO_SAMPLE* _nextMenuSound;
-
     RectButton* _playButton;
     RectButton* _settingButton;
     RectButton* _quitButton;

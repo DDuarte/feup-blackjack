@@ -12,8 +12,6 @@ const uint NUMBER_OF_SUITS = 4;
 const uint NUMBER_OF_CARDS_PER_SUIT = NUMBER_OF_CARDS/NUMBER_OF_SUITS;
 const Vector2D DECK_POSITION = Vector2D(550, 80);
 
-struct ALLEGRO_SAMPLE;
-
 class Deck
 {
 public:
@@ -30,8 +28,6 @@ private:
 
     void InitializeDeck(uint numberOfDecks);
     void Shuffle();
-
-    ALLEGRO_SAMPLE* _shuffleSound;
 };
 
 #endif // DECK_H
