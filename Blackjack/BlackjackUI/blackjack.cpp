@@ -84,7 +84,7 @@ void BlackJack::Initialize()
 
     //for (std::vector<State*>::const_iterator itr = _states.begin(); itr != _states.end(); ++itr)
     //    (*itr)->Initialize(); done when changing states
-
+    _mute = false;
     ChangeState(STATE_MAIN_MENU);
 }
 

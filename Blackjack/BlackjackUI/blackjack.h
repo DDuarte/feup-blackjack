@@ -2,7 +2,7 @@
 #define BLACKJACK_H
 
 #include "utilities.h"
-
+#include "sounds.h"
 #include <vector>
 
 #include <allegro5/allegro.h>
@@ -39,6 +39,10 @@ public:
 
     void ChangeState(int newState);
 
+    
+    bool Mute() const { return _mute; }
+    void Mute(bool val) { _mute = val; if (!val) Sounds::StopAllSounds(); }
+
     ALLEGRO_DISPLAY* GetDisplay() { return _display; }
 private:
     BlackJack();
@@ -59,6 +63,8 @@ private:
     int _state;
     bool _done;
     bool _draw;
+    bool _mute;
+
     std::vector<State*> _states;
 };
 

@@ -14,6 +14,7 @@
 
 bool ChangeToMenuState(RectButton* btn);
 bool HandleButtonClicked(RectButton* btn);
+bool HandleMuteClick(RectButton* btn);
 
 S_Settings::S_Settings() { }
 
@@ -39,6 +40,9 @@ void S_Settings::Initialize()
     RectButton* betDown = new RectButton(Vector2D(34, 15), Vector2D(553, 246), RectButton::ButtonHandler().Bind<&HandleBetDown>());
     _buttons.push_back(betUp);
     _buttons.push_back(betDown);
+
+    RectButton* muteBtn = new RectButton(Vector2D(488, 308),al_map_rgb(255,255,255),"Sound",25, RectButton::ButtonHandler().Bind<&HandleMuteClick>(),true);
+    _buttons.push_back(muteBtn);
 }
 
 void S_Settings::LoadContents() { }
@@ -84,6 +88,8 @@ void S_Settings::Draw()
     al_draw_filled_triangle(ux1, uy1, ux2, uy2, ux3, uy3, al_map_rgb(0, 255, 0));
     al_draw_filled_triangle(bx1, by1, bx2, by2, bx3, by3, al_map_rgb(0, 255, 0));
 
+    if (BlackJack::Instance()->Mute()) al_draw_line(0+488, 5+308, 62+488, 25+308, al_map_rgb(255,255,255), 2.0);
+
     al_draw_text(Fonts::GetFont(25), al_map_rgb(255, 255, 255), 488, 208, 0, "Aposta:");
     al_draw_textf(Fonts::GetFont(25), al_map_rgb(255, 255, 100), 570, 208, 0, "%2.0f", S_Game::GetBet());
 }
@@ -126,6 +132,12 @@ bool HandleButtonClicked(RectButton* btn)
 bool ChangeToMenuState(RectButton* btn)
 {
     BlackJack::Instance()->ChangeState(STATE_MAIN_MENU);
+    return false;
+}
+
+bool HandleMuteClick(RectButton* btn)
+{
+    BlackJack::Instance()->Mute(!BlackJack::Instance()->Mute());
     return false;
 }
 

@@ -48,12 +48,16 @@ public:
 
     ButtonHandler* Handler() { return &_funcHandler; }
 
+    std::string GetText() const { return _text; }
+    void SetText(std::string val) { _text = val; }
+
     bool Visible;
 
 private:
     Vector2D _size;
     Vector2D _position;
     std::string _text;
+
 
     bool _clicked;
     bool _shadowedText;
