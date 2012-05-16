@@ -1,6 +1,9 @@
 #ifndef UTILITIES_H
 #define UTILITIES_H
 
+#include <string>
+#include <sstream>
+
 typedef unsigned int uint;
 
 struct Vector2D
@@ -20,5 +23,13 @@ struct Vector2D
 };
 
 void Error(char const* message);
+
+template <typename T>
+std::string ToString(T val)
+{
+    std::ostringstream out;
+    out << val;
+    return out.str();
+}
 
 #endif // UTILITIESUI_H

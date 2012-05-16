@@ -1,4 +1,5 @@
 #include "utilities.h"
+
 #include <allegro5/allegro_native_dialog.h>
 
 void Error(char const* message)

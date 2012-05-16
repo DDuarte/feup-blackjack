@@ -128,13 +128,6 @@ void Player::Draw(bool activePlayer /*= false*/)
 
     const char* name = _name.c_str();
 
-    std::stringstream ss;
-    ss << _balance << ' ' << "€"; // euro symbol
-
-    // must convert to USTR because we got the euro special symbol
-    // P.S Encodings suck.
-    ALLEGRO_USTR* balance = al_ustr_new(ss.str().c_str());
-
     if (activePlayer) al_draw_filled_rectangle(
         PLAYER_POSITIONS[_index].X + 10, 
         PLAYER_POSITIONS[_index].Y + 10 + 105, 
@@ -142,8 +135,8 @@ void Player::Draw(bool activePlayer /*= false*/)
         PLAYER_POSITIONS[_index].Y + 10 + 105 + Fonts::GetFont(20)->height, al_map_rgb(120, 120, 255));
     al_draw_text(Fonts::GetFont(20), al_map_rgb(255, 255, 255),
         PLAYER_POSITIONS[_index].X + 10, PLAYER_POSITIONS[_index].Y + 10 + 105, 0, name);
-    al_draw_ustr(Fonts::GetFont(20), al_map_rgb(255, 255, 255),
-        PLAYER_POSITIONS[_index].X + 10, PLAYER_POSITIONS[_index].Y - 10 + 105, 0, balance);
+    al_draw_text(Fonts::GetFont(20), al_map_rgb(255, 255, 255),
+        PLAYER_POSITIONS[_index].X + 10, PLAYER_POSITIONS[_index].Y - 10 + 105, 0, (ToString(_balance) + " €").c_str());
 
     if (IsBusted())
         al_draw_text(Fonts::GetFont(20), al_map_rgb(255, 242, 0),
@@ -168,7 +161,6 @@ void Player::Draw(bool activePlayer /*= false*/)
         _doubleChip.SetDestinationCoordinates(Vector2D(PLAYER_POSITIONS[_index].X - 30 - 5, PLAYER_POSITIONS[_index].Y + 5 + 35));
         _doubleChip.Draw();
     }
-    al_ustr_free(balance);
 }
 
 void Player::EnterGame(int index)

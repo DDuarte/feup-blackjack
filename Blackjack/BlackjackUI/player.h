@@ -27,7 +27,6 @@ class Player
 public:
     Player(std::ifstream& file, S_Game* game);
     void Save(std::ofstream& out) const;
-    ~Player() { /*delete _hand;*/ }
 
     std::string GetName() const { return _name; }
     double GetBalance() const { return _balance; }
@@ -79,9 +78,9 @@ private:
 
     Hand* _hand;
     S_Game* _game;
-    
+
     int _index;
-    
+
     bool _surrender;
 
     Bitmap _chip;
