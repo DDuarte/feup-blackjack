@@ -73,6 +73,8 @@ void S_Settings::Draw()
     for (std::vector<RectButton*>::const_iterator itr = _buttons.begin(); itr != _buttons.end(); ++itr)
         (*itr)->Draw();
 
+    _buttons.back()->SetText(GetStr(STR_SOUND)); // this will be the sound button
+
     // triangle1 points
     int ux1 = 570;
     int uy1 = 182;
