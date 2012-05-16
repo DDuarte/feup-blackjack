@@ -57,15 +57,13 @@ bool S_MainMenu::Update(ALLEGRO_EVENT* ev)
     {
         case ALLEGRO_EVENT_DISPLAY_CLOSE:
         {
-            BlackJack::Instance()->Quit();
-            return false;
+            return !BlackJack::Instance()->Quit();
         }
         case ALLEGRO_EVENT_KEY_UP:
         {
             if (ev->keyboard.keycode == ALLEGRO_KEY_ESCAPE)
             {
-                BlackJack::Instance()->Quit();
-                return false;
+                return !BlackJack::Instance()->Quit(true);
             }
             else if (ev->keyboard.keycode == ALLEGRO_KEY_ENTER)
             {

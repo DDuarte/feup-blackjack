@@ -148,6 +148,7 @@ private:
     bool HandleStateResetRound();    // Resets
     
     void ReadPlayersFromFile();
+    void UpdatePlayersFile() const;
 
     void SelectPlayers();
     Player* SelectNextPlayerFromQueue();
@@ -157,6 +158,7 @@ private:
     bool _playerPlayed;
 
     int CountActivePlayers() const;
+
 
     TextLog* _log;
 };

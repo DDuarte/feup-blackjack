@@ -35,7 +35,7 @@ public:
     static BlackJack* Instance();
     static Vector2D GetMousePosition() { return Vector2D(_mouseState->x, _mouseState->y); }
     void _Start();
-    void Quit();
+    bool Quit(bool prompteUser = false);
 
     void ChangeState(int newState);
 

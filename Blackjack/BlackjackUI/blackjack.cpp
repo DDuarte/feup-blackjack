@@ -48,7 +48,7 @@ BlackJack::BlackJack()
 void BlackJack::Initialize()
 {
     // inits
-    //al_set_new_display_flags(ALLEGRO_FULLSCREEN);
+    al_set_new_display_flags(ALLEGRO_FULLSCREEN);
     _display = al_create_display(CONST_WIDTH, CONST_HEIGHT);
     if (!_display)
         Error("Failed to initialize display.");
@@ -136,10 +136,11 @@ void BlackJack::UnloadContents()
     delete _mouseState; // only one instance of this class exists
 }
 
-void BlackJack::Quit()
+bool BlackJack::Quit(bool promptUser/*= false*/)
 {
-    _done = true;
-    // Anything else?
+    int result = (promptUser ? al_show_native_message_box(BlackJack::Instance()->GetDisplay(), "Sair", "", "Deseja sair?", NULL, ALLEGRO_MESSAGEBOX_QUESTION|ALLEGRO_MESSAGEBOX_OK_CANCEL) : true);
+    _done = !(result == 2 || result == 0);
+    return _done;
 }
 
 void BlackJack::_Start()

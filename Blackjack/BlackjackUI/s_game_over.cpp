@@ -20,10 +20,9 @@ void S_GameOver::Initialize()
 bool S_GameOver::Update(ALLEGRO_EVENT* ev)
 {
     if (ev->type == ALLEGRO_EVENT_DISPLAY_CLOSE)
-    {
-        BlackJack::Instance()->Quit();
-        return false;
-    }
+        return !BlackJack::Instance()->Quit(true);
+    else if (ev->type == ALLEGRO_EVENT_KEY_UP && ev->keyboard.keycode == ALLEGRO_KEY_ESCAPE)
+        return !BlackJack::Instance()->Quit(true);
     
     _menuButton->Update(ev);
 

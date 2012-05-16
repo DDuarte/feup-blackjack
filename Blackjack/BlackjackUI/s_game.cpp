@@ -14,6 +14,7 @@
 #include "sounds.h"
 
 #include <string>
+#include <fstream>
 
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_image.h>
@@ -111,21 +112,13 @@ bool S_Game::Update(ALLEGRO_EVENT* ev)
         }
         case ALLEGRO_EVENT_DISPLAY_CLOSE:
         {
-            BlackJack::Instance()->Quit();
-            return false;
+            return !BlackJack::Instance()->Quit(true);
         }
         case ALLEGRO_EVENT_KEY_UP:
         {
             if (ev->keyboard.keycode == ALLEGRO_KEY_ESCAPE)
             {
-                int result = al_show_native_message_box(BlackJack::Instance()->GetDisplay(), "Sair", "", "Deseja sair?", NULL, ALLEGRO_MESSAGEBOX_QUESTION|ALLEGRO_MESSAGEBOX_OK_CANCEL);
-                if (result == 2 || result == 0)
-                    return true;
-                else
-                {
-                    BlackJack::Instance()->Quit();
-                    return false;
-                }
+                return !BlackJack::Instance()->Quit(true);
             }
             break;
         }
@@ -140,6 +133,8 @@ bool S_Game::Update(ALLEGRO_EVENT* ev)
                         Statistics.Players = _players;
                         Statistics.CalculateWinners();
                         
+                        UpdatePlayersFile();
+
                         for (int i = 0; i < MAX_ACTIVE_PLAYERS; ++i)
                         {
                             if (_activePlayers[i] != NULL)
@@ -555,4 +550,19 @@ int S_Game::CountActivePlayers() const
         if (_activePlayers[i] != NULL)
             count++;
     return count;
+}
+
+void S_Game::UpdatePlayersFile() const
+{
+    std::ofstream out(Player::GetPlayersFileName());
+
+    if (!out.is_open())
+        Error("Error creating players.txt file");
+
+    out << _players.cbegin()->GetBalance() << " " << _players.cbegin()->GetName();
+    for (std::vector<Player>::const_iterator p = _players.cbegin()+1; p != _players.cend(); p++)
+    {
+        out << std::endl << p->GetBalance() << " " << p->GetName();
+    }
+
 }
