@@ -15,7 +15,7 @@ Dealer::Dealer(S_Game* game)
 
 void Dealer::Draw()
 {
-    const char* name = "Dealer";
+    static const char* name = "Dealer";
 
     al_draw_text(Fonts::GetFont(20), al_map_rgb(255, 255, 255),
         DEALER_POSITION.X + 10, DEALER_POSITION.Y + 10 + 105, 0, name);

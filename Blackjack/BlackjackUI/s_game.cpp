@@ -14,7 +14,6 @@
 #include "sounds.h"
 
 #include <string>
-#include <Windows.h>
 
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_image.h>
@@ -23,6 +22,7 @@
 #include <allegro5/allegro_native_dialog.h>
 
 double S_Game::_bet = 5.0;
+Stats S_Game::Statistics;
 
 S_Game::S_Game()
 {
@@ -84,9 +84,6 @@ void S_Game::Draw()
     for (std::vector<RectButton*>::iterator btn = _buttons.begin(); btn != _buttons.end(); ++btn)
         if ((*btn)->Visible) (*btn)->Draw();
 
-    // Debug printing
-    al_draw_textf(Fonts::GetFont(10), al_map_rgb(255, 255, 255), 0, 0, ALLEGRO_ALIGN_LEFT, "x: %3.1f y: %3.1f", BlackJack::GetMousePosition().X, BlackJack::GetMousePosition().Y);
-
     for (uint i = 0; i < MAX_ACTIVE_PLAYERS; ++i)
         if (_activePlayers[i] != NULL)
             _activePlayers[i]->Draw(i == _activePlayerIndex && (_gameState == GAME_STATE_PLAYER_TURN || _gameState == GAME_STATE_STAY_OR_GIVE_UP));
@@ -136,8 +133,20 @@ bool S_Game::Update(ALLEGRO_EVENT* ev)
             {
                 case GAME_STATE_PLACING_BETS:
                 {
-                    if (CountActivePlayers() <= 1)
+                    if (CountActivePlayers() < MIN_ACTIVE_PLAYERS)
                     {
+                        Statistics.Players = _players;
+                        Statistics.CalculateWinners();
+                        
+                        for (int i = 0; i < MAX_ACTIVE_PLAYERS; ++i)
+                        {
+                            if (_activePlayers[i] != NULL)
+                            {
+                                Statistics.Winner = _activePlayers[i];
+                                break;
+                            }
+                        }
+
                         BlackJack::Instance()->ChangeState(STATE_GAME_OVER);
                         return true;
                     }
@@ -162,13 +171,6 @@ bool S_Game::Update(ALLEGRO_EVENT* ev)
                             {
                                 counter = 0;
                                 counter2 = 0;
-
-                                for (uint i = 0; i < MAX_ACTIVE_PLAYERS; i++)
-                                {
-                                    if (_activePlayers[i] != NULL)
-                                        if (_activePlayers[i]->IsBlackjack() && !_dealer->IsBlackjack())
-                                            _activePlayers[i]->WinsItAll();
-                                }
 
                                 if (_dealer->IsBlackjack())
                                     PlaySoundOnce(SAMPLE_DEALER_BLACKJACK_SOUND);
@@ -269,6 +271,8 @@ void S_Game::PlayerHit(Player* player, Card* card)
 
     PlaySoundOnce(SAMPLE_DEAL_CARD_SOUND);
 
+    Statistics.HitCount += 1;
+
     if (player->HasLost())
     {
         _playerPlayed = true;
@@ -283,8 +287,8 @@ void S_Game::PlayerStand(Player* player)
     _log->AddString("Jogador: %s | Acção: ficar", player->GetName().c_str());
 
     _playerPlayed = true;
+    Statistics.StandCount += 1;
 }
-
 
 void S_Game::PlayerDouble(Player* player, Card* card)
 {
@@ -292,6 +296,7 @@ void S_Game::PlayerDouble(Player* player, Card* card)
 
     PlaySoundOnce(SAMPLE_DOUBLE_SOUND);
     _playerPlayed = true;
+    Statistics.DoubleCount += 1;
 }
 
 void S_Game::PlayerSurrender(Player* player)
@@ -302,11 +307,13 @@ void S_Game::PlayerSurrender(Player* player)
 void S_Game::PlayerStay(Player* player)
 {
     _playerPlayed = true;
+    Statistics.StandCount += 1;
 }
 
 void S_Game::PlayerBet(Player* player)
 {
-
+    Statistics.TotalMoneyBetPlayers += _bet;
+    Statistics.BetCount += 1;
 }
 
 void S_Game::ReadPlayersFromFile()
@@ -333,7 +340,7 @@ void S_Game::ReadPlayersFromFile()
 
 void S_Game::SelectPlayers()
 {
-    if (_waitingPlayers.size() <= 1)
+    if (_waitingPlayers.size() < MIN_ACTIVE_PLAYERS)
     {
         al_show_native_message_box(BlackJack::Instance()->GetDisplay(), "Error", "", "Not enough players to start a game. Fill in players.txt.", 0, ALLEGRO_MESSAGEBOX_ERROR);
         BlackJack::Instance()->Quit();
@@ -410,6 +417,14 @@ bool S_Game::HandleStatePlayerTurn()
     if (_activePlayers[_activePlayerIndex] == NULL)
         return true;
 
+    if (_activePlayers[_activePlayerIndex]->IsBlackjack())
+    {
+        _buttons[BUTTON_HIT]->Visible = false;
+        _buttons[BUTTON_STAND]->Visible = false;
+        _playerPlayed = true;
+        return true;
+    }
+
     _buttons[BUTTON_HIT]->Handler()->Bind<Player, &Player::Hit>(_activePlayers[_activePlayerIndex]);
     _buttons[BUTTON_STAND]->Handler()->Bind<Player, &Player::Stand>(_activePlayers[_activePlayerIndex]);
     _buttons[BUTTON_DOUBLE]->Handler()->Bind<Player, &Player::Double>(_activePlayers[_activePlayerIndex]);
@@ -442,18 +457,28 @@ bool S_Game::HandleStateCheckResults()
     {
         if (_activePlayers[i] != NULL)
         {
+            if (_activePlayers[i]->IsBlackjack())
+                Statistics.BlackjackCount += 1;
+            else if (_activePlayers[i]->IsBusted())
+                Statistics.BustedCount += 1;
+
+            double money = 0.0;
+
             if (_activePlayers[i]->IsBusted())
-                ;//_activePlayers[i]->Lose();
+                ;
             else if (_dealer->IsBusted()) // assumes player did NOT bust
-                _activePlayers[i]->DealerBusts();
+                money = 2*(S_Game::GetBet() * (1 + _activePlayers[i]->IsDoubleBet()));
             else if (_activePlayers[i]->IsBlackjack() && !_dealer->IsBlackjack())
-                _activePlayers[i]->WinsItAll();
-            //else if (_activePlayers[i]->IsBlackjack() && _dealer->IsBlackjack()) already covered in next case
-            //    _activePlayers[i]->Wins();
+                money = 3*(S_Game::GetBet() * (1 + _activePlayers[i]->IsDoubleBet()));
             else if (_activePlayers[i]->GetScore() >= _dealer->GetScore())
-                _activePlayers[i]->Wins();
+                money = 1*(S_Game::GetBet() * (1 + _activePlayers[i]->IsDoubleBet()));
+
+            _activePlayers[i]->IncreaseBalance(money);
+            Statistics.TotalMoneyReceivedPlayers += money;
         }
     }
+
+    Statistics.RoundCount += 1;
 
     return true;
 }
@@ -525,7 +550,7 @@ int S_Game::CountActivePlayers() const
 {
     int count = 0;
     for (uint i = 0; i < MAX_ACTIVE_PLAYERS; ++i)
-        if (_activePlayers[_activePlayerIndex] != NULL)
+        if (_activePlayers[i] != NULL)
             count++;
     return count;
 }

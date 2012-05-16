@@ -16,7 +16,7 @@ public:
     S_GameOver() { }
     void Initialize() { }
     void LoadContents() { }
-    bool Update(ALLEGRO_EVENT* ev) { return true; }
+    bool Update(ALLEGRO_EVENT* ev);
     void Draw();
     void UnloadContents() { }
 };

@@ -13,6 +13,8 @@ void Fonts::UnloadFonts()
 {
     for (std::unordered_map<uint, ALLEGRO_FONT*>::iterator font = _fonts.begin(); font != _fonts.end(); ++font)
         al_destroy_font(font->second);
+
+    _fonts.clear();
 }
 
 ALLEGRO_FONT* Fonts::GetFont(uint size)

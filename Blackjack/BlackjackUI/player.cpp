@@ -40,6 +40,7 @@ void Player::Save(std::ofstream& out) const
 bool Player::ReadText(std::ifstream& file)
 {
     file >> _balance;
+    _initialBalance = _balance;
 
     getline(file, _name, '\n');
 

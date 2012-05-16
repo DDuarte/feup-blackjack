@@ -2,7 +2,6 @@
 #define PLAYER_H
 
 #include "hand.h"
-#include "s_game.h"
 #include "utilities.h"
 
 #include <string>
@@ -12,6 +11,7 @@
 class Card;
 class RectButton;
 union ALLEGRO_EVENT;
+class S_Game;
 
 const Vector2D PLAYER_POSITIONS[]  = 
 {
@@ -29,9 +29,13 @@ public:
 
     std::string GetName() const { return _name; }
     double GetBalance() const { return _balance; }
+    double GetInitialBalance() const { return _initialBalance; }
+    double GetBalanceDiff() const { return _balance - _initialBalance; }
     double IsDoubleBet() const { return _doubleBet; }
     uint GetScore() const { return _hand->GetScore(); }
     static std::string GetPlayersFileName() { return _playersFileName; }
+
+    void IncreaseBalance(double inc) { _balance += inc; }
 
     bool IsBusted() const { return _hand->IsBusted(); }
     bool IsBlackjack() const { return _hand->IsBlackjack(); }
@@ -40,7 +44,6 @@ public:
     bool HasLost() const { return _hand->IsBusted(); }
 
     void EnterGame(int index);
-    // void ExitGame();
 
     // In-game player actions
     void PlaceBet();
@@ -52,10 +55,6 @@ public:
 
     bool WantsSurrender() const { return _surrender; }
 
-    // Rewards
-    void DealerBusts()  { _balance += (2*(S_Game::GetBet() * (1 + _doubleBet))); }
-    void WinsItAll()    { _balance += (3*(S_Game::GetBet() * (1 + _doubleBet))); }
-    void Wins()         { _balance += (1*(S_Game::GetBet() * (1 + _doubleBet))); }
     void ResetPlayer();
 
     // Hand
@@ -70,6 +69,8 @@ private:
 
     std::string _name;
     double _balance;
+    double _initialBalance;
+
     bool _doubleBet;
 
     static std::string _playersFileName;

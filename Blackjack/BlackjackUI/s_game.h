@@ -4,6 +4,7 @@
 #include "state.h"
 #include "utilities.h"
 #include "bitmaps.h"
+#include "player.h"
 
 #include <vector>
 #include <queue>
@@ -11,7 +12,6 @@
 union ALLEGRO_EVENT;
 struct ALLEGRO_BITMAP;
 class Deck;
-class Player;
 class Dealer;
 class RectButton;
 class ICardOwner;
@@ -40,6 +40,52 @@ enum Buttons
 };
 
 const uint MAX_ACTIVE_PLAYERS = 4;
+const uint MIN_ACTIVE_PLAYERS = 2;
+
+struct Stats
+{
+    Stats()
+    {
+        TotalMoneyBetPlayers = TotalMoneyReceivedPlayers = 0;
+        BlackjackCount = BustedCount = DoubleCount = HitCount = BetCount = StandCount = RoundCount = 0;
+        Winner = PlayerWonMoreMoney = PlayerLostMoreMoney = NULL;
+    }
+
+    double TotalMoneyBetPlayers;
+    double TotalMoneyReceivedPlayers;
+    int BlackjackCount;
+    int BustedCount;
+    int DoubleCount;
+    int HitCount;
+    int BetCount;
+    int StandCount;
+    int RoundCount;
+
+    std::vector<Player> Players;
+    Player* Winner;
+    Player* PlayerWonMoreMoney;
+    Player* PlayerLostMoreMoney;
+
+    void CalculateWinners()
+    {
+        if (Players.empty())
+            return;
+
+        Player* tempWinner = &(*Players.begin());
+        Player* tempLoser = &(*Players.begin());
+        for (std::vector<Player>::iterator itr = Players.begin(); itr != Players.end(); ++itr)
+        {
+            if (tempWinner->GetBalanceDiff() < (*itr).GetBalanceDiff())
+                tempWinner = &(*itr);
+
+            if (tempLoser->GetBalanceDiff() > (*itr).GetBalanceDiff())
+                tempLoser = &(*itr);
+        }
+
+        PlayerWonMoreMoney = tempWinner;
+        PlayerLostMoreMoney = tempLoser;
+    }
+};
 
 class S_Game : public State
 {
@@ -74,6 +120,8 @@ public:
     static void SetBet(double bet) { _bet = bet; }
 
     ALLEGRO_BITMAP* GetChip() { return Bitmaps::GetBitmap(BITMAP_GAME_CHIP); }
+
+    static Stats Statistics;
 
 private:
     Dealer* _dealer;

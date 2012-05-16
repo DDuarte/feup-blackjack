@@ -85,8 +85,6 @@ void Deck::Shuffle()
 
 void Deck::Draw(bool cardBack /* = true*/)
 {
-
-    for (uint i = 0; i < _cards.size(); i+=2) // Drawing each card makes a very big Deck
+    for (uint i = 0; i < _cards.size(); i+=2) // Drawing each card makes a very big Deck so we only draw half of them
         _cards[i].Draw(0.0, false, cardBack);
-
 }

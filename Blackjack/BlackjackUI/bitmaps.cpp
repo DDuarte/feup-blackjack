@@ -13,6 +13,8 @@ void Bitmaps::UnloadBitmaps()
 {
     for (std::map<std::string, ALLEGRO_BITMAP*>::iterator bmp = _bitmaps.begin(); bmp != _bitmaps.end(); ++bmp)
         al_destroy_bitmap(bmp->second);
+
+    _bitmaps.clear();
 }
 
 ALLEGRO_BITMAP* Bitmaps::GetBitmap(int bitmapsPathNumber)

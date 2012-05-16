@@ -16,8 +16,12 @@ void Sounds::UnloadSounds()
     for (std::map<std::string, ALLEGRO_SAMPLE*>::iterator snd = _sounds.begin(); snd != _sounds.end(); ++snd)
         al_destroy_sample(snd->second);
 
+    _sounds.clear();
+
     for (std::map<std::string, ALLEGRO_SAMPLE_INSTANCE*>::iterator snd = _instances.begin(); snd != _instances.end(); ++snd)
         al_destroy_sample_instance(snd->second);
+
+    _instances.clear();
 }
 
 ALLEGRO_SAMPLE_INSTANCE* Sounds::GetSound(int samplePathNumber, ALLEGRO_PLAYMODE playmode/* = ALLEGRO_PLAYMODE_ONCE*/, float speed/*= 1.0*/)

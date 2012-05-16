@@ -172,6 +172,8 @@ void BlackJack::ChangeState(int newState)
         _states[_state]->UnloadContents();
 
     Sounds::StopAllSounds();
+    Bitmaps::UnloadBitmaps();
+    Fonts::UnloadFonts();
 
     _state = newState;
 
