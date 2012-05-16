@@ -3,14 +3,32 @@
 #include "blackjack.h"
 #include "s_game.h"
 #include "utilities.h"
+#include "rect_button.h"
 
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>
 
 #define Stats S_Game::Statistics
 
+bool ChangeToMenuStateFromGameOver(RectButton* btn);
+
+void S_GameOver::Initialize()
+{
+    RectButton* btn = new RectButton(Vector2D(350, 530), al_map_rgb(255, 255, 255), std::string("Menu"), 50, RectButton::ButtonHandler().Bind<&ChangeToMenuStateFromGameOver>(), true);
+    _buttons.push_back(btn);
+}
+
 bool S_GameOver::Update(ALLEGRO_EVENT* ev)
 {
+    if (ev->type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+    {
+        BlackJack::Instance()->Quit();
+        return false;
+    }
+    
+    for (std::vector<RectButton*>::iterator btn = _buttons.begin(); btn != _buttons.end(); btn++)
+        (*btn)->Update(ev);
+
     return true;
 }
 
@@ -25,7 +43,8 @@ void S_GameOver::Draw()
     // outer transparent rectangle
     al_draw_filled_rounded_rectangle(40, 119, 760, 495, 10, 10, al_map_rgba(0, 0, 0, 175));
 
-    
+    for (std::vector<RectButton*>::iterator btn = _buttons.begin(); btn != _buttons.end(); btn++)
+        (*btn)->Draw();
 
     /*
     double TotalMoneyBetPlayers;
@@ -64,7 +83,7 @@ void S_GameOver::Draw()
         std::make_pair("Busts:", ToString(Stats.BustedCount)),
         std::make_pair("Dinheiro gasto:", ToString(Stats.TotalMoneyBetPlayers) + "€"),
         std::make_pair("Dinheiro recebido:", ToString(Stats.TotalMoneyReceivedPlayers) + "€"),
-        std::make_pair("Jogador que ganhou mais:", Stats.PlayerWonMoreMoney ? (Stats.PlayerWonMoreMoney->GetName() + " (" + ToString(Stats.PlayerLostMoreMoney->GetBalanceDiff()) + "€)") : "N/A"),
+        std::make_pair("Jogador que ganhou mais:", Stats.PlayerWonMoreMoney ? (Stats.PlayerWonMoreMoney->GetName() + " (" + ToString(Stats.PlayerWonMoreMoney->GetBalanceDiff()) + "€)") : "N/A"),
         std::make_pair("Jogador que perdeu mais:", Stats.PlayerLostMoreMoney ? (Stats.PlayerLostMoreMoney->GetName() + " (" + ToString(Stats.PlayerLostMoreMoney->GetBalanceDiff()) + "€)") : "N/A")
     };
 
@@ -76,4 +95,12 @@ void S_GameOver::Draw()
     }
 
     // Second column
+}
+
+
+
+bool ChangeToMenuStateFromGameOver(RectButton* btn)
+{
+    BlackJack::Instance()->ChangeState(STATE_MAIN_MENU);
+    return false;
 }

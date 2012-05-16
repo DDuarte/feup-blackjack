@@ -7,6 +7,7 @@
 #include "hand.h"
 #include "fonts.h"
 #include "localization.h"
+#include "dealer.h"
 
 #include <string>
 #include <fstream>
@@ -137,19 +138,22 @@ void Player::Draw(bool activePlayer /*= false*/)
         PLAYER_POSITIONS[_index].X + 10, PLAYER_POSITIONS[_index].Y + 10 + 105, 0, name);
     al_draw_text(Fonts::GetFont(20), al_map_rgb(255, 255, 255),
         PLAYER_POSITIONS[_index].X + 10, PLAYER_POSITIONS[_index].Y - 10 + 105, 0, (ToString(_balance) + " €").c_str());
-
-    if (IsBusted())
-        al_draw_text(Fonts::GetFont(20), al_map_rgb(255, 242, 0),
+    
+    if (!_game->GetDealer()->IsBlackjack())
+    {
+        if (IsBusted())
+            al_draw_text(Fonts::GetFont(20), al_map_rgb(255, 242, 0),
             PLAYER_POSITIONS[_index].X + 10, PLAYER_POSITIONS[_index].Y + 30 + 105, 0, "Busted");
-    else if (IsBlackjack())
-        al_draw_text(Fonts::GetFont(20), al_map_rgb(255, 242, 0),
+        else if (IsBlackjack())
+            al_draw_text(Fonts::GetFont(20), al_map_rgb(255, 242, 0),
             PLAYER_POSITIONS[_index].X + 10, PLAYER_POSITIONS[_index].Y + 30 + 105, 0, "BlackJack");
-    else if (HasLost())
-        al_draw_text(Fonts::GetFont(20), al_map_rgb(255, 242, 0),
+        else if (HasLost())
+            al_draw_text(Fonts::GetFont(20), al_map_rgb(255, 242, 0),
             PLAYER_POSITIONS[_index].X + 10, PLAYER_POSITIONS[_index].Y + 30 + 105, 0, "Lost");
-    else if ((_index < _game->GetActivePlayerIndex() && _game->GetState() != GAME_STATE_DEALING_CARDS && _game->GetState() != GAME_STATE_PLACING_BETS && _game->GetState() != GAME_STATE_POST_GAME) || _game->GetState() == GAME_STATE_STAY_OR_GIVE_UP || _game->GetState() == GAME_STATE_DEALER_TURN)
-        al_draw_text(Fonts::GetFont(20), al_map_rgb(255, 242, 0),
+        else if ((_index < _game->GetActivePlayerIndex() && _game->GetState() != GAME_STATE_DEALING_CARDS && _game->GetState() != GAME_STATE_PLACING_BETS && _game->GetState() != GAME_STATE_POST_GAME) || _game->GetState() == GAME_STATE_STAY_OR_GIVE_UP || _game->GetState() == GAME_STATE_DEALER_TURN)
+            al_draw_text(Fonts::GetFont(20), al_map_rgb(255, 242, 0),
             PLAYER_POSITIONS[_index].X + 10, PLAYER_POSITIONS[_index].Y + 30 + 105, 0, "Stand");
+    }
 
     _hand->Draw(); 
 

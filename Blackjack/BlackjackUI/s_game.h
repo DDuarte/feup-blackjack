@@ -114,7 +114,8 @@ public:
     Player** GetActivePlayers() { return _activePlayers; }
     int GetActivePlayerIndex() { return _activePlayerIndex; }
     int GetState() { return _gameState; }
-
+    Dealer* GetDealer() { return _dealer; }
+    
     void HandleOutOfCards() { }
 
     static double GetBet() { return _bet; }
