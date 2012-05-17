@@ -26,7 +26,8 @@ Player::Player(std::ifstream& file, S_Game* game)
         throw InvalidPlayerException();
 
     _game = game;
-    _hand = new Hand(Vector2D(0,0)); // TODO Don't forget to delete this
+    _hand = new Hand(Vector2D(0,0));
+    // TODO Don't forget to delete this
 
     _doubleBet = false;
     _index = -1;
@@ -145,7 +146,10 @@ void Player::Draw(bool activePlayer /*= false*/)
             PLAYER_POSITIONS[_index].X + 10, PLAYER_POSITIONS[_index].Y + 30 + 105, 0, GetStr(STR_BUSTED).c_str());
         else if (IsBlackjack())
             al_draw_text(Fonts::GetFont(20), al_map_rgb(255, 242, 0),
-            PLAYER_POSITIONS[_index].X + 10, PLAYER_POSITIONS[_index].Y + 30 + 105, 0, "BlackJack'ed");
+            PLAYER_POSITIONS[_index].X + 10, PLAYER_POSITIONS[_index].Y + 30 + 105, 0, "BlackJack");
+        else if (HasLost())
+            al_draw_text(Fonts::GetFont(20), al_map_rgb(255, 242, 0),
+            PLAYER_POSITIONS[_index].X + 10, PLAYER_POSITIONS[_index].Y + 30 + 105, 0, "Lost");
         else if ((_index < _game->GetActivePlayerIndex() && _game->GetState() != GAME_STATE_DEALING_CARDS && _game->GetState() != GAME_STATE_PLACING_BETS && _game->GetState() != GAME_STATE_POST_GAME) || _game->GetState() == GAME_STATE_STAY_OR_GIVE_UP || _game->GetState() == GAME_STATE_DEALER_TURN)
             al_draw_text(Fonts::GetFont(20), al_map_rgb(255, 242, 0),
             PLAYER_POSITIONS[_index].X + 10, PLAYER_POSITIONS[_index].Y + 30 + 105, 0, GetStr(STR_STOOD).c_str());

@@ -3,6 +3,7 @@
 
 #include <string>
 #include <sstream>
+#include <iomanip>
 
 typedef unsigned int uint;
 
@@ -28,8 +29,14 @@ template <typename T>
 std::string ToString(T val)
 {
     std::ostringstream out;
-    out << val;
+    if (!(typeid(T) == typeid(double))) 
+        out << val;
+    else
+        out << std::fixed << std::setprecision(2) <<val;
+
     return out.str();
 }
+
+
 
 #endif // UTILITIESUI_H

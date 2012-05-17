@@ -1,4 +1,4 @@
-55 Albertina
-65 Bia
-75 Cátia
+78 Albertina
+90 Bia
+87.5 Cátia
 0 Daniela

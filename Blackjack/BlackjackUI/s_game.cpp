@@ -466,7 +466,7 @@ bool S_Game::HandleStateCheckResults()
             else if (_dealer->IsBusted()) // assumes player did NOT bust
                 money = 2*(S_Game::GetBet() * (1 + _activePlayers[i]->IsDoubleBet()));
             else if (_activePlayers[i]->IsBlackjack() && !_dealer->IsBlackjack())
-                money = 3*(S_Game::GetBet() * (1 + _activePlayers[i]->IsDoubleBet()));
+                money = 2.5*(S_Game::GetBet() * (1 + _activePlayers[i]->IsDoubleBet()));
             else if (_activePlayers[i]->GetScore() >= _dealer->GetScore())
                 money = 1*(S_Game::GetBet() * (1 + _activePlayers[i]->IsDoubleBet()));
 

@@ -113,7 +113,7 @@ void S_MainMenu::Draw()
     ALLEGRO_COLOR shadowText = al_map_rgb(0, 0, 0);
     ALLEGRO_COLOR selectedText = al_map_rgb(255, 255, 255);
 
-    static Bitmap bg (BITMAP_MENU_BACKGROUND);
+    static Bitmap bg(BITMAP_MENU_BACKGROUND);
     bg.Draw();
 
     al_draw_text(Fonts::GetFont(140), shadowText, 267, 1, ALLEGRO_ALIGN_CENTRE, "Blackjack");
