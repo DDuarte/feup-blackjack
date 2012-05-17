@@ -29,13 +29,19 @@ template <typename T>
 std::string ToString(T val)
 {
     std::ostringstream out;
-    if (!(typeid(T) == typeid(double))) 
-        out << val;
-    else
-        out << std::fixed << std::setprecision(2) <<val;
-
+    out << val;
     return out.str();
 }
+
+template <>
+inline std::string ToString<double>(double val)
+{
+    std::ostringstream out;
+    out << std::fixed << std::setprecision(2) <<val;
+    return out.str();
+}
+
+
 
 
 
