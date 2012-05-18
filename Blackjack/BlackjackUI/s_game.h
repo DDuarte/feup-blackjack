@@ -42,6 +42,12 @@ enum Buttons
 const uint MAX_ACTIVE_PLAYERS = 4;
 const uint MIN_ACTIVE_PLAYERS = 2;
 
+/*!
+ * \struct Stats
+ *
+ * \brief Statistics that will be shown in the game over screen
+ *
+ */
 struct Stats
 {
     Stats()
@@ -87,42 +93,68 @@ struct Stats
     }
 };
 
+/*!
+ * \class S_Game
+ *
+ * \brief Play game state. Contains the game logic and the game data.
+ *
+ */
 class S_Game : public State
 {
 public:
     //- State specific
+    //! Game Play State constructor
     S_Game();
+    //! Initialization of some variables
     void Initialize();
+    //! Load to memory different files (sounds, images and others). Called after Initialize()
     void LoadContents();
+    //! Called every time there's a new event, updates the "state"
     bool Update(ALLEGRO_EVENT* ev);
+    //! Called when re-drawing the screen is needed. Called after Update()
     void Draw();
+    //! Frees the memory of allocated resources in LoadContents()
     void UnloadContents();
 
+    //! Returns the deck
     Deck* GetDeck() { return _deck; }
 
     //- Game specific
     // Events-like calls
+    //! Handles the player bet event. It is called by player bet method of the player class.
     void PlayerBet(Player* /* player*/);
+    //! Handles the player hit event. It is called by player hit method of the player class.
     void PlayerHit(Player* player, Card* card);
+    //! Handles the player stand event. It is called by player stand method of the player class.
     void PlayerStand(Player* player);
+    //! Handles the player double event. It is called by player double method of the player class.
     void PlayerDouble(Player* player, Card* card);
+    //! Handles the player surrender event. It is called by player surrender method of the player class every time a player gives up after a round.
     void PlayerSurrender(Player* player);
+    //! Handles the player stay event. It is called by player stay method of the player class every time a player stays after a round.
     void PlayerStay(Player* player);
 
+    //! Handles the dealer hit event. It is called by the hit method of the Dealer class.
     void DealerHit(Dealer* dealer, Card* card);
 
+    //! Returns an array with pointers to the player in the table (active players)
     Player** GetActivePlayers() { return _activePlayers; }
+    //! Returns the index of the player that is currently playing
     int GetActivePlayerIndex() { return _activePlayerIndex; }
+    //! Return the current internal game state
     int GetState() { return _gameState; }
+    //! Returns a pointer to the dealer
     Dealer* GetDealer() { return _dealer; }
-    
-    void HandleOutOfCards() { }
 
+    //! Return the bet
     static double GetBet() { return _bet; }
+    //! Sets the bet
     static void SetBet(double bet) { _bet = bet; }
 
+    //! Returns the game chip ALLEGRO_BITMAP*
     ALLEGRO_BITMAP* GetChip() { return Bitmaps::GetBitmap(BITMAP_GAME_CHIP); }
 
+    //! Stats instance for the game over state
     static Stats Statistics;
 
 private:

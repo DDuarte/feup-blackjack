@@ -1,3 +1,14 @@
+/*!
+ * \file player.cpp
+ *
+ * \author FEUP - T03G04:
+ * \author Duarte Duarte
+ * \author Miguel Marques
+ *
+ * \date Maio 2012
+ * 
+ */
+
 #include "player.h"
 #include "s_game.h"
 #include "utilities.h"
@@ -74,8 +85,8 @@ bool Player::Hit(RectButton* btn)
         _hand->AddCard(card);
         _game->PlayerHit(this, card);
     }
-    else
-        _game->HandleOutOfCards();
+    //else
+    // HandleOutOfCards(); // Mathematically impossible to happen
     return true;
 }
 
@@ -94,8 +105,8 @@ bool Player::Double(RectButton* btn)
         _doubleBet = true;
         _game->PlayerDouble(this, card);
     }
-    else
-        _game->HandleOutOfCards();
+    //else
+    //    _game->HandleOutOfCards(); // Mathematically impossible to happen
 
     // ...
     return true;

@@ -1,3 +1,14 @@
+/*!
+ * \file fonts.cpp
+ *
+ * \author FEUP - T03G04:
+ * \author Duarte Duarte
+ * \author Miguel Marques
+ *
+ * \date Maio 2012
+ * 
+ */
+
 #include "fonts.h"
 #include "utilities.h"
 

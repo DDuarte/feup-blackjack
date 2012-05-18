@@ -1,3 +1,14 @@
+/*!
+ * \file text_log.cpp
+ *
+ * \author FEUP - T03G04:
+ * \author Duarte Duarte
+ * \author Miguel Marques
+ *
+ * \date Maio 2012
+ * 
+ */
+
 #include "text_log.h"
 #include "utilities.h"
 #include "fonts.h"

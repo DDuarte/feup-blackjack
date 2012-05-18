@@ -1,7 +1,19 @@
+/*!
+ * \file rect_button.cpp
+ *
+ * \author FEUP - T03G04:
+ * \author Duarte Duarte
+ * \author Miguel Marques
+ *
+ * \date Maio 2012
+ * 
+ */
+
 #include "rect_button.h"
 #include "utilities.h"
 #include "fonts.h"
 #include "game_exceptions.h"
+#include "blackjack.h"
 
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>

@@ -1,9 +1,21 @@
-﻿#include "s_settings.h"
+﻿/*!
+ * \file s_setting.cpp
+ *
+ * \author FEUP - T03G04:
+ * \author Duarte Duarte
+ * \author Miguel Marques
+ *
+ * \date Maio 2012
+ * 
+ */
+
+#include "s_settings.h"
 #include "bitmaps.h"
 #include "localization.h"
 #include "rect_button.h"
 #include "fonts.h"
 #include "s_game.h"
+#include "blackjack.h"
 
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>
@@ -44,8 +56,6 @@ void S_Settings::Initialize()
     RectButton* muteBtn = new RectButton(Vector2D(488, 308), al_map_rgb(255,255,255), GetStr(STR_SOUND) ,25, RectButton::ButtonHandler().Bind<&HandleMuteClick>(),true);
     _buttons.push_back(muteBtn);
 }
-
-void S_Settings::LoadContents() { }
 
 bool S_Settings::Update(ALLEGRO_EVENT* ev)
 {

@@ -1,3 +1,14 @@
+/*!
+ * \file deck.cpp
+ *
+ * \author FEUP - T03G04:
+ * \author Duarte Duarte
+ * \author Miguel Marques
+ *
+ * \date Maio 2012
+ * 
+ */
+
 #include "deck.h"
 #include "utilities.h"
 #include "card.h"

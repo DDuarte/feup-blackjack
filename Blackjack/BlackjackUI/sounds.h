@@ -1,3 +1,14 @@
+/*!
+ * \file sounds.h
+ *
+ * \author FEUP - T03G04:
+ * \author Duarte Duarte
+ * \author Miguel Marques
+ *
+ * \date Maio 2012
+ * 
+ */
+
 #ifndef SOUNDS_H
 #define SOUNDS_H
 
@@ -38,11 +49,20 @@ static std::string sounds_path[] =
     "res/86857__milton__dealerblackjack.ogg", 
 };
 
+/*!
+ * \class Sounds
+ *
+ * \brief Represents a set of ALLEGRO_SAMPLE or ALLEGRO_SAMPLE_INSTANCE
+ *
+ */
 class Sounds
 {
 public:
+    //! Releases memory used by all sounds
     static void UnloadSounds();
+    //! Retrieves an ALLEGRO_SAMPLE_INSTANCE
     static ALLEGRO_SAMPLE_INSTANCE* GetSound(int samplesPathNumber, ALLEGRO_PLAYMODE Playmode = ALLEGRO_PLAYMODE_ONCE, float speed= 1.0);
+    //! Stops playing all sounds
     static void StopAllSounds();
 
 private:

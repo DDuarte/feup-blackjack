@@ -1,11 +1,34 @@
+/*!
+ * \file delegate.h
+ *
+ * \author FEUP - T03G04:
+ * \author Duarte Duarte
+ * \author Miguel Marques
+ *
+ * \date Maio 2012
+ * 
+ */
+
 #ifndef DELEGATE_H
 #define DELEGATE_H
 
 #include "game_exceptions.h"
 
+/*!
+ * \class Delegate
+ *
+ * \brief This class is not documented.
+ *
+ */
 template<typename T>
 class Delegate {};
 
+/*!
+ * \class Delegate
+ *
+ * \brief This class is not documented.
+ *
+ */
 template<typename R, typename ARG0>
 class Delegate<R (ARG0)>
 {

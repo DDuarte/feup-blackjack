@@ -1,3 +1,14 @@
+/*!
+ * \file hand.cpp
+ *
+ * \author FEUP - T03G04:
+ * \author Duarte Duarte
+ * \author Miguel Marques
+ *
+ * \date Maio 2012
+ * 
+ */
+
 #include "hand.h"
 #include "card.h"
 #include "game_exceptions.h"

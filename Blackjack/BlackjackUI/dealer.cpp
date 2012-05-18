@@ -1,3 +1,14 @@
+/*!
+ * \file dealer.cpp
+ *
+ * \author FEUP - T03G04:
+ * \author Duarte Duarte
+ * \author Miguel Marques
+ *
+ * \date Maio 2012
+ * 
+ */
+
 #include "s_game.h"
 #include "dealer.h"
 #include "hand.h"
@@ -46,7 +57,8 @@ bool Dealer::Hit()
         NewCard(card);
         _game->DealerHit(this, card);
     }
-    else
-        _game->HandleOutOfCards();
+    //else
+    //    _game->HandleOutOfCards(); // Mathematically impossible to happen
+    //    
     return true;
 }

@@ -1,7 +1,16 @@
+/*!
+ * \file bitmaps.h
+ *
+ * \author FEUP - T03G04:
+ * \author Duarte Duarte
+ * \author Miguel Marques
+ *
+ * \date Maio 2012
+ *
+ */
+
 #ifndef BITMAPS_H
 #define BITMAPS_H
-
-#include "utilities.h"
 
 #include <map>
 #include <vector>
@@ -29,10 +38,18 @@ static std::string bitmaps_path[] =
     "res/gameoverscreen.png"
 };
 
+/*!
+ * \class Bitmaps
+ *
+ * \brief Represents a set of ALLEGRO_BITMAP
+ *
+ */
 class Bitmaps
 {
 public:
+    //! Releases memory used by all bitmaps
     static void UnloadBitmaps();
+    //! Returns an ALLEGRO_BITMAP (BitmapsEnum)
     static ALLEGRO_BITMAP* GetBitmap(int bitmapsPathNumber);
 
 private:

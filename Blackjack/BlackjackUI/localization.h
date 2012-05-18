@@ -1,3 +1,14 @@
+/*!
+ * \file localization.h
+ *
+ * \author FEUP - T03G04:
+ * \author Duarte Duarte
+ * \author Miguel Marques
+ *
+ * \date Maio 2012
+ * 
+ */
+
 #ifndef LOCALIZATION_H
 #define LOCALIZATION_H
 
@@ -59,7 +70,6 @@ enum Strings
     STR_SOUND,
     STR_ACTUAL_F,
     STR_BET,
-    // more here
 };
 
 enum Language
@@ -74,18 +84,35 @@ enum Language
 static char* LanguageShort[] = { "uk", "en", "pt", "fr", "es" };
 static std::string LanguageComplete[] = { "Unknown", "English", "Português", "Français", "Español" };
 
-// Singleton since we need to use it all around the code
-// To get a string of the current language use the macro GetStr() and pass an element of the Strings element
+/*!
+ * \class Localization
+ *
+ * \brief Multi-language support
+ * 
+ * This game supports multiple languages.
+ * Each ones is loaded from binary files encoded in UTF-8 (to support special characters)
+ * Sentences or words in the language file should be held apart by '/0' (null charcter)
+ * 
+ * Our program named "BinaryLanguageMaker" is used to create the files.
+ *
+ * Singleton since we need to use it all around the code
+ * To get a string of the current language use the macro GetStr() and pass an element of the Strings enum
+ *
+ */
 class Localization
 {
 public:
+    //! Static access to the object
     static Localization* Instance();
 
+    //! Returns a vector with the available languages
     std::vector<Language> GetAvailableLanguages() const { return _languages; }
 
+    //! Returns a string translated to the current language. Parameter is a value from Strings enum. Use GetStr macro instead.
     std::string GetString(Strings index) const;
+    //! Returns a string representation of the current languages
     std::string GetCurrentLanguage() const;
-
+    //! Changes language
     void SetLang(Language lang);
 
 private:
