@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<title>Blackjack: Código-Fonte de s_settings.h</title>
+
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+
+</head>
+<body>
+<div id="top"><!-- do not remove this div! -->
+
+
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  
+  
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Blackjack
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   
+  </td>
+  
+  
+  
+ </tr>
+ </tbody>
+</table>
+</div>
+
+<!-- Gerado por Doxygen 1.8.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Localizar');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="files.html"><span>Ficheiros</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Localizar" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;de&#160;ficheiros</span></a></li>
+      <li><a href="globals.html"><span>Ficheiros&#160;membro</span></a></li>
+    </ul>
+  </div>
+</div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tudo</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Ficheiros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Funções</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variáveis</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Definições de tipos</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerações</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Valores da enumeração</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Amigos</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">s_settings.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="s__settings_8h.html">Ir para a documentação deste ficheiro.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
+<a name="l00012"></a>00012 <span class="preprocessor">#ifndef S_SETTINGS_H</span>
+<a name="l00013"></a>00013 <span class="preprocessor"></span><span class="preprocessor">#define S_SETTINGS_H</span>
+<a name="l00014"></a>00014 <span class="preprocessor"></span>
+<a name="l00015"></a>00015 <span class="preprocessor">#include &quot;<a class="code" href="state_8h.html">state.h</a>&quot;</span>
+<a name="l00016"></a>00016 <span class="preprocessor">#include &quot;<a class="code" href="rect__button_8h.html">rect_button.h</a>&quot;</span>
+<a name="l00017"></a>00017 <span class="preprocessor">#include &quot;<a class="code" href="localization_8h.html">localization.h</a>&quot;</span>
+<a name="l00018"></a>00018 
+<a name="l00019"></a>00019 <span class="preprocessor">#include &lt;vector&gt;</span>
+<a name="l00020"></a>00020 
+<a name="l00021"></a>00021 <span class="keyword">union </span>ALLEGRO_EVENT;
+<a name="l00022"></a>00022 
+<a name="l00023"></a>00023 <span class="keywordtype">bool</span> <a class="code" href="s__setting_8cpp.html#a719958e7ff291de78da48542912c8d0e">HandleBetUp</a>(<a class="code" href="class_rect_button.html" title="Defines a clickable button with multiple style options. When clicked, it can call a function (callbac...">RectButton</a>* btn);
+<a name="l00024"></a>00024 <span class="keywordtype">bool</span> <a class="code" href="s__setting_8cpp.html#a0f02c14c8f28e2cfc6196c0c4128bc06">HandleBetDown</a>(<a class="code" href="class_rect_button.html" title="Defines a clickable button with multiple style options. When clicked, it can call a function (callbac...">RectButton</a>* btn);
+<a name="l00025"></a>00025 
+<a name="l00032"></a><a class="code" href="class_s___settings.html">00032</a> <span class="keyword">class </span><a class="code" href="class_s___settings.html" title="Settings screen (muting sound, changing language, changing minimum bet, ...)">S_Settings</a> : <span class="keyword">public</span> <a class="code" href="class_state.html" title="Abstract class that defines an application state.">State</a>
+<a name="l00033"></a>00033 {
+<a name="l00035"></a>00035     <span class="keyword">friend</span> <span class="keywordtype">bool</span> <a class="code" href="class_s___settings.html#aa2f4e4c0580731eea5c7d6119c21f637" title="Called when a button is clicked.">HandleButtonClicked</a>(<a class="code" href="class_rect_button.html" title="Defines a clickable button with multiple style options. When clicked, it can call a function (callbac...">RectButton</a>* btn);
+<a name="l00036"></a>00036 
+<a name="l00043"></a>00043     <span class="keyword">class </span>LanguageButton : <span class="keyword">public</span> <a class="code" href="class_rect_button.html" title="Defines a clickable button with multiple style options. When clicked, it can call a function (callbac...">RectButton</a>
+<a name="l00044"></a>00044     {
+<a name="l00045"></a>00045     <span class="keyword">public</span>:
+<a name="l00047"></a>00047         LanguageButton(<span class="keyword">const</span> <a class="code" href="class_rect_button.html" title="Defines a clickable button with multiple style options. When clicked, it can call a function (callbac...">RectButton</a>&amp; btn) : <a class="code" href="class_rect_button.html" title="Defines a clickable button with multiple style options. When clicked, it can call a function (callbac...">RectButton</a>(btn), _language(-1) { }
+<a name="l00049"></a>00049         LanguageButton(<span class="keyword">const</span> <a class="code" href="class_rect_button.html" title="Defines a clickable button with multiple style options. When clicked, it can call a function (callbac...">RectButton</a>&amp; btn, <span class="keywordtype">int</span> lang) : <a class="code" href="class_rect_button.html" title="Defines a clickable button with multiple style options. When clicked, it can call a function (callbac...">RectButton</a>(btn), _language(lang) { }
+<a name="l00051"></a>00051         <span class="keywordtype">int</span> GetLanguage()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _language; }
+<a name="l00052"></a>00052 
+<a name="l00053"></a>00053     <span class="keyword">private</span>:
+<a name="l00054"></a>00054         <span class="keywordtype">int</span> _language;
+<a name="l00055"></a>00055     };
+<a name="l00056"></a>00056 
+<a name="l00057"></a>00057 <span class="keyword">public</span>:
+<a name="l00059"></a>00059     <a class="code" href="class_s___settings.html#ade1766ab080abab51d2c8ab555a24d46" title="Constructor.">S_Settings</a>();
+<a name="l00061"></a>00061     <span class="keywordtype">void</span> <a class="code" href="class_s___settings.html#a3ef30e959232cfd74342236a503ed2a8" title="Initialization of some variables.">Initialize</a>();
+<a name="l00063"></a><a class="code" href="class_s___settings.html#a5020d6bbc5104bb27d48d3bcb5fc111c">00063</a>     <span class="keywordtype">void</span> <a class="code" href="class_s___settings.html#a5020d6bbc5104bb27d48d3bcb5fc111c" title="Load to memory different files (sounds, images and others). Called after Initialize()">LoadContents</a>() { }
+<a name="l00065"></a>00065     <span class="keywordtype">bool</span> <a class="code" href="class_s___settings.html#ab40028197ea35c2aa28fecb37e12b589" title="Called every time there&#39;s a new event, updates the &quot;state&quot;.">Update</a>(ALLEGRO_EVENT* ev);
+<a name="l00067"></a>00067     <span class="keywordtype">void</span> <a class="code" href="class_s___settings.html#a5c41c0606e2038a355441d04b92c6aac" title="Called when re-drawing the screen is needed. Called after Update()">Draw</a>();
+<a name="l00069"></a>00069     <span class="keywordtype">void</span> <a class="code" href="class_s___settings.html#ab0cecd8d62bb9f89b4611964871af2d8" title="Frees the memory of allocated resources in LoadContents()">UnloadContents</a>();
+<a name="l00070"></a>00070 
+<a name="l00071"></a>00071 <span class="keyword">private</span>:
+<a name="l00072"></a>00072     std::vector&lt;RectButton*&gt; _buttons;
+<a name="l00073"></a>00073 };
+<a name="l00074"></a>00074 
+<a name="l00075"></a>00075 
+<a name="l00076"></a>00076 <span class="preprocessor">#endif // S_SETTINGS_H</span>
+</pre></div></div><!-- contents -->
+
+
+<hr class="footer"/><address class="footer"><small>
+Gerado em Sexta, 18 de Maio de 2012 23:48:50 para Blackjack por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.0
+</small></address>
+
+</body>
+</html>

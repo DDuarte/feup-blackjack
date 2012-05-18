@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<title>Blackjack: Código-Fonte de delegate.h</title>
+
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+
+</head>
+<body>
+<div id="top"><!-- do not remove this div! -->
+
+
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  
+  
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Blackjack
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   
+  </td>
+  
+  
+  
+ </tr>
+ </tbody>
+</table>
+</div>
+
+<!-- Gerado por Doxygen 1.8.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Localizar');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="files.html"><span>Ficheiros</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Localizar" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;de&#160;ficheiros</span></a></li>
+      <li><a href="globals.html"><span>Ficheiros&#160;membro</span></a></li>
+    </ul>
+  </div>
+</div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tudo</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Ficheiros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Funções</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variáveis</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Definições de tipos</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerações</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Valores da enumeração</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Amigos</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">delegate.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="delegate_8h.html">Ir para a documentação deste ficheiro.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
+<a name="l00012"></a>00012 <span class="preprocessor">#ifndef DELEGATE_H</span>
+<a name="l00013"></a>00013 <span class="preprocessor"></span><span class="preprocessor">#define DELEGATE_H</span>
+<a name="l00014"></a>00014 <span class="preprocessor"></span>
+<a name="l00015"></a>00015 <span class="preprocessor">#include &quot;<a class="code" href="game__exceptions_8h.html">game_exceptions.h</a>&quot;</span>
+<a name="l00016"></a>00016 
+<a name="l00023"></a>00023 <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;
+<a name="l00024"></a><a class="code" href="class_delegate.html">00024</a> <span class="keyword">class </span><a class="code" href="class_delegate.html" title="This class is not documented.">Delegate</a> {};
+<a name="l00025"></a>00025 
+<a name="l00032"></a>00032 <span class="keyword">template</span>&lt;<span class="keyword">typename</span> R, <span class="keyword">typename</span> ARG0&gt;
+<a name="l00033"></a><a class="code" href="class_delegate_3_01_r_07_a_r_g0_08_4.html">00033</a> <span class="keyword">class </span><a class="code" href="class_delegate.html" title="This class is not documented.">Delegate</a>&lt;R (ARG0)&gt;
+<a name="l00034"></a>00034 {
+<a name="l00035"></a>00035     <span class="keyword">typedef</span> <span class="keywordtype">void</span>* InstancePtr;
+<a name="l00036"></a>00036     <span class="keyword">typedef</span> bool (*InternalFunction)(InstancePtr, ARG0);
+<a name="l00037"></a>00037     <span class="keyword">typedef</span> std::pair&lt;InstancePtr, InternalFunction&gt; Stub;
+<a name="l00038"></a>00038 
+<a name="l00039"></a>00039 <span class="keyword">public</span>:
+<a name="l00040"></a><a class="code" href="class_delegate_3_01_r_07_a_r_g0_08_4.html#a64d048983b2b38cfa8d47474175a3301">00040</a>     <a class="code" href="class_delegate_3_01_r_07_a_r_g0_08_4.html#a64d048983b2b38cfa8d47474175a3301">Delegate</a>(<span class="keywordtype">void</span>) : m_stub((void*)NULL, (InternalFunction)NULL) {}
+<a name="l00041"></a>00041 
+<a name="l00042"></a>00042     <span class="comment">// Binds a free function</span>
+<a name="l00043"></a>00043     <span class="keyword">template</span> &lt;R (*Function)(ARG0)&gt;
+<a name="l00044"></a><a class="code" href="class_delegate_3_01_r_07_a_r_g0_08_4.html#abd5cae1c1a1b21f1892b4685f5422f31">00044</a>     <a class="code" href="class_delegate_3_01_r_07_a_r_g0_08_4.html">Delegate&lt;R (ARG0)&gt;</a>&amp; Bind(<span class="keywordtype">void</span>)
+<a name="l00045"></a>00045     {
+<a name="l00046"></a>00046         m_stub.first = (<span class="keywordtype">void</span>*)NULL;
+<a name="l00047"></a>00047         m_stub.second = &amp;FunctionStub&lt;Function&gt;;
+<a name="l00048"></a>00048         <span class="keywordflow">return</span> *<span class="keyword">this</span>;
+<a name="l00049"></a>00049     }
+<a name="l00050"></a>00050 
+<a name="l00051"></a>00051     <span class="comment">// Binds a class method</span>
+<a name="l00052"></a>00052     <span class="keyword">template</span> &lt;<span class="keyword">class</span> C, R (C::*Function)(ARG0)&gt;
+<a name="l00053"></a><a class="code" href="class_delegate_3_01_r_07_a_r_g0_08_4.html#aafdaf22f1d2cb595218d2d1ca4ed6512">00053</a>     <a class="code" href="class_delegate_3_01_r_07_a_r_g0_08_4.html">Delegate&lt;R (ARG0)&gt;</a>&amp; Bind(C* instance)
+<a name="l00054"></a>00054     {
+<a name="l00055"></a>00055 
+<a name="l00056"></a>00056         m_stub.first = instance;
+<a name="l00057"></a>00057         m_stub.second = &amp;ClassMethodStub&lt;C, Function&gt;;
+<a name="l00058"></a>00058         <span class="keywordflow">return</span> *<span class="keyword">this</span>;
+<a name="l00059"></a>00059     }
+<a name="l00060"></a>00060 
+<a name="l00061"></a>00061     <span class="comment">// Invokes the delegate</span>
+<a name="l00062"></a><a class="code" href="class_delegate_3_01_r_07_a_r_g0_08_4.html#ad51ac4eb7425cb259ed457fad5563115">00062</a>     R Invoke(ARG0 arg0)<span class="keyword"> const</span>
+<a name="l00063"></a>00063 <span class="keyword">    </span>{
+<a name="l00064"></a>00064         <span class="keywordflow">if</span> (!m_stub.second)
+<a name="l00065"></a>00065             <span class="keywordflow">throw</span> <a class="code" href="class_invalid_delegate_exception.html" title="Delegate is invalid.">InvalidDelegateException</a>(<span class="stringliteral">&quot;Cannot invoke unbound delegate. Call Bind() first.&quot;</span>);
+<a name="l00066"></a>00066 
+<a name="l00067"></a>00067         <span class="keywordflow">return</span> m_stub.second(m_stub.first, arg0);
+<a name="l00068"></a>00068     }
+<a name="l00069"></a>00069 
+<a name="l00070"></a><a class="code" href="class_delegate_3_01_r_07_a_r_g0_08_4.html#a4ab916c577a9b3b53a03b84c55a34795">00070</a>     <span class="keywordtype">bool</span> <span class="keyword">inline</span> <a class="code" href="class_delegate_3_01_r_07_a_r_g0_08_4.html#a4ab916c577a9b3b53a03b84c55a34795">IsNULL</a>() { <span class="keywordflow">return</span> (this-&gt;m_stub.second == NULL); }
+<a name="l00071"></a>00071 
+<a name="l00072"></a>00072 <span class="keyword">private</span>:
+<a name="l00073"></a>00073     <span class="comment">// turns a free function into our internal function stub</span>
+<a name="l00074"></a>00074     <span class="keyword">template</span> &lt;R (*Function)(ARG0)&gt;
+<a name="l00075"></a>00075     <span class="keyword">static</span> <span class="keyword">inline</span> R FunctionStub(InstancePtr, ARG0 arg0)
+<a name="l00076"></a>00076     {
+<a name="l00077"></a>00077         <span class="comment">// we don&#39;t need the instance pointer because we&#39;re dealing with free functions</span>
+<a name="l00078"></a>00078         <span class="keywordflow">return</span> (Function)(arg0);
+<a name="l00079"></a>00079     }
+<a name="l00080"></a>00080 
+<a name="l00081"></a>00081     <span class="comment">// turns a member function into our internal function stub</span>
+<a name="l00082"></a>00082     <span class="keyword">template</span> &lt;<span class="keyword">class</span> C, R (C::*Function)(ARG0)&gt;
+<a name="l00083"></a>00083     <span class="keyword">static</span> <span class="keyword">inline</span> R ClassMethodStub(InstancePtr instance, ARG0 arg0)
+<a name="l00084"></a>00084     {
+<a name="l00085"></a>00085         <span class="comment">// cast the instance pointer back into the original class instance</span>
+<a name="l00086"></a>00086         <span class="keywordflow">return</span> (static_cast&lt;C*&gt;(instance)-&gt;*Function)(arg0);
+<a name="l00087"></a>00087     }
+<a name="l00088"></a>00088 
+<a name="l00089"></a>00089     Stub m_stub;
+<a name="l00090"></a>00090 };
+<a name="l00091"></a>00091 
+<a name="l00092"></a>00092 <span class="preprocessor">#endif // DELEGATE_H</span>
+</pre></div></div><!-- contents -->
+
+
+<hr class="footer"/><address class="footer"><small>
+Gerado em Sexta, 18 de Maio de 2012 23:48:50 para Blackjack por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.0
+</small></address>
+
+</body>
+</html>

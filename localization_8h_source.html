@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<title>Blackjack: Código-Fonte de localization.h</title>
+
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+
+</head>
+<body>
+<div id="top"><!-- do not remove this div! -->
+
+
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  
+  
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Blackjack
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   
+  </td>
+  
+  
+  
+ </tr>
+ </tbody>
+</table>
+</div>
+
+<!-- Gerado por Doxygen 1.8.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Localizar');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="files.html"><span>Ficheiros</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Localizar" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;de&#160;ficheiros</span></a></li>
+      <li><a href="globals.html"><span>Ficheiros&#160;membro</span></a></li>
+    </ul>
+  </div>
+</div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tudo</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Ficheiros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Funções</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variáveis</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Definições de tipos</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerações</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Valores da enumeração</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Amigos</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">localization.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="localization_8h.html">Ir para a documentação deste ficheiro.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
+<a name="l00012"></a>00012 <span class="preprocessor">#ifndef LOCALIZATION_H</span>
+<a name="l00013"></a>00013 <span class="preprocessor"></span><span class="preprocessor">#define LOCALIZATION_H</span>
+<a name="l00014"></a>00014 <span class="preprocessor"></span>
+<a name="l00015"></a>00015 <span class="preprocessor">#include &lt;vector&gt;</span>
+<a name="l00016"></a>00016 <span class="preprocessor">#include &lt;string&gt;</span>
+<a name="l00017"></a>00017 
+<a name="l00018"></a><a class="code" href="localization_8h.html#a5c54f4db74b2a2bdb85ef35f15e6bc9d">00018</a> <span class="preprocessor">#define GetStr(name) Localization::Instance()-&gt;GetString((name))</span>
+<a name="l00019"></a>00019 <span class="preprocessor"></span>
+<a name="l00020"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4">00020</a> <span class="keyword">enum</span> <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4">Strings</a>
+<a name="l00021"></a>00021 {
+<a name="l00022"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4add2b5e59750db5d90628e987d8e32fe8">00022</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4add2b5e59750db5d90628e987d8e32fe8">STR_SUITS</a>,
+<a name="l00023"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a4a1603acb7b5e8c67ed769d4c278f6aa">00023</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a4a1603acb7b5e8c67ed769d4c278f6aa">STR_CLUBS</a>,
+<a name="l00024"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a526199cf2b30f36e9d5646ea55001c3f">00024</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a526199cf2b30f36e9d5646ea55001c3f">STR_SPADES</a>,
+<a name="l00025"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4aced52a3141eeecd04f96c4f421388742">00025</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4aced52a3141eeecd04f96c4f421388742">STR_HEARTS</a>,
+<a name="l00026"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4af01b87f23a7d145bcf1a5352513bc5a1">00026</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4af01b87f23a7d145bcf1a5352513bc5a1">STR_DIAMONDS</a>,
+<a name="l00027"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a9edb667b84e974d6356214a1f82726fa">00027</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a9edb667b84e974d6356214a1f82726fa">STR_NAMES</a>,
+<a name="l00028"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4abb376c22993360b4398deb884f09b04f">00028</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4abb376c22993360b4398deb884f09b04f">STR_TWO</a>,
+<a name="l00029"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4afd21c385ec3473a0f286925d0afd6208">00029</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4afd21c385ec3473a0f286925d0afd6208">STR_THREE</a>,
+<a name="l00030"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4aa9a2b235b2cc44569bd8c2970572eaae">00030</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4aa9a2b235b2cc44569bd8c2970572eaae">STR_FOUR</a>,
+<a name="l00031"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a2dacbc72d04b3e80c254c8e87c54226b">00031</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a2dacbc72d04b3e80c254c8e87c54226b">STR_FIVE</a>,
+<a name="l00032"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a0809face7625798c8f206412dbe2b0ee">00032</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a0809face7625798c8f206412dbe2b0ee">STR_SIX</a>,
+<a name="l00033"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4aa4c5b8c27d8d1851adc44ce0448f1cb4">00033</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4aa4c5b8c27d8d1851adc44ce0448f1cb4">STR_SEVEN</a>,
+<a name="l00034"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a0c7460ff13952fb7be1d80b151801f6a">00034</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a0c7460ff13952fb7be1d80b151801f6a">STR_EIGHT</a>,
+<a name="l00035"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a77bc5a87f4d6d0042a7588e1da3f2694">00035</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a77bc5a87f4d6d0042a7588e1da3f2694">STR_NINE</a>,
+<a name="l00036"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a1524c030c2720eb6adbb102e9a528c6a">00036</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a1524c030c2720eb6adbb102e9a528c6a">STR_TEN</a>,
+<a name="l00037"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a9d1cc14a7d50ecfb253a93cb7d937a22">00037</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a9d1cc14a7d50ecfb253a93cb7d937a22">STR_JACK</a>,
+<a name="l00038"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a055b32049097e848557ba672a71f84c1">00038</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a055b32049097e848557ba672a71f84c1">STR_QUEEN</a>,
+<a name="l00039"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a62e1d29fedf85a1b956a0b3b1442e48d">00039</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a62e1d29fedf85a1b956a0b3b1442e48d">STR_KING</a>,
+<a name="l00040"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4ad704d95f3e6732e9ab2799eadb52d099">00040</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4ad704d95f3e6732e9ab2799eadb52d099">STR_ACE</a>,
+<a name="l00041"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a335b7c747d6a8f0a7564877a689361fd">00041</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a335b7c747d6a8f0a7564877a689361fd">STR_PLAY</a>,
+<a name="l00042"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a61024944bd6d5c0f105f93ee3673d389">00042</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a61024944bd6d5c0f105f93ee3673d389">STR_OPTIONS</a>,
+<a name="l00043"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a7c5670acde7d6852ddd45015a91cbdf9">00043</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a7c5670acde7d6852ddd45015a91cbdf9">STR_QUIT</a>,
+<a name="l00044"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a85c1590fd0ccd29b3a5bcb4e6adc0b3a">00044</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a85c1590fd0ccd29b3a5bcb4e6adc0b3a">STR_HIT</a>,
+<a name="l00045"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a2e19fc52f0446cd02408b3143377d98f">00045</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a2e19fc52f0446cd02408b3143377d98f">STR_STAND</a>,
+<a name="l00046"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a5de092c951d4b0dfa1a69f88734ffcda">00046</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a5de092c951d4b0dfa1a69f88734ffcda">STR_DOUBLE</a>,
+<a name="l00047"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a335b90c3b2dff5390cdaad007d08a69c">00047</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a335b90c3b2dff5390cdaad007d08a69c">STR_GIVEUP</a>,
+<a name="l00048"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4af808e15ef89b1a743f85ea237c2cf601">00048</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4af808e15ef89b1a743f85ea237c2cf601">STR_STAY</a>,
+<a name="l00049"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a765cf54908ec319ca023c93e5d2dc748">00049</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a765cf54908ec319ca023c93e5d2dc748">STR_BUSTED</a>,
+<a name="l00050"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4abf8d75d4fb942724934813aad9a1ca83">00050</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4abf8d75d4fb942724934813aad9a1ca83">STR_STOOD</a>,
+<a name="l00051"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a3237efa2d5f33ae4bfab115ca831c676">00051</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a3237efa2d5f33ae4bfab115ca831c676">STR_EXIT</a>,
+<a name="l00052"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4ad3c97ef433a535fa260ca61b0f303199">00052</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4ad3c97ef433a535fa260ca61b0f303199">STR_SURE_EXIT</a>,
+<a name="l00053"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a1063b9bf6b8ff23f5d1553f9085be181">00053</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a1063b9bf6b8ff23f5d1553f9085be181">STR_PLAYER_HIT_F</a>,
+<a name="l00054"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4ad9e4bd0331c18bbffbcf8d96df1073c2">00054</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4ad9e4bd0331c18bbffbcf8d96df1073c2">STR_PLAYER_STAND_F</a>,
+<a name="l00055"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a09d7d6c8e0f17f54f531b45b7accda85">00055</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a09d7d6c8e0f17f54f531b45b7accda85">STR_PLAYER_DOUBLE_F</a>,
+<a name="l00056"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a42e9471fddac7903be6a0bc92c2ee762">00056</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a42e9471fddac7903be6a0bc92c2ee762">STR_DEALER_HIT_F</a>,
+<a name="l00057"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4ad883055bbb6bb3f422f0f810b7d70153">00057</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4ad883055bbb6bb3f422f0f810b7d70153">STR_STAT_WINNER_IS</a>,
+<a name="l00058"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4adb662086206c8ed0bc54bf50b2790d5f">00058</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4adb662086206c8ed0bc54bf50b2790d5f">STR_STAT_BETS</a>,
+<a name="l00059"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a195654071b607805bb68e47c45efcc7f">00059</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a195654071b607805bb68e47c45efcc7f">STR_STAT_ROUNDS</a>,
+<a name="l00060"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4adfd6cfd7e6ffb42e7b43aacbf34b337f">00060</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4adfd6cfd7e6ffb42e7b43aacbf34b337f">STR_STAT_HITS</a>,
+<a name="l00061"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a93136dc78bb10dfc794fb978b8b24041">00061</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a93136dc78bb10dfc794fb978b8b24041">STR_STAT_STANDS</a>,
+<a name="l00062"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a27ca34a0342dd1bf219171178b8cd7d5">00062</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a27ca34a0342dd1bf219171178b8cd7d5">STR_STAT_DOUBLES</a>,
+<a name="l00063"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a97e37db6dab9dd7bff480ab5ceb4646b">00063</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a97e37db6dab9dd7bff480ab5ceb4646b">STR_STAT_BJS</a>,
+<a name="l00064"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a4ee9234fc5c97fc1490cb1960bf2a370">00064</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a4ee9234fc5c97fc1490cb1960bf2a370">STR_STAT_BUSTS</a>,
+<a name="l00065"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a73f77ba25791c1d8816eb33a8606eba2">00065</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a73f77ba25791c1d8816eb33a8606eba2">STR_STAT_SPENT_MONEY</a>,
+<a name="l00066"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a71865f5c835233b31302d07e113c5d76">00066</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a71865f5c835233b31302d07e113c5d76">STR_STAT_RECEIVED_MONEY</a>,
+<a name="l00067"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a3fe14ee8a712866381a808a737d909a9">00067</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a3fe14ee8a712866381a808a737d909a9">STR_STAT_PLR_WON_MORE</a>,
+<a name="l00068"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4ac0008c02e64ab458760eabeecacb5da3">00068</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4ac0008c02e64ab458760eabeecacb5da3">STR_STAT_PLR_LOST_MORE</a>,
+<a name="l00069"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a03bc047a851197de3809548d128b4799">00069</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a03bc047a851197de3809548d128b4799">STR_STAT_PLR_HEADER</a>,
+<a name="l00070"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4ab840854ec2cca91e6fbc2a75d0fedab9">00070</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4ab840854ec2cca91e6fbc2a75d0fedab9">STR_SOUND</a>,
+<a name="l00071"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a12886d7963216b0710ada8bd50bdc64c">00071</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4a12886d7963216b0710ada8bd50bdc64c">STR_ACTUAL_F</a>,
+<a name="l00072"></a><a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4aa5ad5686f350767d995e2a539805aab7">00072</a>     <a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4aa5ad5686f350767d995e2a539805aab7">STR_BET</a>,
+<a name="l00073"></a>00073 };
+<a name="l00074"></a>00074 
+<a name="l00075"></a><a class="code" href="localization_8h.html#a315ca917ad583797f709ea477dd28705">00075</a> <span class="keyword">enum</span> <a class="code" href="localization_8h.html#a315ca917ad583797f709ea477dd28705">Language</a>
+<a name="l00076"></a>00076 {
+<a name="l00077"></a><a class="code" href="localization_8h.html#a315ca917ad583797f709ea477dd28705aa5fb3717b69cda4e4b26e0e7dacae18c">00077</a>     <a class="code" href="localization_8h.html#a315ca917ad583797f709ea477dd28705aa5fb3717b69cda4e4b26e0e7dacae18c">LANGUAGE_NONE</a>,
+<a name="l00078"></a><a class="code" href="localization_8h.html#a315ca917ad583797f709ea477dd28705a7a0e14bc8ac0fde0782b762e31d2aac3">00078</a>     <a class="code" href="localization_8h.html#a315ca917ad583797f709ea477dd28705a7a0e14bc8ac0fde0782b762e31d2aac3">LANGUAGE_ENGLISH</a>,
+<a name="l00079"></a><a class="code" href="localization_8h.html#a315ca917ad583797f709ea477dd28705a8aed9a28e3e27035e1ea3d37cdc9797a">00079</a>     <a class="code" href="localization_8h.html#a315ca917ad583797f709ea477dd28705a8aed9a28e3e27035e1ea3d37cdc9797a">LANGUAGE_PORTUGUESE</a>,
+<a name="l00080"></a><a class="code" href="localization_8h.html#a315ca917ad583797f709ea477dd28705aaa92e670e87bd38b41477c687aa9bc29">00080</a>     <a class="code" href="localization_8h.html#a315ca917ad583797f709ea477dd28705aaa92e670e87bd38b41477c687aa9bc29">LANGUAGE_FRENCH</a>,
+<a name="l00081"></a><a class="code" href="localization_8h.html#a315ca917ad583797f709ea477dd28705acb152f19692738f6d1257fab594f5066">00081</a>     <a class="code" href="localization_8h.html#a315ca917ad583797f709ea477dd28705acb152f19692738f6d1257fab594f5066">LANGUAGE_SPANISH</a>
+<a name="l00082"></a>00082 };
+<a name="l00083"></a>00083 
+<a name="l00084"></a><a class="code" href="localization_8h.html#adde9d5dcabeeb3e224eb7c269e4551f2">00084</a> <span class="keyword">static</span> <span class="keywordtype">char</span>* <a class="code" href="localization_8h.html#adde9d5dcabeeb3e224eb7c269e4551f2">LanguageShort</a>[] = { <span class="stringliteral">&quot;uk&quot;</span>, <span class="stringliteral">&quot;en&quot;</span>, <span class="stringliteral">&quot;pt&quot;</span>, <span class="stringliteral">&quot;fr&quot;</span>, <span class="stringliteral">&quot;es&quot;</span> };
+<a name="l00085"></a><a class="code" href="localization_8h.html#ae4661ff8088bc977a8645e5a4cab9486">00085</a> <span class="keyword">static</span> std::string <a class="code" href="localization_8h.html#ae4661ff8088bc977a8645e5a4cab9486">LanguageComplete</a>[] = { <span class="stringliteral">&quot;Unknown&quot;</span>, <span class="stringliteral">&quot;English&quot;</span>, <span class="stringliteral">&quot;Português&quot;</span>, <span class="stringliteral">&quot;Français&quot;</span>, <span class="stringliteral">&quot;Español&quot;</span> };
+<a name="l00086"></a>00086 
+<a name="l00102"></a><a class="code" href="class_localization.html">00102</a> <span class="keyword">class </span><a class="code" href="class_localization.html" title="Multi-language support.">Localization</a>
+<a name="l00103"></a>00103 {
+<a name="l00104"></a>00104 <span class="keyword">public</span>:
+<a name="l00106"></a>00106     <span class="keyword">static</span> <a class="code" href="class_localization.html" title="Multi-language support.">Localization</a>* <a class="code" href="class_localization.html#aee8cf7d6c124c4d6093a79617694037a" title="Static access to the object.">Instance</a>();
+<a name="l00107"></a>00107 
+<a name="l00109"></a><a class="code" href="class_localization.html#a05625119cf859e156ea82122ab6f03fb">00109</a>     std::vector&lt;Language&gt; <a class="code" href="class_localization.html#a05625119cf859e156ea82122ab6f03fb" title="Returns a vector with the available languages.">GetAvailableLanguages</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _languages; }
+<a name="l00110"></a>00110 
+<a name="l00112"></a>00112     std::string <a class="code" href="class_localization.html#a31b80d40c636f5a1b34758e7135b5048" title="Returns a string translated to the current language. Parameter is a value from Strings enum...">GetString</a>(<a class="code" href="localization_8h.html#a480540e3ac51984139331d8173df9ff4">Strings</a> index) <span class="keyword">const</span>;
+<a name="l00114"></a>00114     std::string <a class="code" href="class_localization.html#acf31b55525c4659fcfd9fc569d18e644" title="Returns a string representation of the current languages.">GetCurrentLanguage</a>() <span class="keyword">const</span>;
+<a name="l00116"></a>00116     <span class="keywordtype">void</span> <a class="code" href="class_localization.html#a4697832f502b715c32c87f2e0a20bb97" title="Changes language.">SetLang</a>(<a class="code" href="localization_8h.html#a315ca917ad583797f709ea477dd28705">Language</a> lang);
+<a name="l00117"></a>00117 
+<a name="l00118"></a>00118 <span class="keyword">private</span>:
+<a name="l00119"></a>00119     <a class="code" href="class_localization.html" title="Multi-language support.">Localization</a>();
+<a name="l00120"></a>00120 
+<a name="l00121"></a>00121     <span class="keyword">static</span> <a class="code" href="class_localization.html" title="Multi-language support.">Localization</a>* _instance;
+<a name="l00122"></a>00122 
+<a name="l00123"></a>00123     std::vector&lt;Language&gt; _languages;
+<a name="l00124"></a>00124     std::vector&lt;std::string&gt; _strings;
+<a name="l00125"></a>00125     <a class="code" href="localization_8h.html#a315ca917ad583797f709ea477dd28705">Language</a> _currLang;
+<a name="l00126"></a>00126 
+<a name="l00127"></a>00127     <span class="keywordtype">bool</span> ReadLangFile(<span class="keywordtype">char</span>* lang);
+<a name="l00128"></a>00128     <span class="keywordtype">bool</span> FindLangs();
+<a name="l00129"></a>00129     <span class="keyword">static</span> <a class="code" href="localization_8h.html#a315ca917ad583797f709ea477dd28705">Language</a> GetLanguageByShortLang(std::string lang);
+<a name="l00130"></a>00130 };
+<a name="l00131"></a>00131 
+<a name="l00132"></a>00132 <span class="preprocessor">#endif // LOCALIZATION_H</span>
+</pre></div></div><!-- contents -->
+
+
+<hr class="footer"/><address class="footer"><small>
+Gerado em Sexta, 18 de Maio de 2012 23:48:50 para Blackjack por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.0
+</small></address>
+
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<title>Blackjack: Código-Fonte de dealer.h</title>
+
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+
+</head>
+<body>
+<div id="top"><!-- do not remove this div! -->
+
+
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  
+  
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Blackjack
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   
+  </td>
+  
+  
+  
+ </tr>
+ </tbody>
+</table>
+</div>
+
+<!-- Gerado por Doxygen 1.8.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Localizar');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="files.html"><span>Ficheiros</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Localizar" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;de&#160;ficheiros</span></a></li>
+      <li><a href="globals.html"><span>Ficheiros&#160;membro</span></a></li>
+    </ul>
+  </div>
+</div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tudo</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Ficheiros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Funções</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variáveis</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Definições de tipos</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerações</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Valores da enumeração</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Amigos</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">dealer.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="dealer_8h.html">Ir para a documentação deste ficheiro.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
+<a name="l00012"></a>00012 <span class="preprocessor">#ifndef DEALER_H</span>
+<a name="l00013"></a>00013 <span class="preprocessor"></span><span class="preprocessor">#define DEALER_H</span>
+<a name="l00014"></a>00014 <span class="preprocessor"></span>
+<a name="l00015"></a>00015 <span class="preprocessor">#include &quot;<a class="code" href="hand_8h.html">hand.h</a>&quot;</span>
+<a name="l00016"></a>00016 <span class="preprocessor">#include &quot;<a class="code" href="s__game_8h.html">s_game.h</a>&quot;</span>
+<a name="l00017"></a>00017 <span class="preprocessor">#include &quot;<a class="code" href="utilities_8h.html">utilities.h</a>&quot;</span>
+<a name="l00018"></a>00018 
+<a name="l00019"></a>00019 <span class="keyword">class </span><a class="code" href="class_card.html" title="Defines a playing card.">Card</a>;
+<a name="l00020"></a>00020 <span class="keyword">class </span><a class="code" href="class_s___game.html" title="Play game state. Contains the game logic and the game data.">S_Game</a>;
+<a name="l00021"></a>00021 
+<a name="l00022"></a><a class="code" href="dealer_8h.html#a6780298eac5a2af92b50b63ea67823b7">00022</a> <span class="keyword">const</span> <a class="code" href="struct_vector2_d.html" title="Represents a pair of floats (vector)">Vector2D</a> <a class="code" href="dealer_8h.html#a6780298eac5a2af92b50b63ea67823b7">DEALER_POSITION</a> = <a class="code" href="struct_vector2_d.html" title="Represents a pair of floats (vector)">Vector2D</a>(265,63);
+<a name="l00023"></a>00023 
+<a name="l00030"></a><a class="code" href="class_dealer.html">00030</a> <span class="keyword">class </span><a class="code" href="class_dealer.html" title="Represents the dealer of the blackjack game.">Dealer</a>
+<a name="l00031"></a>00031 {
+<a name="l00032"></a>00032 <span class="keyword">public</span>:
+<a name="l00034"></a>00034     <a class="code" href="class_dealer.html#a27bc93617cd53a4bdc1e53f587be5331" title="Constructor.">Dealer</a>(<a class="code" href="class_s___game.html" title="Play game state. Contains the game logic and the game data.">S_Game</a>* game);
+<a name="l00035"></a>00035 
+<a name="l00037"></a><a class="code" href="class_dealer.html#aa430aaeb53c71cb9dbaa437d8fca445c">00037</a>     <span class="keywordtype">bool</span> <a class="code" href="class_dealer.html#aa430aaeb53c71cb9dbaa437d8fca445c" title="Returns true if dealer got more than 21 points.">IsBusted</a>() { <span class="keywordflow">return</span> _hand.<a class="code" href="class_hand.html#a8fc52737e5f52a6d5ed018d91b1dc0d3" title="True if score is higher than 21.">IsBusted</a>(); }
+<a name="l00039"></a><a class="code" href="class_dealer.html#acefb11bec44fc339ead531b81f22a5e3">00039</a>     <span class="keywordtype">bool</span> <a class="code" href="class_dealer.html#acefb11bec44fc339ead531b81f22a5e3" title="Returns true if dealer got 21 points (with only 2 cards)">IsBlackjack</a>() { <span class="keywordflow">return</span> _hand.<a class="code" href="class_hand.html#a469e08300b3863ee1f623d4810ca2d22" title="True if score is 21 (with 2 cards)">IsBlackjack</a>(); }
+<a name="l00040"></a>00040 
+<a name="l00042"></a>00042     <span class="keywordtype">bool</span> <a class="code" href="class_dealer.html#a04d161f37bfb275935627d18c6a1a951" title="Dealer hit.">Hit</a>();
+<a name="l00043"></a>00043 
+<a name="l00045"></a>00045     <span class="keywordtype">void</span> <a class="code" href="class_dealer.html#a45f87596df4f9873ca18f8d4d806d3f2" title="Adds a new card to dealer&#39;s hand.">NewCard</a>(<a class="code" href="class_card.html" title="Defines a playing card.">Card</a>* card);
+<a name="l00047"></a><a class="code" href="class_dealer.html#a96701909a22ef8c36b4c19f82e1c49fa">00047</a>     <span class="keywordtype">void</span> <a class="code" href="class_dealer.html#a96701909a22ef8c36b4c19f82e1c49fa" title="Removes all cards from dealer&#39;s hand.">ClearHand</a>() { _hand.<a class="code" href="class_hand.html#a0a244325749c14e91e51e35d5fd54e20" title="Removes all cards from the hand.">Clear</a>(); }
+<a name="l00049"></a><a class="code" href="class_dealer.html#a2e30ff26bb5dd6720faffa6cb4824647">00049</a>     <a class="code" href="utilities_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14" title="Helper typedef for unsigned integers.">uint</a> <a class="code" href="class_dealer.html#a2e30ff26bb5dd6720faffa6cb4824647" title="Returns the score of dealer&#39;s hand.">GetScore</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _hand.<a class="code" href="class_hand.html#a0b30b0e2bebe48db545b89b08a27ee70" title="Scores.">GetScore</a>(); }
+<a name="l00050"></a>00050 
+<a name="l00052"></a><a class="code" href="class_dealer.html#ad8ba1dc64e9060aaca2f8e7c2c377a8c">00052</a>     <span class="keywordtype">void</span> <a class="code" href="class_dealer.html#ad8ba1dc64e9060aaca2f8e7c2c377a8c" title="Do not show second card.">NoShowSecondCard</a>() { _hand.<a class="code" href="class_hand.html#a95ae8c1353bb399cbdda886164c50e41" title="Do not show second card.">NoShowSecondCard</a>(); }
+<a name="l00054"></a><a class="code" href="class_dealer.html#ae0af85e1c7a9a492ad58eaaa6678ff5d">00054</a>     <span class="keywordtype">void</span> <a class="code" href="class_dealer.html#ae0af85e1c7a9a492ad58eaaa6678ff5d" title="Show second card.">ShowSecondCard</a>() { _hand.<a class="code" href="class_hand.html#a2a07740832c1fe4d0ad45b371897c056" title="Show second card.">ShowSecondCard</a>(); }
+<a name="l00056"></a>00056     <span class="keywordtype">void</span> <a class="code" href="class_dealer.html#a97e8a09bfcfb4ad49e89b4d32af972f8" title="Draw dealer name and hand to the playing field.">Draw</a>();
+<a name="l00057"></a>00057 
+<a name="l00058"></a>00058 <span class="keyword">private</span>:
+<a name="l00059"></a>00059     <a class="code" href="class_hand.html" title="Represents a hand of cards Both used by players and dealer.">Hand</a> _hand;
+<a name="l00060"></a>00060     <a class="code" href="class_s___game.html" title="Play game state. Contains the game logic and the game data.">S_Game</a>* _game;
+<a name="l00061"></a>00061 };
+<a name="l00062"></a>00062 
+<a name="l00063"></a>00063 <span class="preprocessor">#endif // DEALER_H</span>
+</pre></div></div><!-- contents -->
+
+
+<hr class="footer"/><address class="footer"><small>
+Gerado em Sexta, 18 de Maio de 2012 23:48:50 para Blackjack por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.0
+</small></address>
+
+</body>
+</html>

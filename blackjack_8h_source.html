@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<title>Blackjack: Código-Fonte de blackjack.h</title>
+
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+
+</head>
+<body>
+<div id="top"><!-- do not remove this div! -->
+
+
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  
+  
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Blackjack
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   
+  </td>
+  
+  
+  
+ </tr>
+ </tbody>
+</table>
+</div>
+
+<!-- Gerado por Doxygen 1.8.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Localizar');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="files.html"><span>Ficheiros</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Localizar" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;de&#160;ficheiros</span></a></li>
+      <li><a href="globals.html"><span>Ficheiros&#160;membro</span></a></li>
+    </ul>
+  </div>
+</div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tudo</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Ficheiros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Funções</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variáveis</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Definições de tipos</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerações</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Valores da enumeração</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Amigos</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">blackjack.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="blackjack_8h.html">Ir para a documentação deste ficheiro.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
+<a name="l00012"></a>00012 <span class="preprocessor">#ifndef BLACKJACK_H</span>
+<a name="l00013"></a>00013 <span class="preprocessor"></span><span class="preprocessor">#define BLACKJACK_H</span>
+<a name="l00014"></a>00014 <span class="preprocessor"></span>
+<a name="l00015"></a>00015 <span class="preprocessor">#include &quot;<a class="code" href="utilities_8h.html">utilities.h</a>&quot;</span>
+<a name="l00016"></a>00016 <span class="preprocessor">#include &quot;<a class="code" href="sounds_8h.html">sounds.h</a>&quot;</span>
+<a name="l00017"></a>00017 <span class="preprocessor">#include &lt;vector&gt;</span>
+<a name="l00018"></a>00018 
+<a name="l00019"></a>00019 <span class="preprocessor">#include &lt;allegro5/allegro.h&gt;</span>
+<a name="l00020"></a>00020 
+<a name="l00021"></a><a class="code" href="blackjack_8h.html#a162174eadd5ba027f937df3c312aade9">00021</a> <span class="keyword">enum</span> <a class="code" href="blackjack_8h.html#a162174eadd5ba027f937df3c312aade9">StateEnum</a>
+<a name="l00022"></a>00022 {
+<a name="l00023"></a><a class="code" href="blackjack_8h.html#a162174eadd5ba027f937df3c312aade9a9a7c7ff6e6a8231adf458fec27311819">00023</a>     <a class="code" href="blackjack_8h.html#a162174eadd5ba027f937df3c312aade9a9a7c7ff6e6a8231adf458fec27311819">STATE_MAIN_MENU</a>,
+<a name="l00024"></a><a class="code" href="blackjack_8h.html#a162174eadd5ba027f937df3c312aade9a39762c02713f361cc4a2c3aee38bdd0f">00024</a>     <a class="code" href="blackjack_8h.html#a162174eadd5ba027f937df3c312aade9a39762c02713f361cc4a2c3aee38bdd0f">STATE_SETTINGS</a>,
+<a name="l00025"></a><a class="code" href="blackjack_8h.html#a162174eadd5ba027f937df3c312aade9af8f1d4013be7a14c51495005d39e7c0e">00025</a>     <a class="code" href="blackjack_8h.html#a162174eadd5ba027f937df3c312aade9af8f1d4013be7a14c51495005d39e7c0e">STATE_PLAYING</a>,
+<a name="l00026"></a><a class="code" href="blackjack_8h.html#a162174eadd5ba027f937df3c312aade9a0f76ed984e8b06e62cddac03843a9544">00026</a>     <a class="code" href="blackjack_8h.html#a162174eadd5ba027f937df3c312aade9a0f76ed984e8b06e62cddac03843a9544">STATE_GAME_OVER</a>,
+<a name="l00027"></a>00027 };
+<a name="l00028"></a>00028 
+<a name="l00029"></a><a class="code" href="blackjack_8h.html#a198b8c2c77ea9f9815a181ddeda1c320">00029</a> <span class="keyword">enum</span> <a class="code" href="blackjack_8h.html#a198b8c2c77ea9f9815a181ddeda1c320">Constants</a>
+<a name="l00030"></a>00030 {
+<a name="l00031"></a><a class="code" href="blackjack_8h.html#a198b8c2c77ea9f9815a181ddeda1c320ac0646674bc6f4d09c49ae60f02698023">00031</a>     <a class="code" href="blackjack_8h.html#a198b8c2c77ea9f9815a181ddeda1c320ac0646674bc6f4d09c49ae60f02698023">CONST_WIDTH</a> = 800,
+<a name="l00032"></a><a class="code" href="blackjack_8h.html#a198b8c2c77ea9f9815a181ddeda1c320a2fa2a1fc53651df7addd5e8919eafbcd">00032</a>     <a class="code" href="blackjack_8h.html#a198b8c2c77ea9f9815a181ddeda1c320a2fa2a1fc53651df7addd5e8919eafbcd">CONST_HEIGHT</a> = 600,
+<a name="l00033"></a><a class="code" href="blackjack_8h.html#a198b8c2c77ea9f9815a181ddeda1c320a7eaa30fa874054404de361a5a46612b1">00033</a>     <a class="code" href="blackjack_8h.html#a198b8c2c77ea9f9815a181ddeda1c320a7eaa30fa874054404de361a5a46612b1">CONST_FPS</a> = 60
+<a name="l00034"></a>00034 };
+<a name="l00035"></a>00035 
+<a name="l00036"></a>00036 <span class="keyword">struct </span>ALLEGRO_DISPLAY;
+<a name="l00037"></a>00037 <span class="keyword">struct </span>ALLEGRO_EVENT_QUEUE;
+<a name="l00038"></a>00038 <span class="keyword">struct </span>ALLEGRO_TIMER;
+<a name="l00039"></a>00039 <span class="keyword">union </span>ALLEGRO_EVENT;
+<a name="l00040"></a>00040 <span class="keyword">class </span><a class="code" href="class_state.html" title="Abstract class that defines an application state.">State</a>;
+<a name="l00041"></a>00041 
+<a name="l00053"></a><a class="code" href="class_black_jack.html">00053</a> <span class="keyword">class </span><a class="code" href="class_black_jack.html" title="Handles game states.">BlackJack</a>
+<a name="l00054"></a>00054 {
+<a name="l00055"></a>00055 <span class="keyword">public</span>:
+<a name="l00057"></a>00057     <span class="keyword">static</span> <a class="code" href="class_black_jack.html" title="Handles game states.">BlackJack</a>* <a class="code" href="class_black_jack.html#a22d2fb9cf9097c9c013130a70d194812" title="Static access to the object.">Instance</a>();
+<a name="l00059"></a><a class="code" href="class_black_jack.html#ad3f02dced7a61613cda8b0d1f9cc93ec">00059</a>     <span class="keyword">static</span> <a class="code" href="struct_vector2_d.html" title="Represents a pair of floats (vector)">Vector2D</a> <a class="code" href="class_black_jack.html#ad3f02dced7a61613cda8b0d1f9cc93ec" title="Current mouse position.">GetMousePosition</a>() { <span class="keywordflow">return</span> <a class="code" href="struct_vector2_d.html" title="Represents a pair of floats (vector)">Vector2D</a>(_mouseState-&gt;x, _mouseState-&gt;y); }
+<a name="l00061"></a>00061     <span class="keywordtype">void</span> <a class="code" href="class_black_jack.html#a8d1e5d22160bc9646495a594e8f38754" title="Start of all the process.">_Start</a>();
+<a name="l00063"></a>00063     <span class="keywordtype">bool</span> <a class="code" href="class_black_jack.html#ad3a9786bd1b86c6693865aab4f2e6db6" title="Quits the application.">Quit</a>(<span class="keywordtype">bool</span> prompteUser = <span class="keyword">false</span>);
+<a name="l00064"></a>00064 
+<a name="l00066"></a>00066     <span class="keywordtype">void</span> <a class="code" href="class_black_jack.html#a2c665e8bbd698aee9da81a720fb75de7" title="Changes state.">ChangeState</a>(<span class="keywordtype">int</span> newState);
+<a name="l00067"></a>00067 
+<a name="l00069"></a><a class="code" href="class_black_jack.html#ad2136c64c4bfa404a6f29d3ae3f1db16">00069</a>     <span class="keywordtype">bool</span> <a class="code" href="class_black_jack.html#ad2136c64c4bfa404a6f29d3ae3f1db16" title="Tells if sound should be muted or not.">GetMute</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _mute; }
+<a name="l00071"></a><a class="code" href="class_black_jack.html#ae039a854ff625005d07274faec26d8ed">00071</a>     <span class="keywordtype">void</span> <a class="code" href="class_black_jack.html#ae039a854ff625005d07274faec26d8ed" title="Mutes or unmutes sounds.">SetMute</a>(<span class="keywordtype">bool</span> mute) { _mute = mute; <span class="keywordflow">if</span> (mute) <a class="code" href="class_sounds.html#a0e5aa0eaa8a99dc3c63563beadfcd4b7" title="Stops playing all sounds.">Sounds::StopAllSounds</a>(); }
+<a name="l00072"></a>00072 
+<a name="l00074"></a><a class="code" href="class_black_jack.html#a65c779da07583bb01f4df47d033a64b4">00074</a>     ALLEGRO_DISPLAY* <a class="code" href="class_black_jack.html#a65c779da07583bb01f4df47d033a64b4" title="Access to ALLEGRO_DISPLAY.">GetDisplay</a>() { <span class="keywordflow">return</span> _display; }
+<a name="l00075"></a>00075 
+<a name="l00076"></a>00076 <span class="keyword">private</span>:
+<a name="l00077"></a>00077     <a class="code" href="class_black_jack.html" title="Handles game states.">BlackJack</a>();
+<a name="l00078"></a>00078     <span class="keyword">static</span> <a class="code" href="class_black_jack.html" title="Handles game states.">BlackJack</a>* _instance;
+<a name="l00079"></a>00079     <span class="keyword">static</span> ALLEGRO_MOUSE_STATE* _mouseState;
+<a name="l00080"></a>00080 
+<a name="l00081"></a>00081     <span class="keywordtype">void</span> Initialize();
+<a name="l00082"></a>00082     <span class="keywordtype">void</span> LoadContents();
+<a name="l00083"></a>00083     <span class="keywordtype">void</span> Update(ALLEGRO_EVENT* ev);
+<a name="l00084"></a>00084     <span class="keywordtype">void</span> Draw();
+<a name="l00085"></a>00085     <span class="keywordtype">void</span> UnloadContents();
+<a name="l00086"></a>00086 
+<a name="l00087"></a>00087     ALLEGRO_DISPLAY* _display;
+<a name="l00088"></a>00088     ALLEGRO_EVENT_QUEUE* _eventQueue;
+<a name="l00089"></a>00089     ALLEGRO_TIMER* _timer;
+<a name="l00090"></a>00090 
+<a name="l00091"></a>00091     <span class="comment">// game loop &amp; states</span>
+<a name="l00092"></a>00092     <span class="keywordtype">int</span> _state;
+<a name="l00093"></a>00093     <span class="keywordtype">bool</span> _done;
+<a name="l00094"></a>00094     <span class="keywordtype">bool</span> _draw;
+<a name="l00095"></a>00095     <span class="keywordtype">bool</span> _mute;
+<a name="l00096"></a>00096 
+<a name="l00097"></a>00097     std::vector&lt;State*&gt; _states;
+<a name="l00098"></a>00098 };
+<a name="l00099"></a>00099 
+<a name="l00100"></a>00100 <span class="preprocessor">#endif // BLACKJACKUI_H</span>
+</pre></div></div><!-- contents -->
+
+
+<hr class="footer"/><address class="footer"><small>
+Gerado em Sexta, 18 de Maio de 2012 23:48:50 para Blackjack por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.0
+</small></address>
+
+</body>
+</html>

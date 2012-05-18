@@ -1,0 +1,270 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<title>Blackjack: Código-Fonte de s_game.h</title>
+
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+
+</head>
+<body>
+<div id="top"><!-- do not remove this div! -->
+
+
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  
+  
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Blackjack
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   
+  </td>
+  
+  
+  
+ </tr>
+ </tbody>
+</table>
+</div>
+
+<!-- Gerado por Doxygen 1.8.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Localizar');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="files.html"><span>Ficheiros</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Localizar" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;de&#160;ficheiros</span></a></li>
+      <li><a href="globals.html"><span>Ficheiros&#160;membro</span></a></li>
+    </ul>
+  </div>
+</div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tudo</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Ficheiros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Funções</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variáveis</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Definições de tipos</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerações</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Valores da enumeração</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Amigos</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">s_game.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="s__game_8h.html">Ir para a documentação deste ficheiro.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef S_GAME_H</span>
+<a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define S_GAME_H</span>
+<a name="l00003"></a>00003 <span class="preprocessor"></span>
+<a name="l00004"></a>00004 <span class="preprocessor">#include &quot;<a class="code" href="state_8h.html">state.h</a>&quot;</span>
+<a name="l00005"></a>00005 <span class="preprocessor">#include &quot;<a class="code" href="utilities_8h.html">utilities.h</a>&quot;</span>
+<a name="l00006"></a>00006 <span class="preprocessor">#include &quot;<a class="code" href="bitmaps_8h.html">bitmaps.h</a>&quot;</span>
+<a name="l00007"></a>00007 <span class="preprocessor">#include &quot;<a class="code" href="player_8h.html">player.h</a>&quot;</span>
+<a name="l00008"></a>00008 
+<a name="l00009"></a>00009 <span class="preprocessor">#include &lt;vector&gt;</span>
+<a name="l00010"></a>00010 <span class="preprocessor">#include &lt;queue&gt;</span>
+<a name="l00011"></a>00011 
+<a name="l00012"></a>00012 <span class="keyword">union </span>ALLEGRO_EVENT;
+<a name="l00013"></a>00013 <span class="keyword">struct </span>ALLEGRO_BITMAP;
+<a name="l00014"></a>00014 <span class="keyword">class </span><a class="code" href="class_deck.html" title="Represents a deck of cards.">Deck</a>;
+<a name="l00015"></a>00015 <span class="keyword">class </span><a class="code" href="class_dealer.html" title="Represents the dealer of the blackjack game.">Dealer</a>;
+<a name="l00016"></a>00016 <span class="keyword">class </span><a class="code" href="class_rect_button.html" title="Defines a clickable button with multiple style options. When clicked, it can call a function (callbac...">RectButton</a>;
+<a name="l00017"></a>00017 <span class="keyword">class </span>ICardOwner;
+<a name="l00018"></a>00018 <span class="keyword">class </span><a class="code" href="class_text_log.html" title="Defines a &quot;scrolling&quot; log that is displayed on the screen (player and dealer actions)">TextLog</a>;
+<a name="l00019"></a>00019 <span class="keyword">class </span><a class="code" href="class_card.html" title="Defines a playing card.">Card</a>;
+<a name="l00020"></a>00020 
+<a name="l00021"></a><a class="code" href="s__game_8h.html#a7899b65f1ea0f655e4bbf8d2a5714285">00021</a> <span class="keyword">enum</span> <a class="code" href="s__game_8h.html#a7899b65f1ea0f655e4bbf8d2a5714285">GameState</a>
+<a name="l00022"></a>00022 {
+<a name="l00023"></a><a class="code" href="s__game_8h.html#a7899b65f1ea0f655e4bbf8d2a5714285addb4c4f5b4b877d4d57fe4124a55a5f3">00023</a>     <a class="code" href="s__game_8h.html#a7899b65f1ea0f655e4bbf8d2a5714285addb4c4f5b4b877d4d57fe4124a55a5f3">GAME_STATE_PLACING_BETS</a>,
+<a name="l00024"></a><a class="code" href="s__game_8h.html#a7899b65f1ea0f655e4bbf8d2a5714285a0c0b9404500afe8a52e703d5d6392a87">00024</a>     <a class="code" href="s__game_8h.html#a7899b65f1ea0f655e4bbf8d2a5714285a0c0b9404500afe8a52e703d5d6392a87">GAME_STATE_DEALING_CARDS</a>,
+<a name="l00025"></a><a class="code" href="s__game_8h.html#a7899b65f1ea0f655e4bbf8d2a5714285a35aee24719dd57a010a16f493ec07274">00025</a>     <a class="code" href="s__game_8h.html#a7899b65f1ea0f655e4bbf8d2a5714285a35aee24719dd57a010a16f493ec07274">GAME_STATE_PLAYER_TURN</a>,
+<a name="l00026"></a><a class="code" href="s__game_8h.html#a7899b65f1ea0f655e4bbf8d2a5714285a35c865a6806f5454da1e2cbb2adf7b77">00026</a>     <a class="code" href="s__game_8h.html#a7899b65f1ea0f655e4bbf8d2a5714285a35c865a6806f5454da1e2cbb2adf7b77">GAME_STATE_DEALER_TURN</a>,
+<a name="l00027"></a><a class="code" href="s__game_8h.html#a7899b65f1ea0f655e4bbf8d2a5714285adced84157a3be30b872daa6e042fffdf">00027</a>     <a class="code" href="s__game_8h.html#a7899b65f1ea0f655e4bbf8d2a5714285adced84157a3be30b872daa6e042fffdf">GAME_STATE_CHECK_RESULTS</a>,
+<a name="l00028"></a><a class="code" href="s__game_8h.html#a7899b65f1ea0f655e4bbf8d2a5714285a456189094471ab76eb75dc73500a193c">00028</a>     <a class="code" href="s__game_8h.html#a7899b65f1ea0f655e4bbf8d2a5714285a456189094471ab76eb75dc73500a193c">GAME_STATE_STAY_OR_GIVE_UP</a>,
+<a name="l00029"></a><a class="code" href="s__game_8h.html#a7899b65f1ea0f655e4bbf8d2a5714285a4dbfe5bddcac8da242d45bd18345dcbf">00029</a>     <a class="code" href="s__game_8h.html#a7899b65f1ea0f655e4bbf8d2a5714285a4dbfe5bddcac8da242d45bd18345dcbf">GAME_STATE_POST_GAME</a>,
+<a name="l00030"></a><a class="code" href="s__game_8h.html#a7899b65f1ea0f655e4bbf8d2a5714285a71804ea07360ce6c675844b2110eb23a">00030</a>     <a class="code" href="s__game_8h.html#a7899b65f1ea0f655e4bbf8d2a5714285a71804ea07360ce6c675844b2110eb23a">GAME_STATE_RESET_ROUND</a>
+<a name="l00031"></a>00031 };
+<a name="l00032"></a>00032 
+<a name="l00033"></a><a class="code" href="s__game_8h.html#a2200c9a3564da59c1160338587ecb034">00033</a> <span class="keyword">enum</span> <a class="code" href="s__game_8h.html#a2200c9a3564da59c1160338587ecb034">Buttons</a>
+<a name="l00034"></a>00034 {
+<a name="l00035"></a><a class="code" href="s__game_8h.html#a2200c9a3564da59c1160338587ecb034aaab8a48032c5e7ea30d265e8db626fd7">00035</a>     <a class="code" href="s__game_8h.html#a2200c9a3564da59c1160338587ecb034aaab8a48032c5e7ea30d265e8db626fd7">BUTTON_HIT</a>,
+<a name="l00036"></a><a class="code" href="s__game_8h.html#a2200c9a3564da59c1160338587ecb034a266e7af732a672435897c9b05353d809">00036</a>     <a class="code" href="s__game_8h.html#a2200c9a3564da59c1160338587ecb034a266e7af732a672435897c9b05353d809">BUTTON_STAND</a>,
+<a name="l00037"></a><a class="code" href="s__game_8h.html#a2200c9a3564da59c1160338587ecb034ae390eaa11fa2c1e2c4a9aa85d83993cd">00037</a>     <a class="code" href="s__game_8h.html#a2200c9a3564da59c1160338587ecb034ae390eaa11fa2c1e2c4a9aa85d83993cd">BUTTON_DOUBLE</a>,
+<a name="l00038"></a><a class="code" href="s__game_8h.html#a2200c9a3564da59c1160338587ecb034a4be1241e0f6ab860d6da34bbc8ee29db">00038</a>     <a class="code" href="s__game_8h.html#a2200c9a3564da59c1160338587ecb034a4be1241e0f6ab860d6da34bbc8ee29db">BUTTON_GIVE_UP</a>,
+<a name="l00039"></a><a class="code" href="s__game_8h.html#a2200c9a3564da59c1160338587ecb034a8717d0889491c643db66f19343ce660a">00039</a>     <a class="code" href="s__game_8h.html#a2200c9a3564da59c1160338587ecb034a8717d0889491c643db66f19343ce660a">BUTTON_STAY_GAME</a>
+<a name="l00040"></a>00040 };
+<a name="l00041"></a>00041 
+<a name="l00042"></a><a class="code" href="s__game_8h.html#a3ff4e1b69acb125d5e75ef1b4d8b58a2">00042</a> <span class="keyword">const</span> <a class="code" href="utilities_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14" title="Helper typedef for unsigned integers.">uint</a> <a class="code" href="s__game_8h.html#a3ff4e1b69acb125d5e75ef1b4d8b58a2">MAX_ACTIVE_PLAYERS</a> = 4;
+<a name="l00043"></a><a class="code" href="s__game_8h.html#a2bd53362dec16d6cb727f118d6e39d29">00043</a> <span class="keyword">const</span> <a class="code" href="utilities_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14" title="Helper typedef for unsigned integers.">uint</a> <a class="code" href="s__game_8h.html#a2bd53362dec16d6cb727f118d6e39d29">MIN_ACTIVE_PLAYERS</a> = 2;
+<a name="l00044"></a>00044 
+<a name="l00051"></a><a class="code" href="struct_stats.html">00051</a> <span class="keyword">struct </span><a class="code" href="struct_stats.html" title="Statistics that will be shown in the game over screen.">Stats</a>
+<a name="l00052"></a>00052 {
+<a name="l00053"></a><a class="code" href="struct_stats.html#aed79e2b7167040dada2cb2ba8b90ad9b">00053</a>     <a class="code" href="struct_stats.html#aed79e2b7167040dada2cb2ba8b90ad9b">Stats</a>()
+<a name="l00054"></a>00054     {
+<a name="l00055"></a>00055         <a class="code" href="struct_stats.html#ab8a831a62a8e36d43e0c139f280bd966">TotalMoneyBetPlayers</a> = <a class="code" href="struct_stats.html#ac24b79052c5130889c3d17e59e24badf">TotalMoneyReceivedPlayers</a> = 0;
+<a name="l00056"></a>00056         <a class="code" href="struct_stats.html#a9ac4426fa356e051fcdd8c527f94a498">BlackjackCount</a> = <a class="code" href="struct_stats.html#a3d7faebd9a8b4cc182d10ab932ba3cd6">BustedCount</a> = <a class="code" href="struct_stats.html#a2f6c21840084f6650423b5f297835671">DoubleCount</a> = <a class="code" href="struct_stats.html#a483e7fc193ffc84f3cb8e26215ee18fa">HitCount</a> = <a class="code" href="struct_stats.html#ab98bc8f6dcad0bf49a82a42aafac5a08">BetCount</a> = <a class="code" href="struct_stats.html#a10d6ff22045a29bab77f0c612afa3f12">StandCount</a> = <a class="code" href="struct_stats.html#aa7d1e43a99b568021694fdea15ac5300">RoundCount</a> = 0;
+<a name="l00057"></a>00057         <a class="code" href="struct_stats.html#aabdf031c22f62319aa8307ae524c1787">Winner</a> = <a class="code" href="struct_stats.html#a1a12320e7e58b6695113fa1ae907b745">PlayerWonMoreMoney</a> = <a class="code" href="struct_stats.html#a4c8f5fb13cf6f3990f5e74be0f54ee64">PlayerLostMoreMoney</a> = NULL;
+<a name="l00058"></a>00058     }
+<a name="l00059"></a>00059 
+<a name="l00060"></a><a class="code" href="struct_stats.html#ab8a831a62a8e36d43e0c139f280bd966">00060</a>     <span class="keywordtype">double</span> <a class="code" href="struct_stats.html#ab8a831a62a8e36d43e0c139f280bd966">TotalMoneyBetPlayers</a>;
+<a name="l00061"></a><a class="code" href="struct_stats.html#ac24b79052c5130889c3d17e59e24badf">00061</a>     <span class="keywordtype">double</span> <a class="code" href="struct_stats.html#ac24b79052c5130889c3d17e59e24badf">TotalMoneyReceivedPlayers</a>;
+<a name="l00062"></a><a class="code" href="struct_stats.html#a9ac4426fa356e051fcdd8c527f94a498">00062</a>     <span class="keywordtype">int</span> <a class="code" href="struct_stats.html#a9ac4426fa356e051fcdd8c527f94a498">BlackjackCount</a>;
+<a name="l00063"></a><a class="code" href="struct_stats.html#a3d7faebd9a8b4cc182d10ab932ba3cd6">00063</a>     <span class="keywordtype">int</span> <a class="code" href="struct_stats.html#a3d7faebd9a8b4cc182d10ab932ba3cd6">BustedCount</a>;
+<a name="l00064"></a><a class="code" href="struct_stats.html#a2f6c21840084f6650423b5f297835671">00064</a>     <span class="keywordtype">int</span> <a class="code" href="struct_stats.html#a2f6c21840084f6650423b5f297835671">DoubleCount</a>;
+<a name="l00065"></a><a class="code" href="struct_stats.html#a483e7fc193ffc84f3cb8e26215ee18fa">00065</a>     <span class="keywordtype">int</span> <a class="code" href="struct_stats.html#a483e7fc193ffc84f3cb8e26215ee18fa">HitCount</a>;
+<a name="l00066"></a><a class="code" href="struct_stats.html#ab98bc8f6dcad0bf49a82a42aafac5a08">00066</a>     <span class="keywordtype">int</span> <a class="code" href="struct_stats.html#ab98bc8f6dcad0bf49a82a42aafac5a08">BetCount</a>;
+<a name="l00067"></a><a class="code" href="struct_stats.html#a10d6ff22045a29bab77f0c612afa3f12">00067</a>     <span class="keywordtype">int</span> <a class="code" href="struct_stats.html#a10d6ff22045a29bab77f0c612afa3f12">StandCount</a>;
+<a name="l00068"></a><a class="code" href="struct_stats.html#aa7d1e43a99b568021694fdea15ac5300">00068</a>     <span class="keywordtype">int</span> <a class="code" href="struct_stats.html#aa7d1e43a99b568021694fdea15ac5300">RoundCount</a>;
+<a name="l00069"></a>00069 
+<a name="l00070"></a><a class="code" href="struct_stats.html#a2626f7c9073b22da49405f436827514d">00070</a>     std::vector&lt;Player&gt; <a class="code" href="struct_stats.html#a2626f7c9073b22da49405f436827514d">Players</a>;
+<a name="l00071"></a><a class="code" href="struct_stats.html#aabdf031c22f62319aa8307ae524c1787">00071</a>     <a class="code" href="class_player.html" title="Represents a player.">Player</a>* <a class="code" href="struct_stats.html#aabdf031c22f62319aa8307ae524c1787">Winner</a>;
+<a name="l00072"></a><a class="code" href="struct_stats.html#a1a12320e7e58b6695113fa1ae907b745">00072</a>     <a class="code" href="class_player.html" title="Represents a player.">Player</a>* <a class="code" href="struct_stats.html#a1a12320e7e58b6695113fa1ae907b745">PlayerWonMoreMoney</a>;
+<a name="l00073"></a><a class="code" href="struct_stats.html#a4c8f5fb13cf6f3990f5e74be0f54ee64">00073</a>     <a class="code" href="class_player.html" title="Represents a player.">Player</a>* <a class="code" href="struct_stats.html#a4c8f5fb13cf6f3990f5e74be0f54ee64">PlayerLostMoreMoney</a>;
+<a name="l00074"></a>00074 
+<a name="l00075"></a><a class="code" href="struct_stats.html#ac5645f3e12023f32b217689dcfbbd24e">00075</a>     <span class="keywordtype">void</span> <a class="code" href="struct_stats.html#ac5645f3e12023f32b217689dcfbbd24e">CalculateWinners</a>()
+<a name="l00076"></a>00076     {
+<a name="l00077"></a>00077         <span class="keywordflow">if</span> (<a class="code" href="struct_stats.html#a2626f7c9073b22da49405f436827514d">Players</a>.empty())
+<a name="l00078"></a>00078             <span class="keywordflow">return</span>;
+<a name="l00079"></a>00079 
+<a name="l00080"></a>00080         <a class="code" href="class_player.html" title="Represents a player.">Player</a>* tempWinner = &amp;(*<a class="code" href="struct_stats.html#a2626f7c9073b22da49405f436827514d">Players</a>.begin());
+<a name="l00081"></a>00081         <a class="code" href="class_player.html" title="Represents a player.">Player</a>* tempLoser = &amp;(*<a class="code" href="struct_stats.html#a2626f7c9073b22da49405f436827514d">Players</a>.begin());
+<a name="l00082"></a>00082         <span class="keywordflow">for</span> (std::vector&lt;Player&gt;::iterator itr = <a class="code" href="struct_stats.html#a2626f7c9073b22da49405f436827514d">Players</a>.begin(); itr != <a class="code" href="struct_stats.html#a2626f7c9073b22da49405f436827514d">Players</a>.end(); ++itr)
+<a name="l00083"></a>00083         {
+<a name="l00084"></a>00084             <span class="keywordflow">if</span> (tempWinner-&gt;<a class="code" href="class_player.html#a50a6f59a35f6b4aad669d91ef0371706" title="Difference between current balance and initial balance.">GetBalanceDiff</a>() &lt; (*itr).GetBalanceDiff())
+<a name="l00085"></a>00085                 tempWinner = &amp;(*itr);
+<a name="l00086"></a>00086 
+<a name="l00087"></a>00087             <span class="keywordflow">if</span> (tempLoser-&gt;<a class="code" href="class_player.html#a50a6f59a35f6b4aad669d91ef0371706" title="Difference between current balance and initial balance.">GetBalanceDiff</a>() &gt; (*itr).GetBalanceDiff())
+<a name="l00088"></a>00088                 tempLoser = &amp;(*itr);
+<a name="l00089"></a>00089         }
+<a name="l00090"></a>00090 
+<a name="l00091"></a>00091         <a class="code" href="struct_stats.html#a1a12320e7e58b6695113fa1ae907b745">PlayerWonMoreMoney</a> = tempWinner;
+<a name="l00092"></a>00092         <a class="code" href="struct_stats.html#a4c8f5fb13cf6f3990f5e74be0f54ee64">PlayerLostMoreMoney</a> = tempLoser;
+<a name="l00093"></a>00093     }
+<a name="l00094"></a>00094 };
+<a name="l00095"></a>00095 
+<a name="l00102"></a><a class="code" href="class_s___game.html">00102</a> <span class="keyword">class </span><a class="code" href="class_s___game.html" title="Play game state. Contains the game logic and the game data.">S_Game</a> : <span class="keyword">public</span> <a class="code" href="class_state.html" title="Abstract class that defines an application state.">State</a>
+<a name="l00103"></a>00103 {
+<a name="l00104"></a>00104 <span class="keyword">public</span>:
+<a name="l00105"></a>00105     <span class="comment">//- State specific</span>
+<a name="l00107"></a>00107 <span class="comment"></span>    <a class="code" href="class_s___game.html#a4f1b7db55a27ccfaeefad64f2999b70e" title="Game Play State constructor.">S_Game</a>();
+<a name="l00109"></a>00109     <span class="keywordtype">void</span> <a class="code" href="class_s___game.html#a49e50f03797f35785ba3e47a4c17ac72" title="Initialization of some variables.">Initialize</a>();
+<a name="l00111"></a>00111     <span class="keywordtype">void</span> <a class="code" href="class_s___game.html#a34ffb3d1d5c67e2c46cf9db99c9b98cc" title="Load to memory different files (sounds, images and others). Called after Initialize()">LoadContents</a>();
+<a name="l00113"></a>00113     <span class="keywordtype">bool</span> <a class="code" href="class_s___game.html#a50000390fc2efaef52637308a984557d" title="Called every time there&#39;s a new event, updates the &quot;state&quot;.">Update</a>(ALLEGRO_EVENT* ev);
+<a name="l00115"></a>00115     <span class="keywordtype">void</span> <a class="code" href="class_s___game.html#a049592d415d2ea625bd3707c36cd67f2" title="Called when re-drawing the screen is needed. Called after Update()">Draw</a>();
+<a name="l00117"></a>00117     <span class="keywordtype">void</span> <a class="code" href="class_s___game.html#aeed610ab23b5007a9999351a4a8e4634" title="Frees the memory of allocated resources in LoadContents()">UnloadContents</a>();
+<a name="l00118"></a>00118 
+<a name="l00120"></a><a class="code" href="class_s___game.html#ad662c4275654716f7e5c11b9e9f1ab67">00120</a>     <a class="code" href="class_deck.html" title="Represents a deck of cards.">Deck</a>* <a class="code" href="class_s___game.html#ad662c4275654716f7e5c11b9e9f1ab67" title="Returns the deck.">GetDeck</a>() { <span class="keywordflow">return</span> _deck; }
+<a name="l00121"></a>00121 
+<a name="l00122"></a>00122     <span class="comment">//- Game specific</span>
+<a name="l00123"></a>00123     <span class="comment">// Events-like calls</span>
+<a name="l00125"></a>00125 <span class="comment"></span>    <span class="keywordtype">void</span> <a class="code" href="class_s___game.html#a6a2c22a54a3df149b6705c6f43a73c98" title="Handles the player bet event. It is called by player bet method of the player class.">PlayerBet</a>(<a class="code" href="class_player.html" title="Represents a player.">Player</a>* <span class="comment">/* player*/</span>);
+<a name="l00127"></a>00127     <span class="keywordtype">void</span> <a class="code" href="class_s___game.html#a1ca4b3872c52eb13e129a7dad3b5fe01" title="Handles the player hit event. It is called by player hit method of the player class.">PlayerHit</a>(<a class="code" href="class_player.html" title="Represents a player.">Player</a>* player, <a class="code" href="class_card.html" title="Defines a playing card.">Card</a>* card);
+<a name="l00129"></a>00129     <span class="keywordtype">void</span> <a class="code" href="class_s___game.html#aa513a64730cfd1f2f94ec9a09f1def23" title="Handles the player stand event. It is called by player stand method of the player class...">PlayerStand</a>(<a class="code" href="class_player.html" title="Represents a player.">Player</a>* player);
+<a name="l00131"></a>00131     <span class="keywordtype">void</span> <a class="code" href="class_s___game.html#a10c7b2b05dbf741174c0a9fa670912ca" title="Handles the player double event. It is called by player double method of the player class...">PlayerDouble</a>(<a class="code" href="class_player.html" title="Represents a player.">Player</a>* player, <a class="code" href="class_card.html" title="Defines a playing card.">Card</a>* card);
+<a name="l00133"></a>00133     <span class="keywordtype">void</span> <a class="code" href="class_s___game.html#a6d327d2b6ae8ac2c39001ffd248c80d1" title="Handles the player surrender event. It is called by player surrender method of the player class every...">PlayerSurrender</a>(<a class="code" href="class_player.html" title="Represents a player.">Player</a>* player);
+<a name="l00135"></a>00135     <span class="keywordtype">void</span> <a class="code" href="class_s___game.html#a544ee77ad4d2ceb697f64a07aa1bcc06" title="Handles the player stay event. It is called by player stay method of the player class every time a pl...">PlayerStay</a>(<a class="code" href="class_player.html" title="Represents a player.">Player</a>* player);
+<a name="l00136"></a>00136 
+<a name="l00138"></a>00138     <span class="keywordtype">void</span> <a class="code" href="class_s___game.html#ac72cc2173bcfe368dd4d81bbc58ed15f" title="Handles the dealer hit event. It is called by the hit method of the Dealer class.">DealerHit</a>(<a class="code" href="class_dealer.html" title="Represents the dealer of the blackjack game.">Dealer</a>* dealer, <a class="code" href="class_card.html" title="Defines a playing card.">Card</a>* card);
+<a name="l00139"></a>00139 
+<a name="l00141"></a><a class="code" href="class_s___game.html#a471dcfe6b15b073ff21aaaac42587c18">00141</a>     <a class="code" href="class_player.html" title="Represents a player.">Player</a>** <a class="code" href="class_s___game.html#a471dcfe6b15b073ff21aaaac42587c18" title="Returns an array with pointers to the player in the table (active players)">GetActivePlayers</a>() { <span class="keywordflow">return</span> _activePlayers; }
+<a name="l00143"></a><a class="code" href="class_s___game.html#a30daaf2342f16bc3e0e5c61539211f6c">00143</a>     <span class="keywordtype">int</span> <a class="code" href="class_s___game.html#a30daaf2342f16bc3e0e5c61539211f6c" title="Returns the index of the player that is currently playing.">GetActivePlayerIndex</a>() { <span class="keywordflow">return</span> _activePlayerIndex; }
+<a name="l00145"></a><a class="code" href="class_s___game.html#a36999546c0c09dc2b4205b0f0ac63283">00145</a>     <span class="keywordtype">int</span> <a class="code" href="class_s___game.html#a36999546c0c09dc2b4205b0f0ac63283" title="Return the current internal game state.">GetState</a>() { <span class="keywordflow">return</span> _gameState; }
+<a name="l00147"></a><a class="code" href="class_s___game.html#a6c5315262888e0ba9316e8560e6537d9">00147</a>     <a class="code" href="class_dealer.html" title="Represents the dealer of the blackjack game.">Dealer</a>* <a class="code" href="class_s___game.html#a6c5315262888e0ba9316e8560e6537d9" title="Returns a pointer to the dealer.">GetDealer</a>() { <span class="keywordflow">return</span> _dealer; }
+<a name="l00148"></a>00148 
+<a name="l00150"></a><a class="code" href="class_s___game.html#a8cedd775706238e1931c9f957d3599eb">00150</a>     <span class="keyword">static</span> <span class="keywordtype">double</span> <a class="code" href="class_s___game.html#a8cedd775706238e1931c9f957d3599eb" title="Return the bet.">GetBet</a>() { <span class="keywordflow">return</span> _bet; }
+<a name="l00152"></a><a class="code" href="class_s___game.html#a7c9c632673df4674ae4caae588852454">00152</a>     <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_s___game.html#a7c9c632673df4674ae4caae588852454" title="Sets the bet.">SetBet</a>(<span class="keywordtype">double</span> bet) { _bet = bet; }
+<a name="l00153"></a>00153 
+<a name="l00155"></a><a class="code" href="class_s___game.html#a8af12b5d669ba2d1810901169722cc16">00155</a>     ALLEGRO_BITMAP* <a class="code" href="class_s___game.html#a8af12b5d669ba2d1810901169722cc16" title="Returns the game chip ALLEGRO_BITMAP*.">GetChip</a>() { <span class="keywordflow">return</span> <a class="code" href="class_bitmaps.html#a571ded60d5952eab58a474bab8dd0cbb" title="Returns an ALLEGRO_BITMAP (BitmapsEnum)">Bitmaps::GetBitmap</a>(<a class="code" href="bitmaps_8h.html#abbc65212fddb2878587734909e240edaa7d02ea936b1b9f7abd510c5f6f3bd328">BITMAP_GAME_CHIP</a>); }
+<a name="l00156"></a>00156 
+<a name="l00158"></a><a class="code" href="class_s___game.html#a7b8ebbf464df4ca0da8a6e15a5f0a8c7">00158</a>     <span class="keyword">static</span> <a class="code" href="struct_stats.html" title="Statistics that will be shown in the game over screen.">Stats</a> <a class="code" href="class_s___game.html#a7b8ebbf464df4ca0da8a6e15a5f0a8c7" title="Stats instance for the game over state.">Statistics</a>;
+<a name="l00159"></a>00159 
+<a name="l00160"></a>00160 <span class="keyword">private</span>:
+<a name="l00161"></a>00161     <a class="code" href="class_dealer.html" title="Represents the dealer of the blackjack game.">Dealer</a>* _dealer;
+<a name="l00162"></a>00162     <a class="code" href="class_deck.html" title="Represents a deck of cards.">Deck</a>* _deck;
+<a name="l00163"></a>00163 
+<a name="l00164"></a>00164     std::vector&lt;Player&gt; _players;
+<a name="l00165"></a>00165     std::queue&lt;Player*&gt; _waitingPlayers;
+<a name="l00166"></a>00166     <a class="code" href="class_player.html" title="Represents a player.">Player</a>** _activePlayers;
+<a name="l00167"></a>00167     
+<a name="l00168"></a>00168     <span class="keywordtype">int</span> _gameState;
+<a name="l00169"></a>00169     <span class="keywordtype">int</span> _activePlayerIndex;
+<a name="l00170"></a>00170 
+<a name="l00171"></a>00171     std::vector&lt;RectButton*&gt; _buttons;
+<a name="l00172"></a>00172     
+<a name="l00173"></a>00173     <span class="keywordtype">bool</span> HandleStatePlacingBets();   <span class="comment">// Initial placement of bets</span>
+<a name="l00174"></a>00174     <span class="keywordtype">bool</span> HandleStateDealingCards(<a class="code" href="utilities_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14" title="Helper typedef for unsigned integers.">uint</a> i);  <span class="comment">// Dealer deals cards</span>
+<a name="l00175"></a>00175     <span class="keywordtype">bool</span> HandleStatePlayerTurn();    <span class="comment">// Players make hit, stand or double</span>
+<a name="l00176"></a>00176     <span class="keywordtype">bool</span> HandleStateDealerTurn();    <span class="comment">// Dealer Hits until 17</span>
+<a name="l00177"></a>00177     <span class="keywordtype">bool</span> HandleStateCheckResults();  <span class="comment">// Checks the result of the game and pays to the players or not</span>
+<a name="l00178"></a>00178     <span class="keywordtype">bool</span> HandleStateStayOrGiveUp();  <span class="comment">// Asks the player if staying or giving up</span>
+<a name="l00179"></a>00179     <span class="keywordtype">bool</span> HandleStatePostGame();      <span class="comment">// Handles player removal</span>
+<a name="l00180"></a>00180     <span class="keywordtype">bool</span> HandleStateResetRound();    <span class="comment">// Resets</span>
+<a name="l00181"></a>00181     
+<a name="l00182"></a>00182     <span class="keywordtype">void</span> ReadPlayersFromFile();
+<a name="l00183"></a>00183     <span class="keywordtype">void</span> UpdatePlayersFile() <span class="keyword">const</span>;
+<a name="l00184"></a>00184 
+<a name="l00185"></a>00185     <span class="keywordtype">void</span> SelectPlayers();
+<a name="l00186"></a>00186     <a class="code" href="class_player.html" title="Represents a player.">Player</a>* SelectNextPlayerFromQueue();
+<a name="l00187"></a>00187 
+<a name="l00188"></a>00188     <span class="keyword">static</span> <span class="keywordtype">double</span> _bet;
+<a name="l00189"></a>00189     <span class="keywordtype">void</span> NextInternalGameState();
+<a name="l00190"></a>00190     <span class="keywordtype">bool</span> _playerPlayed;
+<a name="l00191"></a>00191 
+<a name="l00192"></a>00192     <span class="keywordtype">int</span> CountActivePlayers() <span class="keyword">const</span>;
+<a name="l00193"></a>00193 
+<a name="l00194"></a>00194 
+<a name="l00195"></a>00195     <a class="code" href="class_text_log.html" title="Defines a &quot;scrolling&quot; log that is displayed on the screen (player and dealer actions)">TextLog</a>* _log;
+<a name="l00196"></a>00196 };
+<a name="l00197"></a>00197 
+<a name="l00198"></a>00198 <span class="preprocessor">#endif // S_GAME_H</span>
+</pre></div></div><!-- contents -->
+
+
+<hr class="footer"/><address class="footer"><small>
+Gerado em Sexta, 18 de Maio de 2012 23:48:50 para Blackjack por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.0
+</small></address>
+
+</body>
+</html>

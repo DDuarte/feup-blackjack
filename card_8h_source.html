@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<title>Blackjack: Código-Fonte de card.h</title>
+
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+
+</head>
+<body>
+<div id="top"><!-- do not remove this div! -->
+
+
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  
+  
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Blackjack
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   
+  </td>
+  
+  
+  
+ </tr>
+ </tbody>
+</table>
+</div>
+
+<!-- Gerado por Doxygen 1.8.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Localizar');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="files.html"><span>Ficheiros</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Localizar" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;de&#160;ficheiros</span></a></li>
+      <li><a href="globals.html"><span>Ficheiros&#160;membro</span></a></li>
+    </ul>
+  </div>
+</div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tudo</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Ficheiros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Funções</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variáveis</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Definições de tipos</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerações</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Valores da enumeração</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Amigos</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">card.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="card_8h.html">Ir para a documentação deste ficheiro.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
+<a name="l00012"></a>00012 <span class="preprocessor">#ifndef CARD_H</span>
+<a name="l00013"></a>00013 <span class="preprocessor"></span><span class="preprocessor">#define CARD_H</span>
+<a name="l00014"></a>00014 <span class="preprocessor"></span>
+<a name="l00015"></a>00015 <span class="preprocessor">#include &quot;<a class="code" href="utilities_8h.html">utilities.h</a>&quot;</span>
+<a name="l00016"></a>00016 <span class="preprocessor">#include &quot;<a class="code" href="bitmap_8h.html">bitmap.h</a>&quot;</span>
+<a name="l00017"></a>00017 
+<a name="l00018"></a>00018 <span class="preprocessor">#include &lt;string&gt;</span>
+<a name="l00019"></a>00019 
+<a name="l00020"></a><a class="code" href="card_8h.html#ae42edd00ffe927e41c9bd20573bf7eef">00020</a> <span class="keyword">enum</span> <a class="code" href="card_8h.html#ae42edd00ffe927e41c9bd20573bf7eef">CardSuit</a>
+<a name="l00021"></a>00021 {
+<a name="l00022"></a><a class="code" href="card_8h.html#ae42edd00ffe927e41c9bd20573bf7eefac4bb23a1901458eb1c73cf7417dbc5ca">00022</a>     <a class="code" href="card_8h.html#ae42edd00ffe927e41c9bd20573bf7eefac4bb23a1901458eb1c73cf7417dbc5ca">CARD_SUIT_CLUBS</a>,
+<a name="l00023"></a><a class="code" href="card_8h.html#ae42edd00ffe927e41c9bd20573bf7eefa66efa9cd5868a3df278e9328861523b7">00023</a>     <a class="code" href="card_8h.html#ae42edd00ffe927e41c9bd20573bf7eefa66efa9cd5868a3df278e9328861523b7">CARD_SUIT_SPADES</a>,
+<a name="l00024"></a><a class="code" href="card_8h.html#ae42edd00ffe927e41c9bd20573bf7eefa257c52f63524d025429ec5230b5cae83">00024</a>     <a class="code" href="card_8h.html#ae42edd00ffe927e41c9bd20573bf7eefa257c52f63524d025429ec5230b5cae83">CARD_SUIT_HEARTS</a>,
+<a name="l00025"></a><a class="code" href="card_8h.html#ae42edd00ffe927e41c9bd20573bf7eefac31da42436bdf7ffc992c2a9570e9241">00025</a>     <a class="code" href="card_8h.html#ae42edd00ffe927e41c9bd20573bf7eefac31da42436bdf7ffc992c2a9570e9241">CARD_SUIT_DIAMONDS</a>
+<a name="l00026"></a>00026 };
+<a name="l00027"></a>00027 
+<a name="l00028"></a><a class="code" href="card_8h.html#a9b53dea70f9271ef898bce8fd62007e4">00028</a> <span class="keyword">enum</span> <a class="code" href="card_8h.html#a9b53dea70f9271ef898bce8fd62007e4">CardRank</a>
+<a name="l00029"></a>00029 {
+<a name="l00030"></a><a class="code" href="card_8h.html#a9b53dea70f9271ef898bce8fd62007e4a05d7955408eae1d582bf0e0f5d2d3de6">00030</a>     <a class="code" href="card_8h.html#a9b53dea70f9271ef898bce8fd62007e4a05d7955408eae1d582bf0e0f5d2d3de6">CARD_RANK_TWO</a>,
+<a name="l00031"></a><a class="code" href="card_8h.html#a9b53dea70f9271ef898bce8fd62007e4aa74015d33da7b2ee098d2d0c0e8bebd8">00031</a>     <a class="code" href="card_8h.html#a9b53dea70f9271ef898bce8fd62007e4aa74015d33da7b2ee098d2d0c0e8bebd8">CARD_RANK_THREE</a>,
+<a name="l00032"></a><a class="code" href="card_8h.html#a9b53dea70f9271ef898bce8fd62007e4a9d088bd84da3c0a757663b82f1e0be4e">00032</a>     <a class="code" href="card_8h.html#a9b53dea70f9271ef898bce8fd62007e4a9d088bd84da3c0a757663b82f1e0be4e">CARD_RANK_FOUR</a>,
+<a name="l00033"></a><a class="code" href="card_8h.html#a9b53dea70f9271ef898bce8fd62007e4a8a5e906e98057ea8ef3f372944c473cb">00033</a>     <a class="code" href="card_8h.html#a9b53dea70f9271ef898bce8fd62007e4a8a5e906e98057ea8ef3f372944c473cb">CARD_RANK_FIVE</a>,
+<a name="l00034"></a><a class="code" href="card_8h.html#a9b53dea70f9271ef898bce8fd62007e4adfc5d5d5356e885d1c4834cdace91d9b">00034</a>     <a class="code" href="card_8h.html#a9b53dea70f9271ef898bce8fd62007e4adfc5d5d5356e885d1c4834cdace91d9b">CARD_RANK_SIX</a>,
+<a name="l00035"></a><a class="code" href="card_8h.html#a9b53dea70f9271ef898bce8fd62007e4a884e70d369645fff14ab026a2c4b8c61">00035</a>     <a class="code" href="card_8h.html#a9b53dea70f9271ef898bce8fd62007e4a884e70d369645fff14ab026a2c4b8c61">CARD_RANK_SEVEN</a>,
+<a name="l00036"></a><a class="code" href="card_8h.html#a9b53dea70f9271ef898bce8fd62007e4a4af00f9c760024f9ec1323666266d732">00036</a>     <a class="code" href="card_8h.html#a9b53dea70f9271ef898bce8fd62007e4a4af00f9c760024f9ec1323666266d732">CARD_RANK_EIGHT</a>,
+<a name="l00037"></a><a class="code" href="card_8h.html#a9b53dea70f9271ef898bce8fd62007e4a5bcbdd987980885556b834f9090dbfc5">00037</a>     <a class="code" href="card_8h.html#a9b53dea70f9271ef898bce8fd62007e4a5bcbdd987980885556b834f9090dbfc5">CARD_RANK_NINE</a>,
+<a name="l00038"></a><a class="code" href="card_8h.html#a9b53dea70f9271ef898bce8fd62007e4afac707d35850d54384d45bf399de9c19">00038</a>     <a class="code" href="card_8h.html#a9b53dea70f9271ef898bce8fd62007e4afac707d35850d54384d45bf399de9c19">CARD_RANK_TEN</a>,
+<a name="l00039"></a><a class="code" href="card_8h.html#a9b53dea70f9271ef898bce8fd62007e4a3ce9aade530399b381bb040ee57a231c">00039</a>     <a class="code" href="card_8h.html#a9b53dea70f9271ef898bce8fd62007e4a3ce9aade530399b381bb040ee57a231c">CARD_RANK_JACK</a>,
+<a name="l00040"></a><a class="code" href="card_8h.html#a9b53dea70f9271ef898bce8fd62007e4a2b6177552c6a9784483dd7a36e082597">00040</a>     <a class="code" href="card_8h.html#a9b53dea70f9271ef898bce8fd62007e4a2b6177552c6a9784483dd7a36e082597">CARD_RANK_QUEEN</a>,
+<a name="l00041"></a><a class="code" href="card_8h.html#a9b53dea70f9271ef898bce8fd62007e4a0aaee061b47e00a816f29ae59a469d81">00041</a>     <a class="code" href="card_8h.html#a9b53dea70f9271ef898bce8fd62007e4a0aaee061b47e00a816f29ae59a469d81">CARD_RANK_KING</a>,
+<a name="l00042"></a><a class="code" href="card_8h.html#a9b53dea70f9271ef898bce8fd62007e4a71ba93ebb432c40baba5eec2488129d3">00042</a>     <a class="code" href="card_8h.html#a9b53dea70f9271ef898bce8fd62007e4a71ba93ebb432c40baba5eec2488129d3">CARD_RANK_ACE</a>
+<a name="l00043"></a>00043 };
+<a name="l00044"></a>00044 
+<a name="l00045"></a><a class="code" href="card_8h.html#a031709aa24398f3beb7382b24b5b89ea">00045</a> <span class="keyword">const</span> <a class="code" href="struct_vector2_d.html" title="Represents a pair of floats (vector)">Vector2D</a> <a class="code" href="card_8h.html#a031709aa24398f3beb7382b24b5b89ea">CARD_SIZE</a> = <a class="code" href="struct_vector2_d.html" title="Represents a pair of floats (vector)">Vector2D</a>(73, 98);
+<a name="l00046"></a>00046 
+<a name="l00047"></a>00047 <span class="comment">// by rank</span>
+<a name="l00048"></a><a class="code" href="card_8h.html#a353d7496ebe1ccb4a5390f0e8efb6d81">00048</a> <span class="keyword">const</span> <a class="code" href="utilities_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14" title="Helper typedef for unsigned integers.">uint</a> <a class="code" href="card_8h.html#a353d7496ebe1ccb4a5390f0e8efb6d81">SCORES</a>[] = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 10, 11 };
+<a name="l00049"></a>00049 
+<a name="l00050"></a>00050 <span class="keyword">struct </span>ALLEGRO_BITMAP;
+<a name="l00051"></a>00051 <span class="keyword">struct </span>ALLEGRO_DISPLAY;
+<a name="l00052"></a>00052 
+<a name="l00059"></a><a class="code" href="class_card.html">00059</a> <span class="keyword">class </span><a class="code" href="class_card.html" title="Defines a playing card.">Card</a>
+<a name="l00060"></a>00060 {
+<a name="l00061"></a>00061 <span class="keyword">public</span>:
+<a name="l00063"></a>00063     <a class="code" href="class_card.html#aa7e418a2563e31981c09612d1aa37ad8" title="Constructor.">Card</a>(<span class="keywordtype">int</span> suit, <span class="keywordtype">int</span> rank);
+<a name="l00064"></a>00064 
+<a name="l00066"></a><a class="code" href="class_card.html#a7f3dae7812303f3d149be128dcc15d9b">00066</a>     <span class="keywordtype">int</span> <a class="code" href="class_card.html#a7f3dae7812303f3d149be128dcc15d9b" title="Suit of the card (clubs, spades, hearts and diamonds)">GetSuit</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _suit; }
+<a name="l00068"></a><a class="code" href="class_card.html#aec387a60320693e0706966f514a5e0a6">00068</a>     <span class="keywordtype">int</span> <a class="code" href="class_card.html#aec387a60320693e0706966f514a5e0a6" title="Type of the card (ace, two, three, ...)">GetRank</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _rank; }
+<a name="l00070"></a><a class="code" href="class_card.html#a7ab0c1e510df1dc58893613c8a053627">00070</a>     <a class="code" href="utilities_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14" title="Helper typedef for unsigned integers.">uint</a> <a class="code" href="class_card.html#a7ab0c1e510df1dc58893613c8a053627" title="Score.">GetScore</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _score; }
+<a name="l00072"></a><a class="code" href="class_card.html#aa64494bd1508da2e8190bea0df3e78f8">00072</a>     <span class="keywordtype">float</span> <a class="code" href="class_card.html#aa64494bd1508da2e8190bea0df3e78f8" title="Width of the card.">GetFrameWidth</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _frameSize.<a class="code" href="struct_vector2_d.html#ad5053de07ddfbb1d38b55fce7f271ff5" title="X coordinate.">X</a>; }
+<a name="l00074"></a><a class="code" href="class_card.html#a872464190c86b5f8a950450935fb66e0">00074</a>     <span class="keywordtype">float</span> <a class="code" href="class_card.html#a872464190c86b5f8a950450935fb66e0" title="Height of the card.">GetFrameHeight</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _frameSize.<a class="code" href="struct_vector2_d.html#adad18acabf7238660d50f5e9ceb01c7c" title="Y coordinate.">Y</a>; }
+<a name="l00076"></a>00076     std::string <a class="code" href="class_card.html#af361f19ffe42099e7b596dd545346047" title="Text representation of the card in the format [S - R].">GetName</a>() <span class="keyword">const</span>;
+<a name="l00077"></a>00077 
+<a name="l00079"></a><a class="code" href="class_card.html#a20bba37e27a22817681a1bffdcfd2a74">00079</a>     <span class="keywordtype">void</span> <a class="code" href="class_card.html#a20bba37e27a22817681a1bffdcfd2a74" title="Changes score of the card; should only be used with aces.">SetScore</a>(<span class="keywordtype">int</span> score) { <span class="keywordflow">if</span> (_rank == <a class="code" href="card_8h.html#a9b53dea70f9271ef898bce8fd62007e4a71ba93ebb432c40baba5eec2488129d3">CARD_RANK_ACE</a>) _score = score; }
+<a name="l00080"></a>00080 
+<a name="l00082"></a><a class="code" href="class_card.html#a197add551aa90903f3b88a943a9239bf">00082</a>     <a class="code" href="struct_vector2_d.html" title="Represents a pair of floats (vector)">Vector2D</a> <a class="code" href="class_card.html#a197add551aa90903f3b88a943a9239bf" title="Returns the position the card is being draw.">GetPosition</a>() { <span class="keywordflow">return</span> _bitmap.<a class="code" href="class_bitmap.html#a75324234945dc17effe6668ba300c1e8" title="Returns the destination coordinates.">GetDestinationCoordinates</a>(); }
+<a name="l00084"></a><a class="code" href="class_card.html#ab3364f07dab6195e67cbf9a9fb0e23bc">00084</a>     <span class="keywordtype">void</span> <a class="code" href="class_card.html#ab3364f07dab6195e67cbf9a9fb0e23bc" title="Changes the position the card is being draw.">SetPosition</a>(<a class="code" href="struct_vector2_d.html" title="Represents a pair of floats (vector)">Vector2D</a> val) { _bitmap.<a class="code" href="class_bitmap.html#a2da59e589d47a9ff4cc57759c28a68d1" title="Changes the destination coordinates.">SetDestinationCoordinates</a>(val); }
+<a name="l00085"></a>00085 
+<a name="l00087"></a><a class="code" href="class_card.html#a7264b294a4ab914f48980cf05163a24e">00087</a>     <span class="keywordtype">bool</span> <a class="code" href="class_card.html#a7264b294a4ab914f48980cf05163a24e" title="Returns true if the card is valid.">IsValid</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _suit != -1 &amp;&amp; _rank != -1 &amp;&amp; _score != -1; }
+<a name="l00088"></a>00088 
+<a name="l00090"></a>00090     <span class="keywordtype">void</span> <a class="code" href="class_card.html#a6ec96e2860fc46864d024a2a184a2825" title="Draws the card to the screen.">Draw</a>(<span class="keywordtype">float</span> angle = 0.0, <span class="keywordtype">bool</span> mouseHovered = <span class="keyword">false</span>, <span class="keywordtype">bool</span> drawBack = <span class="keyword">false</span>); <span class="comment">// angle must be in radians</span>
+<a name="l00091"></a>00091 
+<a name="l00092"></a>00092 <span class="keyword">private</span>:
+<a name="l00093"></a>00093     <span class="keywordtype">int</span> _suit;
+<a name="l00094"></a>00094     <span class="keywordtype">int</span> _rank;
+<a name="l00095"></a>00095     <a class="code" href="utilities_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14" title="Helper typedef for unsigned integers.">uint</a> _score;
+<a name="l00096"></a>00096 
+<a name="l00097"></a>00097     <a class="code" href="class_bitmap.html" title="Defines an image that can be draw in the screen.">Bitmap</a> _bitmap;
+<a name="l00098"></a>00098 
+<a name="l00099"></a>00099     <span class="keywordtype">int</span> _backColorRGB;
+<a name="l00100"></a>00100 
+<a name="l00101"></a>00101     <span class="keyword">static</span> <a class="code" href="struct_vector2_d.html" title="Represents a pair of floats (vector)">Vector2D</a> _frameSize;
+<a name="l00102"></a>00102 };
+<a name="l00103"></a>00103 
+<a name="l00104"></a>00104 <span class="preprocessor">#endif // CARD_H</span>
+</pre></div></div><!-- contents -->
+
+
+<hr class="footer"/><address class="footer"><small>
+Gerado em Sexta, 18 de Maio de 2012 23:48:50 para Blackjack por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.0
+</small></address>
+
+</body>
+</html>

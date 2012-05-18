@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<title>Blackjack: Código-Fonte de player.h</title>
+
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+
+</head>
+<body>
+<div id="top"><!-- do not remove this div! -->
+
+
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  
+  
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Blackjack
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   
+  </td>
+  
+  
+  
+ </tr>
+ </tbody>
+</table>
+</div>
+
+<!-- Gerado por Doxygen 1.8.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Localizar');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="files.html"><span>Ficheiros</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Localizar" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;de&#160;ficheiros</span></a></li>
+      <li><a href="globals.html"><span>Ficheiros&#160;membro</span></a></li>
+    </ul>
+  </div>
+</div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tudo</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Ficheiros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Funções</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variáveis</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Definições de tipos</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerações</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Valores da enumeração</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Amigos</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">player.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="player_8h.html">Ir para a documentação deste ficheiro.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
+<a name="l00012"></a>00012 <span class="preprocessor">#ifndef PLAYER_H</span>
+<a name="l00013"></a>00013 <span class="preprocessor"></span><span class="preprocessor">#define PLAYER_H</span>
+<a name="l00014"></a>00014 <span class="preprocessor"></span>
+<a name="l00015"></a>00015 <span class="preprocessor">#include &quot;<a class="code" href="hand_8h.html">hand.h</a>&quot;</span>
+<a name="l00016"></a>00016 <span class="preprocessor">#include &quot;<a class="code" href="utilities_8h.html">utilities.h</a>&quot;</span>
+<a name="l00017"></a>00017 <span class="preprocessor">#include &quot;<a class="code" href="bitmap_8h.html">bitmap.h</a>&quot;</span>
+<a name="l00018"></a>00018 
+<a name="l00019"></a>00019 <span class="preprocessor">#include &lt;string&gt;</span>
+<a name="l00020"></a>00020 <span class="preprocessor">#include &lt;vector&gt;</span>
+<a name="l00021"></a>00021 <span class="preprocessor">#include &lt;fstream&gt;</span>
+<a name="l00022"></a>00022 
+<a name="l00023"></a>00023 <span class="keyword">class </span><a class="code" href="class_card.html" title="Defines a playing card.">Card</a>;
+<a name="l00024"></a>00024 <span class="keyword">class </span><a class="code" href="class_rect_button.html" title="Defines a clickable button with multiple style options. When clicked, it can call a function (callbac...">RectButton</a>;
+<a name="l00025"></a>00025 <span class="keyword">union </span>ALLEGRO_EVENT;
+<a name="l00026"></a>00026 <span class="keyword">class </span><a class="code" href="class_s___game.html" title="Play game state. Contains the game logic and the game data.">S_Game</a>;
+<a name="l00027"></a>00027 
+<a name="l00028"></a><a class="code" href="player_8h.html#a8464a942ecb8b2c6af47cc2e927fff7f">00028</a> <span class="keyword">const</span> <a class="code" href="struct_vector2_d.html" title="Represents a pair of floats (vector)">Vector2D</a> <a class="code" href="player_8h.html#a8464a942ecb8b2c6af47cc2e927fff7f">PLAYER_POSITIONS</a>[]  = 
+<a name="l00029"></a>00029 {
+<a name="l00030"></a>00030     <a class="code" href="struct_vector2_d.html" title="Represents a pair of floats (vector)">Vector2D</a>(652, 217),
+<a name="l00031"></a>00031     <a class="code" href="struct_vector2_d.html" title="Represents a pair of floats (vector)">Vector2D</a>(460, 344),
+<a name="l00032"></a>00032     <a class="code" href="struct_vector2_d.html" title="Represents a pair of floats (vector)">Vector2D</a>(260, 344),
+<a name="l00033"></a>00033     <a class="code" href="struct_vector2_d.html" title="Represents a pair of floats (vector)">Vector2D</a>(82, 217)
+<a name="l00034"></a>00034 };
+<a name="l00035"></a>00035 
+<a name="l00042"></a><a class="code" href="class_player.html">00042</a> <span class="keyword">class </span><a class="code" href="class_player.html" title="Represents a player.">Player</a>
+<a name="l00043"></a>00043 {
+<a name="l00044"></a>00044 <span class="keyword">public</span>:
+<a name="l00046"></a>00046     <a class="code" href="class_player.html#aa4dc77c1e9c822e07b28ca3d5abd6e26" title="Constructor. Reads &quot;balance(space)name&quot; from a file.">Player</a>(std::ifstream&amp; file, <a class="code" href="class_s___game.html" title="Play game state. Contains the game logic and the game data.">S_Game</a>* game);
+<a name="l00048"></a>00048     <span class="keywordtype">void</span> <a class="code" href="class_player.html#a63ba9536b7603227872c2d5bfd2ddf7a" title="Saves a player to a file.">Save</a>(std::ofstream&amp; out) <span class="keyword">const</span>;
+<a name="l00049"></a>00049 
+<a name="l00051"></a><a class="code" href="class_player.html#aa5030908379dbc95594e4a9856758fef">00051</a>     std::string <a class="code" href="class_player.html#aa5030908379dbc95594e4a9856758fef" title="Name.">GetName</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _name; }
+<a name="l00053"></a><a class="code" href="class_player.html#abcfa1d03ebb679a7dac0a72f95e39e40">00053</a>     <span class="keywordtype">double</span> <a class="code" href="class_player.html#abcfa1d03ebb679a7dac0a72f95e39e40" title="Current balance.">GetBalance</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _balance; }
+<a name="l00055"></a><a class="code" href="class_player.html#ad57a638149da1b2b1d339b72be3eed2c">00055</a>     <span class="keywordtype">double</span> <a class="code" href="class_player.html#ad57a638149da1b2b1d339b72be3eed2c" title="Initial balance.">GetInitialBalance</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _initialBalance; }
+<a name="l00057"></a><a class="code" href="class_player.html#a50a6f59a35f6b4aad669d91ef0371706">00057</a>     <span class="keywordtype">double</span> <a class="code" href="class_player.html#a50a6f59a35f6b4aad669d91ef0371706" title="Difference between current balance and initial balance.">GetBalanceDiff</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _balance - _initialBalance; }
+<a name="l00059"></a><a class="code" href="class_player.html#adcc7413d943519cb4f6e9e5314eca029">00059</a>     <span class="keywordtype">double</span> <a class="code" href="class_player.html#adcc7413d943519cb4f6e9e5314eca029" title="True if player did a double bet.">IsDoubleBet</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _doubleBet; }
+<a name="l00061"></a><a class="code" href="class_player.html#ac53563b7c76d33109a51b37e8e868e89">00061</a>     <a class="code" href="utilities_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14" title="Helper typedef for unsigned integers.">uint</a> <a class="code" href="class_player.html#ac53563b7c76d33109a51b37e8e868e89" title="Player&#39;s hand score.">GetScore</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _hand-&gt;<a class="code" href="class_hand.html#a0b30b0e2bebe48db545b89b08a27ee70" title="Scores.">GetScore</a>(); }
+<a name="l00062"></a>00062 
+<a name="l00064"></a><a class="code" href="class_player.html#a2c9d2bd4f2c65a0a240cc2cbee571321">00064</a>     <span class="keyword">static</span> std::string <a class="code" href="class_player.html#a2c9d2bd4f2c65a0a240cc2cbee571321" title="Name of the file that is used to read/save players (players.txt by default)">GetPlayersFileName</a>() { <span class="keywordflow">return</span> _playersFileName; }
+<a name="l00065"></a>00065 
+<a name="l00067"></a><a class="code" href="class_player.html#ae42e235840d9909cc9fc513ba4cef943">00067</a>     <span class="keywordtype">void</span> <a class="code" href="class_player.html#ae42e235840d9909cc9fc513ba4cef943" title="Increases player&#39;s balance by inc amount (can be negative)">IncreaseBalance</a>(<span class="keywordtype">double</span> inc) { _balance += inc; }
+<a name="l00068"></a>00068 
+<a name="l00070"></a><a class="code" href="class_player.html#ac60e86f08348efc0214ba842bd1dec0e">00070</a>     <span class="keywordtype">bool</span> <a class="code" href="class_player.html#ac60e86f08348efc0214ba842bd1dec0e" title="True if player is busted.">IsBusted</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _hand-&gt;<a class="code" href="class_hand.html#a8fc52737e5f52a6d5ed018d91b1dc0d3" title="True if score is higher than 21.">IsBusted</a>(); }
+<a name="l00072"></a><a class="code" href="class_player.html#a9e31ca9ede3092bcf040669e12e74daf">00072</a>     <span class="keywordtype">bool</span> <a class="code" href="class_player.html#a9e31ca9ede3092bcf040669e12e74daf" title="True if player got blackjack.">IsBlackjack</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _hand-&gt;<a class="code" href="class_hand.html#a469e08300b3863ee1f623d4810ca2d22" title="True if score is 21 (with 2 cards)">IsBlackjack</a>(); }
+<a name="l00074"></a><a class="code" href="class_player.html#a3c6bd6671e4cafef8d901f65565ea0fe">00074</a>     <span class="keywordtype">bool</span> <a class="code" href="class_player.html#a3c6bd6671e4cafef8d901f65565ea0fe" title="True if player can double.">CanDouble</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> (_hand-&gt;<a class="code" href="class_hand.html#a0b30b0e2bebe48db545b89b08a27ee70" title="Scores.">GetScore</a>() == 9 || _hand-&gt;<a class="code" href="class_hand.html#a0b30b0e2bebe48db545b89b08a27ee70" title="Scores.">GetScore</a>() == 10 || _hand-&gt;<a class="code" href="class_hand.html#a0b30b0e2bebe48db545b89b08a27ee70" title="Scores.">GetScore</a>() == 11) &amp;&amp; _hand-&gt;<a class="code" href="class_hand.html#aa9d0367dd680a8a9549b7c9713b60722" title="Number of cards in hand.">GetNumberOfCards</a>() == 2; }
+<a name="l00075"></a>00075 
+<a name="l00077"></a><a class="code" href="class_player.html#a8ddb716a682bed862f79d19a63c1b306">00077</a>     <span class="keywordtype">bool</span> <a class="code" href="class_player.html#a8ddb716a682bed862f79d19a63c1b306" title="True if player has lost current round.">HasLost</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _hand-&gt;<a class="code" href="class_hand.html#a8fc52737e5f52a6d5ed018d91b1dc0d3" title="True if score is higher than 21.">IsBusted</a>(); }
+<a name="l00078"></a>00078 
+<a name="l00080"></a>00080     <span class="keywordtype">void</span> <a class="code" href="class_player.html#a32c2d9576ad98ffce9e058ef409ea97b" title="Player enters the game.">EnterGame</a>(<span class="keywordtype">int</span> index);
+<a name="l00081"></a>00081 
+<a name="l00082"></a>00082     <span class="comment">// In-game player actions</span>
+<a name="l00084"></a>00084 <span class="comment"></span>    <span class="keywordtype">void</span> <a class="code" href="class_player.html#a91e4b02e9486dfdb0d796602ff5a5fb0" title="Player does a bet.">PlaceBet</a>();
+<a name="l00086"></a>00086     <span class="keywordtype">bool</span> <a class="code" href="class_player.html#a02571b81ac61b492b0d4c8160bbe7e5a" title="Player stands.">Stand</a>(<a class="code" href="class_rect_button.html" title="Defines a clickable button with multiple style options. When clicked, it can call a function (callbac...">RectButton</a>* btn);
+<a name="l00088"></a>00088     <span class="keywordtype">bool</span> <a class="code" href="class_player.html#a83f8f1e91e6aa320d7caa9d08c16ad23" title="Player hits.">Hit</a>(<a class="code" href="class_rect_button.html" title="Defines a clickable button with multiple style options. When clicked, it can call a function (callbac...">RectButton</a>* btn);
+<a name="l00090"></a>00090     <span class="keywordtype">bool</span> <a class="code" href="class_player.html#a3c3c4717847318f32304e69b748882d8" title="Player doubles.">Double</a>(<a class="code" href="class_rect_button.html" title="Defines a clickable button with multiple style options. When clicked, it can call a function (callbac...">RectButton</a>* btn);
+<a name="l00092"></a>00092     <span class="keywordtype">bool</span> <a class="code" href="class_player.html#a7e4c609c3477367d24373275b7f365e3" title="Player surrenders.">Surrender</a>(<a class="code" href="class_rect_button.html" title="Defines a clickable button with multiple style options. When clicked, it can call a function (callbac...">RectButton</a>* btn);
+<a name="l00094"></a>00094     <span class="keywordtype">bool</span> <a class="code" href="class_player.html#a8d3688468297fade8552825b76c9148b" title="Player stays in-game.">Stay</a>(<a class="code" href="class_rect_button.html" title="Defines a clickable button with multiple style options. When clicked, it can call a function (callbac...">RectButton</a>* btn);
+<a name="l00095"></a>00095 
+<a name="l00097"></a><a class="code" href="class_player.html#a1a155757ab7df45ffb9ace5f60691ee8">00097</a>     <span class="keywordtype">bool</span> <a class="code" href="class_player.html#a1a155757ab7df45ffb9ace5f60691ee8" title="True if player accepted surrender (asked in end of round)">WantsSurrender</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _surrender; }
+<a name="l00098"></a>00098 
+<a name="l00100"></a>00100     <span class="keywordtype">void</span> <a class="code" href="class_player.html#abb3f4c0cade55d3d63e13a29f598c267" title="Resets player for a new round.">ResetPlayer</a>();
+<a name="l00101"></a>00101 
+<a name="l00102"></a>00102     <span class="comment">// Hand</span>
+<a name="l00104"></a><a class="code" href="class_player.html#ad0946cfb871035181bf6ea5040963241">00104</a> <span class="comment"></span>    <span class="keywordtype">void</span> <a class="code" href="class_player.html#ad0946cfb871035181bf6ea5040963241" title="Adds a new card to player&#39;s hand.">NewCard</a>(<a class="code" href="class_card.html" title="Defines a playing card.">Card</a>* card) { _hand-&gt;<a class="code" href="class_hand.html#a66582543d56b730573900acc4c829155" title="Adds a new card to the hand.">AddCard</a>(card); }
+<a name="l00106"></a><a class="code" href="class_player.html#a8315af7c5eec3f3a330cf815016fe74e">00106</a>     <span class="keywordtype">void</span> <a class="code" href="class_player.html#a8315af7c5eec3f3a330cf815016fe74e" title="Removes all cards from player&#39;s hand.">ClearHand</a>() { _hand-&gt;<a class="code" href="class_hand.html#a0a244325749c14e91e51e35d5fd54e20" title="Removes all cards from the hand.">Clear</a>(); }
+<a name="l00107"></a>00107 
+<a name="l00109"></a>00109     <span class="keywordtype">void</span> <a class="code" href="class_player.html#a2025d348909335191d377eaaf37448a2" title="Draw player name, bet, balance and hand to screen.">Draw</a>(<span class="keywordtype">bool</span> activePlayer = <span class="keyword">false</span>);
+<a name="l00110"></a>00110 
+<a name="l00111"></a>00111 <span class="keyword">private</span>:
+<a name="l00112"></a>00112     <span class="keywordtype">bool</span> ReadText(std::ifstream&amp; in);
+<a name="l00113"></a>00113 
+<a name="l00114"></a>00114     std::string _name;
+<a name="l00115"></a>00115     <span class="keywordtype">double</span> _balance;
+<a name="l00116"></a>00116     <span class="keywordtype">double</span> _initialBalance;
+<a name="l00117"></a>00117 
+<a name="l00118"></a>00118     <span class="keywordtype">bool</span> _doubleBet;
+<a name="l00119"></a>00119 
+<a name="l00120"></a>00120     <span class="keyword">static</span> std::string _playersFileName;
+<a name="l00121"></a>00121 
+<a name="l00122"></a>00122     <a class="code" href="class_hand.html" title="Represents a hand of cards Both used by players and dealer.">Hand</a>* _hand;
+<a name="l00123"></a>00123     <a class="code" href="class_s___game.html" title="Play game state. Contains the game logic and the game data.">S_Game</a>* _game;
+<a name="l00124"></a>00124 
+<a name="l00125"></a>00125     <span class="keywordtype">int</span> _index;
+<a name="l00126"></a>00126 
+<a name="l00127"></a>00127     <span class="keywordtype">bool</span> _surrender;
+<a name="l00128"></a>00128 
+<a name="l00129"></a>00129     <a class="code" href="class_bitmap.html" title="Defines an image that can be draw in the screen.">Bitmap</a> _chip;
+<a name="l00130"></a>00130     <a class="code" href="class_bitmap.html" title="Defines an image that can be draw in the screen.">Bitmap</a> _doubleChip;
+<a name="l00131"></a>00131 
+<a name="l00132"></a>00132 };
+<a name="l00133"></a>00133 
+<a name="l00134"></a>00134 <span class="preprocessor">#endif // PLAYER_H</span>
+</pre></div></div><!-- contents -->
+
+
+<hr class="footer"/><address class="footer"><small>
+Gerado em Sexta, 18 de Maio de 2012 23:48:50 para Blackjack por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.0
+</small></address>
+
+</body>
+</html>

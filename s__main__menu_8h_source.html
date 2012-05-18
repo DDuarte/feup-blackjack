@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<title>Blackjack: Código-Fonte de s_main_menu.h</title>
+
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+
+</head>
+<body>
+<div id="top"><!-- do not remove this div! -->
+
+
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  
+  
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Blackjack
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   
+  </td>
+  
+  
+  
+ </tr>
+ </tbody>
+</table>
+</div>
+
+<!-- Gerado por Doxygen 1.8.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Localizar');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="files.html"><span>Ficheiros</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Localizar" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;de&#160;ficheiros</span></a></li>
+      <li><a href="globals.html"><span>Ficheiros&#160;membro</span></a></li>
+    </ul>
+  </div>
+</div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tudo</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Ficheiros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Funções</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variáveis</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Definições de tipos</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerações</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Valores da enumeração</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Amigos</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">s_main_menu.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="s__main__menu_8h.html">Ir para a documentação deste ficheiro.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
+<a name="l00012"></a>00012 <span class="preprocessor">#ifndef S_MAIN_MENU_H</span>
+<a name="l00013"></a>00013 <span class="preprocessor"></span><span class="preprocessor">#define S_MAIN_MENU_H</span>
+<a name="l00014"></a>00014 <span class="preprocessor"></span>
+<a name="l00015"></a>00015 <span class="preprocessor">#include &quot;<a class="code" href="state_8h.html">state.h</a>&quot;</span>
+<a name="l00016"></a>00016 
+<a name="l00017"></a>00017 <span class="preprocessor">#include &lt;vector&gt;</span>
+<a name="l00018"></a>00018 
+<a name="l00019"></a><a class="code" href="s__main__menu_8h.html#af3d52afbb0d088f62e02208b24a9cbd2">00019</a> <span class="keyword">enum</span> <a class="code" href="s__main__menu_8h.html#af3d52afbb0d088f62e02208b24a9cbd2">Menu</a>
+<a name="l00020"></a>00020 {
+<a name="l00021"></a><a class="code" href="s__main__menu_8h.html#af3d52afbb0d088f62e02208b24a9cbd2a5a87fc9ed9499695d207d699fbf1450d">00021</a>     <a class="code" href="s__main__menu_8h.html#af3d52afbb0d088f62e02208b24a9cbd2a5a87fc9ed9499695d207d699fbf1450d">MENU_PLAY</a>,
+<a name="l00022"></a><a class="code" href="s__main__menu_8h.html#af3d52afbb0d088f62e02208b24a9cbd2a881c719770509dd29b91525f2cd0e8b0">00022</a>     <a class="code" href="s__main__menu_8h.html#af3d52afbb0d088f62e02208b24a9cbd2a881c719770509dd29b91525f2cd0e8b0">MENU_SETTINGS</a>,
+<a name="l00023"></a><a class="code" href="s__main__menu_8h.html#af3d52afbb0d088f62e02208b24a9cbd2a0cc060e77a977b9f5d6a86867ef247da">00023</a>     <a class="code" href="s__main__menu_8h.html#af3d52afbb0d088f62e02208b24a9cbd2a0cc060e77a977b9f5d6a86867ef247da">MENU_QUIT</a>,
+<a name="l00024"></a>00024 };
+<a name="l00025"></a>00025 
+<a name="l00026"></a>00026 <span class="keyword">union </span>ALLEGRO_EVENT;
+<a name="l00027"></a>00027 <span class="keyword">class </span><a class="code" href="class_rect_button.html" title="Defines a clickable button with multiple style options. When clicked, it can call a function (callbac...">RectButton</a>;
+<a name="l00028"></a>00028 <span class="keyword">class </span>AllegroObject;
+<a name="l00029"></a>00029 <span class="keyword">struct </span>ALLEGRO_BITMAP;
+<a name="l00030"></a>00030 
+<a name="l00037"></a><a class="code" href="class_s___main_menu.html">00037</a> <span class="keyword">class </span><a class="code" href="class_s___main_menu.html" title="Main menu of the game (Play, Options, Quit)">S_MainMenu</a> : <span class="keyword">public</span> <a class="code" href="class_state.html" title="Abstract class that defines an application state.">State</a>
+<a name="l00038"></a>00038 {
+<a name="l00039"></a>00039 <span class="keyword">public</span>:
+<a name="l00041"></a>00041     <a class="code" href="class_s___main_menu.html#ad6537fe3060f8614b4105b18e5cb0987" title="Constructor.">S_MainMenu</a>();
+<a name="l00043"></a>00043     <span class="keywordtype">void</span> <a class="code" href="class_s___main_menu.html#ab8fd864432a3224532ca78fc5d267d54" title="Initialization of some variables.">Initialize</a>();
+<a name="l00045"></a>00045     <span class="keywordtype">void</span> <a class="code" href="class_s___main_menu.html#a79e346f811d847c9abc89acf5e0f9f6a" title="Load to memory different files (sounds, images and others). Called after Initialize()">LoadContents</a>();
+<a name="l00047"></a>00047     <span class="keywordtype">bool</span> <a class="code" href="class_s___main_menu.html#adfaf78adf96b65c9f13daac35abb55e0" title="Called every time there&#39;s a new event, updates the &quot;state&quot;.">Update</a>(ALLEGRO_EVENT* ev);
+<a name="l00049"></a>00049     <span class="keywordtype">void</span> <a class="code" href="class_s___main_menu.html#afa2c6477ac14cdb63745fd2d2bfb4518" title="Called when re-drawing the screen is needed. Called after Update()">Draw</a>();
+<a name="l00051"></a>00051     <span class="keywordtype">void</span> <a class="code" href="class_s___main_menu.html#a4b478fe84930e93ba1a4d3ddb3c81a26" title="Frees the memory of allocated resources in LoadContents()">UnloadContents</a>();
+<a name="l00052"></a>00052 
+<a name="l00053"></a>00053 <span class="keyword">private</span>:
+<a name="l00054"></a>00054     <a class="code" href="class_rect_button.html" title="Defines a clickable button with multiple style options. When clicked, it can call a function (callbac...">RectButton</a>* _playButton;
+<a name="l00055"></a>00055     <a class="code" href="class_rect_button.html" title="Defines a clickable button with multiple style options. When clicked, it can call a function (callbac...">RectButton</a>* _settingButton;
+<a name="l00056"></a>00056     <a class="code" href="class_rect_button.html" title="Defines a clickable button with multiple style options. When clicked, it can call a function (callbac...">RectButton</a>* _quitButton;
+<a name="l00057"></a>00057 
+<a name="l00058"></a>00058     <span class="keywordtype">int</span> _selectedMenu;
+<a name="l00059"></a>00059 };
+<a name="l00060"></a>00060 
+<a name="l00061"></a>00061 <span class="preprocessor">#endif // S_MAIN_MENU_H</span>
+</pre></div></div><!-- contents -->
+
+
+<hr class="footer"/><address class="footer"><small>
+Gerado em Sexta, 18 de Maio de 2012 23:48:50 para Blackjack por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.0
+</small></address>
+
+</body>
+</html>
