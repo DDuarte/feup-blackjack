@@ -30,6 +30,7 @@ std::string ToString(T val)
 {
     std::ostringstream out;
     out << val;
+
     return out.str();
 }
 
