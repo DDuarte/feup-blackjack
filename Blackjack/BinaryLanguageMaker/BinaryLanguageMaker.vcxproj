@@ -13,6 +13,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DC46BF33-060D-41AB-B0D7-039532F76FDD}</ProjectGuid>
     <RootNamespace>BinaryCardMaker</RootNamespace>
+    <ProjectName>BinaryLanguageMaker</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

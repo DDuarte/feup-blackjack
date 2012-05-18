@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BinaryCardMaker", "BinaryCardMaker\BinaryCardMaker.vcxproj", "{DC46BF33-060D-41AB-B0D7-039532F76FDD}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BinaryLanguageMaker", "BinaryLanguageMaker\BinaryLanguageMaker.vcxproj", "{DC46BF33-060D-41AB-B0D7-039532F76FDD}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BlackjackUI", "BlackjackUI\BlackjackUI.vcxproj", "{AC90C9A5-69AC-48EF-8174-26669FF7B191}"
 EndProject
