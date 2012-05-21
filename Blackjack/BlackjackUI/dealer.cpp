@@ -47,6 +47,10 @@ void Dealer::Draw()
 
 void Dealer::NewCard( Card* card )
 {
+    //if (_hand.GetNumberOfCards() == 0)
+    //    _hand.AddCard(new Card(CARD_SUIT_SPADES, CARD_RANK_ACE));
+    //else _hand.AddCard(new Card(CARD_SUIT_SPADES, CARD_RANK_TEN));
+
     _hand.AddCard(card);
 }
 

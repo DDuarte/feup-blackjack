@@ -501,6 +501,9 @@ bool S_Game::HandleStateStayOrGiveUp()
 
     if (_activePlayers[_activePlayerIndex]->GetBalance() >= _bet)
     {
+        _buttons[BUTTON_HIT]->Visible = false;
+        _buttons[BUTTON_STAND]->Visible = false;
+        _buttons[BUTTON_DOUBLE]->Visible = false;
         _buttons[BUTTON_GIVE_UP]->Handler()->Bind<Player, &Player::Surrender>(_activePlayers[_activePlayerIndex]);
         _buttons[BUTTON_STAY_GAME]->Handler()->Bind<Player, &Player::Stay>(_activePlayers[_activePlayerIndex]);
         _buttons[BUTTON_GIVE_UP]->Visible = true;
