@@ -4,6 +4,10 @@ FEUP - MIEIC 2011/2012 - 1.º ano
 Blackjack
 =========
 
+![Screenshot 1](screenshot1.jpg)
+
+![Screenshot 2](screenshot2.jpg)
+
 Graphic library
 ---------------
 [Allegro 5.0.6] - A game programming library
